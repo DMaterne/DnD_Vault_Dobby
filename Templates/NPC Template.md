@@ -32,10 +32,10 @@ Größe: 1.69m
 > ###### Stats
 > | Type |  Stat |
 > | ---- | ---- |
+> | Volk | Mensch |
 > | Alter | 69 |
 > | Herkunft | [[Dilos Feykar]] |
-> | Volk | Mensch |
-> 
+> | Wohnort | [[Dilos Feykar]] |
 > ###### Stats 2
 > | Type | Stat |
 > | ---- | ---- |
