@@ -34,5 +34,6 @@ Hier kannst du den Charakter beschreiben
 
 ## Verwandte Seiten
 table file.link as "Verlinkende Seiten"
-from [[Zielseite]]
+from [[NPC Template]]
+
 
