@@ -39,7 +39,7 @@ Größe: 1.69m
 > | Größe | 1,80m |
 
 
-> [!kanban]+
+> [!Kanban]+
 > - [[Link|Lane 1 Title]]
 > 	- ![[Image.png]]
 > 	- [[Link|Card]]
@@ -48,3 +48,4 @@ Größe: 1.69m
 > 	- [[Link|Card]]
 > - Text
 > 	- [ ] Text
+
