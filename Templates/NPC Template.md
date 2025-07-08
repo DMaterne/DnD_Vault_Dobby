@@ -34,7 +34,7 @@ Größe: 1.69m
 > | ---- | ---- |
 > | Alter | 69 |
 > | Herkunft | [[Dilos Feykar]] |
-> | Spezies | Mensch |
+> | Volk | Mensch |
 > 
 > ###### Stats 2
 > | Type | Stat |
