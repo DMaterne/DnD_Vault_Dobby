@@ -37,9 +37,4 @@ Größe: 1.69m
 > | Herkunft | [[Dilos Feykar]] |
 > | Wohnort | [[Dilos Feykar]] |
 > | Größe | 1,80m |
-> 
-> ###### Stats 2
-> | Type | Stat |
-> | ---- | ---- |
-> | Test | Testing |
-> | Test | Testing |
+
