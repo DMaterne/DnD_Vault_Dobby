@@ -1,15 +1,18 @@
 ## Bio
 
-![[NPC_Placeholder.png|300]]
+> [!infobox]
+> # Name
+> ![[NPC_Placeholder.png|cover hsmall]]
+> ###### Stats
+> | Type |  Stat |
+> | ---- | ---- |
+> | Volk | Mensch |
+> | Alter | 69 |
+> | Herkunft | [[Dilos Feykar]] |
+> | Wohnort | [[Dilos Feykar]] |
+> | Größe | 1,80m |
 
-Name: SchmiedNr5  
-Volk: Mensch  
-Alter: ??? 
-Beruf: Schmied
-Herkunft: München
-Wohnort: Berlin
-Aussehen: menschlich, grüne Haare
-Größe: 1.69m
+### Beschreibung
 
 ## Timeline
 
