@@ -33,3 +33,6 @@ Hier kannst du den Charakter beschreiben
 ## Zugehörigkeit
 
 ## Verwandte Seiten
+table file.link as "Verlinkende Seiten"
+from [[Zielseite]]
+
