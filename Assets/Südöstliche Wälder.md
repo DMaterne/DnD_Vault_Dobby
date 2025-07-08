@@ -1,4 +1,4 @@
-Die südwestlichen Wälder gelten als eine der gefährlichsten und zugleich faszinierendsten Regionen des Kontinents. Nur etwa 10 % derer, die sie betreten, kehren lebendig zurück – und jene, die es schaffen, sind kaum wiederzuerkennen. Geschichten über Flüstern zwischen den Bäumen, unsichtbare Kreaturen und verzerrte Magie machen die Runde. Dennoch ist die Region Ziel einer großangelegten Expedition unter kaiserlichem Banner – im Auftrag von Krone, Klan und Zirkel.
+Die südwestlichen Wälder gelten als eine der gefährlichsten und zugleich faszinierendsten Regionen des Kontinents. Nur etwa 10 % derer, die sie betreten, kehren lebendig zurück – und jene, die es schaffen, sind kaum wieder zu erkennen. Geschichten über Flüstern zwischen den Bäumen, unsichtbare Kreaturen und verzerrte Magie machen die Runde. Dennoch ist die Region Ziel einer groß angelegten Expedition unter kaiserlichem Banner – im Auftrag von Krone, Klan und Zirkel.
 
 ##  **Mischwald:**
 
