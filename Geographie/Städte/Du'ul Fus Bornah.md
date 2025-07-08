@@ -1,0 +1,1 @@
+Du'ul Fus Bornah ist die Hauptstadt. [[Castor Aegis]] ist hier groß geworden. 
