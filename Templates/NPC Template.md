@@ -32,7 +32,8 @@ Größe: 1.69m
 > ###### Stats
 > | Type |  Stat |
 > | ---- | ---- |
-> | Test | Testing |
+> | Alter | 69 |
+> | Herkunft | Testing |
 > | Test | Testing |
 > 
 > ###### Stats 2
