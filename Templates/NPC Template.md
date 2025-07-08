@@ -26,7 +26,7 @@ Größe: 1.69m
 
 ---
 
-> [!infobox|left]
+> [!infobox]
 > # Name
 > ![[NPC_Placeholder.png|cover hsmall]]
 > ###### Stats
@@ -49,3 +49,17 @@ Größe: 1.69m
 > - Text
 > 	- [ ] Text
 
+aaaaaaaa
+aaaaa
+a
+aa
+aa
+a
+aa
+aa
+aa
+aa
+aa
+a
+aa
+aaaaaaaa
