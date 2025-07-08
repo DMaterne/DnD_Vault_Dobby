@@ -1,1 +1,0 @@
-Nehmen Affengestalt an, sind Dämonen, selten auf der Materiellen Ebene
