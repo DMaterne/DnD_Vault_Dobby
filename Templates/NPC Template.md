@@ -12,7 +12,8 @@
 > | Wohnort | [[Dilos Feykar]] |
 > | Größe | 1,80m |
 
-### Beschreibung
+**Beschreibung:**
+
 
 ## Timeline
 
