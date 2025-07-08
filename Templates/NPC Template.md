@@ -30,4 +30,6 @@ Hier kannst du den Charakter beschreiben
 
 ---
 
+## Zugehörigkeit
 
+## Verwandte Seiten
