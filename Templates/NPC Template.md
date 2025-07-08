@@ -13,7 +13,7 @@
 > | Größe | 1,80m |
 
 **Beschreibung:**
-
+Hier kannst du den Charakter beschreiben
 
 ## Timeline
 
@@ -30,40 +30,4 @@
 
 ---
 
-> [!infobox]
-> # Name
-> ![[NPC_Placeholder.png|cover hsmall]]
-> ###### Stats
-> | Type |  Stat |
-> | ---- | ---- |
-> | Volk | Mensch |
-> | Alter | 69 |
-> | Herkunft | [[Dilos Feykar]] |
-> | Wohnort | [[Dilos Feykar]] |
-> | Größe | 1,80m |
 
-
-> [!Kanban]+
-> - [[Link|Lane 1 Title]]
-> 	- ![[Image.png]]
-> 	- [[Link|Card]]
-> - [[Link|Lane 2 Title]]
-> 	![[Image without background card styling.png]]
-> 	- [[Link|Card]]
-> - Text
-> 	- [ ] Text
-
-aaaaaaaa
-aaaaa
-a
-aa
-aa
-a
-aa
-aa
-aa
-aa
-aa
-a
-aa
-aaaaaaaa
