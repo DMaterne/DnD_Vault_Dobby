@@ -32,14 +32,14 @@ Die Stadt ist ein Schmelztiegel: Reisende, Abenteurer, Forscher, Flüchtlinge, H
 - [[Zirkel der Spiegel]]
 - [[Stadtwache von Dilos Feykar]]
 
-## Bekannte Persönlichkeiten
+## **Bekannte Persönlichkeiten**
 
 - [[Leo Eisenfaust]]
 - [[Familie Eisenfaust]]
 - Frank (Wache)
 - [[Hauptmann Zoak]]
 
-## Verwandte Seiten
+## **Verwandte Seiten**
 
 ```dataview
 list from [[Dilos Feykar]]

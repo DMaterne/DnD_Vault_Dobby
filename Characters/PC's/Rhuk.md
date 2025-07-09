@@ -65,7 +65,7 @@
 ## Herkunft und Auftrag 
 
 Rhuk entstammt dem [[Klan Brakkel]] – einem der ersten Goblinklans, der sich friedlich der Zivilisation öffnete. Sein Volk suchte keinen Krieg, sondern Anerkennung, Handel und diplomatische Beziehungen. Doch stattdessen begegnete man ihnen mit Verachtung. 
-Goblinkarawanen wurden überfallen, Händler versklavt, Diplomaten verschwanden spurlos. Als Reaktion darauf gründete der Klan eine verdeckte Einheit: die Hautdiebe. 
+Goblinkarawanen wurden überfallen, Händler versklavt, Diplomaten verschwanden spurlos. Als Reaktion darauf gründete der Klan eine verdeckte Einheit: die [[Hautdiebe]]. 
 Diese Organisation war nicht für offenen Kampf gedacht, sondern für gezielte Racheakte. Die Hautdiebe spürten goblinfeindliche Gruppen auf, töteten gezielt – und nahmen ein Stück Haut als Zeichen. Aus diesen Fragmenten entstanden Masken, die sie im Gedenken an die gefallenen Goblins trugen.
 
 ---
@@ -79,9 +79,9 @@ Heute arbeiten sie hauptsächlich im Bereich der Marktbeobachtung, Aufklärung u
 
 ## Rhuk: Der stille Wächter 
 
-Mit 20 Jahren trat Rhuk den Hautdieben bei. Während seiner aktiven Anfangsjahre war er an der Zerschlagung zweier Sklavenhändlernetzwerke beteiligt. Seine Maskenteile aus diesen Einsätzen bewahrt er respektvoll auf – als Erinnerung, nicht aus Stolz. 
+Mit 20 Jahren trat Rhuk den [[Hautdiebe|Hautdieben]] bei. Während seiner aktiven Anfangsjahre war er an der Zerschlagung zweier Sklavenhändlernetzwerke beteiligt. Seine Maskenteile aus diesen Einsätzen bewahrt er respektvoll auf – als Erinnerung, nicht aus Stolz. 
 Rhuk wählte früh den militärischen Weg, da ihm Handel und Diplomatie nicht lagen. Schon früh zeigte sich seine meditative Ruhe und Disziplin. Statt sich als Kämpfer zu profilieren, ließ er sich zum Mönch ausbilden – auf dem Weg des Schattens. 
-Während einer Mission verlor er ein Auge, das später durch ein magisch unterstütztes künstliches Auge ersetzt wurde. Dieses erlaubt es ihm, nach dem Entfernen noch für 15 Minuten Bilder zu empfangen – eine besondere Gabe, die ihm vom Zirkel der Spiegel verliehen wurde.
+Während einer Mission verlor er ein Auge, das später durch ein magisch unterstütztes künstliches Auge ersetzt wurde. Dieses erlaubt es ihm, nach dem Entfernen noch für 15 Minuten Bilder zu empfangen – eine besondere Gabe, die ihm vom [[Zirkel der Spiegel]] verliehen wurde.
 
 ---
 
