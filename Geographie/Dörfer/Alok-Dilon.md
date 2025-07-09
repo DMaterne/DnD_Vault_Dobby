@@ -7,7 +7,7 @@ SEITE UNEDITIERT DA KEINE INFO
 ## **Allgemein**
 
 > [!infobox]
-> # Name
+> # Alok-Dilon
 > ![[DilosFeykar.png|cover hsmall]]
 > ###### [[DilosFeykar.png|Vollbild]]
 > ###### Stats
