@@ -3,30 +3,24 @@
 > [!infobox]
 > # Name
 > ![[NPC_Placeholder.png|cover hsmall]]
+> ###### [[NPC_Placeholder.png|Vollbild]]
 > ###### Stats
-> | Type |  Stat |
+> | Typ |  Stat |
 > | ---- | ---- |
 > | Volk | Mensch |
 > | Alter | 69 |
 > | Herkunft | [[Dilos Feykar]] |
 > | Wohnort | [[Dilos Feykar]] |
 > | Größe | 1,80m |
+> | Status | lebendig |
 
-**Beschreibung:**
-Hier kannst du den Charakter beschreiben
+<div style="min-height: 490px; padding: 12px; border: 0px solid var(--text-faint); border-radius: 10px; background-color: var(--background-secondary); line-height: 1.5;">
+<b>Beschreibung:</b><br>
+Berschreibung Paragraph 1.<br><br>
+Berschreibung Paragraph 2.
+</div>
 
-
-
-
-
-
-
-
-
-
-n
-
-
+---
 
 ## Timeline
 

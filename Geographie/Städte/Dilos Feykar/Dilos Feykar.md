@@ -1,6 +1,6 @@
 Name: Dilos Feykar (tödlicher Wald)
-Population:
-Oberhaupt:
+Population: 12+
+Oberhaupt: ???
 groß
 10% überleben den Dschungel, wahrscheinlich der gefährichste Ort des Kontinents
 

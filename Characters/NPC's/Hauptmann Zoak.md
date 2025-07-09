@@ -3,9 +3,9 @@
 > [!infobox]
 > # Name
 > ![[Zoak.png|cover hsmall]]
-> [[Zoak.png|Vollbild]]
+> ### [[Zoak.png|Vollbild]]
 > ###### Stats
-> | Type |  Stat |
+> | Typ |  Stat |
 > | ---- | ---- |
 > | Volk | Deep Gnome |
 > | Alter | ?? |
@@ -14,7 +14,7 @@
 > | Größe | small |
 > | Status | lebendig |
 
-<div style="min-height: 450px; padding: 12px; border: 0px solid var(--text-faint); border-radius: 10px; background-color: var(--background-secondary); line-height: 1.5;">
+<div style="min-height: 490px; padding: 12px; border: 0px solid var(--text-faint); border-radius: 10px; background-color: var(--background-secondary); line-height: 1.5;">
 <b>Beschreibung:</b><br>
 Hauptmann Zoak ist ein tiefgrauer Gnom mit imposantem Schnauzbart, strenger Haltung und dem Blick eines Mannes, der zu viel gesehen hat. Als Kommandant der Stadtwache von Dilos Feykar wirkt er auf den ersten Blick charmant, beinahe humorvoll – doch unter der Oberfläche verbirgt sich etwas Unnahbares.<br><br>
 Er trägt eine prächtig verzierte Uniform mit alten Abzeichen und einen schweren Säbel an der Seite, den er angeblich während eines „Wettbewerbs der zehn stärksten und gutaussehendsten Abenteurer“ getragen hat – ein Titel, auf den er sichtlich stolz ist. Seine Amtsstube ist mit exotischen Waffen geschmückt, viele davon scheinbar magischer Natur.
