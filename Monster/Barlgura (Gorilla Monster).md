@@ -3,6 +3,6 @@
 - sehr stark
 - können weit springen
 - können Illusionen hervorrufen
-- essen [[Südöstliche Wälder#**Früchte **|magische Bananen]]
+- essen [[Public/Assets/Südöstliche Wälder#**Früchte **|magische Bananen]]
 - können Ranken beschwören, die einen restrainen
 - können unsichtbar werden

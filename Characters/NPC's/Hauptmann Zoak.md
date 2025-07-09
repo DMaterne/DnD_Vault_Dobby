@@ -3,6 +3,7 @@
 > [!infobox]
 > # Name
 > ![[Zoak.png|cover hsmall]]
+> [[Zoak.png|Vollbild]]
 > ###### Stats
 > | Type |  Stat |
 > | ---- | ---- |

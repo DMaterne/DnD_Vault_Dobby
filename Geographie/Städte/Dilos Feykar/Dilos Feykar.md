@@ -4,7 +4,7 @@ Oberhaupt:
 groß
 10% überleben den Dschungel, wahrscheinlich der gefährichste Ort des Kontinents
 
-Dilos Feykar ist eine große Stadt im Süden des Kontinents. Sie bedeckt die komplette Landbrücke zwischen der Halbinsel auf der sich die [[Südöstliche Wälder|südöstlichen Wälder]] und dem restlichen Kontinent.
+Dilos Feykar ist eine große Stadt im Süden des Kontinents. Sie bedeckt die komplette Landbrücke zwischen der Halbinsel auf der sich die [[Public/Assets/Südöstliche Wälder|südöstlichen Wälder]] und dem restlichen Kontinent.
 
 ## Wichtige Orte
 

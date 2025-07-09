@@ -9,7 +9,7 @@
 		{"id":"a95564746b9d3532","x":440,"y":920,"width":250,"height":200,"type":"text","text":"**magische Früchte**\n- natürlich oder durch veränderte Vegetation?\n- Anbauen?\n- Nutzbarkeit?"},
 		{"id":"5e1fc2ec01dddd47","x":84,"y":920,"width":276,"height":200,"type":"text","text":"**veränderte Vegetation**\n- durch Dämonen?\n- natürlich?\n- durch Portal/andere Plane?"},
 		{"id":"d093018d17ff9121","x":492,"y":660,"width":250,"height":160,"type":"text","text":"- woher?\n- Schuld an Vegetation?\n- Eigenständig oder unter Kontrolle?"},
-		{"id":"5fb76cde56079c17","type":"file","file":"Public/Geographie/Südöstliche Wälder.md","x":-520,"y":150,"width":360,"height":920},
+		{"id":"5fb76cde56079c17","type":"file","file":"Public/Geographie/Städte/Dilos Feykar/Südöstliche Wälder.md","x":-520,"y":150,"width":360,"height":920},
 		{"id":"9d662204f490e6ba","x":390,"y":150,"width":322,"height":164,"type":"text","text":"**Körperlose Stimme**\n- unsichtbar?\n- körperlos?\n- kontrolliert Dämonen?\n- ruft Dämonen?"}
 	],
 	"edges":[
