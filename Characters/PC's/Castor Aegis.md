@@ -1,3 +1,5 @@
+%% tags: #pc #zirkel #brakkel #noble %%
+
 ## Bio
 
 ![[CastorAlltagsgewand.png|300]] ![[PCme.png|300]] 
