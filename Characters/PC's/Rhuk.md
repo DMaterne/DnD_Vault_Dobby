@@ -39,3 +39,4 @@ Wie alle Hautdiebe wurde auch Rhuk dem Zirkel der Spiegel zugewiesen – einer g
 
 Heute:
 Mit 30 Jahren ist Rhuk ein erfahrener Hautdieb. Doch die Ruhe der neuen Zeit bringt ihm keine Erfüllung. Er will weiter lernen. Besser werden. Seine Fähigkeiten schärfen – um seine Leute zu beschützen, wenn die Schatten zurückkehren.
+
