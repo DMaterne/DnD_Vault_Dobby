@@ -3,7 +3,7 @@
 > [!infobox]
 > # Name
 > ![[NPC_Placeholder.png|cover hsmall]]
-> ###### [[NPC_Placeholder.png|Vollbild]]
+> [[NPC_Placeholder.png|Vollbild]]
 > ###### Stats
 > | Typ |  Stat |
 > | ---- | ---- |
