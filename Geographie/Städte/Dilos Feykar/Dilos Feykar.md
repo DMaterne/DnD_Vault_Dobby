@@ -1,7 +1,9 @@
+## Allgemein
+
 > [!infobox]
 > # Dilos Feykar
-> ![[NPC_Placeholder.png|cover hsmall]]
-> ###### [[NPC_Placeholder.png|Vollbild]]
+> ![[DilosFeykar.png|cover hsmall]]
+> ###### [[DilosFeykar.png|Vollbild]]
 > ###### Stats
 > | Typ |  Stat |
 > | ---- | ---- |
