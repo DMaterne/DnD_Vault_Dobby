@@ -1,9 +1,10 @@
+## Allgemein
 
 
 > [!infobox]
 > # Dilos Feykar
-> ![[NPC_Placeholder.png|cover hsmall]]
-> ###### [[NPC_Placeholder.png|Vollbild]]
+> ![[DilosFeykar.png|cover hsmall]]
+> ###### [[DilosFeykar.png|Vollbild]]
 > ###### Stats
 > | Typ |  Stat |
 > | ---- | ---- |
@@ -21,7 +22,7 @@ Die Stadt ist ein Schmelztiegel: Reisende, Abenteurer, Forscher, Flüchtlinge, H
 ---
 
 ## Wichtige Orte
-- [[Public/Geographie/Städte/Dilos Feykar/Südöstliche Wälder|Südöstliche Wälder]]
+- [[Südöstliche Wälder|Südöstliche Wälder]]
 - [[Zum Silbernen Anlitz]]
 - [[Der Freundliche Hänker]]
 
