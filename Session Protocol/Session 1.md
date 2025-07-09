@@ -1,3 +1,5 @@
+%% #session %%
+
 Datum: 06.07.2025
 Spieler: alle
 
@@ -5,7 +7,7 @@ Spieler: alle
 
 Charaktererstellung und bissl Lore zur Welt
 
-###  **Session-Protokoll:**
+###  **Session Notizen (raw):**
 Vorstellungsrunde
 
 Stehen morgens vor [[Dilos Feykar]]. Sehen Dschungel im Hintergrund. Wurden gebeten Expedition in Dschungel zur Zivilisierung teilzunehmen. Auftrag von Krone über Umwege (Zirkel). Soldaten, Söldner, Bettler, Adel, Diebe und mehr nehmen Teil. Viele kleine Gruppen. Wir sind nicht zusammen gereist, bilden aber Gruppe. Beginnen Expedition. Nebliger mittag. Am Dschungelrand. Folgen alten Trampelpfad. Blätter werden gelb/rot. Tiefer werden Bäume größer. Unbekannt Früchte.
@@ -62,7 +64,7 @@ Ich begleite [[Leo Eisenfaust|Leo]] (jüngster) zur Familie, Geschwister Peter u
 
 Bekomme Bag of Holding wieder.
 
-###  **Zusammenfassung:**
+###  **Protokoll:**
 
 Der [[Kaiser]] hat zu einer [[Quest - Expedition zur Erschließung der südöstlichen Wälder|Expedition zur Erschließung der südöstlichen Wälder]] ausgerufen. Berichten zufolge sollen nur etwa 10% der Leute die diese Betreten lebendig zurückkehren. Doch die Überlebenden sind nicht mehr sie selbst. Die Grauen der Wälder scheinen sie gebrochen zu haben. Sie sind von Angst geplangt und wollen die [[Public/Assets/Südöstliche Wälder|Wälder]] nie wieder betreten. 
 Doch bietet die Expedition auch Chancen auf Ruhm und Reichtum, die sich manche nicht entgehen lassen wollen.
