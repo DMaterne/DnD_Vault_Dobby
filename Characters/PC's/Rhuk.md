@@ -14,11 +14,11 @@ Werte: Schutz der Schwachen, Erinnerung statt Vergeltung, Loyalität gegenüber 
 Herkunft und Auftrag:
 Rhuk entstammt dem [[Klan Brakkel]] – einem der ersten Goblinclans, der sich friedlich der Zivilisation öffnete. Sein Volk suchte keine Eroberung – sondern Handel, Diplomatie und Anerkennung. Doch was sie fanden, war Verachtung.
 
-Goblinkarawanen wurden überfallen. Händler versklavt. Diplomaten verschwanden. Also griff der Klan zu einem Mittel, das niemand vergessen sollte: den Hautdieben.
+Goblinkarawanen wurden überfallen. Händler versklavt. Diplomaten verschwanden. Also griff der Klan zu einem Mittel, das niemand vergessen sollte: den [[Hautdiebe|Hautdieben]].
 
 Diese Spezialeinheit wurde im Verborgenen gegründet – nicht für Krieg, sondern für Rache. Sie spürten Goblingegner auf, töteten sie lautlos, und nahmen als Zeichen ihrer Tat ein Stück Haut. Aus diesen Stücken nähten sie Masken, die sie zu Ehren ihrer Gefallenen trugen – bei jedem neuen Auftrag, jedem neuen Namen auf der Liste.
 
-Die Hautdiebe wurden gefürchtet – und sie sollten es auch. Denn für jeden toten Goblin sollte jemand das Gesicht verlieren.
+Die [[Hautdiebe]] wurden gefürchtet – und sie sollten es auch. Denn für jeden toten Goblin sollte jemand das Gesicht verlieren.
 
 Wandel der Zeit:
 Mit den Jahren änderte sich die Welt – langsam, aber stetig. Die Stimmen für Toleranz wurden lauter. Goblins durften handeln, Land kaufen, leben. Die alten Masken verblassten.

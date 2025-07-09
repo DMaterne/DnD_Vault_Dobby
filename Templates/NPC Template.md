@@ -15,6 +15,19 @@
 **Beschreibung:**
 Hier kannst du den Charakter beschreiben
 
+
+
+
+
+
+
+
+
+
+n
+
+
+
 ## Timeline
 
 ```timeline
@@ -33,7 +46,9 @@ Hier kannst du den Charakter beschreiben
 ## Zugehörigkeit
 
 ## Verwandte Seiten
-table file.link as "Verlinkende Seiten"
-from [[NPC Template]]
+
+```dataview
+list from [[this]]
+```
 
 

@@ -24,3 +24,6 @@ Doch bietet die Expedition auch Chancen auf Ruhm und Reichtum, die sich manche n
 + Die Gruppe erstattet [[Hauptmann Zoak]] und dem [[Zirkel der Spiegel]] Bericht und hat anschließend zwei Tage Downtime, bis sie weitere Anweisungen erhalten 
 ```
 
+## Mindmap
+
+![[Mindmap Expedition.canvas|Mindmap Expedition]]

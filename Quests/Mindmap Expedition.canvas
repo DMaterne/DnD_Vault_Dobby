@@ -1,0 +1,28 @@
+{
+	"nodes":[
+		{"id":"a95bb676c1bef628","type":"file","file":"Public/Quests/Quest - Expedition zur Erschließung der südöstlichen Wälder.md","x":-540,"y":-700,"width":400,"height":140},
+		{"id":"e7c6ced862bb9544","type":"file","file":"Public/Monster/Barlgura (Gorilla Monster).md","x":360,"y":560,"width":382,"height":100},
+		{"id":"acc55cd9dd0011dc","x":-1280,"y":-840,"width":400,"height":68,"type":"file","file":"Public/Characters/NPC's/Hauptmann Zoak.md"},
+		{"id":"976c473a077e1162","x":-1280,"y":-680,"width":400,"height":100,"type":"file","file":"Public/Gruppierungen/Stadtwache von Dilos Feykar.md"},
+		{"id":"09cbd75123bb9b7b","x":-1280,"y":-480,"width":400,"height":60,"type":"file","file":"Public/Gruppierungen/Zirkel der Spiegel.md"},
+		{"id":"27cf0ca5fbdf3030","type":"file","file":"Public/Session Protocol/Session 1.md","x":319,"y":-655,"width":400,"height":50},
+		{"id":"a95564746b9d3532","x":440,"y":920,"width":250,"height":200,"type":"text","text":"**magische Früchte**\n- natürlich oder durch veränderte Vegetation?\n- Anbauen?\n- Nutzbarkeit?"},
+		{"id":"5e1fc2ec01dddd47","x":84,"y":920,"width":276,"height":200,"type":"text","text":"**veränderte Vegetation**\n- durch Dämonen?\n- natürlich?\n- durch Portal/andere Plane?"},
+		{"id":"d093018d17ff9121","x":492,"y":660,"width":250,"height":160,"type":"text","text":"- woher?\n- Schuld an Vegetation?\n- Eigenständig oder unter Kontrolle?"},
+		{"id":"5fb76cde56079c17","type":"file","file":"Public/Geographie/Südöstliche Wälder.md","x":-520,"y":150,"width":360,"height":920},
+		{"id":"9d662204f490e6ba","x":390,"y":150,"width":322,"height":164,"type":"text","text":"**Körperlose Stimme**\n- unsichtbar?\n- körperlos?\n- kontrolliert Dämonen?\n- ruft Dämonen?"}
+	],
+	"edges":[
+		{"id":"88cc088eb4fd8c1e","fromNode":"e7c6ced862bb9544","fromSide":"left","toNode":"5fb76cde56079c17","toSide":"right","label":"Im Dschungel"},
+		{"id":"f049ebd521dae9d1","fromNode":"a95bb676c1bef628","fromSide":"right","toNode":"27cf0ca5fbdf3030","toSide":"left","label":"Hauptmission"},
+		{"id":"3453a2ddd4e3fe34","fromNode":"a95bb676c1bef628","fromSide":"bottom","toNode":"5fb76cde56079c17","toSide":"top","label":"Gebiet"},
+		{"id":"48f6fe72b24cd732","fromNode":"acc55cd9dd0011dc","fromSide":"bottom","toNode":"976c473a077e1162","toSide":"top","label":"Anführer"},
+		{"id":"a380f6e61832ac72","fromNode":"976c473a077e1162","fromSide":"right","toNode":"a95bb676c1bef628","toSide":"left","label":"betreuen"},
+		{"id":"0017413994082a0d","fromNode":"09cbd75123bb9b7b","fromSide":"right","toNode":"a95bb676c1bef628","toSide":"left","label":"Stellt Personal/\nhat interesse"},
+		{"id":"e284cd4e6aa85dad","fromNode":"e7c6ced862bb9544","fromSide":"bottom","toNode":"5e1fc2ec01dddd47","toSide":"top","label":"Zusammenhang?"},
+		{"id":"b74724739ac2c4b5","fromNode":"e7c6ced862bb9544","fromSide":"bottom","toNode":"a95564746b9d3532","toSide":"top"},
+		{"id":"2c351372db729b2b","fromNode":"a95564746b9d3532","fromSide":"left","toNode":"5e1fc2ec01dddd47","toSide":"right"},
+		{"id":"a9bb6b5874eb7520","fromNode":"5e1fc2ec01dddd47","fromSide":"right","toNode":"a95564746b9d3532","toSide":"left"},
+		{"id":"b1ffbf40284a0bf1","fromNode":"9d662204f490e6ba","fromSide":"bottom","toNode":"e7c6ced862bb9544","toSide":"top","label":"Meister?"}
+	]
+}

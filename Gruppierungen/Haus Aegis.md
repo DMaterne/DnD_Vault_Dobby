@@ -1,4 +1,4 @@
-**Rang:** Baronshaus  
+**Rang:** [[Baron|Baronshaus]]  
 **Leitspruch:** _„Ferrum Meum, Fides Mea“_ – _„Mein Stahl ist mein Glaube“_  
 **Wappen:** 
 ![[WappenHausAegis.png|300]]
@@ -7,7 +7,7 @@
 
 ###  **Über das Haus:**
 
-Haus Aegis gehört zu den ältesten Baronshäusern der Hauptstadt. Gegründet von einer Linie magischer Schildträger, steht es seit Jahrhunderten für Schutz, Verteidigung und Verantwortung. Während andere Häuser durch politische Intrigen, militärische Expansion oder ökonomische Macht glänzen, hat sich Haus Aegis einen Ruf als Hüter von Stabilität, Wissen und Sicherheit erarbeitet.
+Haus Aegis gehört zu den ältesten Baronshäusern der [[Du'ul Fus Bornah|Hauptstadt]]. Gegründet von einer Linie magischer Schildträger, steht es seit Jahrhunderten für Schutz, Verteidigung und Verantwortung. Während andere Häuser durch politische Intrigen, militärische Expansion oder ökonomische Macht glänzen, hat sich Haus Aegis einen Ruf als Hüter von Stabilität, Wissen und Sicherheit erarbeitet.
 
 Ihr Leitspruch **„Ferrum Meum, Fides Mea“** – **„Mein Stahl ist mein Glaube“** – verkörpert ihre Überzeugung: Wahre Stärke kommt nicht durch Angriff oder Machtgier, sondern durch Standhaftigkeit, Disziplin und die Verpflichtung, andere zu schützen.
 

@@ -1,71 +1,23 @@
 ## Bio
 
-![[Zoak.png|300]]
+> [!infobox]
+> # Name
+> ![[Zoak.png|cover hsmall]]
+> ###### Stats
+> | Type |  Stat |
+> | ---- | ---- |
+> | Volk | Deep Gnome |
+> | Alter | ?? |
+> | Herkunft | [[Dilos Feykar]] |
+> | Wohnort | [[Dilos Feykar]] |
+> | Größe | small |
+> | Status | lebendig |
 
-**Name:** Zoak ???
-**Volk:** Deep Gnome  
-**Alter:** alt 
-**Beruf:** Hauptmann der [[Stadtwache von Dilos Feykar]]
-**Herkunft:** ???
-**Wohnort:** [[Dilos Feykar]]
-**Aussehen:** klein, Schnauzer und trägt einen Admiralshut
-**Größe:** small
-
----
-
-**Beschreibung:** 
-Hauptmann Zoak ist ein tiefgrauer Gnom mit imposantem Schnauzbart, strenger Haltung und dem Blick eines Mannes, der zu viel gesehen hat. Als Kommandant der Stadtwache von Dilos Feykar wirkt er auf den ersten Blick charmant, beinahe humorvoll – doch unter der Oberfläche verbirgt sich etwas Unnahbares.
+<div style="min-height: 450px; padding: 12px; border: 0px solid var(--text-faint); border-radius: 10px; background-color: var(--background-secondary); line-height: 1.5;">
+<b>Beschreibung:</b><br>
+Hauptmann Zoak ist ein tiefgrauer Gnom mit imposantem Schnauzbart, strenger Haltung und dem Blick eines Mannes, der zu viel gesehen hat. Als Kommandant der Stadtwache von Dilos Feykar wirkt er auf den ersten Blick charmant, beinahe humorvoll – doch unter der Oberfläche verbirgt sich etwas Unnahbares.<br><br>
 Er trägt eine prächtig verzierte Uniform mit alten Abzeichen und einen schweren Säbel an der Seite, den er angeblich während eines „Wettbewerbs der zehn stärksten und gutaussehendsten Abenteurer“ getragen hat – ein Titel, auf den er sichtlich stolz ist. Seine Amtsstube ist mit exotischen Waffen geschmückt, viele davon scheinbar magischer Natur.
-
----
-
-| Attribut     | Wert                                            |
-|--------------|-------------------------------------------------|
-| **Name**     | Zoak ???                                        |
-| **Volk**     | Deep Gnome                                      |
-| **Alter**    | alt                                              |
-| **Beruf**    | Hauptmann der Stadtwache von Dilos Feykar       |
-| **Herkunft** | ???                                              |
-| **Wohnort**  | Dilos Feykar                                     |
-| **Aussehen** | klein, Schnauzer und trägt einen Admiralshut    |
-| **Größe**    | small                                            |
-
-    </div>
-
-  </div>
-
 </div>
-
-
----
-
-<!-- Charakterprofil: Zoak ??? -->
-
-<div style="display: flex; gap: 1.5em; align-items: flex-start; flex-wrap: wrap;">
-
-  <!-- Linke Spalte mit dem Bild -->
-  <div class="square-image-box">
-    <img src="Zoak.png" alt="Zoak">
-  </div>
-
-  <!-- Rechte Spalte mit der Tabelle -->
-  <div>
-
-| Attribut     | Wert                                            |
-|--------------|-------------------------------------------------|
-| **Name**     | Zoak ???                                        |
-| **Volk**     | Deep Gnome                                      |
-| **Alter**    | alt                                              |
-| **Beruf**    | Hauptmann der Stadtwache von Dilos Feykar       |
-| **Herkunft** | ???                                              |
-| **Wohnort**  | Dilos Feykar                                     |
-| **Aussehen** | klein, Schnauzer und trägt einen Admiralshut    |
-| **Größe**    | small                                            |
-
-  </div>
-
-</div>
-
 
 ---
 
@@ -85,3 +37,19 @@ Er trägt eine prächtig verzierte Uniform mit alten Abzeichen und einen schwere
 + Erste Begegnung und Berichterstattung
 + Als die Gruppe ihm Bericht über die Dschungel-Expedition erstattet, zeigt er reges Interesse – vielleicht zu viel.
 ```
+
+---
+
+## Zugehörigkeit
+
+- [[Stadtwache von Dilos Feykar]]
+- [[Quest - Expedition zur Erschließung der südöstlichen Wälder]]
+
+---
+
+## Verwandte Seiten
+
+```dataview
+list from [[Hauptmann Zoak]]
+```
+

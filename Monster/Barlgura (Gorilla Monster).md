@@ -1,1 +1,8 @@
-Nehmen Affengestalt an, sind Dämonen, selten auf der Materiellen Ebene
+- Nehmen Affengestalt an, sind Dämonen, selten auf der Materiellen Ebene
+- nicht sonderlich schlau/taktisch
+- sehr stark
+- können weit springen
+- können Illusionen hervorrufen
+- essen [[Südöstliche Wälder#**Früchte **|magische Bananen]]
+- können Ranken beschwören, die einen restrainen
+- können unsichtbar werden
