@@ -1,13 +1,25 @@
-Name: Dilos Feykar (tödlicher Wald)
-Population: 12+
-Oberhaupt: ???
-groß
-10% überleben den Dschungel, wahrscheinlich der gefährichste Ort des Kontinents
+> [!infobox]
+> # Dilos Feykar
+> ![[NPC_Placeholder.png|cover hsmall]]
+> ###### [[NPC_Placeholder.png|Vollbild]]
+> ###### Stats
+> | Typ |  Stat |
+> | ---- | ---- |
+> | Kontinent | [[Kontinent of xxx]] |
+> | Bevölkerung | 12+ |
+> | Oberhaupt | ??? |
 
-Dilos Feykar ist eine große Stadt im Süden des Kontinents. Sie bedeckt die komplette Landbrücke zwischen der Halbinsel auf der sich die [[Public/Assets/Südöstliche Wälder|südöstlichen Wälder]] und dem restlichen Kontinent.
+
+<div style="min-height: 410px; padding: 12px; border: 0px solid var(--text-faint); border-radius: 10px; background-color: var(--background-secondary); line-height: 1.5;">
+<b>Beschreibung:</b><br>
+Dilos Feykar ("Tödlicher Wald") ist eine befestigte, florierende Grenzstadt im äußersten Süden des Kontinents. Ihre Mauern erstrecken sich über die gesamte Landbrücke, die die geheimnisvollen [[Public/Geographie/Städte/Dilos Feykar/Südöstliche Wälder|südöstliche Wälder]] mit dem Rest der Zivilisation verbindet. Wer in die Wildnis aufbricht, kommt an Dilos Feykar nicht vorbei.<br><br>
+Die Stadt ist ein Schmelztiegel: Reisende, Abenteurer, Forscher, Flüchtlinge, Händler und fanatische Gläubige leben Seite an Seite mit einfachen Bürgern, Söldnern und Spionen. Viele kommen mit großen Plänen – nur wenige kehren zurück.
+</div>
+
+---
 
 ## Wichtige Orte
-
+- [[Public/Geographie/Städte/Dilos Feykar/Südöstliche Wälder|Südöstliche Wälder]]
 - [[Zum Silbernen Anlitz]]
 - [[Der Freundliche Hänker]]
 
@@ -29,4 +41,5 @@ Dilos Feykar ist eine große Stadt im Süden des Kontinents. Sie bedeckt die kom
 list from [[Dilos Feykar]]
 ```
 
+---
 

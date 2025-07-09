@@ -14,7 +14,7 @@
 > | Größe | 1,80m |
 > | Status | lebendig |
 
-<div style="min-height: 490px; padding: 12px; border: 0px solid var(--text-faint); border-radius: 10px; background-color: var(--background-secondary); line-height: 1.5;">
+<div style="min-height: 500px; padding: 12px; border: 0px solid var(--text-faint); border-radius: 10px; background-color: var(--background-secondary); line-height: 1.5;">
 <b>Beschreibung:</b><br>
 Berschreibung Paragraph 1.<br><br>
 Berschreibung Paragraph 2.
