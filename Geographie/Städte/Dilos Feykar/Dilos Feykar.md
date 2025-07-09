@@ -1,6 +1,6 @@
 %% tags: #city #zirkel %%
 
-## Allgemein
+## **Allgemein**
 
 > [!infobox]
 > # Dilos Feykar
@@ -22,12 +22,12 @@ Die Stadt ist ein Schmelztiegel: Reisende, Abenteurer, Forscher, Flüchtlinge, H
 
 ---
 
-## Wichtige Orte
+## **Wichtige Orte**
 - [[Südöstliche Wälder|Südöstliche Wälder]]
 - [[Zum Silbernen Anlitz]]
 - [[Der Freundliche Hänker]]
 
-## Gruppierungen
+## **Gruppierungen**
 
 - [[Zirkel der Spiegel]]
 - [[Stadtwache von Dilos Feykar]]

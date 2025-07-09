@@ -93,4 +93,4 @@ Nachts um 3 Uhr kommt die Gruppe endlich wieder in [[Dilos Feykar]] an. Ein Wach
 
 Die Gruppe trifft sich wieder im [[Der Freundliche Hänker|freundlichen Hänker]]. Die Session endet und die Party hat zwei Tage downtime.
 
-
+### **Zusammenfassung:**

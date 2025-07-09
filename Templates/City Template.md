@@ -1,6 +1,6 @@
 %% tags: #city %%
 
-## Allgemein
+## **Allgemein**
 
 > [!infobox]
 > # Name
@@ -22,16 +22,16 @@ Paragraph 2.
 
 ---
 
-## Wichtige Orte
+## **Wichtige Orte**
 
 
-## Gruppierungen
+## **Gruppierungen**
 
 
-## Bekannte Persönlichkeiten
+## **Bekannte Persönlichkeiten**
 
 
-## Timeline
+## **Timeline**
 
 ```timeline
 [line-3, body-2]
@@ -46,7 +46,7 @@ Paragraph 2.
 
 ---
 
-## Verwandte Seiten
+## **Verwandte Seiten**
 
 ```dataview
 list from [[this]]

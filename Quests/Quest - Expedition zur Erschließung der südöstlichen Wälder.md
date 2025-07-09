@@ -5,9 +5,16 @@ Der [[Kaiser]] hat zu einer Expedition zur Erschließung der [[Public/Assets/Sü
 Doch bietet die Expedition auch Chancen auf Ruhm und Reichtum, die sich manche nicht entgehen lassen wollen.
 **Ziel:** Herausfinden, was die Wälder so gefährlich macht und wie man diese Zivilisieren kann.
 
+## **Ziele**
+
+- [ ] Wälder erschließen
+- [ ] Ursache für die Verschwundenen finden
+	- [ ] Herkunft der Dämonen klären
+	- [ ] Identität der Stimme finden
+
 ---
 
-## Timeline
+## **Timeline**
 
 ```timeline
 [line-3, body-2]
@@ -24,6 +31,6 @@ Doch bietet die Expedition auch Chancen auf Ruhm und Reichtum, die sich manche n
 + Die Gruppe erstattet [[Hauptmann Zoak]] und dem [[Zirkel der Spiegel]] Bericht und hat anschließend zwei Tage Downtime, bis sie weitere Anweisungen erhalten 
 ```
 
-## Mindmap
+## **Mindmap**
 
 ![[Mindmap Expedition.canvas|Mindmap Expedition]]
