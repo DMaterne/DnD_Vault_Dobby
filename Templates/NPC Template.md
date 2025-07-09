@@ -1,3 +1,5 @@
+%% tags: #npc %%
+
 ## Bio
 
 > [!infobox]

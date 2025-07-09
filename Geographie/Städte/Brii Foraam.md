@@ -1,3 +1,5 @@
+%% tags: #city %%
+
 Stadt Norden
 neuste Stadt
 wohlhabend, da Handel mit anderen Kontinenten

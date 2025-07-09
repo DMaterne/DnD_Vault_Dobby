@@ -1,1 +1,3 @@
+%% tags: #town %%
+
 Dorf SO

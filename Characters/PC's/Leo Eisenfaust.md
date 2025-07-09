@@ -1,3 +1,5 @@
+%% tags: #pc #bahamut %%
+
 ![[LeoEisenhart.png|300]]
 
 **Paladin Leo** **Eisenfaust**

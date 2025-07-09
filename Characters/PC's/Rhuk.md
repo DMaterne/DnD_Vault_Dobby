@@ -1,3 +1,5 @@
+%% tags: #pc #zirkel #brakkel %%
+
 ## Bio
 
 > [!infobox]
