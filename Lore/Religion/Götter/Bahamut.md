@@ -17,5 +17,4 @@ Seine Anhänger sind oft Paladine, Rechtsgelehrte, Heiler oder andere, die ihr L
 ## Bekannte Anhänger:
    
 - [[Leo Eisenfaust]]
-    
-- Deine Mum
+- [[Familie Eisenfaust]]
