@@ -6,6 +6,6 @@ Race: Drow
 
 Gender: female
 
-Aussehen: slender aber toned (assassin halt), dunkelgraue Haut, gelbe Augen, weißes Haar (i.d.R. in hüftlangen Zopf geflochten), Narben im Gesicht (Spinnenfäden-Muster), schwarze Kleidung
+Aussehen: slender aber toned (assassin halt), dunkelgraue Haut, gelbe Augen, weißes Haar (i.d.R. in hüftlangen Zopf geflochten), Narben im Gesicht (Spinnenfäden-Muster), schwarze Kleidung.
 
 **

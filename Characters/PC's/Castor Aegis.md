@@ -15,6 +15,20 @@ Besonderheiten: Magisches Tatoo mit Runen, das er beliebig verformen kann
 Persönlichkeit: Neugierig, stolz auf seine Herkunft, Wissensgierig  
 Werte: Neu ist immer besser, Fortschritt ist Macht
 
+> [!infobox]
+> # Name
+> ![[CastorAlltagsgewand.png|cover hsmall]]
+> ![[PCme.png|cover hsmall]]
+> ### [[CastorAlltagsgewand.png|Vollbild 1 ]][[PCme.png|Vollbild]]
+> ###### Stats
+> | Typ |  Stat |
+> | ---- | ---- |
+> | Volk | Deep Gnome |
+> | Alter | ?? |
+> | Herkunft | [[Dilos Feykar]] |
+> | Wohnort | [[Dilos Feykar]] |
+> | Größe | small |
+> | Status | lebendig |
 
 
 
