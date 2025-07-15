@@ -1,7 +1,13 @@
-**Rang:** [[Baron|Baronshaus]]  
-**Leitspruch:** _„Ferrum Meum, Fides Mea“_ – _„Mein Stahl ist mein Glaube“_  
-**Wappen:** 
-![[WappenHausAegis.png|300]]
+> [!infobox]
+> # Rhuk
+> ![[WappenHausAegis.png|cover hsmall]]
+> ### [[WappenHausAegis.png|Vollbild]]
+> ###### Stats
+> | Typ |  Stat |
+> | ---- | ---- |
+> | Rang | [[Baron|Baronshaus]] |
+> | Leitspruch | _„Ferrum Meum, Fides Mea“_ – _„Mein Stahl ist mein Glaube“_  |
+> | Hauptsitz | [[Du'ul Fus Bornah]] |
 
 ---
 
