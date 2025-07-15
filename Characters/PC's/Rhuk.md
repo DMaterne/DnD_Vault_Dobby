@@ -3,7 +3,7 @@
 ## Bio
 
 > [!infobox]
-> # Name
+> # Rhuk
 > ![[RhukPortrait.png|cover hsmall]]
 > ### [[RhukPortrait.png|Vollbild]]
 > ###### Stats

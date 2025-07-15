@@ -2,39 +2,36 @@
 
 ## Bio
 
-![[CastorAlltagsgewand.png|300]] ![[PCme.png|300]] 
 
-Name: [[Castor Aegis]]  
-Alias: Talos
-Volk: Mensch  
-Alter: 22 Jahre  
-Hintergrund: Zweiter Sohn von [[Haus Aegis]]
-Klasse: Artificer (Armorer)  
+> [!infobox]
+> # Castor Aegis
+> ![[CastorAlltagsgewand.png|cover hsmall]]
+> ![[PCme.png|cover hsmall]]
+> ### [[CastorAlltagsgewand.png|Vollbild 1 ]] [[PCme.png|Vollbild 2]]
+> ###### Stats
+> | Typ |  Stat |
+> | ---- | ---- |
+> | Volk | Mensch |
+> | Alter | 22 |
+> | Herkunft | [[Du'ul Fus Bornah]] |
+> | Wohnort | [[Du'ul Fus Bornah]] |
+> | Größe | 2,0m  |
+> | Status | lebendig |
+> ###### Charakter
+> | Typ |  Stat |
+> | ---- | ---- |
+> | Class | Artificer |
+> | Subclass | Armorer |
+> | Alias | Talos |
+
 Rolle: Wissenschaftler, Tüftler, Verteidiger
 Besonderheiten: Magisches Tatoo mit Runen, das er beliebig verformen kann
 Persönlichkeit: Neugierig, stolz auf seine Herkunft, Wissensgierig  
 Werte: Neu ist immer besser, Fortschritt ist Macht
 
-> [!infobox]
-> # Name
-> ![[CastorAlltagsgewand.png|cover hsmall]]
-> ![[PCme.png|cover hsmall]]
-> ### [[CastorAlltagsgewand.png|Vollbild 1 ]][[PCme.png|Vollbild]]
-> ###### Stats
-> | Typ |  Stat |
-> | ---- | ---- |
-> | Volk | Deep Gnome |
-> | Alter | ?? |
-> | Herkunft | [[Dilos Feykar]] |
-> | Wohnort | [[Dilos Feykar]] |
-> | Größe | small |
-> | Status | lebendig |
-
-
-
 ## Herkunft und Entwicklung:
 
-Geboren in der Hauptstadt eines traditionsreichen, wenn auch nicht mächtigen Adelsgeschlechts, [[Haus Aegis]]. Die Familie besitzt ein Erbe starker arkaner Blutlinien – Magier, Hexenmeister und Gelehrte prägten ihren Namen. Doch wo andere Geschwister bereits mit 10 Jahren ihre ersten Zauber wirkten, blieb bei ihm… nichts.
+Geboren in der Hauptstadt eines traditionsreichen, wenn auch nicht mächtigen Adelsgeschlechts, [[Haus Aegis]] als zweiter Sohn. Die Familie besitzt ein Erbe starker arkaner Blutlinien – Magier, Hexenmeister und Gelehrte prägten ihren Namen. Doch wo andere Geschwister bereits mit 10 Jahren ihre ersten Zauber wirkten, blieb bei ihm… nichts.
 
 Keine Funken. Keine Flammen. Keine magischen Wellen.
 
