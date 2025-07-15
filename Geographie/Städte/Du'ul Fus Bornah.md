@@ -6,8 +6,8 @@ Du'ul Fus Bornah ist die Hauptstadt. [[Castor Aegis]] ist hier groß geworden.
 
 > [!infobox]
 > # Du'ul Fus Bornah
-> ![[DilosFeykar.png|cover hsmall]]
-> ###### [[DilosFeykar.png|Vollbild]]
+> ![[Du'ulPic.png|cover hsmall]]
+> ###### [[Du'ulPic.png|Vollbild]]
 > ###### Stats
 > | Typ |  Stat |
 > | ---- | ---- |
