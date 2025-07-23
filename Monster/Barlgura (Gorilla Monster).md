@@ -6,3 +6,5 @@
 - essen [[Südöstliche Wälder#**Früchte **|magische Bananen]]
 - können Ranken beschwören, die einen restrainen
 - können unsichtbar werden
+
+
