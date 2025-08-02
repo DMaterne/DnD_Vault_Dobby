@@ -29,6 +29,14 @@ start
 erst nacht chillen im mischwald
 echo macht goliath fußspuren
 echo macht alarm zur schutz in der nacht
+weiter gehts am nächsten morgen
+dschungle-time
+die vegetation verändert sich extrem schnell
+versuchen den ursprung zu finden
+hin und wieder tanzen lichter durch den wald, edelsteinartige blätter werfen diese zurück
+der dschungel wird immer unter: rot, smaragt,blau,türkis, silber, gelb. blätter glitzern. boden von grau zu grün, orange, karmesin
+harz honigartig
+sammel 
 
 ###  **Protokoll:**
 
