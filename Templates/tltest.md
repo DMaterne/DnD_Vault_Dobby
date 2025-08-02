@@ -12,5 +12,6 @@ tags:
 last-seen: 2024-06-22
 aliases:
   - Todd
-Picture: [[NPC_Placeholder.png]]
+Picture:
+  - - NPC_Placeholder.png
 ---

@@ -10,36 +10,53 @@
 
 
 
-# Demonic Ape Shapeshifters: An In-depth Analysis
 
-In the realm of mythology and folklore, the concept of demonic ape shapeshifters is not uncommon. While these entities are rarely encountered on the material plane, they possess a unique set of characteristics that distinguish them from other creatures.
 
-## Intelligence and Tactics
+In the context of the provided text, we will refine and expand upon the given content while preserving the original style and meaning. The following is a detailed, edited version of the text:
 
-Contrary to popular belief, these beings are not particularly cunning or tactical. Their intelligence level is comparable to that of an average primate, but their raw strength more than compensates for this deficiency.
+- Assuming the form of apes, they are demons, rarely manifesting on the material plane
+  - Not particularly cunning or tactical
+  - Extremely powerful
+  - Able to leap great distances
+  - Capable of conjuring illusions
+  - Consume [[Südöstliche Wälder#**Fruits **|magical bananas]]
+  - Can summon vines that restrain
+  - Can become invisible
 
-## Strength
+Context:
+[[Session 1]]
+| Name                        | Description                                                                 | Effect                                                             |
+|-----------------------------|------------------------------------------------------------------------------|--------------------------------------------------------------------|
+| White Banana                | Magical banana with violet juice, alleviates exhaustion.                    | Removes 1 level of Exhaustion.                                     |
+| Acidic Pineapple            | Fleshy rind with acidic spikes, dangerous raw but chemically interesting.   | Causes skin/clothing irritation, inedible without processing.      |
+| Jungle Mango                | Sweet, juicy fruit. Completely ordinary, but delicious.                     | No magical effect, filling.                                        |
 
-Demonic ape shapeshifters are incredibly powerful. They can exert a force equivalent to several hundred kilograms, making them formidable opponents in physical confrontations.
+Upon their return to the city early in the morning, the exhausted [[Group]] sought shelter at the tavern "[[Der Freundliche Hänker]]" and later filed a report with [[Hauptmann Zoak]]. His interest in the brought fruits was evident, yet his behavior raised suspicion – as did the magical weapons in his office. While [[Echo]] restocked supplies and Castor Leo accompanied his family, [[Rhuk]] met secretly with a contact at "[[Zum Silbernen Anlitz]]", delivered evidence, and sent a report to their employer. The [[Group]] then reconvened at the tavern and was able to use two days for downtime.
 
-## Agility and Leaping Abilities
+During their reunion at the [[Der Freundliche Hänker|friendly Hänker]], the session ended, and the party had two days of downtime.
 
-These creatures are known for their remarkable agility and leaping abilities. They can cover vast distances in a single bound, making them difficult to outmaneuver.
+[[Quest - Expedition zur Erschließung der südöstlichen Wälder]]
+**Goal:** Discover what makes the woods dangerous and how to civilize them.
 
-## Illusion Casting
+[[Dilos Feykar]]
+## **General Information**
+> [!infobox]
+> # Dilos Feykar
+> ![[DilosFeykar.png|cover hsmall]]
+> ###### [[DilosFeykar.png|Full Image]]
+> ###### Stats
+> | Type   | Stat       |
+> |--------|------------|
+> | Continent | [[Kontinent of xxx]] |
+> | Population | 12+        |
+> | Leader  | Unknown    |
 
-One of the most intriguing aspects of demonic ape shapeshifters is their ability to create illusions. These illusions are not merely optical tricks but rather full-fledged simulations designed to deceive and disorient.
+<div style="min-height: 410px; padding: 12px; border: 0px solid var(--text-faint); border-radius: 10px; background-color: var(--background-secondary); line-height: 1.5;">
+<b>Description:</b><br>
+Dilos Feykar ("Deadly Forest") is a fortified, thriving frontier city located in the extreme south of the continent. Its walls span the entire length of the landbridge connecting it to the mysterious [[Public/Geographie/Städte/Dilos Feykar/Südöstliche Wälder|south-eastern woods]]. Anyone venturing into the wilderness must pass through Dilos Feykar.<br><br>
 
-## Dietary Habits
+The city is a melting pot: Travelers, adventurers, researchers, refugees, merchants, fanatical believers, simple citizens, soldiers, and spies live side by side. Many come with grand plans – few return.<br><br>
+The primary food source for the residents is fish. This is provided through a large number of fish caught.
+</div>
 
-These entities have a peculiar dietary preference for magical bananas native to the Southeast Woods, which are believed to enhance their supernatural abilities.
-
-## Restraint Rank Calling
-
-Demonic ape shapeshifters can summon vines or "rank" as they are commonly known, to restrain their prey or opponents. These rank vines are incredibly strong and difficult to break free from.
-
-## Invisibility
-
-Lastly, these creatures possess the ability to become invisible at will, making them even more elusive and dangerous.
-
-In conclusion, while demonic ape shapeshifters may not be the most intelligent or tactically astute beings, their raw strength, agility, and supernatural abilities make them formidable entities in mythology and folklore. Their unique characteristics have made them a subject of fascination for many scholars and enthusiasts alike.
+[[Südöstliche Wälder]]
