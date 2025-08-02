@@ -18,7 +18,7 @@ Ergebniss und neue Expedition
 neue Erkenntnisse: Dschungel nicht natürlich, war mal wald, bis etwas Mutation ausgelöst hat, wird irgendwann den ganzen Wald einnehmen.
 wäre cool wenn reversibel
 kaufen Rationen und abfahrt
-
+gehen zu [[Hauptmann Zoak]] und sind startklar
 
 ###  **Protokoll:**
 
