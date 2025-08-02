@@ -54,6 +54,12 @@ castor versucht echo zu wecken, scheitert leider.
 feuer oder magie allgemein macht nur halben damage
 kann max hp reduzieren bis zum long rest
 -14 max
+-17
+es explodiert
+knapp gewonnen
+höhle in den boden wo die mücken herkamen
+nutze den als bunker
+
 
 ###  **Protokoll:**
 
