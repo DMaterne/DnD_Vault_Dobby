@@ -10,7 +10,7 @@
 > | Typ |  Stat |
 > | ---- | ---- |
 > | Kontinent | [[Kontinent of xxx]] |
-> | Bevölkerung | 12+ |
+> | Bevölkerung | 19.826 |
 > | Oberhaupt | ??? |
 
 
