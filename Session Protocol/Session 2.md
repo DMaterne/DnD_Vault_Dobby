@@ -36,8 +36,10 @@ versuchen den ursprung zu finden
 hin und wieder tanzen lichter durch den wald, edelsteinartige blätter werfen diese zurück
 der dschungel wird immer unter: rot, smaragt,blau,türkis, silber, gelb. blätter glitzern. boden von grau zu grün, orange, karmesin
 harz honigartig
-[[Castor]] sammelt Proben der Vegetation (Blätter, Rinde, Äste, Harz, Boden, Gras) in den Behältern der Vegetation (versiegeln behälter mit wachs)
+[[Castor]] sammelt Proben der Vegetation (Blätter, Rinde, Äste, Harz, Boden, Gras) in den Behältern der Rationen (versiegeln behälter mit wachs)
 die lichter sind wahrscheinlich lebendig, bleiben auf Distanz
+sind in ca. 3-5 Tagen im Zentrum
+suchen Fluss, nach 1,5 std fündig
 
 ###  **Protokoll:**
 
