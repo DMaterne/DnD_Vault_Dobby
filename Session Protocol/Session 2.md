@@ -13,6 +13,11 @@ Rauch war im Dschungel obwohl Feuer verboten
 Knappte holt uns
 Zoak bestellt uns
 Ergebniss und neue Expedition
+[[Hauptmann Zoak]] chillt mit Kaffee
+[[Echo]] versteckt sich
+neue Erkenntnisse: Dschungel nicht natürlich, war mal wald, bis etwas Mutation ausgelöst hat, wird irgendwann den ganzen Wald einnehmen.
+wäre cool wenn reversibel
+
 
 ###  **Protokoll:**
 
