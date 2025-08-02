@@ -17,7 +17,7 @@ Ergebniss und neue Expedition
 [[Echo]] versteckt sich
 neue Erkenntnisse: Dschungel nicht natürlich, war mal wald, bis etwas Mutation ausgelöst hat, wird irgendwann den ganzen Wald einnehmen.
 wäre cool wenn reversibel
-kaufen rationen und abfahrt
+kaufen Rationen und abfahrt
 
 
 ###  **Protokoll:**

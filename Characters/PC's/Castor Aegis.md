@@ -48,6 +48,8 @@ Doch Innovation ist teuer – und seine Familie verlor irgendwann die Geduld.
 "Du bist kein Zauberer, kein Gelehrter, du bist... ein Bastler."  
 Die Gelder wurden gestrichen. Die Labore verschlossen. Seine Eltern stellten klar: Wenn er seinen Weg gehen will, dann soll er ihn selbst finanzieren.
 
+46 HP nicht vergessen da DND Beyond Probleme macht
+
 ---
 
 ## Kindheit:
