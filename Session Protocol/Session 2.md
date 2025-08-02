@@ -58,6 +58,8 @@ summen lässt leo das bewusstsein verlieren
 castor heilt rhuk
 rhuk wird durch summen betäubt
 1v1
+beide extrem low
+castor gewinnt gerade so
 es explodiert
 knapp gewonnen
 höhle in den boden wo die mücken herkamen
