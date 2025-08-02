@@ -53,6 +53,7 @@ leo und rhuk sind im nahkampf, castor im fernkampf
 castor versucht echo zu wecken, scheitert leider.
 feuer oder magie allgemein macht nur halben damage
 kann max hp reduzieren bis zum long rest
+-14 max
 
 ###  **Protokoll:**
 
