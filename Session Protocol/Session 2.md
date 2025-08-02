@@ -39,7 +39,15 @@ harz honigartig
 [[Castor]] sammelt Proben der Vegetation (Blätter, Rinde, Äste, Harz, Boden, Gras) in den Behältern der Rationen (versiegeln behälter mit wachs)
 die lichter sind wahrscheinlich lebendig, bleiben auf Distanz
 sind in ca. 3-5 Tagen im Zentrum
-suchen Fluss, nach 1,5 std fündig
+suchen Fluss, nach 1,5 std hören rauschen
+wird mehr zu dröhnen, mitunter wasser aber noch was anderes (wassermassen kommen irgendwo auf)
+insektenartiges summen
+echo schleicht sich ran
+echo wird bewusstlos
+hundegroße insekten kommen ran, haben statt rüssel einen speer im gesicht
+sind nicht intelligent, schwarze haare, blaue haut, schweben -> casme, Dröhnen der flügel kann kreatur für 24 stunden betäuben (sind Dämonen)
+Rhuk castet silence
+die casme sind verwirrt
 
 ###  **Protokoll:**
 
