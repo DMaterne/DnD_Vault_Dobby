@@ -25,7 +25,8 @@ haben zauber dimension door zu dem innenhof der wache. zwei leute durch pro schr
 wird stealthy in den bag of holding gepackt
 andere gruppe kommt nach uns rein (wir vorhut, die nachhut), 3 menschen, lila tiefling und gebräunte elfin
 die tür ist schallgeschützt
-
+start
+erst nacht chillen im mischwald
 
 ###  **Protokoll:**
 
