@@ -27,6 +27,8 @@ andere gruppe kommt nach uns rein (wir vorhut, die nachhut), 3 menschen, lila ti
 die tür ist schallgeschützt
 start
 erst nacht chillen im mischwald
+echo macht goliath fußspuren
+echo macht alarm zur schutz in der nacht
 
 ###  **Protokoll:**
 
