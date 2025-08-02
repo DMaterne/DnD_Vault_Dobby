@@ -48,6 +48,10 @@ hundegroße insekten kommen ran, haben statt rüssel einen speer im gesicht
 sind nicht intelligent, schwarze haare, blaue haut, schweben -> casme, Dröhnen der flügel kann kreatur für 24 stunden betäuben (sind Dämonen)
 Rhuk castet silence
 die casme sind verwirrt
+kampf
+leo und rhuk sind im nahkampf, castor im fernkampf
+castor versucht echo zu wecken, scheitert leider.
+
 
 ###  **Protokoll:**
 
