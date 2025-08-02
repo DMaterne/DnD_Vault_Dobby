@@ -67,7 +67,6 @@ nutze den als bunker
 24 stunden wache
 1 stufe exhaustion
 fresse banana
-dann long rest
 packen viecher ein
 long rest
 
