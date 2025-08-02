@@ -8,9 +8,11 @@ Spieler: alle
 ![[Session 1#**Zusammenfassung **]]
 
 ###  **Session Notizen (raw):**
-
 recap
-
+Rauch war im Dschungel obwohl Feuer verboten
+Knappte holt uns
+Zoak bestellt uns
+Ergebniss und neue Expedition
 
 ###  **Protokoll:**
 
