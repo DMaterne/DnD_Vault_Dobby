@@ -53,8 +53,11 @@ leo und rhuk sind im nahkampf, castor im fernkampf
 castor versucht echo zu wecken, scheitert leider.
 feuer oder magie allgemein macht nur halben damage
 kann max hp reduzieren bis zum long rest
--14 max
--17
+rhuk geht ko
+summen lässt leo das bewusstsein verlieren
+castor heilt rhuk
+rhuk wird durch summen betäubt
+1v1
 es explodiert
 knapp gewonnen
 höhle in den boden wo die mücken herkamen
