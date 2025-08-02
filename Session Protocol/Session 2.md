@@ -19,6 +19,13 @@ neue Erkenntnisse: Dschungel nicht natürlich, war mal wald, bis etwas Mutation 
 wäre cool wenn reversibel
 kaufen Rationen und abfahrt
 gehen zu [[Hauptmann Zoak]] und sind startklar
+hat zwei schriftrollen und gibt sie uns
+echo nimmt sie
+haben zauber dimension door zu dem innenhof der wache. zwei leute durch pro schriftrolle.
+wird stealthy in den bag of holding gepackt
+andere gruppe kommt nach uns rein (wir vorhut, die nachhut), 3 menschen, lila tiefling und gebräunte elfin
+die tür ist schallgeschützt
+
 
 ###  **Protokoll:**
 
