@@ -1,7 +1,7 @@
 **== FELDPROTOKOLL – Expedition Südostwald, Tag 1–2 ==**  
 **Verfasser:** Schattenzeiger Rhuk  
 **Zyklus:** 248-5 bis 248-6  
-**Ort:** Südöstliche Wälder – Sektor: Mischwald/Dschungel  
+**Ort:** [[Südöstliche Wälder]] – Sektor: Mischwald/Dschungel  
 **Ziel:** Erkundung, Stabilitätsüberprüfung der Zone, Beobachtung aktiver Anomalien
 
 ---
@@ -30,7 +30,7 @@
 
 **Zwischenfall bei Wassersuche:**
 
-- Echo kollabiert ohne Vorwarnung. Ursprung zunächst unbekannt.
+- [[Echo]] kollabiert ohne Vorwarnung. Ursprung zunächst unbekannt.
     
 - Käferartige Kreaturen erscheinen (Identifikation nach Vergleich: extraplanare Parasitenklasse – vermutlich _Chasme_).
     
@@ -42,7 +42,7 @@
     
 - Erstkontakt durch mich: Käfer 1 eliminiert, jedoch im Folgeschlag durch Käfer 2 kampfunfähig.
     
-- Castor stabilisierte meinen Zustand. Folge: sofortiger Rückfall in Bewusstlosigkeit durch Lärmeinwirkung.
+- [[Castor Aegis]] stabilisierte meinen Zustand. Folge: sofortiger Rückfall in Bewusstlosigkeit durch Lärmeinwirkung.
     
 
 **Rettung und Rückzug:**
@@ -64,7 +64,7 @@
         
 - Symptome: ständiger Druck auf Brustbein, Atemflachheit, Verzögerung in Reaktionen, feine Muskelzuckungen unter Haut. Kein sichtbares Wundbild.
     
-- Paladin führte Gebet durch – leichte mentale Stabilisierung, kein physischer Effekt.
+- Paladin [[Leo Eisenfaust]] führte Gebet durch – leichte mentale Stabilisierung, kein physischer Effekt.
     
 - Rast in Erdloch fortgesetzt. Keine äußeren Bewegungen in der Umgebung.
     

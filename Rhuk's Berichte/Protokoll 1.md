@@ -1,7 +1,7 @@
 **== FELDPROTOKOLL – Expedition Südostwald / Vorhutbericht ==**  
 **Verfasser:** Schattenzeiger Rhuk  
 **Zyklus:** 248-3 bis 248-4  
-**Ort:** Südöstliche Wälder, Mischwald/Dschungel – Rückmeldung aus [[Dilos Feykar]]  
+**Ort:** [[Südöstliche Wälder]], Mischwald/Dschungel – Rückmeldung aus [[Dilos Feykar]]  
 **Ziel:** Aufklärung, Ressourcensicherung, Bedrohungseinschätzung  
 **Status:** Vorläufig abgeschlossen, Bericht an [[Klan Brakkel]] versandt
 
@@ -11,7 +11,7 @@
 
 - Teilnahme an Expedition im Auftrag des Klans / [[Zirkel der Spiegel]].
     
-- Gruppenstruktur: Vier Personen (Codiert: Echo / Leo / Castor / Rhuk).
+- Gruppenstruktur: Vier Personen (Codiert: [[Echo]] / [[Leo Eisenfaust]] / [[Castor Aegis]] / [[Rhuk]]).
     
 - Ziel: Erkundung des südöstlichen Dschungels, Ressourcenidentifikation, Bedrohungseinschätzung.
     
@@ -44,7 +44,7 @@ Fruchterkennung via [[Castor Aegis#Identify]] (Bericht angehängt):
 
 - Stimme unbekannter Quelle. Keine optische Erfassung.
     
-- Angriff durch zwei große Kreaturen (Identifikation: **Barlgura**, extraplanar / dämonisch).
+- Angriff durch zwei große Kreaturen (Identifikation: **[[Barlgura (Gorilla Monster)]]**, extraplanar / dämonisch).
     
 - Eigenschaften: Unsichtbarkeit, Magieeinsatz (Ranken, Illusionen), koordinierte Aggression.
     
@@ -79,7 +79,7 @@ Fruchterkennung via [[Castor Aegis#Identify]] (Bericht angehängt):
 - Unterkunft: [[Der Freundliche Hänker]] – Standardversorgung (5 Silber/Nacht)
     
 
-**Bericht an Hauptmann Zoak:**
+**Bericht an [[Hauptmann Zoak]]:**
 
 - Früchte übergeben (nach kurzer Verzögerung durch Castor).
     
@@ -127,9 +127,7 @@ Fruchterkennung via [[Castor Aegis#Identify]] (Bericht angehängt):
 - Weitere Beobachtung der südöstlichen Wälder
     
 - Analyse der extraplanaren Präsenz durch Zirkel
-    
-- Keine offenen Spuren zu Rhuks Auftrag oder Herkunft sichtbar
-    
+
 
 **Downtime eingeleitet (2 Tage)** – Bereitschaft zur Reaktivierung vorhanden.
 
