@@ -75,7 +75,13 @@ oben 2x2m, +2m pro ebene
 7-20 zeichen je oberlisk
 kopieren alle schriftzeichen auf stöcke
 40 meter dann wasser
-rhuk N, leo O, echo S, 
+rhuk N, leo O, echo S, castor W
+illusionen und so, wir kletterne, kommunizieren aber nicht miteinander sodern mit irgendwas
+12 leute oben, 10x10m plattform
+die kopiene imitieren sachen
+geld ist kopiert
+kopieen haben spiegelbilder und sind berührbar
+kopie nur auf der pyramide
 
 ###  **Protokoll:**
 
