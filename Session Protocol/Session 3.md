@@ -52,6 +52,12 @@ rhuk erkennt schriftzeichen
 die sprache wirkt älter als schrift, ursprung anderer sprachen evtl
 kopieren großteil der schriftzeichen auf stöcke
 echo: viel wald oben am wasserfall, kleiner fluss, bunte bäume
+wasserfall reißt alles weg
+rhuk yeetet auge in wasserfall
+auge kommt an und schaut höhlendecke an, kein wasser
+5 minuten wegstrecke unter wasser
+zeit vergeht merkwürdig
+rhuk springt rein
 
 
 ###  **Protokoll:**
