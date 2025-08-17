@@ -71,8 +71,11 @@ pyramide ein solider block, kein eingang, muster
 stufen pyramide
 sandstein
 7 ebenen
-oben 2x2m
+oben 2x2m, +2m pro ebene
 7-20 zeichen je oberlisk
+kopieren alle schriftzeichen auf stöcke
+40 meter dann wasser
+rhuk N, leo O, echo S, 
 
 ###  **Protokoll:**
 
