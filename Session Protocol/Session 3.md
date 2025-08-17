@@ -83,6 +83,8 @@ geld ist kopiert
 kopieen haben spiegelbilder und sind berührbar
 kopie nur auf der pyramide
 wasserkopien
+lösen sich auf wenn unter den letzten zwei stufen
+fühlen sich nass an
 
 ###  **Protokoll:**
 
