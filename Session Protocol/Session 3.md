@@ -58,7 +58,10 @@ auge kommt an und schaut höhlendecke an, kein wasser
 5 minuten wegstrecke unter wasser
 zeit vergeht merkwürdig
 rhuk springt rein
-
+hinterher
+damage
+verlieren orientierung
+leo und rhuk verlieren bewusstsein
 
 ###  **Protokoll:**
 
