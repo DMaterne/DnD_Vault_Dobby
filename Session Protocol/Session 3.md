@@ -82,6 +82,7 @@ die kopiene imitieren sachen
 geld ist kopiert
 kopieen haben spiegelbilder und sind berührbar
 kopie nur auf der pyramide
+wasserkopien
 
 ###  **Protokoll:**
 
