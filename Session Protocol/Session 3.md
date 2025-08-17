@@ -92,7 +92,8 @@ km weite pilzhöhle
 200 m tief, wir obenstufen runter
 rießige pilze, dreckige kristalle, holzgestelle, treppen und leitern verbinden die ebenen der höhle
 hinten ein halb verwester turm über wasser
-sammeln pr
+sammeln proben von pilzen lianen und kristallen
+castor von humanoiden blauen wesen beschossen, oben mensch, unten schlange, drei humanoide schlangen daneben
 
 ###  **Protokoll:**
 
