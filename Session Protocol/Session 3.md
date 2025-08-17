@@ -62,6 +62,7 @@ hinterher
 damage
 verlieren orientierung
 leo und rhuk verlieren bewusstsein
+wasser und gestein proben höhle
 
 ###  **Protokoll:**
 
