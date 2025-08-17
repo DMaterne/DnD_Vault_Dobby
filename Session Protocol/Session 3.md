@@ -65,6 +65,14 @@ leo und rhuk verlieren bewusstsein
 wasser und gestein proben höhle
 es gibt keine nacht
 mehr gang als höhle
+gehen richtung eingang der struktur
+betreten die unterseite des sees
+pyramide ein solider block, kein eingang, muster
+stufen pyramide
+sandstein
+7 ebenen
+oben 2x2m
+7-20 zeichen je oberlisk
 
 ###  **Protokoll:**
 
