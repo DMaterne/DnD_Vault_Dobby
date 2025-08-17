@@ -63,6 +63,8 @@ damage
 verlieren orientierung
 leo und rhuk verlieren bewusstsein
 wasser und gestein proben höhle
+es gibt keine nacht
+mehr gang als höhle
 
 ###  **Protokoll:**
 
