@@ -85,6 +85,14 @@ kopie nur auf der pyramide
 wasserkopien
 lösen sich auf wenn unter den letzten zwei stufen
 fühlen sich nass an
+handabdrücke ebene 5, 6 ebene senkt sich, 7 bleibt aus säulen, treppe nach unten, kopieen weg
+leo und castor gehen vor
+9 stockwerke runter
+km weite pilzhöhle
+200 m tief, wir obenstufen runter
+rießige pilze, dreckige kristalle, holzgestelle, treppen und leitern verbinden die ebenen der höhle
+hinten ein halb verwester turm über wasser
+sammeln pr
 
 ###  **Protokoll:**
 
