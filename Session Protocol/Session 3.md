@@ -94,6 +94,10 @@ rießige pilze, dreckige kristalle, holzgestelle, treppen und leitern verbinden 
 hinten ein halb verwester turm über wasser
 sammeln proben von pilzen lianen und kristallen
 castor von humanoiden blauen wesen beschossen, oben mensch, unten schlange, drei humanoide schlangen daneben
+greifen an
+suggesten leo und rhuk um zum turm zu kommen
+ziehen sich zurück 
+castor geht unsichtbar zum scouten vom turm
 
 ###  **Protokoll:**
 
