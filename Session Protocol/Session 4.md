@@ -14,8 +14,11 @@ sieht keine fallen
 kehrt zurück
 gruppe geht gemeinsam zum turm durch pilzwald
 turm ist glatt, material unbekannt
-die pilze haben art harz, ist rot und hat hönigkonsitenz
-
+die pilzkronen haben art harz, ist rot und hat hönigkonsitenz
+stamm: wasserählicher saft
+habe proben
+handfaxe ist mit den saft mariniert
+klarer saft brennt wie öl
 
 ###  **Protokoll:**
 
