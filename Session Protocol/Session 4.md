@@ -48,6 +48,11 @@ castor packt ein bild ein, von einer zwergin die sich durch ihren bart streichel
 muster im boden eingelassen in der mitte des raumes
 auch eine ebene tiefer gleiches muster: blume/rose
 ist eingeritzt, castor kopierts auf einen ast
+das muster ist ca 2/3 des raumes groß
+rießige lkw-große spinne an der decke
+reagiert nicht auf kommunikation und bewurf mit jerky
+bewegt sich nicht
+echo will spinne erledigen, rest hat vorbehalte
 
 
 
