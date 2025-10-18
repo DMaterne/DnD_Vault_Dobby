@@ -64,6 +64,13 @@ wasserspeier in form von drachenkopf an decke
 augenscout: nächste ebene gleich
 fackel in die mitte der sonne: lava aus den wasserspeiern
 und unten auch
+können es nicht deaktivieren
+castor castet feather fall und wir springen zu ebene -6
+ist wieder angenehm kühl, aber lava kommt
+schneeflocke auf dem boden, gleiches muster an der decke
+lava fließt nicht in diese ebene rein, wird von unsichtarer wand abgehalten
+der turm besteht aus einem kontinuirlichen knochen, der mega hart ist
+ebene -7 gleich
 
 
 ###  **Protokoll:**
