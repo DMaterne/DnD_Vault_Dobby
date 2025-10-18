@@ -13,7 +13,7 @@ Du'ul Fus Bornah ist die Hauptstadt. [[Castor Aegis]] ist hier groß geworden.
 > | ---- | ---- |
 > | Kontinent | [[Kontinent of xxx]] |
 > | Bevölkerung | 12+ |
-> | Oberhaupt | [[Kaiser]] |
+> | Oberhaupt | [[König]] |
 
 
 <div style="min-height: 410px; padding: 12px; border: 0px solid var(--text-faint); border-radius: 10px; background-color: var(--background-secondary); line-height: 1.5;">
@@ -42,7 +42,7 @@ Die Stadt ist ein Sammelpunkt für Humanoide aus jeder Schicht. Viele Märkte bi
 - [[Haus Aegis]]
 - [[Castor Aegis]]
 - [[Rhuk]]
-- [[Kaiser]]
+- [[König]]
 
 ---
 

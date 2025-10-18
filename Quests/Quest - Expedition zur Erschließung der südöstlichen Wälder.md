@@ -1,7 +1,7 @@
-**Auftraggeber:** [[Kaiser]]
+**Auftraggeber:** [[König]]
 **Auftragsort:** [[Südöstliche Wälder]]
 **Beschreibung:**
-Der [[Kaiser]] hat zu einer Expedition zur Erschließung der [[Südöstliche Wälder|südwestlichen Wälder]] ausgerufen. Berichten zufolge sollen nur etwa 10% der Leute die diese Betreten lebendig zurückkehren. Doch die Überlebenden sind nicht mehr sie selbst. Die Grauen der Wälder scheinen sie gebrochen zu haben. Sie sind von Angst geplangt und wollen die [[Südöstliche Wälder|Wälder]] nie wieder betreten. 
+Der [[König]] hat zu einer Expedition zur Erschließung der [[Südöstliche Wälder|südwestlichen Wälder]] ausgerufen. Berichten zufolge sollen nur etwa 10% der Leute die diese Betreten lebendig zurückkehren. Doch die Überlebenden sind nicht mehr sie selbst. Die Grauen der Wälder scheinen sie gebrochen zu haben. Sie sind von Angst geplangt und wollen die [[Südöstliche Wälder|Wälder]] nie wieder betreten. 
 Doch bietet die Expedition auch Chancen auf Ruhm und Reichtum, die sich manche nicht entgehen lassen wollen.
 **Ziel:** Herausfinden, was die Wälder so gefährlich macht und wie man diese Zivilisieren kann.
 

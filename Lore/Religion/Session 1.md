@@ -66,7 +66,7 @@ Bekomme Bag of Holding wieder.
 
 ###  **Protokoll:**
 
-Der [[Kaiser]] hat zu einer [[Quest - Expedition zur Erschließung der südöstlichen Wälder|Expedition zur Erschließung der südöstlichen Wälder]] ausgerufen. Berichten zufolge sollen nur etwa 10% der Leute die diese Betreten lebendig zurückkehren. Doch die Überlebenden sind nicht mehr sie selbst. Die Grauen der Wälder scheinen sie gebrochen zu haben. Sie sind von Angst geplangt und wollen die [[Südöstliche Wälder|Wälder]] nie wieder betreten. 
+Der [[König]] hat zu einer [[Quest - Expedition zur Erschließung der südöstlichen Wälder|Expedition zur Erschließung der südöstlichen Wälder]] ausgerufen. Berichten zufolge sollen nur etwa 10% der Leute die diese Betreten lebendig zurückkehren. Doch die Überlebenden sind nicht mehr sie selbst. Die Grauen der Wälder scheinen sie gebrochen zu haben. Sie sind von Angst geplangt und wollen die [[Südöstliche Wälder|Wälder]] nie wieder betreten. 
 Doch bietet die Expedition auch Chancen auf Ruhm und Reichtum, die sich manche nicht entgehen lassen wollen.
 
 Die Gruppe versammelt sich morgens vor den östlichen Toren von [[Dilos Feykar]]. Hinter ihnen beginnen die [[Südöstliche Wälder|südöstlichen Wälder]]. Um sie herum sind weitere Teilnehmer der Expedition. Darunter befinden sich die verschiedensten Personen, darunter [[Hierarchie|niedere Adlige]], Bettler, Söldner, Diebe, Soldaten und viele mehr. Der Klassenunterschied ist nicht allzu groß, jedoch treiben jeden eigene Motivationen an.
