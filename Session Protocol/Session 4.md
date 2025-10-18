@@ -71,7 +71,10 @@ schneeflocke auf dem boden, gleiches muster an der decke
 lava fließt nicht in diese ebene rein, wird von unsichtarer wand abgehalten
 der turm besteht aus einem kontinuirlichen knochen, der mega hart ist
 ebene -7 gleich
-
+ebene -8: boden spiralenmuster, wand kleine löcher in unregelmäßigen abständen
+rhuk stellt sich in die mitte und dreht sich
+kristalle und juwelen am ender der löcher
+ebene -10: unteres ende des turms, fackeln und bilder befüllen wände komplett, die decke ist eine spiegel
 
 ###  **Protokoll:**
 
