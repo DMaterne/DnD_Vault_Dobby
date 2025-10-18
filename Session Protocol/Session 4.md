@@ -39,12 +39,13 @@ von außen hört man nicht was im turm ist, von innen schon was außen ist
 zwischenebenen in beide richtungen
 machen mit draht und dem auge von rhuk eine konstruktion zum scouten
 fackeln geben kaum hitze ab, brennt trotzdem, castor nimmt eine mit
-gehen runter
+gehen runter (-1)
 makieren ebene
 scouten mit auge
 die humanoiden auf den portraits sehen neugierig/suchend aus 
 2 stockwerke pro etage etwa (30-40 stufen)
 castor packt ein bild ein, von einer zwergin die sich durch ihren bart streichelt
+weiter runter (-2)
 muster im boden eingelassen in der mitte des raumes
 auch eine ebene tiefer gleiches muster: blume/rose
 ist eingeritzt, castor kopierts auf einen ast
@@ -53,7 +54,15 @@ rießige lkw-große spinne an der decke
 reagiert nicht auf kommunikation und bewurf mit jerky
 bewegt sich nicht
 echo will spinne erledigen, rest hat vorbehalte
-
+echo castet hunters mark: spinne ist am leben
+gehen weiter runter (-3)
+gleich aussehende spinne bei runtergehen, gleiche position
+augen scout: neues muster und keine spinne (muster: sonne wie kreis mit dreiecken)
+gehen runter (-4)
+turm weiß
+wasserspeier in form von drachenkopf an decke
+augenscout: nächste ebene gleich
+echo 
 
 
 ###  **Protokoll:**
