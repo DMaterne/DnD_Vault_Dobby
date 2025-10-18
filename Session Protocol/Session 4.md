@@ -26,6 +26,9 @@ castor nimmt bodenproben
 rhuk tränkt fackeln im weißen saft
 echo probiert roten saft: schmeckt wie blut
 aus dem stamm vom pilz kommt evtl gas, da kleine flamme brennt
+castor merkt dass alles nicht normal ist
+versucht andere zu überzeugen, die glauben er wird wahnsinnig
+gehen zum turm
 
 
 ###  **Protokoll:**
