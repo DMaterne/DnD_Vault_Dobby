@@ -75,6 +75,15 @@ ebene -8: boden spiralenmuster, wand kleine löcher in unregelmäßigen abständ
 rhuk stellt sich in die mitte und dreht sich
 kristalle und juwelen am ender der löcher
 ebene -10: unteres ende des turms, fackeln und bilder befüllen wände komplett, die decke ist eine spiegel
+leo ist in der mitte, unter ihm leuchtet ein muster und er verschwindet
+
+sterben alle, wachen auf in der taverne, am tag wo wir erneut in den wald wollten
+
+level up, verlieren unsere proben :'(
+
+wissen dass wir tod waren, durch die zeit gereist sind und nicht am leben sein sollen
+
+knappe der uns zu zoak bringen soll weckt uns alle wir davor
 
 ###  **Protokoll:**
 
