@@ -29,7 +29,15 @@ aus dem stamm vom pilz kommt evtl gas, da kleine flamme brennt
 castor merkt dass alles nicht normal ist
 versucht andere zu überzeugen, die glauben er wird wahnsinnig
 gehen zum turm
-
+turm mit zauber belegt der von außen einblicke verhindert
+gehen rein
+treppen rauf und runter
+detailreiche portraits in unregelmäßigen abständen
+in portraits nur person und schwarzer hintergrund
+zeit vergeht nicht
+von außen hört man nicht was im turm ist, von innen schon was außen ist
+zwischenebenen in beide richtungen
+machen mit draht und dem auge von rhuk eine konstruktion zum scouten
 
 ###  **Protokoll:**
 
