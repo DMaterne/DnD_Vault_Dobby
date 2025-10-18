@@ -85,6 +85,8 @@ wissen dass wir tod waren, durch die zeit gereist sind und nicht am leben sein s
 
 knappe der uns zu zoak bringen soll weckt uns alle wir davor
 
+castor lv5 hp: 46 
+
 ###  **Protokoll:**
 
 
