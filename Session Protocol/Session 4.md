@@ -38,6 +38,11 @@ zeit vergeht nicht
 von außen hört man nicht was im turm ist, von innen schon was außen ist
 zwischenebenen in beide richtungen
 machen mit draht und dem auge von rhuk eine konstruktion zum scouten
+fackeln geben kaum hitze ab, brennt trotzdem, castor nimmt eine mit
+gehen runter
+makieren ebene
+scouten mit auge
+die humanoiden auf den portraits sehen neugierig/suchend aus 
 
 ###  **Protokoll:**
 
