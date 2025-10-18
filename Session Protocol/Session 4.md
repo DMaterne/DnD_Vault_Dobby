@@ -19,6 +19,14 @@ stamm: wasserählicher saft
 habe proben
 handfaxe ist mit den saft mariniert
 klarer saft brennt wie öl
+castor probiert den saft
+kompass zeigt die zeit: mitternacht
+in der höhle ist es hell "ganz normal"
+castor nimmt bodenproben
+rhuk tränkt fackeln im weißen saft
+echo probiert roten saft: schmeckt wie blut
+aus dem stamm vom pilz kommt evtl gas, da kleine flamme brennt
+
 
 ###  **Protokoll:**
 
