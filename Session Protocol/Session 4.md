@@ -43,6 +43,13 @@ gehen runter
 makieren ebene
 scouten mit auge
 die humanoiden auf den portraits sehen neugierig/suchend aus 
+2 stockwerke pro etage etwa (30-40 stufen)
+castor packt ein bild ein, von einer zwergin die sich durch ihren bart streichelt
+muster im boden eingelassen in der mitte des raumes
+auch eine ebene tiefer gleiches muster: blume/rose
+ist eingeritzt, castor kopierts auf einen ast
+
+
 
 ###  **Protokoll:**
 
