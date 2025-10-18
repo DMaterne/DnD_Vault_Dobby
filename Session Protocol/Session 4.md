@@ -62,7 +62,8 @@ gehen runter (-4)
 turm weiß
 wasserspeier in form von drachenkopf an decke
 augenscout: nächste ebene gleich
-echo 
+fackel in die mitte der sonne: lava aus den wasserspeiern
+und unten auch
 
 
 ###  **Protokoll:**
