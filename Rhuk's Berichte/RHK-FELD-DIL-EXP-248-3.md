@@ -55,7 +55,7 @@ Fruchterkennung via [[Castor Aegis#Identify]] (Bericht angehängt):
 - Barlgura B durch Leo (Divine Smite) zerstört.
     
 
-**5. Trophien/Bergung:**
+**5. Trophäen/Bergung:**
 
 - Hautfragment entnommen (Maske – ritualisierte Archivierung).
     
