@@ -36,7 +36,7 @@ versuchen den ursprung zu finden
 hin und wieder tanzen lichter durch den wald, edelsteinartige blätter werfen diese zurück
 der dschungel wird immer unter: rot, smaragt,blau,türkis, silber, gelb. blätter glitzern. boden von grau zu grün, orange, karmesin
 harz honigartig
-[[Castor]] sammelt Proben der Vegetation (Blätter, Rinde, Äste, Harz, Boden, Gras) in den Behältern der Rationen (versiegeln behälter mit wachs)
+[[Castor Aegis|Castor]] sammelt Proben der Vegetation (Blätter, Rinde, Äste, Harz, Boden, Gras) in den Behältern der Rationen (versiegeln behälter mit wachs)
 die lichter sind wahrscheinlich lebendig, bleiben auf Distanz
 sind in ca. 3-5 Tagen im Zentrum
 suchen Fluss, nach 1,5 std hören rauschen
@@ -72,7 +72,7 @@ Nach der letzten Expedition und den Begegnungen mit den [[Barlgura (Gorilla Mons
 
 Die Gruppe wird erneut zu [[Hauptmann Zoak]] bestellt. Er sitzt entspannt mit einem Becher Kaffee an seinem Schreibtisch, scheinbar unbeeindruckt von der Dringlichkeit der Lage. [[Echo]] beobachtet ihn heimlich aus dem Schatten. Zoak erklärt, dass der Dschungel nicht natürlichen Ursprungs ist. Er war einst gewöhnlicher Wald, bis eine Art Mutation ausgelöst wurde, die nun fortschreitet und bald den gesamten Wald verschlingen könnte. Sollte sich ein Weg finden, diesen Prozess umzukehren, wäre das von größtem Interesse.
 
-Die Gruppe rüstet sich erneut aus, kauft Rationen und ist bald bereit zum Aufbruch. [[Hauptmann Zoak]] übergibt zwei [[Schriftrollen]], die den Zauber Dimension Door enthalten. Mit jeder können zwei Personen direkt in den Innenhof der Stadtwache teleportiert werden. [[Echo]] verstaut beide Schriftrollen vorsichtig in der [[Bag of Holding]], um sie während der Reise zu schützen.
+Die Gruppe rüstet sich erneut aus, kauft Rationen und ist bald bereit zum Aufbruch. [[Hauptmann Zoak]] übergibt zwei Schriftrollen, die den Zauber Dimension Door enthalten. Mit jeder können zwei Personen direkt in den Innenhof der Stadtwache teleportiert werden. [[Echo]] verstaut beide Schriftrollen vorsichtig in der Bag of Holding, um sie während der Reise zu schützen.
 
 Kurz darauf trifft auch eine zweite Expeditionsgruppe ein, bestehend aus drei Menschen, einem lilafarbenen Tiefling und einer gebräunten Elfin. Da Castors Gruppe die Vorhut bildet, wird die zweite Gruppe als Nachhut folgen. Das Portal wird schließlich in einem schallgeschützten Raum geöffnet, bevor die Expedition offiziell beginnt.
 
