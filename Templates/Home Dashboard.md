@@ -4,19 +4,19 @@ banner_y: 0.364
 notetoolbar: none
 dg-publish:
 ---
->[!multi-column]
+>[!multi-column| Arbeitsbereich]
 >
->> [!success]+ Favorite Notes
->> - [[What makes me happy]]
->> - [[🧘Realization Note]]
->> - [[Habit Tracker]]
->> - [[My Goals.canvas|My Goals]]
+>> [!success]+ Templates
+>> - [[City Template]]
+>> - [[Map Template]]
+>> - [[Session Template]]
+>> - [[NPC Template]]
 >
->> [!info]+ Main Notes
->> - [[000 Home]]
->> - [[001 Garden]]
->> - [[Reading List]]
->> - [[Task Dashboard]]
+>> [!info]+ Wichtige Notizen
+>> - [[Quest - Expedition zur Erschließung der südöstlichen Wälder| Expedition der mutierten Wälder]]
+>> - [[Mindmap Expedition.canvas|Mindmap Expedition]]
+>> - [[Ziele]]
+>> - [[Home Dashboard]]
 
 ---
 > [!multi-column]
