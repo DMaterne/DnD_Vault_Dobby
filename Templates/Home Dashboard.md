@@ -90,16 +90,43 @@ if (sessions.length === 0) {
 ```dataview
 LIST
 FROM "Public/Geographie"
-WHERE contains(file.inlinks, [[Session 4]])
+WHERE contains(file.inlinks,[[Session 4]])
 LIMIT 5
 ```
 
 
 
-```dataview
-LIST
-FROM ""
-WHERE regexmatch("^Session\\s*\\d+$", file.name)
-SORT number(replace(file.name, "[^0-9]", "")) DESC
-LIMIT 4
+```dataviewjs
+// ── Ordnerpfade anpassen, falls nötig ──────────────────────────
+const SESSIONS_FOLDER = "Public/Session Protocol";
+const GEO_FOLDER      = "Public/Geographie";
+// ───────────────────────────────────────────────────────────────
+
+// Neueste "Session X" ermitteln (größte Zahl im Namen)
+const sessions = dv.pages()
+  .where(p => p.file.folder === SESSIONS_FOLDER || p.file.path.startsWith(`${SESSIONS_FOLDER}/`))
+  .where(p => /^Session\s*\d+$/i.test(p.file.name))
+  .sort(p => Number(p.file.name.replace(/\D/g, "")), 'desc');
+
+if (sessions.length === 0) {
+  dv.paragraph("⚠️ Keine Session-Dateien gefunden.");
+} else {
+  const latest = sessions[0]; // neueste Session
+
+  // Geographie-Dateien filtern, die einen eingehenden Link von dieser Session haben
+  const places = dv.pages()
+    .where(p => p.file.folder === GEO_FOLDER || p.file.path.startsWith(`${GEO_FOLDER}/`))
+    .where(p => (p.file.inlinks ?? [])
+      .some(l => (l.path || "").replace(/#.*/, "") === latest.file.path))
+    .limit(5);
+
+  if (places.length === 0) {
+    dv.paragraph(`Keine Orte, die [[${latest.file.name}]] verlinken.`);
+  } else {
+    //dv.header(3, `Relevante Orte aus [[${latest.file.name}]]`);
+    dv.list(places.file.link);
+  }
+}
+
+
 ```
