@@ -95,13 +95,13 @@ Die Pilzkronen um sie herum sondern ein zähes, rotes Harz ab, das in seiner Kon
 
 [[Castor Aegis]] merkt zunehmend, dass in dieser Umgebung etwas nicht stimmt. Der Kompass zeigt plötzlich „Mitternacht“, obwohl es in der Höhle hell ist – ganz normal, wie bei Tageslicht (und ein Kompass zeitgt nicht die Uhrzeit an...). Er nimmt zusätzlich Bodenproben und versucht, die anderen von seiner Beobachtung zu überzeugen, doch sie glauben, er verliere langsam den Verstand. [[Rhuk]] tränkt mehrere Fackeln in dem weißen Saft, der zwar kaum Hitze abgibt, aber trotzdem hell brennt. Schließlich steht die Gruppe vor dem Turm. Eine magische Barriere verhindert jegliche Einblicke von außen, doch sie können hindurchtreten.
 
-Im Inneren führen Treppen nach oben und unten. Überall hängen detailreiche Porträts, unregelmäßig verteilt, jeweils nur mit einer einzelnen Person vor schwarzem Hintergrund. Zeit scheint hier keine Rolle zu spielen – sie vergeht einfach nicht. Von außen dringt kein Laut hinein, doch von innen kann man hören, was außerhalb geschieht. Zwischen den Etagen finden sich schmale Zwischenebenen in beide Richtungen. Die Gruppe baut mit einem Draht und [[Rhuks Auge]] eine improvisierte Konstruktion, um die unteren Stockwerke zu erkunden.
+Im Inneren führen Treppen nach oben und unten. Überall hängen detailreiche Porträts, unregelmäßig verteilt, jeweils nur mit einer einzelnen Person vor schwarzem Hintergrund. Zeit scheint hier keine Rolle zu spielen – sie vergeht einfach nicht. Von außen dringt kein Laut hinein, doch von innen kann man hören, was außerhalb geschieht. Zwischen den Etagen finden sich schmale Zwischenebenen in beide Richtungen. Die Gruppe baut mit einem Draht und [[Rhuk|Rhuks Auge]] eine improvisierte Konstruktion, um die unteren Stockwerke zu erkunden.
 
 Sie beginnen mit dem Abstieg. In der ersten unteren Ebene (-1) markieren sie den Boden. Das Auge zeigt, dass die Gestalten auf den Porträts sich leicht bewegen – sie wirken neugierig, suchend. Jede Ebene umfasst etwa zwei Stockwerke mit 30 bis 40 Stufen. [[Castor Aegis]] nimmt eines der Bilder an sich: eine Zwergin, die sich nachdenklich durch ihren Bart streicht.
 
 In der zweiten Ebene (-2) entdecken sie ein in den Boden geritztes Muster – eine blütenförmige Gravur, etwa zwei Drittel des Raumes groß. Eine Ebene tiefer findet sich das gleiche Symbol wieder. [[Castor Aegis]] kopiert es auf einen Holzstab. An der Decke hängt eine riesige, LKW-große Spinne. Sie reagiert weder auf Rufe noch auf geworfene Stücke getrockneten Fleisches. [[Echo]] möchte sie ausschalten, doch der Rest der Gruppe zögert. Als [[Echo]] Hunter’s Mark wirkt, bestätigt sich, dass die Kreatur lebt – sie bewegt sich aber weiterhin nicht.
 
-Die Gruppe steigt weiter ab (-3). Wieder hängt eine Spinne an derselben Position, doch beim Scouten mit [[Rhuks Auge]] in der nächsten Ebene (-4) ist sie verschwunden. Stattdessen findet das Auge ein neues Muster auf dem Boden – eine Sonne, ein Kreis mit dreieckigen Spitzen.
+Die Gruppe steigt weiter ab (-3). Wieder hängt eine Spinne an derselben Position, doch beim Scouten mit [[Rhuk|Rhuks Auge]] in der nächsten Ebene (-4) ist sie verschwunden. Stattdessen findet das Auge ein neues Muster auf dem Boden – eine Sonne, ein Kreis mit dreieckigen Spitzen.
 
 Der Turm selbst ist hier weiß. An der Decke ragen Wasserspeier in Form von Drachenköpfen hervor. [[Rhuk|Rhuks Auge]] bestätigt, dass auch die nächste Ebene gleich aussieht. Als sie eine Fackel in die Mitte des Sonnenmusters legen, beginnt plötzlich Lava aus den Wasserspeiern zu strömen – auch auf der darunterliegenden Etage. Die Gruppe versucht, die Mechanik zu deaktivieren, doch es ist unmöglich. [[Castor Aegis]] wirkt Feather Fall, und sie springen gemeinsam auf Ebene -6.
 
@@ -109,7 +109,7 @@ Dort ist es wieder kühl. Auf dem Boden liegt das Muster einer Schneeflocke, und
 
 Die nächste Ebene (-7) ist identisch. In Ebene -8 bedeckt ein spiralförmiges Muster den Boden, und die Wände sind von unregelmäßigen Löchern durchzogen. [[Rhuk]] stellt sich in die Mitte und dreht sich – in den Löchern glimmen schwach Kristalle und Juwelen. Schließlich erreichen sie Ebene -10, das untere Ende des Turms. Die Wände sind vollständig mit Fackeln und Porträts bedeckt, und an der Decke befindet sich ein makelloser Spiegel. [[Leo Eisenfaust]] tritt in die Mitte des Raumes. Unter ihm beginnt ein Symbol zu leuchten – und im nächsten Moment verschwindet er spurlos.
 
-Alles wird schwarz. Die Gruppe spürt Hitze, Schmerz, und dann nichts mehr.
+Castor folgt ihm und Echo wirkt Hunters Mark auf ihn. Der Spell löst sich auf, als folgen die anderen beiden. Alles wird schwarz. Die Gruppe spürt Hitze, Schmerz, und dann nichts mehr.
 
 Sie wachen in der Taverne auf – am selben Tag, an dem sie eigentlich erneut in den Wald aufbrechen wollten. Der Tag hat sich wiederholt. Alle Proben sind verschwunden. Jeder weiß, dass sie gestorben sind, und dass sie jetzt nicht mehr wirklich leben sollten.
 
