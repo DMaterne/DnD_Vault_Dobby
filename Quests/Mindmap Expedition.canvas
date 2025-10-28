@@ -9,15 +9,20 @@
 		{"id":"d093018d17ff9121","type":"text","text":"- woher?\n- Schuld an Vegetation?\n- Eigenständig oder unter Kontrolle?","x":168,"y":1850,"width":250,"height":160},
 		{"id":"5e1fc2ec01dddd47","type":"text","text":"**veränderte Vegetation**\n- durch Dämonen?\n- natürlich?\n- durch Portal/andere Plane?","x":-240,"y":2110,"width":276,"height":200},
 		{"id":"a95564746b9d3532","type":"text","text":"**magische Früchte**\n- natürlich oder durch veränderte Vegetation?\n- Anbauen?\n- Nutzbarkeit?","x":116,"y":2110,"width":250,"height":200},
-		{"id":"9d662204f490e6ba","type":"text","text":"**Körperlose Stimme**\n- unsichtbar?\n- körperlos?\n- kontrolliert Dämonen?\n- ruft Dämonen?","x":66,"y":1340,"width":322,"height":164},
+		{"id":"9d662204f490e6ba","type":"text","text":"**Körperlose Stimme**\n- unsichtbar?\n- körperlos?\n- kontrolliert Dämonen?\n- ruft Dämonen?","x":66,"y":1320,"width":322,"height":184},
 		{"id":"82b4571cdf52345d","x":580,"y":560,"width":400,"height":400,"type":"file","file":"Public/Monster/Chasme (Käfer).md"},
 		{"id":"89d52b08ca2df961","x":680,"y":-200,"width":220,"height":60,"type":"text","text":"**Magischer See**"},
 		{"id":"bd0bb827c05c4a60","x":180,"y":-140,"width":250,"height":55,"type":"text","text":"keine Geräusche"},
 		{"id":"fd2baf842a6564a2","x":180,"y":-320,"width":250,"height":60,"type":"text","text":"zwei Monde"},
-		{"id":"94e67b780a80fe4b","x":1258,"y":-205,"width":250,"height":60,"type":"text","text":"**Unterirdische Höhle**"},
-		{"id":"a2575b01d08f5e9e","x":1254,"y":-16,"width":250,"height":60,"type":"text","text":"Pilzwald"},
-		{"id":"9ce6d1929e987679","x":1249,"y":146,"width":250,"height":60,"type":"text","text":"Yuan Ti"},
-		{"id":"4edf13328c758df0","x":1209,"y":255,"width":250,"height":50,"type":"text","text":"Knochenturm"}
+		{"id":"94e67b780a80fe4b","x":1258,"y":-205,"width":250,"height":145,"type":"text","text":"**Unterirdische Höhle**\n- wieso unter Struktur?\n- anderes Biom"},
+		{"id":"a2575b01d08f5e9e","x":1254,"y":-16,"width":250,"height":196,"type":"text","text":"Pilzwald\n- verschiedene Flüssigkeiten: Brennbar und Blut?\n- normal?"},
+		{"id":"4edf13328c758df0","x":1249,"y":500,"width":250,"height":260,"type":"text","text":"Knochenturm\n- Fallen\n- Portraits\n- wer hat erbaut?\n- haben sich Yuai Ti ferngehalten?\n- noch da?"},
+		{"id":"9ce6d1929e987679","x":1249,"y":240,"width":250,"height":220,"type":"text","text":"Yuan Ti\n- gefangen/versiegelt?\n- Kommunikation möglich?\n- zum Turm gelockt?"},
+		{"id":"617a53b22583b827","x":1249,"y":812,"width":250,"height":148,"type":"text","text":"körperlose Stimme\n- wieso zum Turm gelockt?\n- Feindlich?"},
+		{"id":"7b4bc8ed17864a64","x":180,"y":52,"width":250,"height":60,"type":"text","text":"Alles wirkt normal"},
+		{"id":"8e266cf48891f612","x":1800,"y":534,"width":250,"height":193,"type":"text","text":"Tod durch Falle\n- Zeitreise?\n- Illusion?\n- Wieso im Leeren Räumen so viele Fallen?"},
+		{"id":"5c13eee49c85385d","x":1778,"y":1185,"width":250,"height":60,"type":"text","text":"Wiederauferstehung\n- Tag vor Abreise, Auslöser Wald?\n- Gleichzeitiges erwachen trotz unterschiedlicher Todeszeitpunkte"},
+		{"id":"dfb627505104c570","x":180,"y":-460,"width":250,"height":70,"type":"text","text":"Zeit vergeht anders"}
 	],
 	"edges":[
 		{"id":"88cc088eb4fd8c1e","fromNode":"e7c6ced862bb9544","fromSide":"left","toNode":"5fb76cde56079c17","toSide":"right","label":"Im Dschungel"},
@@ -34,6 +39,15 @@
 		{"id":"6cde76e35b97a0e8","fromNode":"bd0bb827c05c4a60","fromSide":"right","toNode":"89d52b08ca2df961","toSide":"left","label":"nur hier?"},
 		{"id":"500cdb935400e9a2","fromNode":"fd2baf842a6564a2","fromSide":"right","toNode":"89d52b08ca2df961","toSide":"left","label":"nur hier?"},
 		{"id":"6a17754ab783a3cb","fromNode":"82b4571cdf52345d","fromSide":"top","toNode":"89d52b08ca2df961","toSide":"bottom","label":"bewachen?"},
-		{"id":"e533fc7918c3faa2","fromNode":"89d52b08ca2df961","fromSide":"right","toNode":"94e67b780a80fe4b","toSide":"left","label":"unter Struktur"}
+		{"id":"e533fc7918c3faa2","fromNode":"89d52b08ca2df961","fromSide":"right","toNode":"94e67b780a80fe4b","toSide":"left","label":"unter Struktur"},
+		{"id":"be63b1cbe223a445","fromNode":"94e67b780a80fe4b","fromSide":"right","toNode":"a2575b01d08f5e9e","toSide":"right"},
+		{"id":"486bdd689a55bb23","fromNode":"94e67b780a80fe4b","fromSide":"right","toNode":"9ce6d1929e987679","toSide":"right"},
+		{"id":"95d04bc357bb9b39","fromNode":"94e67b780a80fe4b","fromSide":"right","toNode":"4edf13328c758df0","toSide":"right"},
+		{"id":"cf261b5c1c7e1b78","fromNode":"94e67b780a80fe4b","fromSide":"right","toNode":"617a53b22583b827","toSide":"right"},
+		{"id":"28d0ea46b9f022cc","fromNode":"617a53b22583b827","fromSide":"left","toNode":"9d662204f490e6ba","toSide":"right"},
+		{"id":"76831fe6e62d6922","fromNode":"9d662204f490e6ba","fromSide":"right","toNode":"617a53b22583b827","toSide":"left","label":"selbe Stimme?"},
+		{"id":"f5005ad36117601a","fromNode":"7b4bc8ed17864a64","fromSide":"right","toNode":"89d52b08ca2df961","toSide":"left","label":"nur hier?"},
+		{"id":"34abc4c9d1dcad49","fromNode":"4edf13328c758df0","fromSide":"right","toNode":"8e266cf48891f612","toSide":"left"},
+		{"id":"d4626435689a65bc","fromNode":"dfb627505104c570","fromSide":"right","toNode":"89d52b08ca2df961","toSide":"left","label":"nur hier?"}
 	]
 }
