@@ -65,42 +65,38 @@ dg-publish:
 > > ```
 
 ```dataviewjs
-// Calculate days since first note
-const files = dv.pages()
-const oldestFile = files.sort(f => f.file.ctime)[0]
-const daysSinceStart = Math.floor((Date.now() - oldestFile.file.ctime) / (1000 * 60 * 60 * 24))
-// Count total notes
-const totalNotes = files.length
-// Count unique tags
-const allTags = files.flatMap(p => p.file.tags).distinct()
-const totalTags = allTags.length
-// Create a visually appealing display that works in both light and dark modes
-dv.paragraph(`<div style="
-  background-color: var(--background-secondary);
-  border: 1px solid var(--background-modifier-border);
-  border-radius: 10px;
-  padding: 20px;
-  text-align: center;
-  font-family: var(--font-text);
-  color: var(--text-normal);
-">
-  <h2 style="color: var(--text-normal);">📊 Obsidian Stats</h2>
-  <p style="font-size: 18px; margin: 10px 0;">
-    🗓️ You've been using Obsidian for <strong>${daysSinceStart}</strong> days
-  </p>
-  <p style="font-size: 18px; margin: 10px 0;">
-    📝 You have <strong>${totalNotes}</strong> notes
-  </p>
-  <p style="font-size: 18px; margin: 10px 0;">
-    🏷️ You're using <strong>${totalTags}</strong> unique tags
-  </p>
-</div>`)
+// 1) Neueste "Session X" finden (größte Zahl im Namen)
+const latestSession = dv.pages()
+  .where(p => /^Session\s*\d+$/i.test(p.file.name))
+  .sort(p => Number(p.file.name.replace(/[^0-9]/g, "")), 'desc')
+  .first();
+
+if (!latestSession) {
+  dv.paragraph("⚠️ Keine Session-Dateien gefunden.");
+} else {
+  // 2) Geographie-Dateien laden (Ordnerpfad anpassen, falls nötig)
+  const geoPages = dv.pages("Public/Geographie");
+
+  // 3) Filtern: Nur die, die [[Session N]] in den eingehenden Links haben
+  const results = geoPages
+    .where(p => Array.isArray(p.file.inlinks) && p.file.inlinks
+      .some(link => link.path === latestSession.file.path))
+    .limit(5);
+
+  dv.header(3, `Orte, die auf [[${latestSession.file.name}]] verlinken`);
+  if (results.length === 0) {
+    dv.paragraph("Keine Treffer.");
+  } else {
+    dv.list(results.map(p => p.file.link));
+  }
+}
+
 ```
 
 ```dataview
 LIST
 FROM "Public/Geographie"
-
+WHERE contains(file.inlinks, [[Session 4]])
 LIMIT 5
 ```
 
@@ -111,5 +107,5 @@ LIST
 FROM ""
 WHERE regexmatch("^Session\\s*\\d+$", file.name)
 SORT number(replace(file.name, "[^0-9]", "")) DESC
-LIMIT 4
+LIMIT 1
 ```

@@ -26,3 +26,12 @@ Tiefer im Inneren der Wälder beginnt der eigentliche Urwald – ein dampfendes,
 | ![[mango.png]] | **Dschungel-Mango**  Saftig, orange-gelb und fast gewöhnlich in Aussehen und Geruch – die Mango verströmt einen süßen, vertrauten Duft. Sie schmeckt wie eine besonders reife Mango, ist aber resistenter gegen äußere Einflüsse. Magisch nicht auffällig, aber nahrhaft und angenehm im Geschmack.  *Effekt:* Keine magischen Eigenschaften – aber sättigend und moralestärkend im Dschungelalltag. |
 | ![[drachenschuppenfrucht.png]] | **Drachenfrucht**  Diese mystische Frucht trägt den Namen zu Recht: Ihre Schale besteht aus kräftigen, überlappenden Schuppen in den Farben der metallischen Drachen – von glänzendem Silber bis zu schimmerndem Bronzegrün. Beim Aufprall auf harte Oberflächen spürt man die Wucht: Mit genug Kraft lassen sich damit sogar Dellen in Bäume schlagen. Der rote Saft im Inneren ist dickflüssig, süß und kraftspendend.  *Effekt:* Beim Verzehr stellt sie 1d4 Trefferpunkte wieder her.|
 
+---
+
+## **Verwandte Seiten**
+
+```dataview
+list from [[Südöstliche Wälder]]
+```
+
+---

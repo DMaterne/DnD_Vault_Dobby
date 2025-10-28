@@ -111,7 +111,7 @@ Die nächste Ebene (-7) ist identisch. In Ebene -8 bedeckt ein spiralförmiges M
 
 Castor folgt ihm und Echo wirkt Hunters Mark auf ihn. Der Spell löst sich auf, als folgen die anderen beiden. Alles wird schwarz. Die Gruppe spürt Hitze, Schmerz, und dann nichts mehr.
 
-Sie wachen in der Taverne auf – am selben Tag, an dem sie eigentlich erneut in den Wald aufbrechen wollten. Der Tag hat sich wiederholt. Alle Proben sind verschwunden. Jeder weiß, dass sie gestorben sind, und dass sie jetzt nicht mehr wirklich leben sollten.
+Sie wachen in der Taverne auf – am selben Tag, an dem sie eigentlich erneut in den [[Südöstliche Wälder|Wald]] aufbrechen wollten. Der Tag hat sich wiederholt. Alle Proben sind verschwunden. Jeder weiß, dass sie gestorben sind, und dass sie jetzt nicht mehr wirklich leben sollten.
 
 Ein Klopfen an der Tür reißt sie aus ihren Gedanken. Es ist der Knappe, der sie zu [[Hauptmann Zoak]] bringen will – genau wie damals.
 
