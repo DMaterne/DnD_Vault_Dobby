@@ -5,7 +5,7 @@ Spieler: alle
 
 ###  **Zusammenfassung letzte Session: [[Session 2]]**
 
-![[Session 2#**Zusammenfassung **]]
+![[Session 2#**Zusammenfassung ** ]]
 
 ###  **Session Notizen (raw):**
 recap
@@ -125,5 +125,22 @@ Die Session endet, als Castor unsichtbar auf den halbverwesten Turm zuschleicht,
 
 ### **Zusammenfassung:**
 
+Die Gruppe erholt sich im stinkenden Insektenbau vom letzten Kampf. [[Echo]] tarnt sich mit verwesenden Insektenresten, fertigt aus Moos Ohrstöpsel für alle und dämpft so das gefährliche Summen der Tiefe. Nach einem stillen Frühstück und [[Leo Eisenfausts]] Gebet zu [[Bahamut]] brechen sie zum Wasserfall auf. Trotz Markierungen finden sie den Weg nur dank [[Rhuk]], der den Wasserfall schließlich im Südosten lokalisiert. Am See angekommen, entdecken sie stilles, unbewegtes Wasser, zwei Monde am Himmel und eine unnatürliche Stille. [[Castor Aegis]] nimmt Proben und bemerkt, dass sich Wasser und Sand seltsam verhalten – das Wasser ist unbeweglich, feuerfest und ohne sichtbaren Auslauf.
 
+Im See erkennt Castor eine Struktur aus vier Säulen und einer zentralen Pyramide. [[Leo Eisenfaust]] schwimmt dorthin, während [[Echo]] den Wasserfall erklimmt und [[Rhuk]] uralte, vermutlich urschriftliche Zeichen entdeckt. Diese werden auf Holzstäbe übertragen. Ein magisches Auge zeigt, dass sich unter dem Wasserfall ein Tunnel befindet, in dem Zeit seltsam fließt. Schließlich springt die Gruppe selbst hinein, wird von der Strömung mitgerissen, verliert die Orientierung – Leo und Rhuk werden bewusstlos.
 
+Sie erwachen in einem Gang unter dem See, an der Unterseite einer siebenstufigen Sandsteinpyramide mit vier obsidianen Säulen, bedeckt von uralten Zeichen. Beim Umrunden werden sie von Illusionen getäuscht – sie glauben, miteinander zu reden, sprechen aber mit Kopien. Auf der Spitze erscheinen zwölf lebensechte Doppelgänger, die sich auflösen, sobald sie die unteren Stufen verlassen. In den oberen Ebenen erscheinen Handabdrücke; eine verborgene Treppe öffnet sich nach unten.
+
+[[Leo Eisenfaust]] und [[Castor Aegis]] steigen voran. Neun Ebenen tiefer finden sie eine gewaltige Pilzhöhle, durchzogen von Holzstrukturen, trüben Kristallen und riesigen Pilzen. In der Ferne steht ein halb verfallener Turm über einem unterirdischen See. Während die Gruppe Proben sammelt, wird Castor von einem blauen, humanoiden Schlangenwesen beschossen. Drei weitere serpentinenartige Gegner greifen an, flüstern [[Leo Eisenfaust]] und [[Rhuk]] magische Suggestionen ein und zwingen sie zum Rückzug.
+
+[[Castor Aegis]] macht sich unsichtbar, um den Turm aus der Nähe zu erkunden. Die Session endet, als er sich lautlos dem halbverwesten Bau nähert, während die Tiefe des Pilzwaldes unter ihnen lebendig zu atmen scheint.
+
+---
+
+## **Verwandte Seiten**
+
+```dataview
+list from [[Session 3]]
+```
+
+---

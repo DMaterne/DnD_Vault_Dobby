@@ -117,5 +117,25 @@ Ein Klopfen an der Tür reißt sie aus ihren Gedanken. Es ist der Knappe, der si
 
 ### **Zusammenfassung:**
 
+[[Castor Aegis]] erkundet unsichtbar den halbverfallenen Turm, entdeckt keine Fallen und kehrt zur Gruppe zurück. Gemeinsam machen sie sich durch den dichten Pilzwald auf den Weg. Der Turm besteht aus glattem, fremdartigem Material ohne sichtbare Fugen. Die umliegenden Pilze sondern rotes Harz und klaren Saft ab – ersteres dick wie Blut, letzterer brennbar wie Öl und offenbar gasförmig aktiv. [[Castor Aegis]] und [[Rhuk]] nehmen Proben; Castor merkt, dass etwas mit der Umgebung nicht stimmt. Sein Kompass zeigt „Mitternacht“, obwohl es hell ist. Rhuk tränkt Fackeln im weißen Saft, die seltsam kalt, aber hell brennen.
 
+Vor dem Turm entdecken sie eine magische Barriere, die Einblicke verhindert, aber den Durchgang erlaubt. Innen führen Treppen nach oben und unten, Wände sind mit Porträts einzelner Personen auf schwarzem Grund geschmückt. Zeit scheint stillzustehen – keine Geräusche dringen hinein, doch Klänge von außen sind hörbar. Mit Rhuks magischem Auge erkunden sie die unteren Ebenen.
+
+Auf Ebene -1 bemerken sie, dass sich die Porträts leicht bewegen, als wären sie lebendig. Castor nimmt eines an sich – eine Zwergin, die sich nachdenklich durch ihren Bart streicht. In Ebene -2 und -3 finden sie ein blumenförmiges Symbol, in dessen Mitte eine riesige Spinne hängt, die trotz Echos Hunter’s Mark regungslos bleibt. Eine Ebene tiefer (-4) erscheint statt der Spinne ein Sonnensymbol auf dem Boden. Aus Wasserspeiern in Drachenform beginnt Lava zu strömen, als sie eine Fackel in die Mitte legen. Castor wirkt Feather Fall, und die Gruppe entkommt nach unten.
+
+In Ebene -6 herrscht wieder Kälte. Eine Schneeflocke ziert Boden und Decke, und eine unsichtbare Barriere hält die Lava zurück. Castor erkennt, dass der gesamte Turm aus einem massiven Knochenblock besteht. In Ebene -8 erscheinen spiralförmige Gravuren, aus Löchern in den Wänden glimmen schwache Kristalle und Juwelen. Schließlich erreichen sie Ebene -10: die Wände sind vollständig mit Fackeln und Porträts bedeckt, an der Decke hängt ein makelloser Spiegel.
+
+[[Leo Eisenfaust]] tritt in die Mitte des Raumes – ein Symbol leuchtet auf, und er verschwindet spurlos. Castor folgt, [[Echo]] markiert ihn magisch, doch der Zauber bricht sofort ab. Dunkelheit, Hitze, Schmerz – dann nichts mehr.
+
+Die Gruppe erwacht in der Taverne – am selben Morgen, an dem sie ursprünglich zur Expedition aufbrechen wollten. Alle Proben sind verschwunden. Jeder weiß, dass sie gestorben sind – und dass sie nun nicht mehr wirklich leben. Ein Klopfen an der Tür reißt sie aus dem Schock: der Knappe steht dort, um sie zu [[Hauptmann Zoak]] zu bringen – genau wie zuvor.
+
+---
+
+## **Verwandte Seiten**
+
+```dataview
+list from [[Session 4]]
+```
+
+---
 

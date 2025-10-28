@@ -90,5 +90,22 @@ Die Session endet mit dem Wissen, dass der Dschungel nicht nur mutiert, sondern 
 
 ### **Zusammenfassung:**
 
+Nach der Begegnung mit den [[Barlgura (Gorilla Monster)|Barlgura]] erhält die Gruppe einige Tage Downtime in [[Dilos Feykar]]. Bald ruft sie [[Hauptmann Zoak]] erneut zu sich: dichter Rauch steigt aus dem [[Südöstliche Wälder#Dschungel|Dschungel]], obwohl dort Feuer verboten ist. Zoak erklärt, der Dschungel sei das Ergebnis einer Mutation, die einst aus gewöhnlichem Wald entstand und nun alles verschlingt. Sollte sich der Prozess umkehren lassen, wäre das von großem Interesse.
 
+Die Gruppe rüstet sich aus, erhält zwei Schriftrollen mit _Dimension Door_ und macht sich als Vorhut auf den Weg. Eine zweite Expeditionsgruppe folgt später. Nach einer ruhigen Nacht im [[Südöstliche Wälder#Mischwald|Mischwald]] beginnt der Marsch in den Dschungel. Die Vegetation verändert sich rapide – Farben schimmern in Rot, Smaragd, Blau und Türkis, Blätter wirken wie Edelsteine, Harz wie Honig. [[Castor Aegis]] sammelt Proben von Pflanzen und Boden, während leuchtende Lichter in der Ferne tanzen.
 
+Beim Erkunden eines Flusses hören sie ein lauter werdendes Summen. [[Echo]] schleicht voraus, wird jedoch bewusstlos, als sich riesige insektenartige Dämonen zeigen – [[Chasme (Käfer)|Chasme]]. [[Rhuk]] wirkt _Silence_, wodurch die Gegner verwirrt werden, während [[Leo Eisenfaust]] und Rhuk im Nahkampf kämpfen und Castor versucht, Echo zu retten. Magie wirkt nur eingeschränkt; die Dämonen senken die maximale Lebensenergie. Schließlich explodieren die Chasme – ein knapper Sieg, Castor bleibt als Einziger aufrecht.
+
+In der entstehenden Ruhe entdecken sie eine Höhle, die sie als Bunker nutzen. Nach 24 Stunden Wache, einer Stufe Erschöpfung und einer Rast mit magischen [[Südöstliche Wälder#**Früchte **|Bananen]] erholt sich die Gruppe. Die Dämonenkadaver werden als Beweis gesichert.
+
+Die Session endet mit der Erkenntnis, dass der Dschungel nicht nur mutiert, sondern auch dämonische Lebensformen hervorbringt.
+
+---
+
+## **Verwandte Seiten**
+
+```dataview
+list from [[Session 2]]
+```
+
+---
