@@ -53,7 +53,7 @@ Paragraph 2.
 ## **Verwandte Seiten**
 
 ```dataview
-list from [[this]]
+list from [[Ahrol Mir]]
 ```
 
 ---

@@ -29,13 +29,13 @@ dg-publish:
 > >SORT number(replace(file.name, "[^0-9]", "")) DESC
 > >LIMIT 5
 >
-> > [!info]+ Recent Projects
+> > [!info]+ Relevante Orte
 > > - [[30 Apps in 30 day]]
 > > - [[The Gamified Life]]
 > > - [[ZenFocus]]
 > > - [[Obsidian Ninja]]
 >
-> > [!success]+ Journal
+> > [!info]+ Relevante NPCs
 >> ```dataview
 > > List
 > > From "003 REFLECT/Journal"
@@ -99,13 +99,12 @@ dv.paragraph(`<div style="
 
 ```dataview
 LIST
-FROM ""
-WHERE regexmatch("^Session\\s*\\d+$", file.name)
-SORT number(replace(file.name, "[^0-9]", "")) DESC
-LIMIT 1
+FROM "Public/Geographie"
 
-
+LIMIT 5
 ```
+
+
 
 ```dataview
 LIST
