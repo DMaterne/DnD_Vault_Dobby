@@ -65,31 +65,25 @@ dg-publish:
 > > ```
 
 ```dataviewjs
-// 1) Neueste "Session X" finden (größte Zahl im Namen)
-const latestSession = dv.pages()
-  .where(p => /^Session\s*\d+$/i.test(p.file.name))
-  .sort(p => Number(p.file.name.replace(/[^0-9]/g, "")), 'desc')
-  .first();
+const FOLDER = "Public/Session Protocol";
+const SHOW_OUTPUT = true;
 
-if (!latestSession) {
+const sessions = dv.pages()
+  .where(p => p.file.path.startsWith(`${FOLDER}/`) || p.file.folder === FOLDER)
+  .where(p => /^Session\s*\d+$/i.test(p.file.name))
+  .sort(p => Number(p.file.name.replace(/\D/g, "")), 'desc');
+
+if (sessions.length === 0) {
   dv.paragraph("⚠️ Keine Session-Dateien gefunden.");
 } else {
-  // 2) Geographie-Dateien laden (Ordnerpfad anpassen, falls nötig)
-  const geoPages = dv.pages("Public/Geographie");
+  const latestSession = sessions[0].file.link;
+  const latestName    = sessions[0].file.name;
+  const latestPath    = sessions[0].file.path;
 
-  // 3) Filtern: Nur die, die [[Session N]] in den eingehenden Links haben
-  const results = geoPages
-    .where(p => Array.isArray(p.file.inlinks) && p.file.inlinks
-      .some(link => link.path === latestSession.file.path))
-    .limit(5);
-
-  dv.header(3, `Orte, die auf [[${latestSession.file.name}]] verlinken`);
-  if (results.length === 0) {
-    dv.paragraph("Keine Treffer.");
-  } else {
-    dv.list(results.map(p => p.file.link));
-  }
+  if (SHOW_OUTPUT) dv.paragraph(`Neueste Session: ${latestSession}`);
+  // latestSession / latestName / latestPath stehen dir hier zur Verfügung
 }
+
 
 ```
 
@@ -107,5 +101,5 @@ LIST
 FROM ""
 WHERE regexmatch("^Session\\s*\\d+$", file.name)
 SORT number(replace(file.name, "[^0-9]", "")) DESC
-LIMIT 1
+LIMIT 4
 ```
