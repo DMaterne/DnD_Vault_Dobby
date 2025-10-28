@@ -4,7 +4,7 @@ banner_y: 0.364
 notetoolbar: none
 dg-publish:
 ---
->[!multi-column| Arbeitsbereich]
+>[!multi-column] Arbeitsbereich
 >
 >> [!success]+ Templates
 >> - [[City Template]]
@@ -19,7 +19,7 @@ dg-publish:
 >> - [[Home Dashboard]]
 
 ---
-> [!multi-column]
+> [!multi-column] Relevante Dateien
 >
 > > [!note]+ Letzte Sessions
 >>```dataview
@@ -63,7 +63,7 @@ dg-publish:
 > > ```
 >
 >
-> > [!info]+ Relevante NPCs
+> > [!info]+ Relevante NPC's
 > > ```dataviewjs
 > > const SESSIONS_FOLDER = "Public/Session Protocol";
 > > const NPC_FOLDERS = [
@@ -92,16 +92,13 @@ dg-publish:
 > >   if (npcs.length === 0) {
 > >     dv.paragraph(`Keine NPCs oder Monster, die [[${latest.file.name}]] verlinken.`);
 > >   } else {
-> >     dv.header(3, `Relevante NPCs & Monster aus [[${latest.file.name}]]`);
 > >     dv.list(npcs.file.link);
 > >   }
 > > }
 > > ```
 >
 ---
-
----
-> [!multi-column]
+> [!multi-column] Neue Dateien
 >
 > > [!tip]+ Recently Created
 >>```dataview
@@ -120,68 +117,4 @@ dg-publish:
 > > Limit 5
 > > ```
 
-```dataviewjs
-const FOLDER = "Public/Session Protocol";
-const SHOW_OUTPUT = true;
 
-const sessions = dv.pages()
-  .where(p => p.file.path.startsWith(`${FOLDER}/`) || p.file.folder === FOLDER)
-  .where(p => /^Session\s*\d+$/i.test(p.file.name))
-  .sort(p => Number(p.file.name.replace(/\D/g, "")), 'desc');
-
-if (sessions.length === 0) {
-  dv.paragraph("⚠️ Keine Session-Dateien gefunden.");
-} else {
-  const latestSession = sessions[0].file.link;
-  const latestName    = sessions[0].file.name;
-  const latestPath    = sessions[0].file.path;
-
-  if (SHOW_OUTPUT) dv.paragraph(`Neueste Session: ${latestSession}`);
-  // latestSession / latestName / latestPath stehen dir hier zur Verfügung
-}
-
-
-```
-
-```dataview
-LIST
-FROM "Public/Geographie"
-WHERE contains(file.inlinks,[[Session 4]])
-LIMIT 5
-```
-
-
-
-```dataviewjs
-// ── Ordnerpfade anpassen, falls nötig ──────────────────────────
-const SESSIONS_FOLDER = "Public/Session Protocol";
-const GEO_FOLDER      = "Public/NPC's";
-// ───────────────────────────────────────────────────────────────
-
-// Neueste "Session X" ermitteln (größte Zahl im Namen)
-const sessions = dv.pages()
-  .where(p => p.file.folder === SESSIONS_FOLDER || p.file.path.startsWith(`${SESSIONS_FOLDER}/`))
-  .where(p => /^Session\s*\d+$/i.test(p.file.name))
-  .sort(p => Number(p.file.name.replace(/\D/g, "")), 'desc');
-
-if (sessions.length === 0) {
-  dv.paragraph("⚠️ Keine Session-Dateien gefunden.");
-} else {
-  const latest = sessions[0]; // neueste Session
-
-  // Geographie-Dateien filtern, die einen eingehenden Link von dieser Session haben
-  const places = dv.pages()
-    .where(p => p.file.folder === GEO_FOLDER || p.file.path.startsWith(`${GEO_FOLDER}/`))
-    .where(p => (p.file.inlinks ?? [])
-      .some(l => (l.path || "").replace(/#.*/, "") === latest.file.path))
-    .limit(5);
-
-  if (places.length === 0) {
-    dv.paragraph(`Keine NPC's, die [[${latest.file.name}]] verlinken.`);
-  } else {
-    dv.list(places.file.link);
-  }
-}
-
-
-```

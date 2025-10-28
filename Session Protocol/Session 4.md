@@ -89,7 +89,7 @@ castor lv5 hp: 46
 
 ###  **Protokoll:**
 
-[[Castor Aegis]] nähert sich unsichtbar dem halbverwesten [[Turm im Pilzwald|Turm]], bis auf etwa eine Stunde Distanz. Er findet keine Fallen, keine Bewegung und keine Anzeichen von Leben. Nachdem er den Bereich abgesichert hat, kehrt er zur Gruppe zurück. Gemeinsam brechen sie durch den dichten Pilzwald auf, um den Turm zu untersuchen. Der Turm ist aus einem glatten, unbekannten Material gefertigt, ohne sichtbare Fugen oder Risse.
+[[Castor Aegis]] nähert sich unsichtbar dem halbverwesten [[Turm im Pilzwald|Turm]], bis auf etwa eine Stunde Distanz. Er findet keine Fallen, keine Bewegung und keine Anzeichen von [[Yuan-Ti]]. Nachdem er den Bereich abgesichert hat, kehrt er zur Gruppe zurück. Gemeinsam brechen sie durch den dichten Pilzwald auf, um den Turm zu untersuchen. Der Turm ist aus einem glatten, unbekannten Material gefertigt, ohne sichtbare Fugen oder Risse.
 
 Die Pilzkronen um sie herum sondern ein zähes, rotes Harz ab, das in seiner Konsistenz an Honig erinnert. Der Saft in den Stämmen dagegen ist klar und wässrig. [[Castor Aegis]] und [[Rhuk]] nehmen Proben beider Flüssigkeiten. Castor mariniert eine seiner Handäxte in dem Saft, der sich als brennbar wie Öl erweist. [[Echo]] probiert den roten Harzsaft – er schmeckt metallisch, fast wie Blut. Der klare Saft scheint außerdem Gas freizusetzen, denn eine kleine Flamme brennt daran stetig weiter.
 
