@@ -21,8 +21,10 @@
 		{"id":"617a53b22583b827","x":1249,"y":812,"width":250,"height":148,"type":"text","text":"körperlose Stimme\n- wieso zum Turm gelockt?\n- Feindlich?"},
 		{"id":"7b4bc8ed17864a64","x":180,"y":52,"width":250,"height":60,"type":"text","text":"Alles wirkt normal"},
 		{"id":"8e266cf48891f612","x":1800,"y":534,"width":250,"height":193,"type":"text","text":"Tod durch Falle\n- Zeitreise?\n- Illusion?\n- Wieso im Leeren Räumen so viele Fallen?"},
-		{"id":"5c13eee49c85385d","x":1778,"y":1185,"width":250,"height":60,"type":"text","text":"Wiederauferstehung\n- Tag vor Abreise, Auslöser Wald?\n- Gleichzeitiges erwachen trotz unterschiedlicher Todeszeitpunkte"},
-		{"id":"dfb627505104c570","x":180,"y":-460,"width":250,"height":70,"type":"text","text":"Zeit vergeht anders"}
+		{"id":"dfb627505104c570","x":180,"y":-500,"width":250,"height":70,"type":"text","text":"Zeit vergeht anders"},
+		{"id":"5c13eee49c85385d","x":1800,"y":1161,"width":248,"height":439,"type":"text","text":"Wiederauferstehung\n\n- Tag vor Abreise, Auslöser Wald?\n- Gleichzeitiges erwachen trotz unterschiedlicher Todeszeitpunkte\n- Wissen über unnatürliche Ereignisse und Vegetation\n- Wieso wir?\n- Ursache für Zeitschleife am Vortag?"},
+		{"id":"d2f3813b5769fd98","x":2440,"y":1219,"width":294,"height":324,"type":"text","text":"Wissenslücken:\n\n- Zeitmagie\n- Magische Strukturen\n- Magische Fallen\n- Dämonen\n- andere Planes\n- Wiederbelebungsmagie\n- frühere Expeditionen\n- Geschichte des Kontinents"},
+		{"id":"574aecfb048bd0f1","x":1774,"y":1768,"width":406,"height":252,"type":"text","text":"Theorien:\n- körperlose Stimme als Mastermind\n\t- evtl. testet uns\n\t- will Expedition aufhalten\n- Bahamut hat uns geschützt\n\t- Leo muss aufklären\n- Dämonen experimentieren im Wald\n- Yuan-Ti haben Dämonen gerufen\n\t- evtl. Invasionspläne\n- Zoak als Mastermind\n\t- sehr erfahren\n\t- mächtige magische Waffen\n\t- sehr geskillt\n- "}
 	],
 	"edges":[
 		{"id":"88cc088eb4fd8c1e","fromNode":"e7c6ced862bb9544","fromSide":"left","toNode":"5fb76cde56079c17","toSide":"right","label":"Im Dschungel"},
@@ -48,6 +50,8 @@
 		{"id":"76831fe6e62d6922","fromNode":"9d662204f490e6ba","fromSide":"right","toNode":"617a53b22583b827","toSide":"left","label":"selbe Stimme?"},
 		{"id":"f5005ad36117601a","fromNode":"7b4bc8ed17864a64","fromSide":"right","toNode":"89d52b08ca2df961","toSide":"left","label":"nur hier?"},
 		{"id":"34abc4c9d1dcad49","fromNode":"4edf13328c758df0","fromSide":"right","toNode":"8e266cf48891f612","toSide":"left"},
-		{"id":"d4626435689a65bc","fromNode":"dfb627505104c570","fromSide":"right","toNode":"89d52b08ca2df961","toSide":"left","label":"nur hier?"}
+		{"id":"d4626435689a65bc","fromNode":"dfb627505104c570","fromSide":"right","toNode":"89d52b08ca2df961","toSide":"left","label":"nur hier?"},
+		{"id":"cd6e8f951d25010a","fromNode":"8e266cf48891f612","fromSide":"bottom","toNode":"5c13eee49c85385d","toSide":"top"},
+		{"id":"d83c99f69611f50b","fromNode":"5c13eee49c85385d","fromSide":"right","toNode":"d2f3813b5769fd98","toSide":"left"}
 	]
 }
