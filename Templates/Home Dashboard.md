@@ -30,18 +30,74 @@ dg-publish:
 > >LIMIT 5
 >
 > > [!info]+ Relevante Orte
-> > - [[30 Apps in 30 day]]
-> > - [[The Gamified Life]]
-> > - [[ZenFocus]]
-> > - [[Obsidian Ninja]]
+> > ```dataviewjs
+> > // ── Ordnerpfade anpassen, falls nötig ──────────────────────────
+> > const SESSIONS_FOLDER = "Public/Session Protocol";
+> > const GEO_FOLDER      = "Public/Geographie";
+> > // ───────────────────────────────────────────────────────────────
+> >
+> > // Neueste "Session X" ermitteln (größte Zahl im Namen)
+> > const sessions = dv.pages()
+> >   .where(p => p.file.folder === SESSIONS_FOLDER || p.file.path.startsWith(`${SESSIONS_FOLDER}/`))
+> >   .where(p => /^Session\s*\d+$/i.test(p.file.name))
+> >   .sort(p => Number(p.file.name.replace(/\D/g, "")), 'desc');
+> >
+> > if (sessions.length === 0) {
+> >   dv.paragraph("⚠️ Keine Session-Dateien gefunden.");
+> > } else {
+> >   const latest = sessions[0]; // neueste Session
+> >
+> >   // Geographie-Dateien filtern, die einen eingehenden Link von dieser Session haben
+> >   const places = dv.pages()
+> >     .where(p => p.file.folder === GEO_FOLDER || p.file.path.startsWith(`${GEO_FOLDER}/`))
+> >     .where(p => (p.file.inlinks ?? [])
+> >       .some(l => (l.path || "").replace(/#.*/, "") === latest.file.path))
+> >     .limit(5);
+> >
+> >   if (places.length === 0) {
+> >     dv.paragraph(`Keine Orte, die [[${latest.file.name}]] verlinken.`);
+> >   } else {
+> >     dv.list(places.file.link);
+> >   }
+> > }
+> > ```
+>
 >
 > > [!info]+ Relevante NPCs
->> ```dataview
-> > List
-> > From "003 REFLECT/Journal"
-> > sort file.mtime Desc
-> > Limit 5
+> > ```dataviewjs
+> > const SESSIONS_FOLDER = "Public/Session Protocol";
+> > const NPC_FOLDERS = [
+> >   "Public/Characters/NPC's",
+> >   "Public/Monster"
+> > ];
+> >
+> > // Neueste "Session X" ermitteln (größte Zahl im Namen)
+> > const sessions = dv.pages()
+> >   .where(p => p.file.folder === SESSIONS_FOLDER || p.file.path.startsWith(`${SESSIONS_FOLDER}/`))
+> >   .where(p => /^Session\s*\d+$/i.test(p.file.name))
+> >   .sort(p => Number(p.file.name.replace(/\D/g, "")), 'desc');
+> >
+> > if (sessions.length === 0) {
+> >   dv.paragraph("⚠️ Keine Session-Dateien gefunden.");
+> > } else {
+> >   const latest = sessions[0];
+> >   const npcs = dv.pages()
+> >     .where(p => NPC_FOLDERS.some(folder =>
+> >       p.file.folder === folder || p.file.path.startsWith(`${folder}/`)
+> >     ))
+> >     .where(p => (p.file.inlinks ?? [])
+> >       .some(l => (l.path || "").replace(/#.*/, "") === latest.file.path))
+> >     .limit(5);
+> >
+> >   if (npcs.length === 0) {
+> >     dv.paragraph(`Keine NPCs oder Monster, die [[${latest.file.name}]] verlinken.`);
+> >   } else {
+> >     dv.header(3, `Relevante NPCs & Monster aus [[${latest.file.name}]]`);
+> >     dv.list(npcs.file.link);
+> >   }
+> > }
 > > ```
+>
 ---
 
 ---
@@ -99,7 +155,7 @@ LIMIT 5
 ```dataviewjs
 // ── Ordnerpfade anpassen, falls nötig ──────────────────────────
 const SESSIONS_FOLDER = "Public/Session Protocol";
-const GEO_FOLDER      = "Public/Geographie";
+const GEO_FOLDER      = "Public/NPC's";
 // ───────────────────────────────────────────────────────────────
 
 // Neueste "Session X" ermitteln (größte Zahl im Namen)
@@ -121,9 +177,8 @@ if (sessions.length === 0) {
     .limit(5);
 
   if (places.length === 0) {
-    dv.paragraph(`Keine Orte, die [[${latest.file.name}]] verlinken.`);
+    dv.paragraph(`Keine NPC's, die [[${latest.file.name}]] verlinken.`);
   } else {
-    //dv.header(3, `Relevante Orte aus [[${latest.file.name}]]`);
     dv.list(places.file.link);
   }
 }
