@@ -21,13 +21,13 @@ dg-publish:
 ---
 > [!multi-column]
 >
-> > [!note]+ Books
+> > [!note]+ Letzte Sessions
 >>```dataview
-> > List
-> > From #book
-> > sort file.mtime Desc
-> > limit 5
-> > ```
+> >List
+> >From ""
+> >WHERE regexmatch("^Session\\s*\\d+$", file.name)
+> >SORT number(replace(file.name, "[^0-9]", "")) DESC
+> >LIMIT 5
 >
 > > [!info]+ Recent Projects
 > > - [[30 Apps in 30 day]]
@@ -51,8 +51,9 @@ dg-publish:
 >>```dataview
 > >List
 > >From ""
-> >sort file.ctime Desc
-> >Limit 5
+> >WHERE regexmatch("^Session\\s*\\d+$", file.name)
+> >SORT number(replace(file.name, "[^0-9]", "")) DESC
+> >LIMIT 4
 > >```
 >
 > > [!example]+ Recently Modified
@@ -94,4 +95,22 @@ dv.paragraph(`<div style="
     🏷️ You're using <strong>${totalTags}</strong> unique tags
   </p>
 </div>`)
+```
+
+```dataview
+LIST
+FROM ""
+WHERE regexmatch("^Session\\s*\\d+$", file.name)
+SORT number(replace(file.name, "[^0-9]", "")) DESC
+LIMIT 1
+
+
+```
+
+```dataview
+LIST
+FROM ""
+WHERE regexmatch("^Session\\s*\\d+$", file.name)
+SORT number(replace(file.name, "[^0-9]", "")) DESC
+LIMIT 4
 ```
