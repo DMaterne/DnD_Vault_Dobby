@@ -5,7 +5,7 @@
 		{"id":"976c473a077e1162","type":"file","file":"Public/Gruppierungen/Stadtwache von Dilos Feykar.md","x":-1280,"y":-680,"width":400,"height":100},
 		{"id":"09cbd75123bb9b7b","type":"file","file":"Public/Gruppierungen/Zirkel der Spiegel.md","x":-1280,"y":-480,"width":400,"height":60},
 		{"id":"5fb76cde56079c17","type":"file","file":"Public/Geographie/Städte/Dilos Feykar/Südöstliche Wälder.md","x":-520,"y":150,"width":360,"height":920},
-		{"id":"e7c6ced862bb9544","type":"file","file":"Public/Monster/Barlgura (Gorilla Monster).md","x":36,"y":1750,"width":382,"height":100},
+		{"id":"e7c6ced862bb9544","type":"file","file":"Public/Monster/Barlgura.md","x":36,"y":1750,"width":382,"height":100},
 		{"id":"d093018d17ff9121","type":"text","text":"- woher?\n- Schuld an Vegetation?\n- Eigenständig oder unter Kontrolle?","x":168,"y":1850,"width":250,"height":160},
 		{"id":"5e1fc2ec01dddd47","type":"text","text":"**veränderte Vegetation**\n- durch Dämonen?\n- natürlich?\n- durch Portal/andere Plane?","x":-240,"y":2110,"width":276,"height":200},
 		{"id":"a95564746b9d3532","type":"text","text":"**magische Früchte**\n- natürlich oder durch veränderte Vegetation?\n- Anbauen?\n- Nutzbarkeit?","x":116,"y":2110,"width":250,"height":200},
@@ -25,7 +25,7 @@
 		{"id":"8e266cf48891f612","x":1798,"y":527,"width":250,"height":206,"type":"text","text":"Tod durch Falle\n- Zeitreise?\n- Illusion?\n- Wieso im Leeren Räumen so viele Fallen?"},
 		{"id":"d2f3813b5769fd98","x":2200,"y":1206,"width":294,"height":350,"type":"text","text":"Wissenslücken:\n\n- Zeitmagie\n- Magische Strukturen\n- Magische Fallen\n- Dämonen\n- andere Planes\n- Wiederbelebungsmagie\n- frühere Expeditionen\n- Geschichte des Kontinents\n- Yuan-Ti"},
 		{"id":"574aecfb048bd0f1","x":1720,"y":1750,"width":406,"height":632,"type":"text","text":"Theorien:\n- körperlose Stimme als Mastermind\n\t- evtl. testet uns\n\t- will Expedition aufhalten\n- Bahamut hat uns geschützt\n\t- Leo hat vor der Abreise gebetet\n- Dämonen experimentieren im Wald\n\t- dämonische Präsenz\n\t- körperlose Stimme leiten niedere Dämonen und versuchen Abenteurer aufzuhalten\n- Yuan-Ti haben Dämonen gerufen\n\t- evtl. Invasionspläne\n\t- haben uns zum Turm gelockt\n- Zoak als Mastermind\n\t- sehr erfahren\n\t- mächtige magische Waffen\n\t- sehr geskillt\n- Wald als Tor zwischen Planes\n\t- Dämonische Präsenz\n\t- körperlose Stimme evtl. Fey/Irrlicht"},
-		{"id":"82b4571cdf52345d","x":590,"y":412,"width":400,"height":400,"type":"file","file":"Public/Monster/Chasme (Käfer).md"}
+		{"id":"82b4571cdf52345d","x":590,"y":412,"width":400,"height":400,"type":"file","file":"Public/Monster/Chasme.md"}
 	],
 	"edges":[
 		{"id":"88cc088eb4fd8c1e","fromNode":"e7c6ced862bb9544","fromSide":"left","toNode":"5fb76cde56079c17","toSide":"right","label":"Im Dschungel"},

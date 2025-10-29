@@ -16,10 +16,16 @@
 
 <div style="min-height: 410px; padding: 12px; border: 0px solid var(--text-faint); border-radius: 10px; background-color: var(--background-secondary); line-height: 1.5;">
 <b>Beschreibung:</b><br>
-Ein magischer Turm inmitten eines Pilzwaldes in einer unterirdischen Höhle. Die Höhle konnte durch eine <a href="Pyramidenstruktur">magische Struktur</a>
- am Boden eines Sees inmitten der <a href="Südöstliche Wälder">südöstliche Wälder</a> betreten werden. Dazu muss man ein Rätsel lösen. In der Höhle leben Yuan-Ti. Diese sind feindlich gesinnt, meiden aber den Turm.<br><br>
-Der Turm scheint Perfekt zylindrisch zu sein, besteht jedoch aus Knochen. Von außen lässt sich nichts aus dem inneren des Turms sehen und man kann auch nicht hineinsehen. Wenn man den Turm verlässt, hört man eine innere Stimme, welchen einen dazu drängt, diesen wieder zu betreten. Im inneren erleuchten magische Fackeln den Turm. Portraits von verschiedenen Personen bei verschiedenen Aktivitäten hängen an den Wänden. Der Hintergrund dieser ist immer schwarz. Verschiedene Fallen sind auf den Ebenen. Diese werden durch unterschiedliche Muster die im Boden eingraviert sind gekennzeichnet.
+Ein magischer Turm inmitten eines Pilzwaldes in einer unterirdischen Höhle. Die Höhle konnte durch eine
+<a class="internal-link" data-href="Pyramidenstruktur" href="Pyramidenstruktur">magische Struktur</a>
+am Boden eines Sees inmitten der
+<a class="internal-link" data-href="Südöstliche Wälder" href="Südöstliche Wälder">südöstlichen Wälder</a>
+betreten werden. Dazu musste man ein Rätsel lösen. In der Höhle leben
+<a class="internal-link" data-href="Yuan-Ti" href="Yuan-Ti">Yuan-Ti</a>.
+Diese sind feindlich gesinnt, meiden aber den Turm.<br><br>
+Der Turm scheint perfekt zylindrisch zu sein, besteht jedoch aus Knochen. Von außen lässt sich nichts aus dem Inneren des Turms sehen und man kann auch nicht hineinsehen. Wenn man den Turm verlässt, hört man eine innere Stimme, die einen dazu drängt, diesen wieder zu betreten. Im Inneren erleuchten magische Fackeln den Turm. Portraits von verschiedenen Personen bei verschiedenen Aktivitäten hängen an den Wänden. Der Hintergrund dieser ist immer schwarz. Verschiedene Fallen sind auf den Ebenen. Diese werden durch unterschiedliche Muster, die im Boden eingraviert sind, gekennzeichnet.
 </div>
+
 
 ---
 

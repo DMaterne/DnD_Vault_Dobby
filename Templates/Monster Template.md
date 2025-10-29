@@ -6,12 +6,14 @@
 > # Name
 > ![[NPC_Placeholder.png|cover hsmall]]
 > ###### [[NPC_Placeholder.png|Vollbild]]
-> ###### Stats
+> ###### Übersicht
 > | Typ |  Stat |
 > | ---- | ---- |
 > | Type | Humanoid |
 > | Size | small/medium/large |
-> | Vorkommen | [[Südöstliche Wälder]] |
+> | Vorkommen | [[Südöstliche Wälder]] | 
+> | Sprache | Abyssal |
+> | Intelligenz | Hoch |
 
 
 <div style="min-height: 500px; padding: 12px; border: 0px solid var(--text-faint); border-radius: 10px; background-color: var(--background-secondary); line-height: 1.5;">
