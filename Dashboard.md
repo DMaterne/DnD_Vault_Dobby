@@ -131,7 +131,7 @@
 >> - [[NPC Template]]
 >
 >> [!info]+ Wichtige Notizen
->> - [[Quest - Expedition zur Erschließung der südöstlichen Wälder| Expedition der mutierten Wälder]]
+>> - [[Quest - Expedition zur Erschließung der südöstlichen Wälder| Expedition in den mutierten Wälder]]
 >> - [[Mindmap Expedition.canvas|Mindmap Expedition]]
 >> - [[Questlog]]
 >> - [[Dashboard]]

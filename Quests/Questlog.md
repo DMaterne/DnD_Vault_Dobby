@@ -24,3 +24,4 @@
 		- [ ] Körperlose Stimme
 		- [ ] Planes
 	- [ ] Finde den Auslöser
+- [ ] Klaue Bogen von [[Hauptmann Zoak]]

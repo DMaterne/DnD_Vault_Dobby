@@ -3,7 +3,7 @@
 ## Bio
 
 > [!infobox]
-> # Name
+> # Zoak
 > ![[Zoak.png|cover hsmall]]
 > ### [[Zoak.png|Vollbild]]
 > ###### Stats
