@@ -136,4 +136,13 @@
 >> - [[Questlog]]
 >> - [[Dashboard]]
 
+---
+## Spielercharaktere
+
+| Name                           | Spieler | Rasse | Class | Subclass | Level | Rolle
+|-----------------------------------|--------------|--------|-|-|-|-|
+| [[Castor Aegis]] | Domi | Mensch | Artificer | Armorer | 6 | Tank & Support
+| [[Echo]] | Iggy | Tabaxi | Ranger / Rouge | Gloomstalker | 5 / 1 | DD
+| [[Leo Eisenfaust]]             | Schorschus | Mensch | Paladin | ??? | 6 | Tank & Healer
+| [[Rhuk]] | Tjubi | Goblin | Monk | Path of Shadow | 6 | DD
 
