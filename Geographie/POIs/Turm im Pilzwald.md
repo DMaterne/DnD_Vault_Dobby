@@ -4,8 +4,8 @@
 
 > [!infobox]
 > # Turm im Pilzwald
-> ![[TurmPilzwald.png]]
-> ###### [[DilosFeykar.png|Vollbild]]
+> ![[toweGraphic.png]] ![[TurmPilzwald.png]]
+> ###### [[toweGraphic.png|Vollbild 1]] [[TurmPilzwald.png|Vollbild 2]] 
 > ###### Stats
 > | Typ |  Stat |
 > | ---- | ---- |
@@ -16,7 +16,7 @@
 
 <div style="min-height: 410px; padding: 12px; border: 0px solid var(--text-faint); border-radius: 10px; background-color: var(--background-secondary); line-height: 1.5;">
 <b>Beschreibung:</b><br>
-Ein magischer Turm inmitten eines Pilzwaldes in einer unterirdischen Höhle. Die Höhle konnte durch eine magische Struktur am Boden eines Sees inmitten der [[Südöstliche Wälder|südöstlichen Wälder]] betreten werden. Dazu mussta man ein Rätsel lösen. In der Höhle leben Yuan-Ti. Diese sind feindlich gesinnt, meiden aber den Turm.<br><br>
+Ein magischer Turm inmitten eines Pilzwaldes in einer unterirdischen Höhle. Die Höhle konnte durch eine [[Pyramidemagische Struktur]] am Boden eines Sees inmitten der [[Südöstliche Wälder|südöstlichen Wälder]] betreten werden. Dazu mussta man ein Rätsel lösen. In der Höhle leben Yuan-Ti. Diese sind feindlich gesinnt, meiden aber den Turm.<br><br>
 Der Turm scheint Perfekt zylindrisch zu sein, besteht jedoch aus Knochen. Von außen lässt sich nichts aus dem inneren des Turms sehen und man kann auch nicht hineinsehen. Wenn man den Turm verlässt, hört man eine innere Stimme, welchen einen dazu drängt, diesen wieder zu betreten. Im inneren erleuchten magische Fackeln den Turm. Portraits von verschiedenen Personen bei verschiedenen Aktivitäten hängen an den Wänden. Der Hintergrund dieser ist immer schwarz. Verschiedene Fallen sind auf den Ebenen. Diese werden durch unterschiedliche Muster die im Boden eingraviert sind gekennzeichnet.
 </div>
 
