@@ -56,7 +56,7 @@ Am Turmfuß verschwindet [[Leo Eisenfaust]] in einem Lichtmuster, gefolgt von de
 
 + [[Session 4]]
 + Der Zeitsprung  
-+ Die Gruppe erwacht in der [[Taverne Der Freundliche Henker|Taverne „Der Freundliche Henker“]], am selben Tag, an dem sie eigentlich aufbrechen sollten. Alle Proben sind verschwunden.  
++ Die Gruppe erwacht in der [[Der Freundliche Hänker|Taverne "Der Freundliche Henker"]], am selben Tag, an dem sie eigentlich aufbrechen sollten. Alle Proben sind verschwunden.  
 Sie erkennen, dass sie gestorben sind und sich nun in einer Zeitschleife befinden. Kurz darauf erscheint erneut der Knappe, um sie zu [[Hauptmann Zoak]] zu bringen – genau wie zuvor.
 
 

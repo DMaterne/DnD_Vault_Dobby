@@ -6,7 +6,7 @@
 > # Turm im Pilzwald
 > ![[toweGraphic.png]] ![[TurmPilzwald.png]]
 > ###### [[toweGraphic.png|Vollbild 1]] [[TurmPilzwald.png|Vollbild 2]] 
-> ###### Stats
+> ###### Infos
 > | Typ |  Stat |
 > | ---- | ---- |
 > | Kontinent | [[Kontinent of xxx]] |
