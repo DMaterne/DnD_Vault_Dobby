@@ -1,4 +1,4 @@
-![[bannerObsidian.webp]]
+![[BannerNew.png]]
 
 ---
 >[!multi-column] Arbeitsbereich
