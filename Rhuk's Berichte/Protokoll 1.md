@@ -48,7 +48,7 @@ Fruchterkennung via [[Castor Aegis#Identify]] (Bericht angehängt):
     
 - Eigenschaften: Unsichtbarkeit, Magieeinsatz (Ranken, Illusionen), koordinierte Aggression.
     
-- Taktische Aufteilung: Rhuk + Leo -> Barlgura B | Echo + Castor -> Barlgura A
+- Taktische Aufteilung: Rhuk + Leo -> Barlgura B | [[Echo]] + Castor -> Barlgura A
     
 - Barlgura A durch Gruppe eliminiert.
     
@@ -83,7 +83,7 @@ Fruchterkennung via [[Castor Aegis#Identify]] (Bericht angehängt):
 
 - Früchte übergeben (nach kurzer Verzögerung durch Castor).
     
-- Echo entdeckt magische Waffen – keine Bedrohung, jedoch erhöhte Aufmerksamkeit.
+- [[Echo]] entdeckt magische Waffen – keine Bedrohung, jedoch erhöhte Aufmerksamkeit.
     
 - Zoak: ehemaliger Abenteurer, Aussagen plausibel. Keine Eskalation.
     
