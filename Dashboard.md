@@ -125,7 +125,7 @@
 >[!multi-column] Arbeitsbereich
 >
 >> [!success]+ Templates
->> - [[City Template]]
+>> - [[0. Template List]]
 >> - [[Map Template]]
 >> - [[Session Template]]
 >> - [[NPC Template]]
