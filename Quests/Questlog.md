@@ -1,0 +1,12 @@
+- [ ] [[Quest - Expedition zur Erschließung der südöstlichen Wälder|Expedition in die mutierten Wälder]]
+	- [ ] Finde die Ursache der Mutationen
+		- [ ] Dämonische Aktivität erforschen
+		- [ ] Körperlose Stimme identifizieren
+		- [ ] [[Turm im Pilzwald]] erforschen
+		- [ ] Zusammenhang mit [[Yuan-Ti]] überprüfen
+	- [ ] Kehre die Mutationen um
+		- [ ] Finde die Ursache
+		- [ ] Finde eine Heilung
+	- [ ] Ergründe das Schicksal der verschwundenen Abenteurer
+		- [ ] Personen mit Portraits im [[Turm im Pilzwald]] abgleichen
+		- [ ] Finde eine Heilung
