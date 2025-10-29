@@ -21,7 +21,7 @@ dg-publish:
 ---
 > [!multi-column] Relevante Dateien
 >
-> > [!note]+ Letzte Sessions
+> > [!example]+ Letzte Sessions
 >>```dataview
 > >List
 > >From ""
@@ -29,7 +29,13 @@ dg-publish:
 > >SORT number(replace(file.name, "[^0-9]", "")) DESC
 > >LIMIT 5
 >
-> > [!info]+ Relevante Orte
+>> [!tip]+ Charaktäre
+>> - [[Castor Aegis]]
+>> - [[Leo Eisenfaust]]
+>> - [[Rhuk]]
+>> - [[Echo]]
+>
+> > [!warning]+ Relevante Orte
 > > ```dataviewjs
 > > // ── Ordnerpfade anpassen, falls nötig ──────────────────────────
 > > const SESSIONS_FOLDER = "Public/Session Protocol";
@@ -63,7 +69,7 @@ dg-publish:
 > > ```
 >
 >
-> > [!info]+ Relevante NPC's
+> > [!danger]+ Relevante NPC's
 > > ```dataviewjs
 > > const SESSIONS_FOLDER = "Public/Session Protocol";
 > > const NPC_FOLDERS = [
@@ -100,16 +106,15 @@ dg-publish:
 ---
 > [!multi-column] Neue Dateien
 >
-> > [!tip]+ Recently Created
->>```dataview
-> >List
-> >From ""
-> >WHERE regexmatch("^Session\\s*\\d+$", file.name)
-> >SORT number(replace(file.name, "[^0-9]", "")) DESC
-> >LIMIT 4
-> >```
+> > [!todo]+ Recently Created
+> > ```dataview
+> > LIST
+> > FROM ""
+> > SORT file.ctime DESC
+> > LIMIT 5
+> > ```
 >
-> > [!example]+ Recently Modified
+> > [!cite]+ Recently Modified
 >> ```dataview 
 > > List 
 > > From ""
