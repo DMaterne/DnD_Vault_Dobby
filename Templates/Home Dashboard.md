@@ -1,9 +1,5 @@
----
-banner: https://i.pinimg.com/736x/e3/a0/85/e3a085296c94a8219565f5641429a5cc.jpg
-banner_y: 0.364
-notetoolbar: none
-dg-publish:
----
+![[bannerObsidian.webp]]
+
 >[!multi-column] Arbeitsbereich
 >
 >> [!success]+ Templates
