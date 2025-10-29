@@ -1,15 +1,3 @@
-- Nehmen Affengestalt an, sind Dämonen, selten auf der Materiellen Ebene
-- nicht sonderlich schlau/taktisch
-- sehr stark
-- können weit springen
-- können Illusionen hervorrufen
-- essen [[Südöstliche Wälder#**Früchte **|magische Bananen]]
-- können Ranken beschwören, die einen restrainen
-- können unsichtbar werden
-
-
-
-
 %% tags: #monster #demon %%
 
 ## Bio
@@ -35,6 +23,19 @@ Sie bewegen sich auf allen Vieren mit der Geschwindigkeit eines Raubtiers und k�
 Ihr Erscheinen gilt als Vorbote größerer dämonischer Aktivität – wo ein Barlgura auftaucht, folgen meist bald andere Kreaturen des Abyss.<br><br>
 Die beiden Barlgura, denen die Expedition in den [[Südöstliche Wälder#Dschungel|südöstlichen Wäldern]] begegnete, materialisierten sich nach einer Serie magischer Störungen in der Umgebung. Sie schienen von einer **unsichtbaren Stimme** oder Macht kontrolliert zu werden.
 </div>
+
+---
+## **Allgemeines**
+
+- Nehmen Affengestalt an, sind Dämonen, selten auf der Materiellen Ebene
+- nicht sonderlich schlau/taktisch
+- sehr stark
+- können weit springen
+- können Illusionen hervorrufen
+- essen [[Südöstliche Wälder#**Früchte **|magische Bananen]]
+- können Ranken beschwören, die einen restrainen
+- können unsichtbar werden
+
 
 ---
 
