@@ -16,6 +16,23 @@
 >> - [[Home Dashboard]]
 
 ---
+
+>[!multi-column] Die Welt
+>
+>> [!success]+ Orte
+>> - [[Kontinent of xxx]]
+>> - [[Dilos Feykar]]
+>> - [[Du'ul Fus Bornah]]
+>> - [[Südöstliche Wälder]]
+>
+>> [!info]+ Charaktäre
+>> - [[Quest - Expedition zur Erschließung der südöstlichen Wälder| Expedition der mutierten Wälder]]
+>> - [[Mindmap Expedition.canvas|Mindmap Expedition]]
+>> - [[Ziele]]
+>> - [[Home Dashboard]]
+
+
+---
 > [!multi-column] Relevante Dateien
 >
 > > [!example]+ Letzte Sessions
