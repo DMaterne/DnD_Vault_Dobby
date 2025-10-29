@@ -134,6 +134,6 @@
 >> - [[Quest - Expedition zur Erschließung der südöstlichen Wälder| Expedition der mutierten Wälder]]
 >> - [[Mindmap Expedition.canvas|Mindmap Expedition]]
 >> - [[Questlog]]
->> - [[Home Dashboard]]
+>> - [[Dashboard]]
 
 
