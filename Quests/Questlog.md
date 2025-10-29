@@ -4,9 +4,23 @@
 		- [ ] Körperlose Stimme identifizieren
 		- [ ] [[Turm im Pilzwald]] erforschen
 		- [ ] Zusammenhang mit [[Yuan-Ti]] überprüfen
+		- [ ] Planare Verschiebung untersuchen
+		- [ ] Zeitverdrehung untersuchen
 	- [ ] Kehre die Mutationen um
 		- [ ] Finde die Ursache
 		- [ ] Finde eine Heilung
 	- [ ] Ergründe das Schicksal der verschwundenen Abenteurer
 		- [ ] Personen mit Portraits im [[Turm im Pilzwald]] abgleichen
-		- [ ] Finde eine Heilung
+		- [ ] Finde die Verschwundenen
+	- [ ] Erschließe den Wald
+		- [ ] Karte anlegen
+		- [ ] Sicheren Pfad finden
+		- [ ] Dämonen ausrotten
+		- [ ] Mutationen umkehren
+- [ ] Zeitschleife durch Tod
+	- [ ] Sammle Informationen 
+		- [ ] Zeitmagie
+		- [ ] [[Turm im Pilzwald]]
+		- [ ] Körperlose Stimme
+		- [ ] Planes
+	- [ ] Finde den Auslöser

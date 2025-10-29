@@ -1,21 +1,6 @@
 ![[BannerNew.png]]
 
 ---
->[!multi-column] Arbeitsbereich
->
->> [!success]+ Templates
->> - [[City Template]]
->> - [[Map Template]]
->> - [[Session Template]]
->> - [[NPC Template]]
->
->> [!info]+ Wichtige Notizen
->> - [[Quest - Expedition zur Erschließung der südöstlichen Wälder| Expedition der mutierten Wälder]]
->> - [[Mindmap Expedition.canvas|Mindmap Expedition]]
->> - [[Questlog]]
->> - [[Home Dashboard]]
-
----
 
 >[!multi-column] Die Welt
 >
@@ -135,5 +120,20 @@
 > > sort file.mtime Desc
 > > Limit 4
 > > ```
+
+---
+>[!multi-column] Arbeitsbereich
+>
+>> [!success]+ Templates
+>> - [[City Template]]
+>> - [[Map Template]]
+>> - [[Session Template]]
+>> - [[NPC Template]]
+>
+>> [!info]+ Wichtige Notizen
+>> - [[Quest - Expedition zur Erschließung der südöstlichen Wälder| Expedition der mutierten Wälder]]
+>> - [[Mindmap Expedition.canvas|Mindmap Expedition]]
+>> - [[Questlog]]
+>> - [[Home Dashboard]]
 
 
