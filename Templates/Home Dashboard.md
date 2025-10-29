@@ -1,5 +1,6 @@
 ![[bannerObsidian.webp]]
 
+---
 >[!multi-column] Arbeitsbereich
 >
 >> [!success]+ Templates
@@ -23,7 +24,7 @@
 > >From ""
 > >WHERE regexmatch("^Session\\s*\\d+$", file.name)
 > >SORT number(replace(file.name, "[^0-9]", "")) DESC
-> >LIMIT 5
+> >LIMIT 4
 >
 >> [!tip]+ Charaktäre
 >> - [[Castor Aegis]]
@@ -54,7 +55,7 @@
 > >     .where(p => p.file.folder === GEO_FOLDER || p.file.path.startsWith(`${GEO_FOLDER}/`))
 > >     .where(p => (p.file.inlinks ?? [])
 > >       .some(l => (l.path || "").replace(/#.*/, "") === latest.file.path))
-> >     .limit(5);
+> >     .limit(4);
 > >
 > >   if (places.length === 0) {
 > >     dv.paragraph(`Keine Orte, die [[${latest.file.name}]] verlinken.`);
@@ -65,7 +66,7 @@
 > > ```
 >
 >
-> > [!danger]+ Relevante NPC's
+> > [!danger]+ Relevante NPCs
 > > ```dataviewjs
 > > const SESSIONS_FOLDER = "Public/Session Protocol";
 > > const NPC_FOLDERS = [
@@ -89,7 +90,7 @@
 > >     ))
 > >     .where(p => (p.file.inlinks ?? [])
 > >       .some(l => (l.path || "").replace(/#.*/, "") === latest.file.path))
-> >     .limit(5);
+> >     .limit(4);
 > >
 > >   if (npcs.length === 0) {
 > >     dv.paragraph(`Keine NPCs oder Monster, die [[${latest.file.name}]] verlinken.`);
@@ -107,7 +108,7 @@
 > > LIST
 > > FROM ""
 > > SORT file.ctime DESC
-> > LIMIT 5
+> > LIMIT 4
 > > ```
 >
 > > [!cite]+ Recently Modified
@@ -115,7 +116,7 @@
 > > List 
 > > From ""
 > > sort file.mtime Desc
-> > Limit 5
+> > Limit 4
 > > ```
 
 
