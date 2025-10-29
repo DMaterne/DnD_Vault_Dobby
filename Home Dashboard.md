@@ -12,28 +12,28 @@
 >> [!info]+ Wichtige Notizen
 >> - [[Quest - Expedition zur Erschließung der südöstlichen Wälder| Expedition der mutierten Wälder]]
 >> - [[Mindmap Expedition.canvas|Mindmap Expedition]]
->> - [[Ziele]]
+>> - [[Questlog]]
 >> - [[Home Dashboard]]
 
 ---
 
 >[!multi-column] Die Welt
 >
->> [!success]+ Orte
+>> [!note]+ Orte
 >> - [[Kontinent of xxx]]
 >> - [[Dilos Feykar]]
 >> - [[Du'ul Fus Bornah]]
 >> - [[Südöstliche Wälder]]
 >
->> [!info]+ Charaktäre
->> - [[Quest - Expedition zur Erschließung der südöstlichen Wälder| Expedition der mutierten Wälder]]
->> - [[Mindmap Expedition.canvas|Mindmap Expedition]]
->> - [[Ziele]]
->> - [[Home Dashboard]]
+>> [!bug]+ Charaktäre & Gruppierungen
+>> - [[Magic Mike]]
+>> - [[König]]
+>> - [[Zirkel der Spiegel]]
+>> - [[Hauptmann Zoak]]
 
 
 ---
-> [!multi-column] Relevante Dateien
+> [!multi-column] Aktuelle Dateien
 >
 > > [!example]+ Letzte Sessions
 >>```dataview
@@ -49,7 +49,7 @@
 >> - [[Rhuk]]
 >> - [[Echo]]
 >
-> > [!warning]+ Relevante Orte
+> > [!warning]+ Aktuelle Orte
 > > ```dataviewjs
 > > // ── Ordnerpfade anpassen, falls nötig ──────────────────────────
 > > const SESSIONS_FOLDER = "Public/Session Protocol";
@@ -83,7 +83,7 @@
 > > ```
 >
 >
-> > [!danger]+ Relevante NPCs
+> > [!danger]+ Aktuelle NPCs
 > > ```dataviewjs
 > > const SESSIONS_FOLDER = "Public/Session Protocol";
 > > const NPC_FOLDERS = [
@@ -120,7 +120,7 @@
 ---
 > [!multi-column] Neue Dateien
 >
-> > [!todo]+ Recently Created
+> > [!cite]+ Recently Created
 > > ```dataview
 > > LIST
 > > FROM ""
@@ -128,7 +128,7 @@
 > > LIMIT 4
 > > ```
 >
-> > [!cite]+ Recently Modified
+> > [!todo]+ Recently Modified
 >> ```dataview 
 > > List 
 > > From ""
