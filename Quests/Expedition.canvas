@@ -1,0 +1,27 @@
+{
+	"nodes":[
+		{"id":"0b32fe41b74f6e0e","type":"text","text":"[[Turm im Pilzwald]]","x":-185,"y":120,"width":250,"height":60},
+		{"id":"2e36391cf88c9702","type":"text","text":"[[Körperlose Stimme]]","x":-800,"y":400,"width":250,"height":60},
+		{"id":"b977d1b694719973","x":-800,"y":120,"width":250,"height":60,"type":"text","text":"Dämonen"},
+		{"id":"2aa35fa2f6c7e5e2","type":"text","text":"[[Turm auf Insel]]","x":420,"y":120,"width":250,"height":60},
+		{"id":"a54431515009720c","x":-185,"y":400,"width":250,"height":60,"type":"text","text":"Yuan-Ti"},
+		{"id":"0391af07160bb213","x":420,"y":-120,"width":250,"height":60,"type":"text","text":"Zeitreise/Wiederauferstehung"},
+		{"id":"c1edf5564ee37e51","type":"text","text":"Mutationen der [[Südöstliche Wälder|Wälder]]","x":-185,"y":-480,"width":250,"height":60},
+		{"id":"d75ef4cd06b6b792","type":"text","text":"[[Quest - Expedition zur Erschließung der südöstlichen Wälder|Expedition]]","x":-185,"y":-780,"width":250,"height":60},
+		{"id":"9aae1f7789c1c712","x":-185,"y":-420,"width":250,"height":140,"type":"text","text":"- Zeit vergeht anders\n- veränderte Vegetation\n- veränderte Wahrnehmung"}
+	],
+	"edges":[
+		{"id":"b5b26b13b8d35ba2","fromNode":"d75ef4cd06b6b792","fromSide":"bottom","toNode":"c1edf5564ee37e51","toSide":"top","label":"Grund für Expedition"},
+		{"id":"be5ebda706b9db54","fromNode":"c1edf5564ee37e51","fromSide":"bottom","toNode":"0b32fe41b74f6e0e","toSide":"top","label":"unterhalb vom Dschungel"},
+		{"id":"07762c8405052ecc","fromNode":"c1edf5564ee37e51","fromSide":"left","toNode":"b977d1b694719973","toSide":"top","label":"Ursache oder Wirkung"},
+		{"id":"dbf6a11e6a28ab48","fromNode":"b977d1b694719973","fromSide":"top","toNode":"c1edf5564ee37e51","toSide":"left"},
+		{"id":"ed3d0291eb742c2a","fromNode":"2e36391cf88c9702","fromSide":"top","toNode":"b977d1b694719973","toSide":"bottom","label":"Meister?"},
+		{"id":"e8de6bb98aa6a291","fromNode":"2e36391cf88c9702","fromSide":"right","toNode":"0b32fe41b74f6e0e","toSide":"left","label":"gleiche Stimme?"},
+		{"id":"f2f6cc37ef95d5b2","fromNode":"0b32fe41b74f6e0e","fromSide":"left","toNode":"2e36391cf88c9702","toSide":"right"},
+		{"id":"78bbf04c680ca6d2","fromNode":"2aa35fa2f6c7e5e2","fromSide":"left","toNode":"0b32fe41b74f6e0e","toSide":"right"},
+		{"id":"8b93bec1a7b2c840","fromNode":"0b32fe41b74f6e0e","fromSide":"right","toNode":"2aa35fa2f6c7e5e2","toSide":"left","label":"der selbe?"},
+		{"id":"707c42cfaddb27bb","fromNode":"a54431515009720c","fromSide":"top","toNode":"0b32fe41b74f6e0e","toSide":"bottom","label":"Angst oder Erbauer?"},
+		{"id":"79b1b53ec521368a","fromNode":"a54431515009720c","fromSide":"left","toNode":"2e36391cf88c9702","toSide":"right","label":"gehören zusammen?"},
+		{"id":"ade309c871e37705","fromNode":"0b32fe41b74f6e0e","fromSide":"top","toNode":"0391af07160bb213","toSide":"left","label":"Ursache?"}
+	]
+}

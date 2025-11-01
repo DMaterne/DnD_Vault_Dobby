@@ -1,0 +1,1 @@
+Ein magischer Turm auf einer Insel. Mehr ist nicht bekannt.
