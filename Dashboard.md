@@ -1,6 +1,17 @@
 ![[BannerNew.png]]
 
 ---
+## Spielercharaktere
+
+| Name                           | Spieler | Rasse | Class | Subclass | Level | Rolle
+|-----------------------------------|--------------|--------|-|-|-|-|
+| [[Castor Aegis]] | Domi | Mensch | Artificer | Armorer | 6 | Tank 
+| [[Echo]] | Iggy | Tabaxi | Ranger / Rouge | Gloomstalker | 5 / 1 | Furry
+| [[Leo Eisenfaust]]             | Schorschus | Mensch | Paladin | ??? | 6 | Healer
+| [[Rhuk]] | Tjubi | Goblin | Monk | Path of Shadow | 6 | Maskottchen
+
+---
+## Wichtige Links
 
 >[!multi-column] Die Welt
 >
@@ -134,15 +145,8 @@
 >> - [[Quest - Expedition zur Erschließung der südöstlichen Wälder| Expedition in den mutierten Wälder]]
 >> - [[Mindmap Expedition.canvas|Mindmap Expedition]]
 >> - [[Questlog]]
->> - [[Dashboard]]
+>> - [[Kontinent of xxx]]
 
----
-## Spielercharaktere
 
-| Name                           | Spieler | Rasse | Class | Subclass | Level | Rolle
-|-----------------------------------|--------------|--------|-|-|-|-|
-| [[Castor Aegis]] | Domi | Mensch | Artificer | Armorer | 6 | Tank & Support
-| [[Echo]] | Iggy | Tabaxi | Ranger / Rouge | Gloomstalker | 5 / 1 | DD
-| [[Leo Eisenfaust]]             | Schorschus | Mensch | Paladin | ??? | 6 | Tank & Healer
-| [[Rhuk]] | Tjubi | Goblin | Monk | Path of Shadow | 6 | DD
+
 
