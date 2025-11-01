@@ -1,0 +1,7 @@
+{
+	"nodes":[
+		{"id":"c1edf5564ee37e51","x":-241,"y":-188,"width":250,"height":60,"type":"text","text":"Mutationen der Wälder"},
+		{"id":"0b32fe41b74f6e0e","x":-185,"y":-17,"width":250,"height":60,"type":"text","text":"Magischer Turm"}
+	],
+	"edges":[]
+}
