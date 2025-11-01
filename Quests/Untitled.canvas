@@ -1,7 +1,9 @@
 {
 	"nodes":[
 		{"id":"c1edf5564ee37e51","x":-241,"y":-188,"width":250,"height":60,"type":"text","text":"Mutationen der Wälder"},
-		{"id":"0b32fe41b74f6e0e","x":-185,"y":-17,"width":250,"height":60,"type":"text","text":"Magischer Turm"}
+		{"id":"0b32fe41b74f6e0e","x":-185,"y":-17,"width":250,"height":60,"type":"text","text":"Magischer Turm"},
+		{"id":"2e36391cf88c9702","x":-562,"y":30,"width":250,"height":60,"type":"text","text":"Körperlose Stimme"},
+		{"id":"d75ef4cd06b6b792","x":-461,"y":164,"width":250,"height":60,"type":"text","text":"Expedition"}
 	],
 	"edges":[]
 }
