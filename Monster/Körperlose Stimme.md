@@ -15,8 +15,8 @@
 
 <div style="min-height: 500px; padding: 12px; border: 0px solid var(--text-faint); border-radius: 10px; background-color: var(--background-secondary); line-height: 1.5;">
 <b>Beschreibung:</b><br>
-Berschreibung Paragraph 1.<br><br>
-Berschreibung Paragraph 2.
+Eine Körperlose Stimme die mit der Party telepatisch kommuniziert hat.<br><br>
+
 </div>
 
 ---
