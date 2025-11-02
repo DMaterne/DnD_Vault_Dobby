@@ -5,7 +5,7 @@
 > ###### Stats
 > | Typ |  Stat |
 > | ---- | ---- |
-> | Rang | [[Baron|Baronshaus]] |
+> | Rang | Baronenhaus |
 > | Leitspruch | _„Ferrum Meum, Fides Mea“_ – _„Mein Stahl ist mein Glaube“_  |
 > | Hauptsitz | [[Du'ul Fus Bornah]] |
 
@@ -15,24 +15,23 @@ Haus Aegis gehört zu den ältesten Baronshäusern der [[Du'ul Fus Bornah|Haupts
 
 Ihr Leitspruch **„Ferrum Meum, Fides Mea“** – **„Mein Stahl ist mein Glaube“** – verkörpert ihre Überzeugung: Wahre Stärke kommt nicht durch Angriff oder Machtgier, sondern durch Standhaftigkeit, Disziplin und die Verpflichtung, andere zu schützen.
 
----
-
 ###  **Die Familie:**
 
-- **Vater:** **Baron Nikandros Aegis**  
+- **Oberhaupt:** **Baron Nikandros Aegis**  
     Ein strenger, prinzipientreuer Mann, der große Stücke auf Ehre und Tradition hält. Ein meisterlicher Magier der Defensivkünste, der darauf bedacht ist, das Erbe des Hauses zu wahren. Seine Beziehung zu seinem zweitgeborenen Sohn ist komplex – Stolz und Enttäuschung liegen oft nah beieinander.
     
-- **Mutter:** **Dame Lysandra Aegis (geb. Phokas)**  
+- **Dame:** **Lysandra Aegis (geb. Phokas)**  
     Eine warmherzige, aber sehr kluge Frau. Sie stammt aus einem Haus von Schriftgelehrten und Archivaren. Sie ist eine Meisterin der Runenmagie.
     
-- **Großer Bruder:** **Asteron Aegis**  
+- **Erstgeborener Sohn:** **Asteron Aegis**  
     Der Erstgeborene. Groß, stark, mit mächtigem magischen Talent gesegnet. Er verkörpert genau das, was das Haus in seinen traditionellen Idealen sieht: Ein brillanter Verteidiger, Magier und Diplomat. Er übernimmt zunehmend Aufgaben in der Hauptstadt, sitzt in Gremien, pflegt politische Kontakte und ist als zukünftiger Baron vorgesehen. Zwischen den Brüdern herrscht eine Mischung aus Bewunderung, Rivalität und unterschwelliger Spannung.
     
-- **Kleine Schwester:** **Ione Aegis**  
+- **Zweitgeborener Sohn:** **[[Castor Aegis]]**  
+	dadadadadadada
+	
+- **Erstgeborene Tochter:** **Ione Aegis**  
     14 Jahre alt, wissbegierig, neugierig und frech. Sie bewundert Castor über alles, liebt seine Erfindungen und hängt ihm oft in der Werkstatt auf die Nerven. Während sie arkanes Talent zeigt, interessiert sie sich gleichzeitig stark für Technik und will beides miteinander verbinden – sehr zum Unmut der Eltern, die hoffen, sie möge „auf den rechten Weg“ kommen.
-    
 
----
 
 ###  **Philosophie des Hauses:**
 
