@@ -22,11 +22,7 @@ Du'ul Fus Bornah ist die Hauptstadt des Reichs auf dem Kontinent [[Kontinent of 
 Die Stadt ist ein Sammelpunkt für Humanoide aus jeder Schicht. Viele Märkte bieten einen Absatzmarkt für alle möglichen Produkte. Vor allem der Umsatz von Luxusgütern ist sehr vielversprechend, aufgrund des hohen Anteils an Adligen in der Bevölkerung der Stadt.
 </div>
 
----
-
 ## Wichtige Orte
-
----
 
 ## Gruppierungen
 
@@ -35,8 +31,6 @@ Die Stadt ist ein Sammelpunkt für Humanoide aus jeder Schicht. Viele Märkte bi
 - [[Klan Brakkel]]
 - [[Hautdiebe]]
 
----
-
 ## Bekannte Persönlichkeiten
 
 - [[Haus Aegis]]
@@ -44,12 +38,9 @@ Die Stadt ist ein Sammelpunkt für Humanoide aus jeder Schicht. Viele Märkte bi
 - [[Rhuk]]
 - [[König]]
 
----
-
 ## Verwandte Seiten
 
 ```dataview
 list from [[Du'ul Fus Bornah]]
 ```
 
----

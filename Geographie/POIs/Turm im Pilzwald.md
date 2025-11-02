@@ -26,9 +26,6 @@ Diese sind feindlich gesinnt, meiden aber den Turm.<br><br>
 Der Turm scheint perfekt zylindrisch zu sein, besteht jedoch aus Knochen. Von außen lässt sich nichts aus dem Inneren des Turms sehen und man kann auch nicht hineinsehen. Wenn man den Turm verlässt, hört man eine innere Stimme, die einen dazu drängt, diesen wieder zu betreten. Im Inneren erleuchten magische Fackeln den Turm. Portraits von verschiedenen Personen bei verschiedenen Aktivitäten hängen an den Wänden. Der Hintergrund dieser ist immer schwarz. Verschiedene Fallen sind auf den Ebenen. Diese werden durch unterschiedliche Muster, die im Boden eingraviert sind, gekennzeichnet.
 </div>
 
-
----
-
 ## **Eigenschaften**
 
 **Bereich:** unterirdischer Pilzwald unter dem See  
@@ -61,14 +58,11 @@ Der Turm scheint perfekt zylindrisch zu sein, besteht jedoch aus Knochen. Von au
 - Hypothese: Die Porträts sind **magische Aufzeichnungen** früherer Besucher oder Opfer des Turms.  
 - Eventuell dienen sie als **Beobachter** oder **Energiespeicher** der Turmmagie.  
 
-
----
-
 ## **Verwandte Seiten**
 
 ```dataview
 list from [[Turm im Pilzwald]]
 ```
 
----
+
 

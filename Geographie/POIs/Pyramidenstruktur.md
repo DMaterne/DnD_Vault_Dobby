@@ -21,13 +21,9 @@ Eine magische Struktur unter einem See im <a class="internal-link" data-href="S�
 Um zur Struktur zu gelangen, muss man sich in den Wasserfall stürzen, der als Zufluss dient. Dieser reißt einen mit gewaltiger Wucht mit und führt einen in einen Hohlraum mit Zugang zur Struktur. 
 </div>
 
----
-
 ## **Rätsel**
 
 Beim betreten der Struktur erscheinen auf der drei weiteren Seiten Wasser-Doppelgänger. Diese kopieren jede Bewegung. Auf der 5.Ebene befinden sich Einlassungen in Handgröße. Drückt man diese, machen die Doppelgänger das auch. Dadurch wird ein Mechanismus aktiviert, der die 6. Ebene herablässt und eine Treppe zugänglich macht. Diese führt etwa 200m in die Tiefe.
-
----
 
 ## **Verwandte Seiten**
 
@@ -35,5 +31,4 @@ Beim betreten der Struktur erscheinen auf der drei weiteren Seiten Wasser-Doppel
 list from [[Pyramidenstruktur]]
 ```
 
----
 

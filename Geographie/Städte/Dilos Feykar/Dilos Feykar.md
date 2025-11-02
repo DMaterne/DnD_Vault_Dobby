@@ -21,8 +21,6 @@ Die Stadt ist ein Schmelztiegel: Reisende, Abenteurer, Forscher, Flüchtlinge, H
 Die Hauptnahrungsquelle der Bürger ist Fisch. Dieser wird durch eine große Menge an Fischen gefangen.
 </div>
 
----
-
 ## **Wichtige Orte**
 - [[Südöstliche Wälder|Südöstliche Wälder]]
 - [[Zum Silbernen Anlitz]]
@@ -37,7 +35,7 @@ Die Hauptnahrungsquelle der Bürger ist Fisch. Dieser wird durch eine große Men
 
 - [[Leo Eisenfaust]]
 - [[Familie Eisenfaust]]
-- Frank (Wache)
+- Frank (Wache am Tor)
 - [[Hauptmann Zoak]]
 
 ## **Verwandte Seiten**
@@ -46,5 +44,4 @@ Die Hauptnahrungsquelle der Bürger ist Fisch. Dieser wird durch eine große Men
 list from [[Dilos Feykar]]
 ```
 
----
 

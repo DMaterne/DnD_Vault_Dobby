@@ -19,8 +19,6 @@ Eine Körperlose Stimme die mit der Party telepatisch kommuniziert hat.<br><br>
 
 </div>
 
----
-
 ## Timeline
 
 ```timeline
@@ -37,8 +35,6 @@ Eine Körperlose Stimme die mit der Party telepatisch kommuniziert hat.<br><br>
 + Im [[Turm im Pilzwald]]
 + Beim Verlassen des Turms hören die Mitglieder die dies tun erneut die Stimme. Diese Befiehlt ihnen wieder in den Turm zu gehen.
 ```
-
----
 
 ## Zugehörigkeit
 

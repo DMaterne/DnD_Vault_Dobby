@@ -1,6 +1,5 @@
 ![[BannerNew.png]]
 
----
 ## Spielercharaktere
 
 | Name                           | Spieler | Rasse | Class | Subclass | Level | Rolle
@@ -10,13 +9,12 @@
 | [[Leo Eisenfaust]]             | Schorschus | Mensch | Paladin | ??? | 6 | Healer
 | [[Rhuk]] | Tjubi | Goblin | Monk | Path of Shadow | 6 | Maskottchen
 
----
 ## Wichtige Links
 
 >[!multi-column] Die Welt
 >
 >> [!note]+ Orte
->> - [[Kontinent of xxx]]
+>> - [[Goblinstan]]
 >> - [[Dilos Feykar]]
 >> - [[Du'ul Fus Bornah]]
 >> - [[Südöstliche Wälder]]
