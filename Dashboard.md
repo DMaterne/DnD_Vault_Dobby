@@ -6,8 +6,8 @@
 |-----------------------------------|--------------|--------|-|-|-|-|
 | [[Castor Aegis]] | Domi | Mensch | Artificer | Armorer | 6 | Tank 
 | [[Echo]] | Iggy | Tabaxi | Ranger / Rouge | Gloomstalker | 5 / 1 | Furry
-| [[Leo Eisenfaust]]             | Schorschus | Mensch | Paladin | ??? | 6 | Healer
-| [[Rhuk]] | Tjubi | Goblin | Monk | Path of Shadow | 6 | Maskottchen
+| [[Leo Eisenfaust]]             | Schorschus | Mensch | Paladin | Oath of Devotion | 6 | Healer
+| [[Rhuk]] | Tjubi | Goblin | Monk | Way of Shadow | 6 | Maskottchen
 
 ## Wichtige Links
 
