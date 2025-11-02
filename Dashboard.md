@@ -36,11 +36,11 @@
 > >SORT number(replace(file.name, "[^0-9]", "")) DESC
 > >LIMIT 4
 >
->> [!tip]+ Charaktäre
->> - [[Castor Aegis]]
->> - [[Echo]]
->> - [[Leo Eisenfaust]]
->> - [[Rhuk]]
+> >[!tip]+ Charaktäre
+> >```dataview
+> >LIST
+> >FROM "Public/Characters/PC's"
+> >SORT file.name ASC
 >
 > > [!warning]+ Aktuelle Orte
 > > ```dataviewjs
