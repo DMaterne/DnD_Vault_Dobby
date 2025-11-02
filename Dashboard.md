@@ -14,17 +14,16 @@
 >[!multi-column] Die Welt
 >
 >> [!note]+ Orte
->> - [[Goblinstan]]
 >> - [[Dilos Feykar]]
 >> - [[Du'ul Fus Bornah]]
+>> - [[Goblinstan]]
 >> - [[Südöstliche Wälder]]
 >
 >> [!bug]+ Charaktäre & Gruppierungen
->> - [[Magic Mike]]
->> - [[König]]
->> - [[Zirkel der Spiegel]]
 >> - [[Hauptmann Zoak]]
-
+>> - [[König]]
+>> - [[Magic Mike]]
+>> - [[Zirkel der Spiegel]]
 
 ---
 > [!multi-column] Aktuelle Dateien
@@ -39,9 +38,9 @@
 >
 >> [!tip]+ Charaktäre
 >> - [[Castor Aegis]]
+>> - [[Echo]]
 >> - [[Leo Eisenfaust]]
 >> - [[Rhuk]]
->> - [[Echo]]
 >
 > > [!warning]+ Aktuelle Orte
 > > ```dataviewjs
