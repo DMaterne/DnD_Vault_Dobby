@@ -36,7 +36,7 @@
 > >SORT number(replace(file.name, "[^0-9]", "")) DESC
 > >LIMIT 4
 >
-> >[!tip]+ Charaktäre
+> >[!tip]+ Player Characters
 > >```dataview
 > >LIST
 > >FROM "Public/Characters/PC's"
