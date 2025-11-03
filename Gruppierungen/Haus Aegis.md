@@ -27,7 +27,7 @@ Ihr Leitspruch **„Ferrum Meum, Fides Mea“** – **„Mein Stahl ist mein Gla
     Der Erstgeborene. Groß, stark, mit mächtigem magischen Talent gesegnet. Er verkörpert genau das, was das Haus in seinen traditionellen Idealen sieht: Ein brillanter Verteidiger, Magier und Diplomat. Er übernimmt zunehmend Aufgaben in der Hauptstadt, sitzt in Gremien, pflegt politische Kontakte und ist als zukünftiger Baron vorgesehen. Zwischen den Brüdern herrscht eine Mischung aus Bewunderung, Rivalität und unterschwelliger Spannung.
     
 - **Zweitgeborener Sohn:** **[[Castor Aegis]]**  
-	dadadadadadada
+	Castor besitzt kein magisches Talent. Dafür ist er aber mit großem Intellekt gesegnet. Es studiert die Magie und nutzt Erfindungen um diese selbst anwenden zu können. Er strebt nach Wissen und der Anerkennung der Menschen.
 	
 - **Erstgeborene Tochter:** **Ione Aegis**  
     14 Jahre alt, wissbegierig, neugierig und frech. Sie bewundert Castor über alles, liebt seine Erfindungen und hängt ihm oft in der Werkstatt auf die Nerven. Während sie arkanes Talent zeigt, interessiert sie sich gleichzeitig stark für Technik und will beides miteinander verbinden – sehr zum Unmut der Eltern, die hoffen, sie möge „auf den rechten Weg“ kommen.
