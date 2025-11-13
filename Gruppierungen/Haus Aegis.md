@@ -49,3 +49,9 @@ Haus Aegis steht für:
     
 - **Arkaner Perfektion:** Ihre Magie ist fast ausschließlich defensiv geprägt – Schutzzauber, Barrieren, magische Panzerungen, Bannkreise und Abwehrmechanismen.
 
+## **Verwandte Seiten**
+
+```dataview
+list from [[Haus Aegis]]
+```
+

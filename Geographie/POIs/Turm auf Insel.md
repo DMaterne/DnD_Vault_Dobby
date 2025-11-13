@@ -7,7 +7,7 @@
 > ![[TurmPilzwald.png|cover hsmall]]
 > ###### [[magPyramid.png|Vollbild]]
 > ###### Infos
-> | Eigenschaft |  Wert |
+> | Attribut |  Wert |
 > | ---- | ---- |
 > | Kontinent | [[Kontinent of xxx]] |
 > | Region | ??? |
