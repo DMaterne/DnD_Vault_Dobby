@@ -1,3 +1,14 @@
+> [!infobox]
+> # Die Vurchtlosen Fier
+> ![[NPC_Placeholder.png]]
+> ### [[NPC_Placeholder.png|Vollbild]]
+> ###### Stats
+> | Attribut |  Wert |
+> | ---- | ---- |
+> | Art | Abenteurer |
+> | Leitspruch | _„Ich mag Schoki“_  |
+> | Hauptsitz | [[Kontinent of xxx]] |
+> 
 ## Mitglieder
 
 - [[Castor Aegis]]

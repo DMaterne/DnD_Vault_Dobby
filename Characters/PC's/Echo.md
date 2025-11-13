@@ -47,3 +47,9 @@ Von Natur aus eher Alleingänger formte Echo keine tiefen Freundschaften, mit Au
   
 
 Die Freundschaft zwischen den beiden wuchs, bis Echo zu einem besonderen top-secret Auftrag geschickt wurde, auf dem Echo auch [[Rhuk]] und [[Leo Eisenfaust]] wieder begegnen sollte. Echo traf auch wieder auf einen Artificer, [[Castor Aegis]], der indirekt für den Zirkel arbeitete und von dem Echo vor einiger Zeit ein Päckchen für den Zirkel abholen sollte. Was genau die Mission beinhaltete, wurde vom Zirkel bisher verschwiegen. Das war an sich nichts unübliches, und doch hatte Echo ein mulmiges Gefühl dabei, das von ungesunder Neugier überschattet wurde.
+
+## **Verwandte Seiten**
+
+```dataview
+list from [[Echo]]
+```
