@@ -1,7 +1,7 @@
 > [!infobox]
 > # Die Vurchtlosen Fier
-> ![[NPC_Placeholder.png]]
-> ### [[NPC_Placeholder.png|Vollbild]]
+> ![[group epic.png]]
+> ### [[group epic.png|Vollbild]]
 > ###### Stats
 > | Attribut |  Wert |
 > | ---- | ---- |
