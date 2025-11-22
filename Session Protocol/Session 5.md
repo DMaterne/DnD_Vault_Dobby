@@ -9,7 +9,7 @@ Spieler: alle
 
 ###  **Session Notizen (raw):**
 
-Bönkis Rückblick:
+Bönkis Rückblick
 
 
 
