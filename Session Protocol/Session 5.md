@@ -29,6 +29,8 @@ butler (65, mensch, dünn, gepflegtes haar) nimmt personalien auf und führt uns
 
 infos zum [[Turm auf Insel]]: schwarz wie obsidian, abenteuerer schafeen es nicht zu den turm aus gründen. wahrnehmungsprobleme klingt nach fey. 
 
+folgen der nachut gruppe. nach paar stunden joggen die stadt nicht mehr sichtbar.
+
 ###  **Protokoll:**
 
 
