@@ -17,7 +17,7 @@
 - Aufklärung: Lichtung + Abhang südöstlich, geschätzt drei Stunden entfernt.
     
 
-Ankunft Wasserfall/See:  
+## Ankunft Wasserfall/See:  
 
 - Erreichen Wasserfall mit angrenzendem See.
     
@@ -35,15 +35,14 @@ Ankunft Wasserfall/See:
     
 - Auge bestätigt Transport in dunkle Höhle.
     
-
-  Struktur im See:  
+## Struktur im See:  
 
 - Steinerne Pyramide sichtbar, vier Obsidian-Säulen, Gravuren in alter Sprache (Castor bestätigt).
     
 - Castor betritt See, droht trotz Sicherung zu ertrinken. Bestätigung: Wasser real, Verhalten unlogisch.
     
 
-  Zugang:  
+## Zugang:  
 
 - Sprung in Strömung – langer Tauchgang, extreme Belastung. Bewusstlosigkeit, Wiederbelebung durch [[Echo]].
     
@@ -54,7 +53,7 @@ Ankunft Wasserfall/See:
 - Zugang ausgelöst durch Handabdruck auf 5. Stufe.
     
 
-  Innenbereich:  
+## Innenbereich:  
 
 - Wendeltreppe führt tief hinab, unter Seeboden.
     
@@ -73,7 +72,7 @@ Ankunft Wasserfall/See:
 
 ---
 
-  FORTSETZUNG TAG 3 – PILZWALD UND TURMZUGANG  
+## FORTSETZUNG TAG 3 – PILZWALD UND TURMZUGANG  
 
 - [[Castor Aegis]] kehrte zurück; Turm laut Schätzung eine Stunde entfernt.
     
@@ -86,7 +85,7 @@ Ankunft Wasserfall/See:
 - Eingang des Turms: schwarzer Torbogen ohne sichtbare Tür oder Inschrift.
     
 
-  Vorerkundung:  
+## Vorerkundung:  
 
 - Beobachtung durch mein Auge. Hinter dem Torbogen Wendeltreppe nach oben und unten.
     
@@ -95,9 +94,9 @@ Ankunft Wasserfall/See:
 - Auge an Seil befestigt, Abstieg durchgeführt.
     
 
----
 
-  TURMEBENEN – STRUKTURIERTE AUFTEILUNG  
+
+## TURMEBENEN – STRUKTURIERTE AUFTEILUNG  
 
   U1:   Keine besonderen Merkmale außer fortgesetzten Gemälden an den Wänden.
 
@@ -120,20 +119,16 @@ Materialanalyse ergibt: Turmstruktur besteht vermutlich aus kompaktiertem Knoche
 
   U9:   Kopie von U8.
 
-  U10:   Letzte Ebene.  
-Wände dicht mit Gemälden behängt, Spiegel an der Decke, Fackelkreis am Boden.  
-[[Leo Eisenfaust]] betritt Ebene → Boden aktiviert unbekanntes Muster → [[Leo Eisenfaust]] verschwindet.  
-Hypothese: Teleportation.  
-[[Echo]] markiert [[Castor Aegis]] mit _Hunter’s Mark_ zur Kontrolle.  
-[[Castor Aegis]] betritt Ebene → identischer Effekt → _Hunter’s Mark_ erlischt.  
+  U10:   Letzte Ebene.  Wände dicht mit Gemälden behängt, Spiegel an der Decke, Fackelkreis am Boden. [[Leo Eisenfaust]] betritt Ebene → Boden aktiviert unbekanntes Muster → [[Leo Eisenfaust]] verschwindet.  
+**Hypothese**: Teleportation.  
+[[Echo]] markiert [[Castor Aegis]] mit _Hunter’s Mark_ zur Kontrolle. [[Castor Aegis]] betritt Ebene → identischer Effekt → _Hunter’s Mark_ erlischt.  
 Rückzug unmöglich.  
 [[Echo]] und ich folgen.
-
-  Folge:   Gefühl von Zerreißen der eigenen Existenz und Auflösung der eigenen Essenz.
+**Folge**: Gefühl von Zerreißen der eigenen Existenz und Auflösung der eigenen Essenz.
 
 ---
 
-  NACHEREIGNIS / ANOMALER TRANSFER  
+## NACHEREIGNIS / ANOMALER TRANSFER  
 
 - Bewusstsein kehrt in der Taverne am Tag des ursprünglichen Aufbruchs zurück.
     
@@ -146,7 +141,7 @@ Rückzug unmöglich.
 
 ---
 
-  ZUSATZBEOBACHTUNGEN (WALD UND SEESGRUND):  
+## ZUSATZBEOBACHTUNGEN (WALD UND SEESGRUND):  
 
 - Anhaltende mentale Beeinflussung:
     
@@ -163,7 +158,7 @@ Rückzug unmöglich.
 
 ---
 
-  STATUS:  
+## STATUS:  
 
 - Gruppe handlungsfähig.
     

@@ -86,7 +86,7 @@
     
 - Kein Meer in Sicht.
     
-- Topografie untypisch, Dschungel scheint „normal“, jedoch zeitlich entkoppelt.
+- Topografie untypisch, Wald scheint „normal“, erstreckt sich bis zum Horizont, Dschungel nicht erkennbar.
     
 
 ###   2. Begegnung mit Kampfspuren  
@@ -97,7 +97,7 @@
     
 - Menschlicher Arm in Chasme-Maul.
     
-- Silberner Ring geborgen (→ von [[Echo]]).
+- Silberner Ring geborgen ([[Echo]]).
     
 - Arm per Schwert abgetrennt, um Opfer zu befreien; Wunde kauterisiert.
     
