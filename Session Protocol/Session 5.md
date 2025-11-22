@@ -68,7 +68,9 @@ leo wirft sein bild in die mitte, nichts passiert. castor zerstört ein bild mit
 
 gehen wieder in den eingangsbereich. machen wieder ein augen lasso und scouten ebene +1. ist die decke. wir gehen hoch. sind genau über den eingang. sehen einen weiteren torbogen, evtl ausgang. kein muster am boden. rhuk wirft sein auge durch das tor. außerhalb des tores sieht rhuk nichts mehr. er holt das auge wieder ein. auge kaputt! castor nimmt noch ein bild (teenager junge mit weißer echse in der hand, schaut auf einen schneebedeckten berg im hintergrund). alle bilder immer gleich. 
 
-castor untersucht das auge, kurzschluss aber es sollte demnächst wieder gehen
+castor untersucht das auge, magischer kurzschluss aber es sollte demnächst wieder gehen
+
+echo schießt einen pfeil durch. echo castet hunters mark auf leo, der durch das tor will. er testet mit seinem arm, ob es sicher ist. scheint so. echo geht durch, hunters mark verschwindet. echo ist auf einer brücke, 100e meter über dem boden. am ende der brücke ist ein glitzern. 
 
 ###  **Protokoll:**
 
