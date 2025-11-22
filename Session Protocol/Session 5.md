@@ -64,6 +64,8 @@ nehmen proben
 
 andere ablenkung, wir gehen zum turm. castor nimmt ein bild (wieder die bärtige lady). gehen runter und alles ist gleich. rechts sehen wir jungen menschen in metallrüstung, der nach etwas sucht. castor ist auf einem bild mit rune in der hand. castor nimmt das bild. bilder der ganzen party. sehen suchend aus. rhuk hat maske und seil in den händen, hat nur normales auge. leo hat die drachenschuppe in der hand, aus der sein arm ist. echo hat eine spinnenfigur in der hand.
 
+leo wirft sein bild in die mitte, nichts passiert. castor zerstört ein bild
+
 ###  **Protokoll:**
 
 
