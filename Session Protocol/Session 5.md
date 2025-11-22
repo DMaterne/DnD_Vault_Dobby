@@ -95,7 +95,9 @@ wenn ich die rune vom bild auf einem edelstein nachbilde, kann ich fireball dami
 
 nach long rest:
 
-sind ausgeruht und gewaschen
+sind ausgeruht und gewaschen.  
+
+gehen zum juwelier, deep gnome.
 
 ###  **Protokoll:**
 
