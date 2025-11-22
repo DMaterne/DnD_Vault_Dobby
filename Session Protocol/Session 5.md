@@ -50,7 +50,7 @@ sie waren viel im süden des kontinents, kommen aus hauptstadt. nachtwache mit j
 
 gruppen erzählen sich alles, gehen zum see. leo castor und tiefling merken, dass es nicht normal ist... wieder zwei monde, geräuschloser wald, weirder see.
 
-
+gehen zum wasserfall, tiefling betet, wir können wasser atmen
 
 ###  **Protokoll:**
 
