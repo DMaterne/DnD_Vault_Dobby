@@ -44,7 +44,7 @@ Vrostellungsrunde:
 - Dorn Dundragon: Anführer, m, 2 arme
 - Diero: Mensch, m, 1 Arm
 - Soviliss: Elfe, m
-- Iados: Tiefling, m, Art Künstlername, Kleriker, hat Bildertagebuch
+- Iados: Tiefling, m, 2 Arme, Art Künstlername, Kleriker, hat Bildertagebuch
 
 sie waren viel im süden des kontinents, kommen aus hauptstadt. nachtwache mit jeweils einem aus jeder gruppe. 
 
@@ -54,7 +54,9 @@ gehen zum wasserfall, tiefling betet, wir können wasser atmen. ab in den wasser
 
 gehen in die höhle.
 
-yuan-ti verstecken sich hinter felsen. riesig
+yuan-ti verstecken sich hinter felsen. riesiges schlangenskelett hinter ihnen (etwa 1 rhuk großer kopf). warnen die anderen.
+
+andere gruppe hat im norden schon gegen yuan ti gekämpft. naga skelett ist die riesenschlange, ist ihr untoter sklave. es gibt telepatische yuan ti magier.
 
 ###  **Protokoll:**
 
