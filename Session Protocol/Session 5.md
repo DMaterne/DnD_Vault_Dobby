@@ -75,6 +75,10 @@ alle gehen durch. magische items gehen nicht mehr. nach einiger zeit geht mein s
 
 wald wächst von der decke herunter. das glitzern sind eis und kristalle. eingange 5m hoch, 6m breit. kristalle wachsen aus der wand, die wände sind eisüberzogen.
 
+viele kristallproben und eisproben. das eis ist hart wie metall. eis ist kalt und schmilzt nicht.
+
+langer gang der in eine höhle zu führen scheint.
+
 ###  **Protokoll:**
 
 
