@@ -45,7 +45,7 @@ Vrostellungsrunde:
 - Diero: Mensch, m, 1 Arm
 - Soviliss: Elfe, m
 - Iados: Tiefling, m, Art Künstlername, Kleriker, hat Bildertagebuch
-sie waren viel im süden des kontinents, 
+sie waren viel im süden des kontinents, kommen aus hauptstadt. nachtwache mit jeweils einem aus jeder gruppe. 
 
 ###  **Protokoll:**
 
