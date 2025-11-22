@@ -23,7 +23,6 @@ Ihr Erscheinen gilt als Vorbote größerer dämonischer Aktivität – wo ein Ba
 Die beiden Barlgura, denen die Expedition in den <a class="internal-link" data-href="Südöstliche Wälder" href="Südöstliche Wälder">Dschungel</a> begegnete, materialisierten sich nach einer Serie magischer Störungen in der Umgebung. Sie schienen von einer unsichtbaren Stimme oder Macht kontrolliert zu werden.
 </div>
 
----
 ## **Verhalten**
 
 - Nehmen Affengestalt an, sind Dämonen, selten auf der Materiellen Ebene
@@ -35,14 +34,10 @@ Die beiden Barlgura, denen die Expedition in den <a class="internal-link" data-h
 - können Ranken beschwören, die einen restrainen
 - können unsichtbar werden
 
-
----
-
 ## **Verwandte Seiten**
 
 ```dataview
 list from [[Barlgura]]
 ```
 
----
 

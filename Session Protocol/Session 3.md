@@ -119,7 +119,7 @@ In der fünften Ebene erscheinen Handabdrücke, die sechste Ebene senkt sich dar
 
 Die Höhle erstreckt sich kilometerweit, etwa zweihundert Meter tief, mit mehreren verbundenen Ebenen aus Holzgestellen, Treppen und Leitern. Überall wachsen riesige Pilze, trübe Kristalle leuchten schwach, und in der Ferne erhebt sich ein halb verfallener Turm über einem unterirdischen See. Die Gruppe sammelt Proben von Pilzen, Lianen und Kristallen. Plötzlich wird [[Castor Aegis]] beschossen – von einem blauen, humanoiden Wesen mit Schlangenkörper. Drei weitere Gestalten, halb Mensch, halb Schlange, begleiten es.
 
-Die Kreaturen greifen an und wirken Magie. Eine körperlose Stimme flüstert [[Leo Eisenfaust]] und [[Rhuk]] Suggestionen ein, die sie zwingen, sich dem Turm zu nähern. Die Gruppe zieht sich zurück. [[Castor Aegis]] aktiviert einen Unsichtbarkeitszauber und schleicht sich allein nach vorn, um den Turm zu erkunden.
+Die Kreaturen greifen an und wirken Magie. Eine [[Körperlose Stimme|körperlose Stimme]] flüstert [[Leo Eisenfaust]] und [[Rhuk]] Suggestionen ein, die sie zwingen, sich dem Turm zu nähern. Die Gruppe zieht sich zurück. [[Castor Aegis]] aktiviert einen Unsichtbarkeitszauber und schleicht sich allein nach vorn, um den Turm zu erkunden.
 
 Die Session endet, als Castor unsichtbar auf den halbverwesten Turm zuschleicht, während unter ihnen die pilzüberwucherte Tiefe weiter atmet.
 

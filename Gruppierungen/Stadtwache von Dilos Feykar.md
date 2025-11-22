@@ -4,4 +4,4 @@ Bei der [[Quest - Expedition zur Erschließung der südöstlichen Wälder|Expedi
 
 ## **Mitglieder:**
 - [[Hauptmann Zoak]]
-- Frank
+- Frank (Wache am Tor)

@@ -23,14 +23,10 @@ In der Welt der Sterblichen tauchen sie selten auf – meist nur dort, wo dämon
 Die Chasme, die im <a class="internal-link" data-href="Südöstliche Wälder" href="Südöstliche Wälder">Dschungel</a> gesichtet wurden, scheinen an diese Umgebung gebunden zu sein.
 </div>
 
----
-
 ## Verhalten
 - geben ein Summen ab, das einmal pro Tag dazu führen kann, dass man für etwa 24 Stunden bewusstlos wird
 - Scharfer, harter Stachel im Gesicht
 - Wenn man gestochen wird, nimmt die eigene Vitalität ab
-
----
 
 ## Verwandte Seiten
 

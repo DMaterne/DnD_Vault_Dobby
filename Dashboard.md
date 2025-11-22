@@ -1,21 +1,29 @@
 ![[BannerNew.png]]
 
----
+## Spielercharaktere
+
+| Name                           | Spieler | Rasse | Class | Subclass | Level | Rolle
+|-----------------------------------|--------------|--------|-|-|-|-|
+| [[Castor Aegis]] | Domi | Mensch | Artificer | Armorer | 6 | Tank 
+| [[Echo]] | Iggy | Tabaxi | Ranger / Rouge | Gloomstalker | 5 / 1 | Furry
+| [[Leo Eisenfaust]]             | Schorschus | Mensch | Paladin | Oath of Devotion | 6 | Healer
+| [[Rhuk]] | Tjubi | Goblin | Monk | Way of Shadow | 6 | Maskottchen
+
+## Wichtige Links
 
 >[!multi-column] Die Welt
 >
 >> [!note]+ Orte
->> - [[Kontinent of xxx]]
 >> - [[Dilos Feykar]]
 >> - [[Du'ul Fus Bornah]]
+>> - [[Goblinstan]]
 >> - [[Südöstliche Wälder]]
 >
 >> [!bug]+ Charaktäre & Gruppierungen
->> - [[Magic Mike]]
->> - [[König]]
->> - [[Zirkel der Spiegel]]
 >> - [[Hauptmann Zoak]]
-
+>> - [[König]]
+>> - [[Magic Mike]]
+>> - [[Zirkel der Spiegel]]
 
 ---
 > [!multi-column] Aktuelle Dateien
@@ -28,11 +36,11 @@
 > >SORT number(replace(file.name, "[^0-9]", "")) DESC
 > >LIMIT 4
 >
->> [!tip]+ Charaktäre
->> - [[Castor Aegis]]
->> - [[Leo Eisenfaust]]
->> - [[Rhuk]]
->> - [[Echo]]
+> >[!tip]+ Player Characters
+> >```dataview
+> >LIST
+> >FROM "Public/Characters/PC's"
+> >SORT file.name ASC
 >
 > > [!warning]+ Aktuelle Orte
 > > ```dataviewjs
@@ -134,15 +142,7 @@
 >> - [[Quest - Expedition zur Erschließung der südöstlichen Wälder| Expedition in den mutierten Wälder]]
 >> - [[Mindmap Expedition.canvas|Mindmap Expedition]]
 >> - [[Questlog]]
->> - [[Dashboard]]
+>> - [[Kontinent of xxx]]
 
----
-## Spielercharaktere
 
-| Name                           | Spieler | Rasse | Class | Subclass | Level | Rolle
-|-----------------------------------|--------------|--------|-|-|-|-|
-| [[Castor Aegis]] | Domi | Mensch | Artificer | Armorer | 6 | Tank & Support
-| [[Echo]] | Iggy | Tabaxi | Ranger / Rouge | Gloomstalker | 5 / 1 | DD
-| [[Leo Eisenfaust]]             | Schorschus | Mensch | Paladin | ??? | 6 | Tank & Healer
-| [[Rhuk]] | Tjubi | Goblin | Monk | Path of Shadow | 6 | DD
 

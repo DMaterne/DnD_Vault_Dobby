@@ -15,11 +15,9 @@
 
 <div style="min-height: 500px; padding: 12px; border: 0px solid var(--text-faint); border-radius: 10px; background-color: var(--background-secondary); line-height: 1.5;">
 <b>Beschreibung:</b><br>
-Berschreibung Paragraph 1.<br><br>
-Berschreibung Paragraph 2.
-</div>
+Eine Körperlose Stimme die mit der Party telepatisch kommuniziert hat.<br><br>
 
----
+</div>
 
 ## Timeline
 
@@ -37,8 +35,6 @@ Berschreibung Paragraph 2.
 + Im [[Turm im Pilzwald]]
 + Beim Verlassen des Turms hören die Mitglieder die dies tun erneut die Stimme. Diese Befiehlt ihnen wieder in den Turm zu gehen.
 ```
-
----
 
 ## Zugehörigkeit
 
