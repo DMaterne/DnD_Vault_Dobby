@@ -99,6 +99,10 @@ sind ausgeruht und gewaschen.
 
 gehen zum juwelier, deep gnome. kaufe für 40 gp plus die kristalle 100gp rubin.
 
+60gp übrig.
+
+gehen zum waffenladen. Gertruden, die 50 jähriger muscle mommy chillt beim verkauf.
+
 ###  **Protokoll:**
 
 
