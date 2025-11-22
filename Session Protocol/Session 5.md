@@ -97,7 +97,7 @@ nach long rest:
 
 sind ausgeruht und gewaschen.  
 
-gehen zum juwelier, deep gnome.
+gehen zum juwelier, deep gnome. kaufe für 40 gp plus die kristalle 100gp rubin.
 
 ###  **Protokoll:**
 
