@@ -87,7 +87,7 @@ wir landen im innenhof der wache von [[Dilos Feykar]]. erzählen [[Hauptmann Zoa
 
 bekommen met. berichten alles. zeigen alles beweise und proben. münzen im bart der zwergenlady vom festland bevor die nation gegründet wurde (100 jahre her).
 
-erholen und morgen gibt ausrüstung und how to kill a dragon. er zieht einen fetten sack geld raus. bezahlun für die erste mission.
+erholen und morgen gibt ausrüstung und how to kill a dragon. er zieht einen fetten sack geld raus. bezahlung für die erste mission.
 
 5 platin und 50 gold
 
