@@ -93,6 +93,10 @@ erholen und morgen gibt ausrüstung und how to slay a dragon. er zieht einen fet
 
 wenn ich die rune vom bild auf einem edelstein nachbilde, kann ich fireball damit casten (etwa 10gp im wert)
 
+nach long rest:
+
+sind ausgeruht und gewaschen
+
 ###  **Protokoll:**
 
 
