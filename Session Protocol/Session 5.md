@@ -37,7 +37,15 @@ gehen zu ihnen. nachhut ist wachsam. halten handarmbrust, stab, keule und morgen
 
 elfe und tiefling männlich, einarmiger mensch auch, und noch eine frau und ein mann mensch.
 
-[[Castor Aegis]] will wissen ob erstes mal im wald. echo will wissen was für eine schrift der butler geschrieben hat, tiefling sagt dass es drakonisch ist. war früher amtssprache. castor sagt dass er nicht 
+[[Castor Aegis]] will wissen ob erstes mal im wald. echo will wissen was für eine schrift der butler geschrieben hat, tiefling sagt dass es drakonisch ist. war früher amtssprache. castor sagt dass er nicht religiös ist und wird von allen belehrt.
+
+Vrostellungsrunde:
+- Olma Dundragon: Schwerster, w
+- Dorn Dundragon: Anführer, m, 2 arme
+- Diero: Mensch, m, 1 Arm
+- Soviliss: Elfe, m
+- Iados: Tiefling, m, Art Künstlername, Kleriker, hat Bildertagebuch
+sie waren viel im süden des kontinents, 
 
 ###  **Protokoll:**
 
