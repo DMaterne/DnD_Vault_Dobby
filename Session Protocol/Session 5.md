@@ -23,7 +23,7 @@ echo spricht mit priester/cleriker etwa anfang 30, in robe mit drachen/schlangen
 rest macht kaffee und kuchen bei den eisenfausts. thema wiedergeburt: gibt große magier die es können, zeitmagie: keine ahnung, frau eisenfaust hat große buchsammlung. sucht uns bücher heraus. kennt erik (bürgermeister), arkanist. hat erik gekanllt.
 im rathaus gibt es bücher über die stadt
 
-gehen zu rathaus.
+gehen zu rathaus. unterhalten uns über ereignisse. evtl. hat uns wer gehört.
 
 
 ###  **Protokoll:**
