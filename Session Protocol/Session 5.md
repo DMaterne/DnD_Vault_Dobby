@@ -20,7 +20,11 @@ echo will auf kirchturm, rest geht zu leos family.
 
 die ganze insel folgt den drachenglauben (bahamut und tiamat zu gleichen teilen verehrt).
 echo spricht mit priester/cleriker etwa anfang 30, in robe mit drachen/schlangenmustern. cleriker kann uns nicht weiterhelfen. geht morgen leute heilen. ansprache auf zeitmagie: nicht auf offenen wiesen und pilzkreisen einschlafen. auf dem turm nur der grüne dschungel zu sehen.
-rest macht kaffee und kuchen bei den eisenfausts. 
+rest macht kaffee und kuchen bei den eisenfausts. thema wiedergeburt: gibt große magier die es können, zeitmagie: keine ahnung, frau eisenfaust hat große buchsammlung
+
+im rathaus gibt es bücher über die stadt
+
+
 ###  **Protokoll:**
 
 
