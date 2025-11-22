@@ -79,7 +79,11 @@ viele kristallproben und eisproben. das eis ist hart wie metall. eis ist kalt un
 
 langer gang der in eine höhle zu führen scheint. wir fahren mit labortisch schlitten. der gang führt bergab. echo und castor können mit crowbars lenken. kommen am ende in einem komplett gefrorenen hohlraum an. dieser ist gefrohren. um uns herum gefrohrene kreaturen und schätze. über uns an der decke ein weißer drache.
 
-wir bekommen ne breath attack ab. viel dmg. castor zieht scroll um zu fliehen, gibt sie echo und schreit:"halt, wir kommen mit schätzen", echo das bild mit dem jungen um zu verhandeln und sagt: "wir wollen helfen". gibt die scroll an rhuk. rhuk versucht zu verhandeln: "wir sind nur auf einer expedition und wollen eigentlich wieder weg". (rhuk und echo verhandeln schlecht). rhuk flieht mit echo.
+wir bekommen ne breath attack ab. viel dmg. castor zieht scroll um zu fliehen, gibt sie echo und schreit:"halt, wir kommen mit schätzen", echo das bild mit dem jungen um zu verhandeln und sagt: "wir wollen helfen". gibt die scroll an rhuk. rhuk versucht zu verhandeln: "wir sind nur auf einer expedition und wollen eigentlich wieder weg". (rhuk und echo verhandeln schlecht). rhuk flieht mit echo. drache sagt ihr habt beliath gestört. castor und leo fliehen mit der schriftrolle.
+
+schriftrollen weg. tisch weg
+
+wir landen im innenhof der wache von [[Dilos Feykar]]. erzählen [[Hauptmann Zoak]] der auf dem hof kommt davon. alle sind erschüttert als sie vom drachen hören.
 
 ###  **Protokoll:**
 
