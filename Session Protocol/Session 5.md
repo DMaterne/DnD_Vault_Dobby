@@ -10,8 +10,7 @@ Spieler: alle
 ###  **Session Notizen (raw):**
 
 Bönkis Rückblick
-
-
+[[Leo Eisenfaust]] fragt frank nach veschwundenen Leuten. Keine Ahnung wer wer ist. Etwa 20 verschwundene im Wald.
 
 ###  **Protokoll:**
 
