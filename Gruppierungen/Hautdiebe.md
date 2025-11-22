@@ -9,7 +9,7 @@
 > | ---- | ---- |
 > | Art | Gilde |
 > | Zugehörigkeit | _„Ich mag Schoki“_  |
-> | Hauptsitz | [[Kontinent of xxx]] |
+> | Hauptsitz | [[Bron Muz]] |
 
 ##  **Über die Gruppe:**
 

@@ -9,7 +9,7 @@
 > ###### Infos
 > | Typ |  Stat |
 > | ---- | ---- |
-> | Kontinent | [[Kontinent of xxx]] |
+> | Kontinent | [[Bron Muz]] |
 > | Region | [[Südöstliche Wälder]] |
 > | Erbauer | ??? |
 

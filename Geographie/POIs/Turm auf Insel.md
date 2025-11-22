@@ -9,7 +9,7 @@
 > ###### Infos
 > | Attribut |  Wert |
 > | ---- | ---- |
-> | Kontinent | [[Kontinent of xxx]] |
+> | Kontinent | [[Bron Muz]] |
 > | Region | ??? |
 > | Erbauer | ??? |
 

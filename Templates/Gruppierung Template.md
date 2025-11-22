@@ -7,7 +7,7 @@
 > | ---- | ---- |
 > | Art | Gilde |
 > | Leitspruch | _„Ich mag Schoki“_  |
-> | Hauptsitz | [[Kontinent of xxx]] |
+> | Hauptsitz | [[Bron Muz]] |
 
 <div style="min-height: 410px; padding: 12px; border: 0px solid var(--text-faint); border-radius: 10px; background-color: var(--background-secondary); line-height: 1.5;">
 <b>Beschreibung:</b><br>
