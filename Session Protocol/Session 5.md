@@ -44,7 +44,7 @@ Vrostellungsrunde:
 - Dorn Dundragon: Anführer, m, 2 arme
 - Diero: Mensch, m, 1 Arm
 - Soviliss: Elfe, m
-- Iados: Tiefling, m, Art Künstlername, Kleriker, hat Bildertagebuch
+- Iados: Tiefling, m, 2 Arme, Art Künstlername, Kleriker, hat Bildertagebuch
 
 sie waren viel im süden des kontinents, kommen aus hauptstadt. nachtwache mit jeweils einem aus jeder gruppe. 
 
@@ -54,7 +54,63 @@ gehen zum wasserfall, tiefling betet, wir können wasser atmen. ab in den wasser
 
 gehen in die höhle.
 
-yuan-ti verstecken sich hinter felsen. riesig
+yuan-ti verstecken sich hinter felsen. riesiges schlangenskelett hinter ihnen (etwa 1 rhuk großer kopf). warnen die anderen.
+
+andere gruppe hat im norden schon gegen yuan ti gekämpft. naga skelett ist die riesenschlange, ist ihr untoter sklave. es gibt telepatische yuan ti magier. die andere gruppe hat amulette die den geist schützen. 
+
+treffpunkt: fuß der treppen.
+
+nehmen proben
+
+andere ablenkung, wir gehen zum turm. castor nimmt ein bild (wieder die bärtige lady). gehen runter und alles ist gleich. rechts sehen wir jungen menschen in metallrüstung, der nach etwas sucht. castor ist auf einem bild mit rune in der hand. castor nimmt das bild. bilder der ganzen party. sehen suchend aus. rhuk hat maske und seil in den händen, hat nur normales auge. leo hat die drachenschuppe in der hand, aus der sein arm ist. echo hat eine spinnenfigur in der hand.
+
+leo wirft sein bild in die mitte, nichts passiert. castor zerstört ein bild mit fire bolt.
+
+gehen wieder in den eingangsbereich. machen wieder ein augen lasso und scouten ebene +1. ist die decke. wir gehen hoch. sind genau über den eingang. sehen einen weiteren torbogen, evtl ausgang. kein muster am boden. rhuk wirft sein auge durch das tor. außerhalb des tores sieht rhuk nichts mehr. er holt das auge wieder ein. auge kaputt! castor nimmt noch ein bild (teenager junge mit weißer echse in der hand, schaut auf einen schneebedeckten berg im hintergrund). alle bilder immer gleich. 
+
+castor untersucht das auge, magischer kurzschluss aber es sollte demnächst wieder gehen
+
+echo schießt einen pfeil durch. echo castet hunters mark auf leo, der durch das tor will. er testet mit seinem arm, ob es sicher ist. scheint so. echo geht durch, hunters mark verschwindet. echo ist auf einer brücke, 100e meter über dem boden. am ende der brücke ist ein glitzern. 
+alle gehen durch. magische items gehen nicht mehr. nach einiger zeit geht mein stuff wieder. eine art stromschlag hat alles wieder aktiviert. in der ferne fliegen kreaturen. wald ist in der ferne.
+
+wald wächst von der decke herunter. das glitzern sind eis und kristalle. eingange 5m hoch, 6m breit. kristalle wachsen aus der wand, die wände sind eisüberzogen.
+
+viele kristallproben und eisproben. das eis ist hart wie metall. eis ist kalt und schmilzt nicht.
+
+langer gang der in eine höhle zu führen scheint. wir fahren mit labortisch schlitten. der gang führt bergab. echo und castor können mit crowbars lenken. kommen am ende in einem komplett gefrorenen hohlraum an. dieser ist gefrohren. um uns herum gefrohrene kreaturen und schätze. über uns an der decke ein weißer drache.
+
+wir bekommen ne breath attack ab. viel dmg. castor zieht scroll um zu fliehen, gibt sie echo und schreit:"halt, wir kommen mit schätzen", echo das bild mit dem jungen um zu verhandeln und sagt: "wir wollen helfen". gibt die scroll an rhuk. rhuk versucht zu verhandeln: "wir sind nur auf einer expedition und wollen eigentlich wieder weg". (rhuk und echo verhandeln schlecht). rhuk flieht mit echo. drache sagt ihr habt beliath gestört. castor und leo fliehen mit der schriftrolle.
+
+schriftrollen weg. tisch weg
+
+wir landen im innenhof der wache von [[Dilos Feykar]]. erzählen [[Hauptmann Zoak]] der auf dem hof kommt davon. alle sind erschüttert als sie vom drachen hören. Zoak beruhigt die situation. gehen ins zoaks kammer, heiler versorgt leo. 
+
+bekommen met. berichten alles. zeigen alles beweise und proben. münzen im bart der zwergenlady vom festland bevor die nation gegründet wurde (100 jahre her).
+
+erholen und morgen gibt ausrüstung und how to slay a dragon. er zieht einen fetten sack geld raus. bezahlung für die erste mission.
+
+5 platin und 50 gold
+
+wenn ich die rune vom bild auf einem edelstein nachbilde, kann ich fireball damit casten (etwa 10gp im wert)
+
+sind ausgeruht und gewaschen.  
+
+gehen zum juwelier, deep gnome. kaufe für 40 gp plus die kristalle 100gp rubin.
+
+60gp übrig. jeder 15gp
+
+gehen zum waffenladen. Gertruden, die 50 jähriger muscle mommy chillt beim verkauf.
+
+gehen zu einem magischen item laden. lila vorhänge. magic mike!!! echo will bogen. 250gp :(
+
+hat umhang, ring und tränke für eisresistenz. auch heiltränke, drachentöterpfeile, 100gp für dracheneis. ring of cold resistence für leo, 60gp übrig.
+
+2 potions (3d6+4), 4 rubine des kabooms
+kaboom: 10 minuten machen, 3h lernen
+
+4h homunculus herstellen
+
+long rest im freundlichen henker
 
 ###  **Protokoll:**
 
