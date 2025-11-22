@@ -16,6 +16,10 @@ alle bekommen ohrstöpsel.
 
 kein bücherei, stadtchronik aber schon
 
+echo will auf kirchturm, rest geht zu leos family. 
+
+die ganze insel folgt den drachenglauben (bahamut und tiamat zu gleichen teilen ver)
+
 ###  **Protokoll:**
 
 
