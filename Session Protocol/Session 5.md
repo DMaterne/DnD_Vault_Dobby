@@ -85,7 +85,7 @@ schriftrollen weg. tisch weg
 
 wir landen im innenhof der wache von [[Dilos Feykar]]. erzählen [[Hauptmann Zoak]] der auf dem hof kommt davon. alle sind erschüttert als sie vom drachen hören. Zoak beruhigt die situation. gehen ins zoaks kammer, heiler versorgt leo. 
 
-bekoomen met. 
+bekommen met. 
 
 ###  **Protokoll:**
 
