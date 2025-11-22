@@ -1,6 +1,6 @@
 %% tags: #city #zirkel #brakkel %%
 
-Du'ul Fus Bornah ist die Hauptstadt. [[Castor Aegis]] ist hier groß geworden. 
+Du'ul Fus Bornah ist die Hauptstadt. [[Castor Aegis]] ist hier groß geworden. jo
 
 ## Allgemein
 
