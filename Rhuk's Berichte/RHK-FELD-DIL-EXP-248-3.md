@@ -76,7 +76,7 @@ Fruchterkennung via [[Castor Aegis#Identify]] (Bericht angehängt):
 
 - Zeit: 03:00, Tor geöffnet durch Wachmann „Frank“
     
-- Unterkunft: [[Der Freundliche Hänker]] – Standardversorgung (5 Silber/Nacht)
+- Unterkunft: [[Der Freundliche Henker]] – Standardversorgung (5 Silber/Nacht)
     
 
 **Bericht an [[Hauptmann Zoak]]:**

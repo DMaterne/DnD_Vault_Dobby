@@ -24,7 +24,7 @@ Die Hauptnahrungsquelle der Bürger ist Fisch. Dieser wird durch eine große Men
 ## **Wichtige Orte**
 - [[Südöstliche Wälder|Südöstliche Wälder]]
 - [[Zum Silbernen Anlitz]]
-- [[Der Freundliche Hänker]]
+- [[Der Freundliche Henker]]
 
 ## **Gruppierungen**
 

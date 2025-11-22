@@ -1,12 +1,12 @@
 == FELDPROTOKOLL – Expedition Südostwald, Tag 3 ==  
-**Verfasser:** Schattenzeiger Rhuk  
-**Zyklus:** 248-7  
-**Ort:** Südöstliche Wälder – Unterzone: Seesgrund bis Turmkomplex  
-**Ziel:** Erkundung und Sicherung anomaler Strukturen
+  Verfasser:   Schattenzeiger Rhuk  
+  Zyklus:   248-7  
+  Ort:   Südöstliche Wälder – Unterzone: Seesgrund bis Turmkomplex  
+  Ziel:   Erkundung und Sicherung anomaler Strukturen
 
 ---
 
-**TAG 3 – ANOMALER SEE UND PYRAMIDENKOMPLEX**
+##   TAG 3 – ANOMALER SEE UND PYRAMIDENKOMPLEX  
 
 - Starker Leichengestank, [[Echo]] reibt sich mit Substanz ein.
     
@@ -17,13 +17,13 @@
 - Aufklärung: Lichtung + Abhang südöstlich, geschätzt drei Stunden entfernt.
     
 
-**Ankunft Wasserfall/See:**
+Ankunft Wasserfall/See:  
 
 - Erreichen Wasserfall mit angrenzendem See.
     
 - Wasser kristallklar, Oberfläche unbewegt trotz Zufluss.
     
-- **Wasserfall real, starke Strömung geht direkt von dort aus, reißt Objekte fort – See selbst bleibt ungestört.**
+-   Wasserfall real, starke Strömung geht direkt von dort aus, reißt Objekte fort – See selbst bleibt ungestört.  
     
 - Wasserproben in Flaschen bleiben unbewegt, Stadtwasser liegt wie Öl auf Oberfläche.
     
@@ -36,14 +36,14 @@
 - Auge bestätigt Transport in dunkle Höhle.
     
 
-**Struktur im See:**
+  Struktur im See:  
 
 - Steinerne Pyramide sichtbar, vier Obsidian-Säulen, Gravuren in alter Sprache (Castor bestätigt).
     
 - Castor betritt See, droht trotz Sicherung zu ertrinken. Bestätigung: Wasser real, Verhalten unlogisch.
     
 
-**Zugang:**
+  Zugang:  
 
 - Sprung in Strömung – langer Tauchgang, extreme Belastung. Bewusstlosigkeit, Wiederbelebung durch [[Echo]].
     
@@ -54,7 +54,7 @@
 - Zugang ausgelöst durch Handabdruck auf 5. Stufe.
     
 
-**Innenbereich:**
+  Innenbereich:  
 
 - Wendeltreppe führt tief hinab, unter Seeboden.
     
@@ -73,7 +73,7 @@
 
 ---
 
-**FORTSETZUNG TAG 3 – PILZWALD UND TURMZUGANG**
+  FORTSETZUNG TAG 3 – PILZWALD UND TURMZUGANG  
 
 - [[Castor Aegis]] kehrte zurück; Turm laut Schätzung eine Stunde entfernt.
     
@@ -86,7 +86,7 @@
 - Eingang des Turms: schwarzer Torbogen ohne sichtbare Tür oder Inschrift.
     
 
-**Vorerkundung:**
+  Vorerkundung:  
 
 - Beobachtung durch mein Auge. Hinter dem Torbogen Wendeltreppe nach oben und unten.
     
@@ -97,30 +97,30 @@
 
 ---
 
-**TURMEBENEN – STRUKTURIERTE AUFTEILUNG**
+  TURMEBENEN – STRUKTURIERTE AUFTEILUNG  
 
-**U1:** Keine besonderen Merkmale außer fortgesetzten Gemälden an den Wänden.
+  U1:   Keine besonderen Merkmale außer fortgesetzten Gemälden an den Wänden.
 
-**U2:** Boden mit Rosenmuster graviert. Riesige Spinne an Decke beobachtet Bewegung, keine Aggression. Spinne scheint in der Zeit stillzustehen.
+  U2:   Boden mit Rosenmuster graviert. Riesige Spinne an Decke beobachtet Bewegung, keine Aggression. Spinne scheint in der Zeit stillzustehen.
 
-**U3:** Identisch mit U2.
+  U3:   Identisch mit U2.
 
-**U4:** Neues Bodenmuster: stilisierte Sonne. An Decke Wasserspeier in Drachenform.  
+  U4:   Neues Bodenmuster: stilisierte Sonne. An Decke Wasserspeier in Drachenform.  
 Platzierung einer Feuerquelle im Zentrum der Sonne löst Falle aus: Wasserspeier geben Lava ab, Sonnenmuster leuchtet.  
 Evakuierung durch _Feather Fall_ auf U5.
 
-**U5:** Identisches Layout wie U4. Falle wird gleichzeitig mit U4 ausgelöst.
+  U5:   Identisches Layout wie U4. Falle wird gleichzeitig mit U4 ausgelöst.
 
-**U6:** Deutlich kühler. Muster: Schneeflocke. Lava aus U5 sammelt sich über der Treppe, kann U6 nicht erreichen.  
+  U6:   Deutlich kühler. Muster: Schneeflocke. Lava aus U5 sammelt sich über der Treppe, kann U6 nicht erreichen.  
 Materialanalyse ergibt: Turmstruktur besteht vermutlich aus kompaktiertem Knochenmaterial.
 
-**U7:** Kopie von U6.
+  U7:   Kopie von U6.
 
-**U8:** Spiralmuster im Boden. Durchlöcherte Wände, Enden der Bohrungen mit Kristallen und Edelsteinen besetzt.
+  U8:   Spiralmuster im Boden. Durchlöcherte Wände, Enden der Bohrungen mit Kristallen und Edelsteinen besetzt.
 
-**U9:** Kopie von U8.
+  U9:   Kopie von U8.
 
-**U10:** Letzte Ebene.  
+  U10:   Letzte Ebene.  
 Wände dicht mit Gemälden behängt, Spiegel an der Decke, Fackelkreis am Boden.  
 [[Leo Eisenfaust]] betritt Ebene → Boden aktiviert unbekanntes Muster → [[Leo Eisenfaust]] verschwindet.  
 Hypothese: Teleportation.  
@@ -129,11 +129,11 @@ Hypothese: Teleportation.
 Rückzug unmöglich.  
 [[Echo]] und ich folgen.
 
-**Folge:** Gefühl von Zerreißen der eigenen Existenz und Auflösung der eigenen Essenz.
+  Folge:   Gefühl von Zerreißen der eigenen Existenz und Auflösung der eigenen Essenz.
 
 ---
 
-**NACHEREIGNIS / ANOMALER TRANSFER**
+  NACHEREIGNIS / ANOMALER TRANSFER  
 
 - Bewusstsein kehrt in der Taverne am Tag des ursprünglichen Aufbruchs zurück.
     
@@ -146,7 +146,7 @@ Rückzug unmöglich.
 
 ---
 
-**ZUSATZBEOBACHTUNGEN (WALD UND SEESGRUND):**
+  ZUSATZBEOBACHTUNGEN (WALD UND SEESGRUND):  
 
 - Anhaltende mentale Beeinflussung:
     
@@ -163,7 +163,7 @@ Rückzug unmöglich.
 
 ---
 
-**STATUS:**
+  STATUS:  
 
 - Gruppe handlungsfähig.
     
@@ -174,5 +174,5 @@ Rückzug unmöglich.
 
 ---
 
-**Archivcode:** RHK-FELD-DIL-EXP/248-7  
-**Verteiler:** Klan Brakkel – Intern / Zirkel der Spiegel – Grau / Spiegelarchiv (versiegelt)
+  Archivcode:   RHK-FELD-DIL-EXP/248-7  
+  Verteiler:   Klan Brakkel – Intern / Zirkel der Spiegel – Grau / Spiegelarchiv (versiegelt)
