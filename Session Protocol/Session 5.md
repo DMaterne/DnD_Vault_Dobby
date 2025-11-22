@@ -33,6 +33,8 @@ folgen der nachut gruppe. nach paar stunden joggen die stadt nicht mehr sichtbar
 
 finden feuer in der ferne. echo schleicht sich an. am feuer sind ein mensch im schlafsack, ein tiefling der ihn heilt, zwei menschen am feuer.
 
+gehen zu ihnen. nachhut ist wachsam. halten handarmbrust, stab, keule und morgenstern. elfin in den bäumen.
+
 ###  **Protokoll:**
 
 
