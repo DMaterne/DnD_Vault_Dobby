@@ -48,7 +48,10 @@ Vrostellungsrunde:
 
 sie waren viel im süden des kontinents, kommen aus hauptstadt. nachtwache mit jeweils einem aus jeder gruppe. 
 
-gruppen trennen sich am nächsten tag
+gruppen erzählen sich alles, gehen zum see. leo castor und tiefling merken, dass es nicht normal ist... wieder zwei monde, geräuschloser wald, weirder see.
+
+
+
 ###  **Protokoll:**
 
 
