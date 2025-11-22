@@ -105,7 +105,10 @@ gehen zum waffenladen. Gertruden, die 50 jähriger muscle mommy chillt beim verk
 
 gehen zu einem magischen item laden. lila vorhänge. magic mike!!! echo will bogen. 250gp :(
 
-hat umhang, ring und tränke für eisresistenz. auch heiltränke, drachentöterpfeile, 100gp für dracheneis
+hat umhang, ring und tränke für eisresistenz. auch heiltränke, drachentöterpfeile, 100gp für dracheneis. ring of cold resistence für leo, 60gp übrig.
+
+2 potions (3d6+4), 4 rubine des kabooms
+
 
 ###  **Protokoll:**
 
