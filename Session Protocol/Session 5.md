@@ -77,7 +77,7 @@ wald wächst von der decke herunter. das glitzern sind eis und kristalle. eingan
 
 viele kristallproben und eisproben. das eis ist hart wie metall. eis ist kalt und schmilzt nicht.
 
-langer gang der in eine höhle zu führen scheint. wir fahren mit labortisch schlitten. der gang führt bergab. echo und castor können mit crowbars lenken. kommen am ende an und werden angegriffen.
+langer gang der in eine höhle zu führen scheint. wir fahren mit labortisch schlitten. der gang führt bergab. echo und castor können mit crowbars lenken. kommen am ende in einem komplett gefrorenen hohlraum an. dieser ist gefrohren. um uns herum gefrohrene kreaturen und schätze. über uns an der decke ein weißer drache.
 
 Monster:
 
