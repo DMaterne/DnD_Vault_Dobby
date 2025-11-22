@@ -91,6 +91,8 @@ erholen und morgen gibt ausrüstung und how to slay a dragon. er zieht einen fet
 
 5 platin und 50 gold
 
+wenn ich die rune vom bild auf einem edelstein nachbilde, kann ich fireball damit casten (etwa 10gp im wert)
+
 ###  **Protokoll:**
 
 
