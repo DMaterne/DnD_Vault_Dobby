@@ -18,7 +18,8 @@ kein bücherei, stadtchronik aber schon
 
 echo will auf kirchturm, rest geht zu leos family. 
 
-die ganze insel folgt den drachenglauben (bahamut und tiamat zu gleichen teilen ver)
+die ganze insel folgt den drachenglauben (bahamut und tiamat zu gleichen teilen verehrt).
+echo spricht mit priester/cleriker etwa anfang 30, in robe mit drachen/schlangenmustern. 
 
 ###  **Protokoll:**
 
