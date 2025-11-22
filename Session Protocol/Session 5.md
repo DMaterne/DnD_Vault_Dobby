@@ -31,6 +31,8 @@ infos zum [[Turm auf Insel]]: schwarz wie obsidian, abenteuerer schafeen es nich
 
 folgen der nachut gruppe. nach paar stunden joggen die stadt nicht mehr sichtbar. das sit komisch. auch kein meer sichtbar. dschungel etwa 5-6 stunden entfernt. folgen der gruppe. nach zwei stunden finden wir kampfspuren. 2 tote chasme. suchen nach hinweisen zu der gruppe. die chasme riechen nach verbrannten fleisch, verfaulten fleisch und eiter. menschenarm im maul. silberner ring am rechten ringfinger. arm von schwert abgetrennt. echo nimmt den ring.
 
+finden feuer in der ferne. echo schleicht sich an. am feuer sind ein mensch im schlafsack, ein tiefling der ihn heilt, zwei menschen am feuer.
+
 ###  **Protokoll:**
 
 
