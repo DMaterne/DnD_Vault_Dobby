@@ -66,7 +66,9 @@ andere ablenkung, wir gehen zum turm. castor nimmt ein bild (wieder die bärtige
 
 leo wirft sein bild in die mitte, nichts passiert. castor zerstört ein bild mit fire bolt.
 
-gehen wieder in den eingangsbereich. machen wieder ein augen lasso und scouten ebene +1. ist die decke. wir gehen hoch. sind genau über den eingang. sehen einen weiteren torbogen, evtl ausgang. kein muster am boden. rhuk wirft sein auge durch das tor. außerhalb des tores sieht rhuk nichts mehr. er holt das auge wieder ein. auge kaputt! castor nimmt noch ein bild (teena)
+gehen wieder in den eingangsbereich. machen wieder ein augen lasso und scouten ebene +1. ist die decke. wir gehen hoch. sind genau über den eingang. sehen einen weiteren torbogen, evtl ausgang. kein muster am boden. rhuk wirft sein auge durch das tor. außerhalb des tores sieht rhuk nichts mehr. er holt das auge wieder ein. auge kaputt! castor nimmt noch ein bild (teenager junge mit weißer echse in der hand, schaut auf einen schneebedeckten berg im hintergrund). alle bilder immer gleich. 
+
+castor untersucht das auge, kurzschluss aber es sollte demnächst wieder gehen
 
 ###  **Protokoll:**
 
