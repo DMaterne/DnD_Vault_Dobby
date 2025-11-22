@@ -56,7 +56,9 @@ gehen in die höhle.
 
 yuan-ti verstecken sich hinter felsen. riesiges schlangenskelett hinter ihnen (etwa 1 rhuk großer kopf). warnen die anderen.
 
-andere gruppe hat im norden schon gegen yuan ti gekämpft. naga skelett ist die riesenschlange, ist ihr untoter sklave. es gibt telepatische yuan ti magier.
+andere gruppe hat im norden schon gegen yuan ti gekämpft. naga skelett ist die riesenschlange, ist ihr untoter sklave. es gibt telepatische yuan ti magier. die andere gruppe hat amulette die den geist schützen. 
+
+treffpunkt: fuß de
 
 ###  **Protokoll:**
 
