@@ -93,8 +93,6 @@ erholen und morgen gibt ausrüstung und how to slay a dragon. er zieht einen fet
 
 wenn ich die rune vom bild auf einem edelstein nachbilde, kann ich fireball damit casten (etwa 10gp im wert)
 
-nach long rest:
-
 sind ausgeruht und gewaschen.  
 
 gehen zum juwelier, deep gnome. kaufe für 40 gp plus die kristalle 100gp rubin.
@@ -108,7 +106,11 @@ gehen zu einem magischen item laden. lila vorhänge. magic mike!!! echo will bog
 hat umhang, ring und tränke für eisresistenz. auch heiltränke, drachentöterpfeile, 100gp für dracheneis. ring of cold resistence für leo, 60gp übrig.
 
 2 potions (3d6+4), 4 rubine des kabooms
+kaboom: 10 minuten machen, 3h lernen
 
+4h homunculus herstellen
+
+long rest im freundlichen henker
 
 ###  **Protokoll:**
 
