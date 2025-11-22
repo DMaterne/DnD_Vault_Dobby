@@ -1,1 +1,0 @@
-Der Kaiser ist die höchste Autorität auf dem [[Kontinent of xxx]].

@@ -1,0 +1,1 @@
+Der König ist die höchste Autorität auf dem [[Bron Muz]].

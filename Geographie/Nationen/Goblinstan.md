@@ -1,40 +1,36 @@
-%% tags: #city %%
-
-Stadt Norden
-neuste Stadt
-wohlhabend, da Handel mit anderen Kontinenten
-Castor: viele niedrige Adlige für Statusausbau durch Handel, große Bastion um oberen Kontinent zu Expiditieren
+%% tags: #nation %%
 
 ## **Allgemein**
 
 > [!infobox]
-> # Brii Foraam
+> # Name
 > ![[DilosFeykar.png|cover hsmall]]
 > ###### [[DilosFeykar.png|Vollbild]]
 > ###### Stats
 > | Typ |  Stat |
 > | ---- | ---- |
-> | Kontinent | [[Kontinent of xxx]] |
+> | Kontinent | [[Bron Muz]] |
 > | Bevölkerung | ??? |
 > | Oberhaupt | ??? |
 
 
 <div style="min-height: 410px; padding: 12px; border: 0px solid var(--text-faint); border-radius: 10px; background-color: var(--background-secondary); line-height: 1.5;">
 <b>Beschreibung:</b><br>
-Paragraph 1.<br><br>
-Paragraph 2.
+Die Heimat der Gablins.<br><br>
+Liegt auf einer großen Insel im Nord_Osten des [[Kontinent of xxx]].
 </div>
-
----
 
 ## **Wichtige Orte**
 
 
 ## **Gruppierungen**
 
+- [[Klan Brakkel]]
+- [[Hautdiebe]]
 
 ## **Bekannte Persönlichkeiten**
 
+- [[Rhuk]]
 
 ## **Timeline**
 
@@ -49,13 +45,8 @@ Paragraph 2.
 + In 1616, the Dutch founded the first European-owned coffee estate in Sri Lanka, then Ceylon, then Java in 1696. The French began growing coffee in the Caribbean, followed by the Spanish in Central America and the Portuguese in Brazil. European coffee houses sprang up in Italy and later France, where they reached a new level of popularity. Now, it is de _rigueur_ for Parisians to indulge in a cup of coffee and a baguette or croissant at the numerous coffee cafes throughout Paris.
 ```
 
----
-
 ## **Verwandte Seiten**
 
 ```dataview
 list from [[this]]
 ```
-
----
-

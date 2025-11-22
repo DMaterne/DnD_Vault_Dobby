@@ -3,7 +3,7 @@
 ## Bio
 
 > [!infobox]
-> # Name
+> # Zoak
 > ![[Zoak.png|cover hsmall]]
 > ### [[Zoak.png|Vollbild]]
 > ###### Stats
@@ -22,8 +22,6 @@ Hauptmann Zoak ist ein tiefgrauer Gnom mit imposantem Schnauzbart, strenger Halt
 Er trägt eine prächtig verzierte Uniform mit alten Abzeichen und einen schweren Säbel an der Seite, den er angeblich während eines „Wettbewerbs der zehn stärksten und gutaussehendsten Abenteurer“ getragen hat – ein Titel, auf den er sichtlich stolz ist. Seine Amtsstube ist mit exotischen Waffen geschmückt, viele davon scheinbar magischer Natur.
 </div>
 
----
-
 ## Timeline
 
 ```timeline
@@ -41,14 +39,10 @@ Er trägt eine prächtig verzierte Uniform mit alten Abzeichen und einen schwere
 + Als die Gruppe ihm Bericht über die Dschungel-Expedition erstattet, zeigt er reges Interesse – vielleicht zu viel.
 ```
 
----
-
 ## Zugehörigkeit
 
 - [[Stadtwache von Dilos Feykar]]
 - [[Quest - Expedition zur Erschließung der südöstlichen Wälder]]
-
----
 
 ## Verwandte Seiten
 

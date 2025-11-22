@@ -5,8 +5,6 @@
 **Ziel:** Die Welt durch gezielte Informationslenkung in stabile Bahnen halten – durch Wahrheit, Lüge oder Schweigen.  
 **Symbol:** Ein silberner Handspiegel, in dem kein Gesicht zu sehen ist.
 
----
-
 ### Grundprinzipien
 
 - **„Wissen ist Währung.“**  
@@ -17,8 +15,6 @@
 
 - **„Jede Wahrheit ist ein Werkzeug.“**  
   Der Zirkel entscheidet, welche Wahrheiten nützen – und welche gefährlich sind.
-
----
 
 ### Aufbau der Zelle „Saphirglas“
 

@@ -1,3 +1,14 @@
+> [!infobox]
+> # Name
+> ![[NPC_Placeholder.png]]
+> ### [[NPC_Placeholder.png|Vollbild]]
+> ###### Stats
+> | Attribut |  Wert |
+> | ---- | ---- |
+> | Art | Gilde |
+> | Zugehörigkeit | _„Ich mag Schoki“_  |
+> | Hauptsitz | [[Bron Muz]] |
+
 ## Allgemein
 
 Alias: Ahtiid Aan (Bekleidete Sklaven)

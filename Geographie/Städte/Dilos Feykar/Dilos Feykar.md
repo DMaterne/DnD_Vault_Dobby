@@ -9,7 +9,7 @@
 > ###### Stats
 > | Typ |  Stat |
 > | ---- | ---- |
-> | Kontinent | [[Kontinent of xxx]] |
+> | Kontinent | [[Bron Muz]] |
 > | Bevölkerung | 19.826 |
 > | Oberhaupt | ??? |
 
@@ -20,8 +20,6 @@ Dilos Feykar ("Tödlicher Wald") ist eine befestigte, florierende Grenzstadt im 
 Die Stadt ist ein Schmelztiegel: Reisende, Abenteurer, Forscher, Flüchtlinge, Händler und fanatische Gläubige leben Seite an Seite mit einfachen Bürgern, Söldnern und Spionen. Viele kommen mit großen Plänen – nur wenige kehren zurück.<br><br>
 Die Hauptnahrungsquelle der Bürger ist Fisch. Dieser wird durch eine große Menge an Fischen gefangen.
 </div>
-
----
 
 ## **Wichtige Orte**
 - [[Südöstliche Wälder|Südöstliche Wälder]]
@@ -37,7 +35,7 @@ Die Hauptnahrungsquelle der Bürger ist Fisch. Dieser wird durch eine große Men
 
 - [[Leo Eisenfaust]]
 - [[Familie Eisenfaust]]
-- Frank (Wache)
+- Frank (Wache am Tor)
 - [[Hauptmann Zoak]]
 
 ## **Verwandte Seiten**
@@ -46,5 +44,4 @@ Die Hauptnahrungsquelle der Bürger ist Fisch. Dieser wird durch eine große Men
 list from [[Dilos Feykar]]
 ```
 
----
 
