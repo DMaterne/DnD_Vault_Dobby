@@ -58,7 +58,9 @@ yuan-ti verstecken sich hinter felsen. riesiges schlangenskelett hinter ihnen (e
 
 andere gruppe hat im norden schon gegen yuan ti gekämpft. naga skelett ist die riesenschlange, ist ihr untoter sklave. es gibt telepatische yuan ti magier. die andere gruppe hat amulette die den geist schützen. 
 
-treffpunkt: fuß de
+treffpunkt: fuß der treppen.
+
+andere ablenkung, wir gehen zum turm. castor nimmt ein bild (wieder die bärtige lady). gehen runter und a
 
 ###  **Protokoll:**
 
