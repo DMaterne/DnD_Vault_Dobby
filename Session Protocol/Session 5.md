@@ -103,6 +103,8 @@ gehen zum juwelier, deep gnome. kaufe für 40 gp plus die kristalle 100gp rubin.
 
 gehen zum waffenladen. Gertruden, die 50 jähriger muscle mommy chillt beim verkauf.
 
+gehen zu einem magischen item laden. lila vorhänge.
+
 ###  **Protokoll:**
 
 
