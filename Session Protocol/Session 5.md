@@ -20,11 +20,12 @@ echo will auf kirchturm, rest geht zu leos family.
 
 die ganze insel folgt den drachenglauben (bahamut und tiamat zu gleichen teilen verehrt).
 echo spricht mit priester/cleriker etwa anfang 30, in robe mit drachen/schlangenmustern. cleriker kann uns nicht weiterhelfen. geht morgen leute heilen. ansprache auf zeitmagie: nicht auf offenen wiesen und pilzkreisen einschlafen. auf dem turm nur der grüne dschungel zu sehen.
-rest macht kaffee und kuchen bei den eisenfausts. thema wiedergeburt: gibt große magier die es können, zeitmagie: keine ahnung, frau eisenfaust hat große buchsammlung. sucht uns bücher heraus. kennt erik (bürgermeister), arkanist. hat erik gekanllt.
+rest macht kaffee und kuchen bei den eisenfausts. thema wiedergeburt: gibt große magier die es können, zeitmagie: keine ahnung, frau eisenfaust hat große buchsammlung. sucht uns bücher heraus. kennt Erek (bürgermeister), arkanist. hat erik gekanllt.
 im rathaus gibt es bücher über die stadt
 
 gehen zu rathaus. unterhalten uns über ereignisse. evtl. hat uns wer gehört. castor erinnert sich dass ein zauber durch ein symbol uns umgebracht hat. danach wollen wir mit der nachhutt gruppe sprechen ob denen das gleiche schiksal wiederfahren ist.
 
+butler nimmt personalien auf und führt uns in ein büro. dort ein dicker 50 jähriger mann. kurzes braunes haar, massiver schnauzer 2x gesicht-breite. butler (frederick geht). echo flirtet mit dem bart von Erek und bekommt liste für haarpflegeprodukte. Erek erkennt leo, er ihn aber nicht. 
 
 ###  **Protokoll:**
 
