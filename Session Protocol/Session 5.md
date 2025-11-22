@@ -71,6 +71,7 @@ gehen wieder in den eingangsbereich. machen wieder ein augen lasso und scouten e
 castor untersucht das auge, magischer kurzschluss aber es sollte demnächst wieder gehen
 
 echo schießt einen pfeil durch. echo castet hunters mark auf leo, der durch das tor will. er testet mit seinem arm, ob es sicher ist. scheint so. echo geht durch, hunters mark verschwindet. echo ist auf einer brücke, 100e meter über dem boden. am ende der brücke ist ein glitzern. 
+alle gehen durch. magische items gehen nicht mehr. nach einiger zeit geht mein stuff wieder. eine art stromschlag hat alles wieder aktiviert. in der ferne fliegen kreaturen. wald ist in der ferne
 
 ###  **Protokoll:**
 
