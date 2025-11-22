@@ -13,7 +13,7 @@ SEITE UNEDITIERT DA KEINE INFO
 > ###### Stats
 > | Typ |  Stat |
 > | ---- | ---- |
-> | Kontinent | [[Kontinent of xxx]] |
+> | Kontinent | [[Bron Muz]] |
 > | Bevölkerung | ??? |
 > | Oberhaupt | ??? |
 

@@ -9,7 +9,7 @@
 > ###### Stats
 > | Typ |  Stat |
 > | ---- | ---- |
-> | Kontinent | [[Kontinent of xxx]] |
+> | Kontinent | [[Bron Muz]] |
 > | Bevölkerung | 19.826 |
 > | Oberhaupt | ??? |
 

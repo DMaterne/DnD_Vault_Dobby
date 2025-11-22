@@ -7,7 +7,7 @@
 > | ---- | ---- |
 > | Art | Abenteurer |
 > | Leitspruch | _„Ich mag Schoki“_  |
-> | Hauptsitz | [[Kontinent of xxx]] |
+> | Hauptsitz | [[Bron Muz]] |
 > 
 ## Mitglieder
 

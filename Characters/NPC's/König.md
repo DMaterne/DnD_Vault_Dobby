@@ -1,1 +1,1 @@
-Der König ist die höchste Autorität auf dem [[Kontinent of xxx]].
+Der König ist die höchste Autorität auf dem [[Bron Muz]].

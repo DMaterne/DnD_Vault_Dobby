@@ -2,7 +2,7 @@
 	- [ ] Finde die Ursache der Mutationen
 		- [ ] Dämonische Aktivität erforschen
 		- [ ] [[Körperlose Stimme]] identifizieren
-		- [ ] [[Turm im Pilzwald]] erforschen
+		- [x] [[Turm im Pilzwald]] erforschen
 		- [ ] Zusammenhang mit [[Yuan-Ti]] überprüfen
 		- [ ] Planare Verschiebung untersuchen
 		- [ ] Veränderte Zeit ergründen
