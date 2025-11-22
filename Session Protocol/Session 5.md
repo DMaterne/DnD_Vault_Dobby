@@ -37,7 +37,7 @@ gehen zu ihnen. nachhut ist wachsam. halten handarmbrust, stab, keule und morgen
 
 elfe und tiefling männlich, einarmiger mensch auch, und noch eine frau und ein mann mensch.
 
-[[Castor Aegis]] will wissen ob erstes mal im wald. 
+[[Castor Aegis]] will wissen ob erstes mal im wald. echo will wissen was für eine schrift der butler geschrieben hat, tiefling sagt dass es drakonisch ist. war früher amtssprache. castor sagt dass er nicht 
 
 ###  **Protokoll:**
 
