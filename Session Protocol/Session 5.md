@@ -79,7 +79,7 @@ viele kristallproben und eisproben. das eis ist hart wie metall. eis ist kalt un
 
 langer gang der in eine höhle zu führen scheint. wir fahren mit labortisch schlitten. der gang führt bergab. echo und castor können mit crowbars lenken. kommen am ende in einem komplett gefrorenen hohlraum an. dieser ist gefrohren. um uns herum gefrohrene kreaturen und schätze. über uns an der decke ein weißer drache.
 
-Monster:
+wir bekommen ne breath attack ab. viel dmg. castor zieht scroll um zu fliehen, gibt sie echo, echo das bild mit dem jungen um zu verhandeln. gibt die scroll an rhuk. 
 
 ###  **Protokoll:**
 
