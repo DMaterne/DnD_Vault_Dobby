@@ -25,7 +25,7 @@ im rathaus gibt es bücher über die stadt
 
 gehen zu rathaus. unterhalten uns über ereignisse. evtl. hat uns wer gehört. castor erinnert sich dass ein zauber durch ein symbol uns umgebracht hat. danach wollen wir mit der nachhutt gruppe sprechen ob denen das gleiche schiksal wiederfahren ist.
 
-butler nimmt personalien auf und führt uns in ein büro. dort ein dicker 50 jähriger mann. kurzes braunes haar, massiver schnauzer 2x gesicht-breite. butler (frederick geht). echo flirtet mit dem bart von Erek und bekommt liste für haarpflegeprodukte. Erek erkennt leo, er ihn aber nicht. erstea mal phänomene vor etwa 5 jahren. geruch von fehlgeschlagen zauber anfangs. letzte sechs monate ausbreitung weitaus schneller. sprechen see an. 
+butler nimmt personalien auf und führt uns in ein büro. dort ein dicker 50 jähriger mann. kurzes braunes haar, massiver schnauzer 2x gesicht-breite. butler (frederick geht). echo flirtet mit dem bart von Erek und bekommt liste für haarpflegeprodukte. Erek erkennt leo, er ihn aber nicht. erstea mal phänomene vor etwa 5 jahren. geruch von fehlgeschlagen zauber anfangs. letzte sechs monate ausbreitung weitaus schneller. sprechen see an. erek weiß nichts davon. geben alle infos über tag-nacht verzerrung, mutationen und den see preis. auch pyramidenstruktur.
 
 ###  **Protokoll:**
 
