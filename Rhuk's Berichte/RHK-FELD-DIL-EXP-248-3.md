@@ -44,7 +44,7 @@ Fruchterkennung via [[Castor Aegis#Identify]] (Bericht angehängt):
 
 - Stimme unbekannter Quelle. Keine optische Erfassung.
     
-- Angriff durch zwei große Kreaturen (Identifikation: **[[Barlgura]]**, extraplanar / dämonisch).
+- Angriff durch zwei große Kreaturen (Identifikation: **[[Barlgura2]]**, extraplanar / dämonisch).
     
 - Eigenschaften: Unsichtbarkeit, Magieeinsatz (Ranken, Illusionen), koordinierte Aggression.
     

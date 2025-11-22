@@ -32,7 +32,7 @@
 
 - [[Echo]] kollabiert ohne Vorwarnung. Ursprung zunächst unbekannt.
     
-- Käferartige Kreaturen erscheinen (Identifikation nach Vergleich: extraplanare Parasitenklasse – vermutlich _Chasme_).
+- Käferartige Kreaturen erscheinen (Identifikation nach Vergleich: extraplanare Parasitenklasse – vermutlich _[[Chasme2]]_).
     
 - Beschreibung: ca. 2m groß, blauschwarzer Chitinpanzer, segmentierte Gliedmaßen, rüsselartiger Fortsatz, vier Flügel. Geräuschentwicklung massiv – niederfrequentes Summen mit desorientierender Wirkung.
     
