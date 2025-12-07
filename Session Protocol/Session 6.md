@@ -106,7 +106,13 @@ er ist verwirrt, da young dragons diese abilities nicht haben sollen
 rhuk erkennt: er hat angst
 entschuldigt sich und meint, er muss die stadt vorbereiten
 war der gleiche drache wie beim ersten mal, keine besondere veränderung
-echo bekommt paket von 
+echo bekommt paket von [[Vicari]], drinnen ist eine [[Lolth]]-Statue, wie auf dem Portrait aus dem Turm, an den händen der statue ist getrocknetes blut
+downtime: 
+- echo liest, klaut und sucht heiler
+- castor forscht, sucht arbeit und heiler
+- rhuk schreibt berichte und recherchiert
+- leo meditiert
+distanz zur hauptstadt, 
 
 ###  **Protokoll:**
 
