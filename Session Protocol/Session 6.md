@@ -84,7 +84,7 @@ layer action: höhleneingang wird verschlossen, die drei fliehenden in eis gefan
 rip jarvis
 kampf
 phase zwei: berliath schreit und eine eisrüstung bildet sich um seinen körper
-rune werfen: 8d6
+rhuk: rune werfen: 8d6
 tanja dead, castor down
 
 
