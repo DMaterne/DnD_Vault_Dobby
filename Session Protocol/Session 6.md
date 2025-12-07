@@ -50,6 +50,13 @@ wachen:
 - Tanja: Speer
 - Willhelm: 4 Äxte, Bogen, 5 Pfeile
 - Olaf(fa): Bogen, 10 Pfeile, Shortsword
+brechen auf
+5 bananas und 16 drachenfrüchte gesammelt
+echo looki looki nach ozean und stadt (ab morgen 2 verschwunden)
+tag zwei betreten dschungel
+suchen see
+castor zerstört außversehen das fernglas
+
 
 ###  **Protokoll:**
 
