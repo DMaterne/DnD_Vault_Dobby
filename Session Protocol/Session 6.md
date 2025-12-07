@@ -38,6 +38,7 @@ bekommen extrarationen da kein ausgang aus der höhle bekannt ist
 soldaten beladen wagen
 belohnung: dürfen soviel wir tragen dürfen vom hord des drachen nehmen
 80 tagesrationen
+jeder eine scroll
 - rhuk, shortbow, speer, 5 pfeile
 - echo, drachentöterbogen, 20 großpfeile, shortsword, 10 pfeile
 - castor, speer, 2 javelins
