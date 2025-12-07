@@ -56,6 +56,9 @@ echo looki looki nach ozean und stadt (ab morgen 2 verschwunden)
 tag zwei betreten dschungel
 suchen see
 castor zerstört aus versehen das fernglas
+sind am wasserfall
+ochsen am baum angebunden
+ausrüstung aufgeteilt
 
 
 ###  **Protokoll:**
