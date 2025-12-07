@@ -100,6 +100,12 @@ revivify echo lebt wieder
 echo bekommt permanente verletzung: fuß kaputt, -10 ft. movement
 castor permanente verletzung: arm kaputt, muss ab (disadvantage auf str bei heben und schieben)
 heilung level 5 kann diese heilen
+zoak kommt raus und ist unhappy
+wir berichten
+er ist verwirrt, da young dragons diese abilities nicht haben sollen
+rhuk erkennt: er hat angst
+entschuldigt sich und meint, er muss die stadt vorbereiten
+war der gleiche drache wie beim ersten mal, keine besondere veränderung
 
 ###  **Protokoll:**
 
