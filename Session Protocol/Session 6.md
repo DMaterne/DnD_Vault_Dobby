@@ -61,6 +61,10 @@ ochsen am baum angebunden
 ausrüstung aufgeteilt
 sehen die yuan-ti leichen
 keine spur von dorns truppe
+gehen zu treffpunkt
+brief in festspalt: sind zurückgekehrt aber wir nicht da, erkunden weiter
+hinterlassen nachricht für dorns truppe
+gehen zu schlachtfeld
 
 ###  **Protokoll:**
 
