@@ -55,7 +55,7 @@ brechen auf
 echo looki looki nach ozean und stadt (ab morgen 2 verschwunden)
 tag zwei betreten dschungel
 suchen see
-castor zerstört außversehen das fernglas
+castor zerstört aus versehen das fernglas
 
 
 ###  **Protokoll:**
