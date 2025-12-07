@@ -72,6 +72,8 @@ echo übergibt sich
 -1 banane
 rhuks augo + jarvis: superduper scout drohne
 brücke unten und oben gleich, evtl kann man auf der unterseite laufen
+castor kassier ein junge echse bild ein
+
 
 ###  **Protokoll:**
 
