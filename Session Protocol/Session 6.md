@@ -17,7 +17,7 @@ rhuk holt ein übersetzungsbuch für sylvan
 draconic alte amtssprache, vor 60 jahren kam common
 draconic von manchen adligen noch gesprochen
 echo kauft buch draconic übersetzen für 20gp (duden für draconic)
-
+gehen zu [[Hauptmann Zoak]], folgen ihm 
 
 ###  **Protokoll:**
 
