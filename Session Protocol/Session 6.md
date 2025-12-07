@@ -86,6 +86,11 @@ kampf
 phase zwei: berliath schreit und eine eisrüstung bildet sich um seinen körper
 rhuk: rune werfen: 8d6
 tanja dead, castor down
+leo hebt castor auf
+castor zieht sich zurück
+drache fliegt
+bob dead
+drache zwischen kevin, echo castor, leo kurz dahinter prone
 
 
 ###  **Protokoll:**
