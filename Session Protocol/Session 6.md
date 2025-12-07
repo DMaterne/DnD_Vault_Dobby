@@ -37,6 +37,7 @@ gruppe von dorn ist nicht zurückgekehrt
 bekommen extrarationen da kein ausgang aus der höhle bekannt ist
 soldaten beladen wagen
 belohnung: dürfen soviel wir tragen dürfen vom hord des drachen nehmen
+80 tagesrationen
 
 ###  **Protokoll:**
 
