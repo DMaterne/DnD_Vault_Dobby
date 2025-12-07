@@ -42,8 +42,13 @@ belohnung: dürfen soviel wir tragen dürfen vom hord des drachen nehmen
 - echo, drachentöterbogen, 20 großpfeile, shortsword, 10 pfeile
 - castor, speer, 2 javelins
 - leo, großschwert,1x javelin
-soldaten:
-- 
+echo kauft materialien und castor versucht daraus ein werkzeug herzustellen
+wachen:
+- Bob: Großaxt
+- Kevin: Drachentöterbogen, 20 Großpfeile
+- Justus: Speer
+- Tanja: Speer
+- Willhelm: 
 
 ###  **Protokoll:**
 
