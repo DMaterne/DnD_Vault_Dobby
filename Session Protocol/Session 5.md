@@ -128,7 +128,7 @@ Die Helden erreichten schließlich den [[Turm auf Insel]] und fanden im Inneren 
 
 Auf der anderen Seite fanden sie sich auf einer schwebenden Brücke hoch über einem bodenlosen Abgrund wieder. Magische Gegenstände funktionierten zunächst nicht, wurden jedoch von einem stößenden Energieimpuls reaktiviert. Am Ende der Brücke lag eine Höhle aus Eis und Kristall, gefüllt mit eingefrorenen Kreaturen und Schätzen. Von der Decke hing ein gewaltiger weißer Drache. Er erwachte und überzog die Gruppe mit einem zerstörerischen Frosthauch. Im Chaos versuchten [[Echo]] und [[Rhuk]] zu verhandeln, und Castor schrie mit letzter Kraft, sie wollten helfen und keine Schätze stehlen. Doch der Drache erklärte mit donnernder Stimme:
 
-**„Ich bin [[Beliath]]. Ihr habt gestört, was niemals berührt werden darf.“**
+**„Ich bin [[Berliath]]. Ihr habt gestört, was niemals berührt werden darf.“**
 
 Castor aktivierte eine Teleportationsschriftrolle und brachte die Gruppe im letzten Moment in Sicherheit.
 
@@ -144,7 +144,7 @@ Im Rathaus trafen sie durch [[Frederick]] auf [[Erek]], den Bürgermeister. Er b
 
 Auf dem Weg in die südlichen Wälder verschwanden schließlich sogar Stadt und Meer aus Sicht. Die Gruppe fand zwei tote [[Chasme]] und einen abgetrennten Arm mit silbernem Ring, den [[Echo]] behielt. Am Lagerfeuer trafen sie auf **Olma und Dorn Dundragon, Diero, Soviliss und Iados**, der ein illustriertes Tagebuch führte. Am nächsten Morgen zogen alle gemeinsam weiter zum See, über dem zwei Monde zu sehen waren. Nach einem Gebet von Iados tauchten sie in eine Höhle mit [[Yuan-Ti]] und einem skelettierten Naga-Sklaven.
 
-Im [[Turm auf Insel]] fanden sie Bilder, die sie selbst zeigten: [[Castor Aegis]] mit Rune, [[Rhuk]] mit nur einem natürlichen Auge und einem Seil, [[Leo Eisenfaust]] mit einer Drachenschuppe und [[Echo]] mit einer Spinnenfigur. Rhuks magisches Auge wurde im Portal zerstört. Dahinter führte eine schwebende Brücke zu einer Eishöhle, in der ein riesiger weißer Drache namens [[Beliath]] erwachte und sie angriff. Castor teleportierte die Gruppe im letzten Moment zur [[Stadtwache von Dilos Feykar]].
+Im [[Turm auf Insel]] fanden sie Bilder, die sie selbst zeigten: [[Castor Aegis]] mit Rune, [[Rhuk]] mit nur einem natürlichen Auge und einem Seil, [[Leo Eisenfaust]] mit einer Drachenschuppe und [[Echo]] mit einer Spinnenfigur. Rhuks magisches Auge wurde im Portal zerstört. Dahinter führte eine schwebende Brücke zu einer Eishöhle, in der ein riesiger weißer Drache namens [[Berliath]] erwachte und sie angriff. Castor teleportierte die Gruppe im letzten Moment zur [[Stadtwache von Dilos Feykar]].
 
 [[Hauptmann Zoak]] ließ sie heilen und vergab die Belohnung: fünf Platin und fünfzig Gold. Anschließend kaufte die Gruppe beim Deep-Gnome-Juwelier, bei Gertruden und bei [[Magic Mike]] Ausrüstung, darunter Heiltränke, Drachen-Eis, explosive Rubine sowie einen Ring des Kälteschutzes, und ruhte im Gasthaus [[Der Freundliche Henker]].
 
