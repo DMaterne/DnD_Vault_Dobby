@@ -82,6 +82,8 @@ frightening aura
 drei wachen fliehen (olaf, willian, justus)
 layer action: höhleneingang wird verschlossen, die drei fliehenden in eis gefangen
 rip jarvis
+kampf
+phase zwei: berliath schreit und eine eisrüstung bildet sich um seinen körper
 
 ###  **Protokoll:**
 
