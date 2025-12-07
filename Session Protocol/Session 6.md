@@ -79,8 +79,9 @@ kompass funktioniert normal
 warten in drachen höhle
 schießen auf ihn
 frightening aura
-drei wachen fliehen
+drei wachen fliehen (olaf, willian, justus)
 layer action: höhleneingang wird verschlossen, die drei fliehenden in eis gefangen
+rip jarvis
 
 ###  **Protokoll:**
 
