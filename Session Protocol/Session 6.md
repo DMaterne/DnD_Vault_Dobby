@@ -23,9 +23,13 @@ die 6 mutigen soldaten sollen uns bei töten des drachens helfen
 equipment: (necrotic nur gegen drachen)
 - 6 javelins (str 1d6+strmod piercing 2d6 necrotic)
 - 30 pfeile (1d6+dexmod piercing, 2d6 necrotic)
-- großschwert (+strmod, 3d6 necrotic)
+- großschwert (2d6+strmod, 3d6 necrotic)
 - 4 äxte (light, werfbar 1d4+dexmod slashing, 2d6 necrotic)
-- 2 kurzschwerter (finesse 1d6 slashing, 2d6 necrotic)
+- 2 kurzschwerter (finesse 1d6+dex/str slashing, 1d8 necrotic)
+- 4 schriftrollen dimension door (2 leute pro rolle)
+- 4 speere (1d8 piercing, versitile 1d10 piercing, reach 5ft. extra, 2d10 necrotic)
+- 2 drachentöterbögen (1d10+strmod)
+equipment nur ausgeliehen
 
 ###  **Protokoll:**
 
