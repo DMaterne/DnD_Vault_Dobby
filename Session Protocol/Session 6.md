@@ -93,8 +93,12 @@ bob dead
 drache zwischen kevin, echo castor, leo kurz dahinter prone
 kevin will fliehen
 opportunity attack, kevin dead
-
-
+castor down
+echo down
+fliehen mit zwei scrolls, echo dead
+revivify echo lebt wieder
+echo bekommt permanente verletzung: fuß kaputt, -10 ft. movement
+castor
 
 ###  **Protokoll:**
 
