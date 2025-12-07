@@ -45,10 +45,11 @@ belohnung: dürfen soviel wir tragen dürfen vom hord des drachen nehmen
 echo kauft materialien und castor versucht daraus ein werkzeug herzustellen
 wachen:
 - Bob: Großaxt
-- Kevin: Drachentöterbogen, 20 Großpfeile
+- Kevin: Drachentöterbogen, 20 Großpfeile, Javelin x3
 - Justus: Speer
 - Tanja: Speer
-- Willhelm: 
+- Willhelm: 4 Äxte, Bogen, 5 Pfeile
+- Olaf(fa): Bogen, 10 Pfeile, Shortsword
 
 ###  **Protokoll:**
 
