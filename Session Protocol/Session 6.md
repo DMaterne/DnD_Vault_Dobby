@@ -76,6 +76,8 @@ brücke unten und oben gleich, evtl kann man auf der unterseite laufen
 castor kassier ein junge echse bild ein
 alles fliegende weg
 kompass funktioniert normal
+warten in drachen höhle
+schießen auf ihn
 
 ###  **Protokoll:**
 
