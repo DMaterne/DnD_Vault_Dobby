@@ -98,7 +98,8 @@ echo down
 fliehen mit zwei scrolls, echo dead
 revivify echo lebt wieder
 echo bekommt permanente verletzung: fuß kaputt, -10 ft. movement
-castor
+castor permanente verletzung: arm kaputt, muss ab (disadvantage auf str bei heben und schieben)
+heilung level 5 kann diese heilen
 
 ###  **Protokoll:**
 
