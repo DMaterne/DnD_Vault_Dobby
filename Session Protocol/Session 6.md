@@ -20,9 +20,12 @@ echo kauft buch draconic übersetzen für 20gp (duden für draconic)
 gehen zu [[Hauptmann Zoak]], folgen ihm über das trainingsgelände zu scheune
 dort 6 wachen warten auf uns, wagen mit 2 ochsen, wand mit equipment
 die 6 mutigen soldaten sollen uns bei töten des drachens helfen
-equipment:
-- 
-- 
+equipment: (necrotic nur gegen drachen)
+- 6 javelins (str 1d6+strmod piercing 2d6 necrotic)
+- 30 pfeile (1d6+dexmod piercing, 2d6 necrotic)
+- großschwert (+strmod, 3d6 necrotic)
+- 4 äxte (light, werfbar 1d4+dexmod slashing, 2d6 necrotic)
+- 2 kurzschwerter (finesse 1d6 slashing, 2d6 necrotic)
 
 ###  **Protokoll:**
 
