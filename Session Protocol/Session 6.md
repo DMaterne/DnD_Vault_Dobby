@@ -106,6 +106,7 @@ er ist verwirrt, da young dragons diese abilities nicht haben sollen
 rhuk erkennt: er hat angst
 entschuldigt sich und meint, er muss die stadt vorbereiten
 war der gleiche drache wie beim ersten mal, keine besondere veränderung
+echo bekommt paket von 
 
 ###  **Protokoll:**
 
