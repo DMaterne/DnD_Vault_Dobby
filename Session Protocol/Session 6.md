@@ -91,6 +91,9 @@ castor zieht sich zurück
 drache fliegt
 bob dead
 drache zwischen kevin, echo castor, leo kurz dahinter prone
+kevin will fliehen
+opportunity attack, kevin dead
+
 
 
 ###  **Protokoll:**
