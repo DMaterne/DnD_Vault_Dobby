@@ -17,7 +17,12 @@ rhuk holt ein übersetzungsbuch für sylvan
 draconic alte amtssprache, vor 60 jahren kam common
 draconic von manchen adligen noch gesprochen
 echo kauft buch draconic übersetzen für 20gp (duden für draconic)
-gehen zu [[Hauptmann Zoak]], folgen ihm 
+gehen zu [[Hauptmann Zoak]], folgen ihm über das trainingsgelände zu scheune
+dort 6 wachen warten auf uns, wagen mit 2 ochsen, wand mit equipment
+die 6 mutigen soldaten sollen uns bei töten des drachens helfen
+equipment:
+- 
+- 
 
 ###  **Protokoll:**
 
