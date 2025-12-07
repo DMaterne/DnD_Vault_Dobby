@@ -27,9 +27,13 @@ equipment: (necrotic nur gegen drachen)
 - 4 äxte (light, werfbar 1d4+dexmod slashing, 2d6 necrotic)
 - 2 kurzschwerter (finesse 1d6+dex/str slashing, 1d8 necrotic)
 - 4 schriftrollen dimension door (2 leute pro rolle)
-- 4 speere (1d8 piercing, versitile 1d10 piercing, reach 5ft. extra, 2d10 necrotic)
-- 2 drachentöterbögen (1d10+strmod)
+- 4 speere (1d8+dexmod piercing, versitile 1d10+dexmod piercing, reach 5ft. extra, 2d10 necrotic)
+- 2 drachentöterbögen (1d10+strmod piercing, 3d8 necrotic, -10ft. movespeed, nur großpfeile)
+- 40 großpfeile
+- großaxt (1d12+strmod, 3d6 necrotic)
+- 3 bögen für die special pfeile
 equipment nur ausgeliehen
+gruppe von dorn ist nicht zurückgekehrt
 
 ###  **Protokoll:**
 
