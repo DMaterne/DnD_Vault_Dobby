@@ -65,6 +65,8 @@ gehen zu treffpunkt
 brief in festspalt: sind zurückgekehrt aber wir nicht da, erkunden weiter
 hinterlassen nachricht für dorns truppe
 gehen zu schlachtfeld
+yuan-ti gelootet
+castor kassiert die zwei naga giftzähne
 
 ###  **Protokoll:**
 
