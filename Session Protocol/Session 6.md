@@ -112,7 +112,9 @@ downtime:
 - castor forscht, sucht arbeit und heiler
 - rhuk schreibt berichte und recherchiert
 - leo meditiert
-distanz zur hauptstadt, 
+distanz zur hauptstadt, monat reiten
+level up
+echo bekommt status: Vom Tod berührt
 
 ###  **Protokoll:**
 
