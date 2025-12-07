@@ -74,7 +74,8 @@ echo übergibt sich
 rhuks augo + jarvis: superduper scout drohne
 brücke unten und oben gleich, evtl kann man auf der unterseite laufen
 castor kassier ein junge echse bild ein
-
+alles fliegende weg
+kompass funktioniert normal
 
 ###  **Protokoll:**
 
