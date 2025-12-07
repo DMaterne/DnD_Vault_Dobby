@@ -59,7 +59,8 @@ castor zerstört aus versehen das fernglas
 sind am wasserfall
 ochsen am baum angebunden
 ausrüstung aufgeteilt
-
+sehen die yuan-ti leichen
+keine spur von dorns truppe
 
 ###  **Protokoll:**
 
