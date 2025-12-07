@@ -67,6 +67,9 @@ hinterlassen nachricht für dorns truppe
 gehen zu schlachtfeld
 yuan-ti gelootet
 castor kassiert die zwei naga giftzähne
+rhuk führt small talk mit wachen
+echo übergibt sich
+-1 banane
 
 ###  **Protokoll:**
 
