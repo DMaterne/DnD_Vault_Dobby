@@ -78,6 +78,9 @@ alles fliegende weg
 kompass funktioniert normal
 warten in drachen höhle
 schießen auf ihn
+frightening aura
+drei wachen fliehen
+layer action: höhleneingang wird verschlossen, die drei fliehenden in eis gefangen
 
 ###  **Protokoll:**
 
