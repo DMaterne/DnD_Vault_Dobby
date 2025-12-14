@@ -4,10 +4,10 @@
 
 | Name                           | Spieler | Rasse | Class | Subclass | Level | Rolle
 |-----------------------------------|--------------|--------|-|-|-|-|
-| [[Castor Aegis]] | Domi | Mensch | Artificer | Armorer | 6 | Tank 
-| [[Echo]] | Iggy | Tabaxi | Ranger / Rouge | Gloomstalker | 5 / 1 | Furry
-| [[Leo Eisenfaust]]             | Schorschus | Mensch | Paladin | Oath of Devotion | 6 | Healer
-| [[Rhuk]] | Tjubi | Goblin | Monk | Way of Shadow | 6 | Maskottchen
+| [[Castor Aegis]] | Domi | Mensch | Artificer | Armorer | 7 | Tank 
+| [[Echo]] | Iggy | Tabaxi | Ranger / Rouge | Gloomstalker | 5 / 2 | Furry
+| [[Leo Eisenfaust]]             | Schorschus | Mensch | Paladin | Oath of Devotion | 7 | Healer
+| [[Rhuk]] | Tjubi | Goblin | Monk / Warlock | Way of Shadow / Archfey | 6 / 1 | Maskottchen
 
 ## Wichtige Links
 
