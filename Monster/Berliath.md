@@ -4,8 +4,8 @@
 
 > [!infobox]
 > # Beliath
-> ![[NPC_Placeholder.png|cover hsmall]]
-> ###### [[NPC_Placeholder.png|Vollbild]]
+> ![[Berliath.jpg|cover hsmall]]
+> ###### [[Berliath.jpg|Vollbild]]
 > ###### Übersicht
 > | Typ |  Stat |
 > | ---- | ---- |
