@@ -75,7 +75,6 @@
 > > }
 > > ```
 >
->
 > > [!danger]+ Aktuelle NPCs
 > > ```dataviewjs
 > > const SESSIONS_FOLDER = "Public/Session Protocol";
