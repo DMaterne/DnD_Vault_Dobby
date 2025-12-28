@@ -75,6 +75,21 @@ Long Rest
 
 Leo und Rhuk sind wieder in der Stadt und verkaufen den Loot. Echo hat noch zwei Tage Bettruhe. Zahlen Schulden ab. 73gp übrig. 
 
+1. Tag des 11. Monats (Winteranfang)
+
+Brechen wieder auf. 
+- Tag 1 - 5: Ereignislos
+- Tag 6: Ruinen im Südwesten am Sumpfrand
+
+Einzelne Mauern, Dächer, alles eingesunken (ca. Hälfte sichtbar)
+Jarvis + Rhuks Auge: Airborne Scout
+-> sieht unbewohnt aus, kein gutes Versteck
+Jarvis fliegt näher ran. Entdecken Schätze aber Wasser ist zu kalt. Ziehen weiter.
+- Tag 8: Rhuk macht ein Opfer an seine Chaja
+- erreichen die Wüste am Ende von Tag 8
+- Tag 10: in der linken sind komische Schatten zu erkennen, die in den Himmel ragen
+Jarvis und das Auge düsen los. Erkennt eine Turmsäule, eine von 4, drei sind zusammengebrochen. Zwischen den Säulen thront ein Gebäude. Kuppeln, Goldverzierungen und mehr, wahrscheinlich ein Palast. Aber dieser scheint beschädigt. Etwa 3 Stunden Marsch entfernt.
+
 ###  **Protokoll:**
 
 
