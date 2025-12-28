@@ -51,11 +51,11 @@ Nehmen den Auftrag an: Wagen mit Spanntuch, Trittbrett, leere Kisten und Wasserf
 
 Habel Bastelmetall, Schilf dabei und Echo war nochmal klauen.
 
-Rhuk im Wagen als Kind verkleidet, Echo als Händler vorne, Leo daneben als Wache und Castor hinten als Wache.
+[[Rhuk]] im Wagen als Kind verkleidet, Echo als Händler vorne, Leo daneben als Wache und Castor hinten als Wache.
 
-- Tag 1 ereignislos
-- Tag 2 Rhuk schickt Floß mit Tagesration den Wellen entgegen -> Opfergabe, wiedersetzt sich Wellen und geht unter, erzählt er hat Frau mit großen Möpsen getroffen
-- Tag 3 
+- Tag 1: ereignislos
+- Tag 2: [[Rhuk]] schickt Floß mit Tagesration den Wellen entgegen -> Opfergabe, wiedersetzt sich Wellen und geht unter, erzählt er hat Frau mit großen Möpsen getroffen
+- Tag 3: Monster Manual wird geholt: Gruppe Knoll greift im Sumpf an
 
 ###  **Protokoll:**
 
