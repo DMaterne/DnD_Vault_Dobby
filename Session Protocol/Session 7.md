@@ -57,7 +57,23 @@ Habel Bastelmetall, Schilf dabei und Echo war nochmal klauen.
 - Tag 2: [[Rhuk]] schickt Floß mit Tagesration den Wellen entgegen -> Opfergabe, wiedersetzt sich Wellen und geht unter, erzählt er hat Frau mit großen Möpsen getroffen
 - Tag 3: Monster Manual wird geholt: Gruppe Knoll greift im Sumpf an
 
-Tote Gnolls werden zu Ghosts wenn durch non-holy Schaden erledigt
+Tote Gnolls werden zu Ghosts wenn durch non-holy Schaden erledigt. Ein Gnoll hat ne Waffe zum Paralysieren. Erwischt Echo. Echo wird gecrittet. Echo Tot.
+Gewinnen Kampf. 
+Castor teleportiert sich mit Echo in die Kaserne. Ruft nach Hilfe und rennt Richtung Zoak. 6 Sekunden über vor dem Gebäudeeingang. Geht rechts. Tür oder Gang? Tür! Medizinflügel. Castor schreit "Wiederbeleben JETZT" vollkommen erschöpft. Heiler stellt sich daneben.
+
+Echo ist in einer schwarzen leere. Hat Schmerzen, aber die Schreie sind stumm. Es fühlt sich an, als ob jemand sie systematisch, fast schon medizinisch, auseinandernimmt. Eine kalte, metallische, klauenartige Konstruktion bohrt sich in den Körper. Diese fasst das Herz und versucht dieses zu drücken bis etwas im Körper platzt und Sie wieder erwacht. Sie hört nichts, nur Stille und Schmerz. Sie erkennt Castor. Sie lebt für den Moment. Die Geräusche der Welt kehren zurück. Sie weiß, dass das ihr dritter Tod war. Ihre Seele ist beschädigt. Wiederbelebungen sind nicht mehr möglich. Der Debuff "Vom Tod berührt" wird zu "Vom Tod umarmt" (-2 CON, true resurrection ist einzige Wiederbelebungsmöglichkeit, Resistenz Necrotic, Schwäche Radient). 
+Mit rauer Stimme sagt sie etwas. Die Wiederbelebung kostet 150 gp. Wir haben Schulden... nicht schon wieder :( 
+Castor soll nach Necromancer fragen, gibt keine hier. Dann erstattet er Bericht. Liest bei Mutti Eisenfaust Bücher und sucht nach Infos zu Echos Zustand.
+
+Leo und Rhuk looten. Nehmen die Handaxe die paralysiert hat. Diese scheint an die Geister zu erinnern. Scheint eine nekromantische Verzauberung zu sein. Sammeln:
+- 6 Lederüstungen (84gp)
+- 5 Gleven (85gp)
+- 1 Handaxe (CON Save 15, sonst Paralyse, +1 Weapon)
+- 6 Langbögen (54gp)
+- Haut der Fang of Yeenoghu (Rhuk)
+Long Rest
+
+Leo und Rhuk sind wieder in der Stadt und verkaufen den Loot. Echo hat noch zwei Tage Bettruhe. Zahlen Schulden ab. 73gp übrig. 
 
 ###  **Protokoll:**
 
