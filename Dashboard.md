@@ -7,7 +7,7 @@
 | [[Castor Aegis]] | Domi | Mensch | Artificer | Armorer | 7 | Tank 
 | [[Echo]] | Iggy | Tabaxi | Ranger / Rouge | Gloomstalker | 5 / 2 | Furry
 | [[Leo Eisenfaust]]             | Schorschus | Mensch | Paladin | Oath of Devotion | 7 | Healer
-| [[Rhuk]] | Tjubi | Goblin | Monk / Warlock | Way of Shadow / Archfey | 6 / 1 | Maskottchen
+| [[Rhuk]] | Tjubi | Goblin | Monk / Warlock | Way of Shadow / Archfey | 6 / 1 | Edgelord
 
 ## Wichtige Links
 
