@@ -140,5 +140,11 @@ In der anschließenden Downtime las Echo, stahl und suchte nach Heilern. Castor 
 
 ### **Zusammenfassung:**
 
+Castor stellte der [[Gruppe]] seinen Homunculus Jarvis vor und verteilte Runensteine mit _Fireball_. Echo und Rhuk erhielten Heiltränke. Nach mehreren Besorgungen in der Stadt – darunter Bücher zu Draconic, Ausrüstung und Übersetzungshilfen – traf sich die Gruppe mit **[[Hauptmann Zoak]]**, der sechs Soldaten und spezielle, gegen Drachen wirksame Ausrüstung bereitstellte. Als Belohnung wurde der freie Zugriff auf den Hort des Drachen zugesagt.
 
+Auf dem Weg durch Dschungel und Wasserfälle fand die Gruppe [[Yuan-Ti]]-Leichen, jedoch keine Spur von Dorns verschollener Truppe. In der Drachenhöhle kam es zum Kampf mit dem jungen Eisdrache [[Berliath]]. Durch Furchtaura, Lair-Actions und eine zweite Kampfphase mit Eispanzerung eskalierte der Kampf schnell. Mehrere Wachen starben oder flohen, Jarvis wurde zerstört, und auch die Gruppe erlitt schwere Verluste. Castor und Echo gingen mehrfach zu Boden; [[Echo]] starb kurzzeitig und wurde mittels _Revivify_ zurückgeholt.
+
+Der Rückzug gelang nur knapp mithilfe von _Dimension Door_. Echo behielt eine permanente Beinverletzung (−10 ft Bewegung), Castor verlor einen Arm (Nachteile bei körperlicher Kraft). Zoak zeigte sich nach dem Bericht verunsichert, da der Drache Fähigkeiten zeigte, die für sein Alter untypisch sind, und begann mit Vorbereitungen zum Schutz der Stadt.
+
+Während der Downtime suchte die Gruppe nach Heilung, Wissen und Arbeit. Echo erhielt ein mysteriöses Paket von **[[Vicari]]** mit einer blutbefleckten Statue der **Lolth**. Die Gruppe stieg im Level auf, und Echo trägt seither den Status _„Vom Tod berührt“_.
 
