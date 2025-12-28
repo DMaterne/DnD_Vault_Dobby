@@ -57,6 +57,8 @@ Habel Bastelmetall, Schilf dabei und Echo war nochmal klauen.
 - Tag 2: [[Rhuk]] schickt Floß mit Tagesration den Wellen entgegen -> Opfergabe, wiedersetzt sich Wellen und geht unter, erzählt er hat Frau mit großen Möpsen getroffen
 - Tag 3: Monster Manual wird geholt: Gruppe Knoll greift im Sumpf an
 
+Tote Gnolls werden zu Ghosts wenn durch non-holy Schaden erledigt
+
 ###  **Protokoll:**
 
 
