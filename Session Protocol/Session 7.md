@@ -88,7 +88,8 @@ Jarvis fliegt näher ran. Entdecken Schätze aber Wasser ist zu kalt. Ziehen wei
 - Tag 8: Rhuk macht ein Opfer an seine Chaja
 - erreichen die Wüste am Ende von Tag 8
 - Tag 10: in der linken sind komische Schatten zu erkennen, die in den Himmel ragen
-Jarvis und das Auge düsen los. Erkennt eine Turmsäule, eine von 4, drei sind zusammengebrochen. Zwischen den Säulen thront ein Gebäude. Kuppeln, Goldverzierungen und mehr, wahrscheinlich ein Palast. Aber dieser scheint beschädigt. Etwa 3 Stunden Marsch entfernt.
+Jarvis und das Auge düsen los. Erkennt eine Turmsäule, eine von 4, drei sind zusammengebrochen. Zwischen den Säulen thront ein Gebäude. Kuppeln, Goldverzierungen und mehr, wahrscheinlich ein Palast. Aber dieser scheint beschädigt. Etwa 3 Stunden Marsch entfernt. Nehmen Wagenräder mit und den Ochsen "Oxfried", lassen aber Wagen und Fracht zurück. 
+Kommen bei Palast-Ruinen an. Ruinen im Sand versunken. Castor haut Brocken aus der Wand und macht Leuchtsteine für alle. Große Halle, links und rechts Durchgänge, vorne Treppe nach oben. Unten ist nichts. Schlangenmuster am Geländer, Geschmückt mit Goldfäden. Verblasster Teppich unter dem Sand, der schon am zerfallen ist. Übermaß an Schlangenmustern und Goldschmuck im extrem alten Tempel, evtl. älter als die aktuelle Zivilisation. Wirkt wie ein vergangener Machtsitz.
 
 ###  **Protokoll:**
 
