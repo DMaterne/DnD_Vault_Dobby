@@ -90,6 +90,17 @@ Jarvis fliegt näher ran. Entdecken Schätze aber Wasser ist zu kalt. Ziehen wei
 - Tag 10: in der linken sind komische Schatten zu erkennen, die in den Himmel ragen
 Jarvis und das Auge düsen los. Erkennt eine Turmsäule, eine von 4, drei sind zusammengebrochen. Zwischen den Säulen thront ein Gebäude. Kuppeln, Goldverzierungen und mehr, wahrscheinlich ein Palast. Aber dieser scheint beschädigt. Etwa 3 Stunden Marsch entfernt. Nehmen Wagenräder mit und den Ochsen "Oxfried", lassen aber Wagen und Fracht zurück. 
 Kommen bei Palast-Ruinen an. Ruinen im Sand versunken. Castor haut Brocken aus der Wand und macht Leuchtsteine für alle. Große Halle, links und rechts Durchgänge, vorne Treppe nach oben. Unten ist nichts. Schlangenmuster am Geländer, Geschmückt mit Goldfäden. Verblasster Teppich unter dem Sand, der schon am zerfallen ist. Übermaß an Schlangenmustern und Goldschmuck im extrem alten Tempel, evtl. älter als die aktuelle Zivilisation. Wirkt wie ein vergangener Machtsitz.
+Proben von Stein, Geländer und Teppich. 
+Gehen oben hin und versuchen die Türe aufzusprengen. Shatter: KABOOOOOM!
+Der Sand fließt wie Wasser aus einem Damm. Nach einiger Zeit ist eine Art Thron erkennbar. Im Sand sind überall [[Yuan-Ti]]-Skelette und Funkeln. Haben die Schatzkammer/Thronsaal gefunden. Der Thron ist leer.
+Rhuk nimmt einen Diamanten, kann sich aber nicht hinausteleportieren, Magie scheint darin nicht zu wirken.
+- 15 Perlen, etwa 100gp Wert
+- Ingesamt 748 Platin, 2311 Gold, 4953 Silber, 571 Kupfer
+- Ingesamt Juwelen und Edelsteine im Wert von 3500 Gold
+- Schmuck 2000gp
+- .
+Der rechte Armlehne vom Tron lässt sich bewegen. Man hört wie sich eine Tür öffnet. Hinten am Thron ist eine Öffnung, ein Schwert schwbt dort. Ein Zweihänder, Großschwert mit viele Verzierungen. Leo zieht es heraus. Ledergriff mit Schlangenhautmuster. Unter zwei gpldene Schlangenköpfe, der Griff unter dem Leder sind die Körper die sich winden und deren Schwänze die Crossguard bilden. Flambergeklinge aus zwei gewobenen Metallstücken, die in einer schlangenzungenartigen Spitze enden. Die silberne Klinge leuchtet leicht in Licht. Scheint auch Einhändig führbar zu sein, wenn mit der Bahamut-Hand geführt. Die Klinge Schmilzt Sand sofort zu Glas.
+Gehen zurück zum Wagen, bauen die Räder wieder an
 
 ###  **Protokoll:**
 
