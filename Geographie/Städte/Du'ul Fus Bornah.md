@@ -11,7 +11,7 @@ Du'ul Fus Bornah ist die Hauptstadt. [[Castor Aegis]] ist hier groß geworden.
 > ###### Stats
 > | Typ |  Stat |
 > | ---- | ---- |
-> | Kontinent | [[Kontinent of xxx]] |
+> | Kontinent | [[Bron Muz]] |
 > | Bevölkerung | 12+ |
 > | Oberhaupt | [[König]] |
 
