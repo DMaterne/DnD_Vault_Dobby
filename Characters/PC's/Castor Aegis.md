@@ -50,6 +50,8 @@ Die Gelder wurden gestrichen. Die Labore verschlossen. Seine Eltern stellten kla
 
 46 HP nicht vergessen da DND Beyond Probleme macht
 
+
+
 ---
 
 ## Kindheit:

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ![636252789083357808.jpeg](https://media-waterdeep.cursecdn.com/avatars/thumbnails/0/415/1000/1000/636252789083357808.jpeg)  
 #### White Dragon
 
@@ -81,3 +82,41 @@ The region containing a legendary white dragon’s lair is warped by the dragon�
 - If the dragon wishes to move through a wall, it can do so without slowing down. The portion of the wall the dragon moves through is destroyed, however.
 
 If the dragon dies, the fog and precipitation fade within 1 day. The ice walls melt over the course of 1d10 days.
+=======
+%% tags: #monster %%
+
+## Bio
+
+> [!infobox]
+> # Name
+> ![[NPC_Placeholder.png|cover hsmall]]
+> ###### [[NPC_Placeholder.png|Vollbild]]
+> ###### Übersicht
+> | Attribut |  Wert |
+> | ---- | ---- |
+> | Type | Dragon |
+> | Size | large |
+> | Vorkommen | [[Südöstliche Wälder]] | 
+> | Sprache | Comon, Draconic |
+> | Intelligenz | Hoch |
+
+
+<div style="min-height: 500px; padding: 12px; border: 0px solid var(--text-faint); border-radius: 10px; background-color: var(--background-secondary); line-height: 1.5;">
+<b>Beschreibung:</b><br>
+Beliath ist ein weißer Drache der in der Höhle unterhalb des Sees in den Südöstlichen Wäldern lebt.<br><br>
+Er hat dort sein Layer.
+</div>
+
+
+## Verhalten
+
+Er ist aggresiv und an Schätzen interessiert.
+
+## Verwandte Seiten
+
+```dataview
+list from [[Beliath]]
+```
+
+
+>>>>>>> origin/main

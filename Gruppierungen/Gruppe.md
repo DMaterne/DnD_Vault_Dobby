@@ -6,7 +6,7 @@
 > | Attribut |  Wert |
 > | ---- | ---- |
 > | Art | Abenteurer |
-> | Leitspruch | _„Ich mag Schoki“_  |
+> | Leitspruch | _„IWer keinmal stirbt dem traut man nicht“_  |
 > | Hauptsitz | [[Bron Muz]] |
 > 
 ## Mitglieder
