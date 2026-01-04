@@ -199,5 +199,13 @@ Nach dieser Entdeckung kehrt die Gruppe zum Wagen zurück und montiert die Räde
 
 ### **Zusammenfassung:**
 
+Nach den Ereignissen der vorherigen Expedition bricht die Gruppe – **[[Castor Aegis]]**, **[[Echo]]**, **[[Leo Eisenfaust]]** und **[[Rhuk]]** – aus dem stinkenden Insektenbau auf und folgt Hinweisen zu einem scheinbar normalen Wasserfall. Der angrenzende See entpuppt sich jedoch als unnatürlich: Das Wasser ist vollkommen still, ohne Zu- oder Abfluss, Sand wird nicht aufgewirbelt, Feuer zeigt keine Wirkung, und selbst reinigende Magie bleibt wirkungslos. Zwei Monde stehen am Himmel, der Wald ist still – und dennoch fühlt sich alles trügerisch normal an.
 
+Unter der Wasseroberfläche entdecken sie eine massive Struktur: eine siebenstufige Pyramide aus Sandstein, umgeben von vier **Obsidian**-Säulen, bedeckt mit uralten Schriftzeichen, die älter wirken als jede bekannte Sprache. Zeit und Wahrnehmung beginnen sich zu verzerren. Die Gruppe erlebt Illusionen, Gespräche verlaufen ins Leere, und auf der Spitze der Pyramide erscheinen lebensechte Doppelgänger der Abenteurer selbst. Erst nachdem ein verborgenes Mechanismus-Ritual ausgelöst wird, öffnet sich ein Abstieg in die Tiefe.
+
+Unterhalb der Pyramide erstreckt sich eine gigantische, kilometerweite Pilzhöhle. Holzstege, Leitern und Plattformen verbinden verschiedene Ebenen, riesige Pilze wachsen zwischen trüben Kristallen. In der Ferne ragt ein halb verfallener Turm aus einem unterirdischen See. Während die Gruppe Proben sammelt, werden sie von **Yuan-Ti** angegriffen. Mehrere der schlangenartigen Humanoiden wirken Magie und flüstern Suggestionen, die insbesondere **[[Leo Eisenfaust]]** und **[[Rhuk]]** beinahe dazu zwingen, sich dem Turm zu nähern.
+
+Die Gruppe zieht sich zurück. **[[Castor Aegis]]** trifft eine riskante Entscheidung: Er wird unsichtbar und macht sich allein auf den Weg, um den Turm auszukundschaften.
+
+**Die Session endet**, als Castor lautlos auf den halb verfallenen Turm zuschleicht – während unter ihm die pilzüberwucherte Tiefe wie ein lebendiger Organismus atmet.
 

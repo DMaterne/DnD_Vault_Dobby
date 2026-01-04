@@ -23,4 +23,4 @@ darkmode: false ### marker
 
 ## Geschichte
 
-XXX ist ein relativ frisch besiedelter Kontinent. Die Bevölkerung ernährt sich Hauptsächlich von der Fischerei.
+Bron Muz ist ein relativ frisch besiedelter Kontinent. Die Bevölkerung ernährt sich Hauptsächlich von der Fischerei.

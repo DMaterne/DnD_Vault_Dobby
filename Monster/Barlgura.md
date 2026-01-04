@@ -4,8 +4,8 @@
 
 > [!infobox]
 > # Barlgura
-> ![[Barlgura.png|cover hsmall]]
-> ### [[Barlgura.png|Vollbild]]
+> ![[barlgura.png|cover hsmall]]
+> ### [[barlgura.png|Vollbild]]
 > ###### Übersicht
 > | Typ |  Stat |
 > | ---- | ---- |

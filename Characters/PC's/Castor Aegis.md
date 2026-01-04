@@ -6,8 +6,8 @@
 > [!infobox]
 > # Castor Aegis
 > ![[CastorAlltagsgewand.png|cover hsmall]]
-> ![[PCme.png|cover hsmall]]
-> ### [[CastorAlltagsgewand.png|Vollbild 1 ]] [[PCme.png|Vollbild 2]]
+> ![[CastorArmor.png|cover hsmall]]
+> ### [[CastorAlltagsgewand.png|Vollbild 1 ]] [[CastorArmor.png|Vollbild 2]]
 > ###### Stats
 > | Typ |  Stat |
 > | ---- | ---- |
@@ -48,12 +48,6 @@ Doch Innovation ist teuer – und seine Familie verlor irgendwann die Geduld.
 "Du bist kein Zauberer, kein Gelehrter, du bist... ein Bastler."  
 Die Gelder wurden gestrichen. Die Labore verschlossen. Seine Eltern stellten klar: Wenn er seinen Weg gehen will, dann soll er ihn selbst finanzieren.
 
-46 HP nicht vergessen da DND Beyond Probleme macht
-
-
-
----
-
 ## Kindheit:
 
 Wie für den Adel üblich, wurde Castor in den Wissenschaften und im Nahkampf ausgebildet. Der Schwertkampf liegt ihm nicht, weswegen er sich im unbewaffneten Nahkampf übte. Zum Abschluss seiner Nahkampfausbildung erhielt er von seinen Eltern einen Cloak of Protection. 
@@ -62,13 +56,9 @@ Mit 14 Jahren wurden ihm die finanziellen Mittel für seine Erfindungen gestrich
 
 Im Alter von 17 Jahren baute er im Auftrag von [[Leo Eisenfaust]] eine Armprothese.
 
----
-
 ## Rüstung:
 
 Seine magische Rüstung wird über die Runen seines magischen Tattoos gesteuert. Diese helfen ihm magische Energie zu steuern und umzuleiten. In der Rüstung sind verschieden Runen und Mechanismen verbaut, die ihm erlauben Zauber zu wirken und seine Körperlichen Fähigkeiten zu verstärken.
-
----
 
 ## Begegnung mit [[Rhuk]]:
 
@@ -81,8 +71,6 @@ Und was der Klan bot, war einfach: Geld. Material. Und eine moralisch… flexibl
 
 Was genau die Hautdiebe tun? Er fragt nicht. Sie zahlen. Und er liefert.
 
----
-
 ## Heute:
 
 Er arbeitet als inoffizieller Entwickler für den Klan. Manche Aufträge sind einfach – ein magischer Schlüssel, ein Sensor, ein Lautlosigkeitszauber in Gerätform. Andere sind... diffiziler. Einmal entwickelte er einen Runenprojektor, der Illusionen erzeugte, die sogar einen Zollbeamten täuschen konnten. Ein anderes Mal ein Greifhaken, der auf einer verdichteten Windkapsel basierte.
@@ -91,16 +79,12 @@ Ab und zu hat er auch kleiner Aufträge für den [[Zirkel der Spiegel]] erledigt
 
 Er weiß: Was er baut, wird für Dinge genutzt, über die man nicht redet. Aber das ist ihm egal. Solange er weiter tüfteln darf – und solange das nächste Upgrade seiner Rüstung nur ein Auftrag entfernt ist.
 
----
-
 ## Ausblick:
 
 Er träumt davon, eines Tages etwas zu bauen, das die Welt verändert. Vielleicht eine neue Energiequelle, vielleicht eine revolutionäre Waffe. Vielleicht einfach ein Gerät, das ihn endlich über die magiebegabten Mitglieder seiner Familie erhebt.
 
 [[Rhuk]] ist dabei mehr als nur ein Kunde geworden. Er ist ein Verbündeter. Vielleicht sogar ein Freund.  
 Zwei Wesen aus völlig unterschiedlichen Welten – aber beide getrieben von derselben Wahrheit.
-
----
 
 ## Alignment: Lawful Neutral
 

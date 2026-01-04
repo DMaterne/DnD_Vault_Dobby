@@ -1,3 +1,5 @@
+%% tags: #group %%
+
 > [!infobox]
 > # Name
 > ![[NPC_Placeholder.png]]
