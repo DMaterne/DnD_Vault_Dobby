@@ -22,7 +22,7 @@ Rhuk: Zirkus Informieren, Maggie-Warcock-Gey Shit gelernt
 Leo: Meditation und Training mit Wachen
 -> 48 Gold, 30 Silber, 16 Kupfer, . , Stärke oder Dex +1
 
-Funkstille von Vicari
+Funkstille von [[Vicari]]
 Castor hat 5 gold Schulden bei [[Leo Eisenfaust]] für die Operation
 
 Rhuk und Echo gehen zum Silbernen Anlitz, müssen Drachen töten und Loot übergeben
@@ -114,7 +114,7 @@ Die folgende Downtime verbringen die Gruppenmitglieder sehr unterschiedlich. **[
 
 **[[Leo Eisenfaust | Leo]]** verbringt seine Downtime mit Meditation und intensivem Training mit der Stadtwache. Diese Phase stärkt ihn körperlich und mental; er geht mit klar verbesserter Kampfkraft daraus hervor.
 
-Parallel dazu herrscht weiterhin Funkstille von **Vicari**, was bei der Gruppe zunehmend Unruhe auslöst. Zusätzlich steht im Raum, dass Castor noch **fünf Gold Schulden bei [[Leo Eisenfaust]]** für eine frühere Operation hat – eine Kleinigkeit, die jedoch symptomatisch für die angespannte finanzielle Gesamtlage ist.
+Parallel dazu herrscht weiterhin Funkstille von **[[Vicari]]**, was bei der Gruppe zunehmend Unruhe auslöst. Zusätzlich steht im Raum, dass Castor noch **fünf Gold Schulden bei [[Leo Eisenfaust]]** für eine frühere Operation hat – eine Kleinigkeit, die jedoch symptomatisch für die angespannte finanzielle Gesamtlage ist.
 
 Im Austausch mit der Stadtwache erhalten **Leo** und **Castor** einen ernüchternden Überblick über die militärische Situation. Die Mauern werden verstärkt, Ballisten aufgestellt, Netzwerfer vorbereitet. Die Garnison wird gezielt gegen physischen Schaden und Eis ausgerüstet, und spezielle Anti-Drachen-Waffen werden verteilt. Dennoch gibt es Schwachstellen: Die Ostseite der Stadt gilt als vergleichsweise ungeschützt, und die Handelswege sind nur noch sporadisch gesichert. Mehrere Karawanen sind bereits verschwunden; regulären Verkehr gibt es kaum noch. Nur ausgebildete Späher wagen sich überhaupt in die Wälder. Die Hauptstadt ist zu Fuß oder mit Karren etwa einen Monat entfernt, mit Pferden etwa anderthalb Wochen.
 
