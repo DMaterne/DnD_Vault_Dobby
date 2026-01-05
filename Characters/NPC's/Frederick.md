@@ -4,8 +4,8 @@
 
 > [!infobox]
 > # [[Frederick]]
-> ![[Frederick_Portrait.png|cover hsmall]]
-> ###### [[Frederick_Portrait.png|Vollbild]]
+> ![[fredrick.png|cover hsmall]]
+> ###### [[fredrick.png|Vollbild]]
 > ###### Stats
 > | Typ |  Stat |
 > | ---- | ---- |

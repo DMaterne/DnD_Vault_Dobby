@@ -4,8 +4,8 @@
 
 > [!infobox]
 > # [[Erek]]
-> ![[Erek_Portrait.png|cover hsmall]]
-> ###### [[Erek_Portrait.png|Vollbild]]
+> ![[erek.png|cover hsmall]]
+> ###### [[erek.png|Vollbild]]
 > ###### Stats
 > | Typ |  Stat |
 > | ---- | ---- |
