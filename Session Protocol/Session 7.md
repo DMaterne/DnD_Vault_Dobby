@@ -118,7 +118,7 @@ Parallel dazu herrscht weiterhin Funkstille von **[[Vicari]]**, was bei der Grup
 
 Im Austausch mit der Stadtwache erhalten **Leo** und **Castor** einen ernüchternden Überblick über die militärische Situation. Die Mauern werden verstärkt, Ballisten aufgestellt, Netzwerfer vorbereitet. Die Garnison wird gezielt gegen physischen Schaden und Eis ausgerüstet, und spezielle Anti-Drachen-Waffen werden verteilt. Dennoch gibt es Schwachstellen: Die Ostseite der Stadt gilt als vergleichsweise ungeschützt, und die Handelswege sind nur noch sporadisch gesichert. Mehrere Karawanen sind bereits verschwunden; regulären Verkehr gibt es kaum noch. Nur ausgebildete Späher wagen sich überhaupt in die Wälder. Die Hauptstadt ist zu Fuß oder mit Karren etwa einen Monat entfernt, mit Pferden etwa anderthalb Wochen.
 
-Echo versucht, bei _Magic Mike_ **Drachen-Eis-Kristalle** zu erwerben, doch der Vorrat ist vollständig aufgebraucht. Gespräche über [[Lolth]] verlaufen auffällig stockend – das Thema ist verpönt, die Menschen meiden es bewusst. Leo bringt **Naga-Zähne** ins Gespräch; gemeinsam kommt man zu der Einschätzung, dass **Säure möglicherweise gegen Drachen-Eis wirksam ist**, während hochkonzentriertes Gift zumindest theoretisch gegen den Drachen selbst helfen könnte. Leo erwirbt schließlich acht Ampullen Säure für vierzig Gold.
+Echo versucht, bei [[Magic Mike]] **Drachen-Eis-Kristalle** zu erwerben, doch der Vorrat ist vollständig aufgebraucht. Gespräche über [[Lolth]] verlaufen auffällig stockend – das Thema ist verpönt, die Menschen meiden es bewusst. Leo bringt **Naga-Zähne** ins Gespräch; gemeinsam kommt man zu der Einschätzung, dass **Säure möglicherweise gegen Drachen-Eis wirksam ist**, während hochkonzentriertes Gift zumindest theoretisch gegen den Drachen selbst helfen könnte. Leo erwirbt schließlich acht Ampullen Säure für vierzig Gold.
 
 Castor verfolgt währenddessen eine andere Spur. Er sucht einen Kartographen auf, um ein Bild zu analysieren, das einen Jungen vor einem Berg zeigt. Der alte Mann – asiatischer Schnauzer, ledrige Haut, Monokel, beeindruckendes Fachwissen – untersucht das Bild sorgfältig und gibt es zurück. Sein Urteil ist eindeutig: Der dargestellte Berg existiert nicht mehr. Er wurde vor Jahrhunderten vollständig abgetragen, und an seiner Stelle steht heute die Hauptstadt **[[Du'ul Fus Bornah]]**. Alternativ könnte das Bild auch **[[Berliath]]** zeigen. Beides deutet auf ein enormes Alter und eine tiefere historische Bedeutung hin.
 
@@ -169,27 +169,17 @@ Oben wird die Tür mit einem **Shatter** aufgesprengt. Der Sand dahinter fließt
 
 - 15 Perlen (~100 gp)
     
-- 748 Platin
+- 751 Platin
     
 - 2311 Gold
     
-- 4953 Silber
+- 4941 Silber
     
 - 571 Kupfer
     
 - Edelsteine im Wert von ca. 3500 Gold
     
 - Schmuck im Wert von ca. 2000 Gold
-
-Jeder Spieler erhält später
-
-- **187 Platin**
-    
-- **1077 Gold**
-    
-- **1245 Silber**
-    
-- **150 Kupfer**
     
 Die Edelsteine werden vorerst behalten um sie später zu vercraften.
 
@@ -199,13 +189,10 @@ Nach dieser Entdeckung kehrt die Gruppe zum Wagen zurück und montiert die Räde
 
 ### **Zusammenfassung:**
 
-Nach den Ereignissen der vorherigen Expedition bricht die Gruppe – **[[Castor Aegis]]**, **[[Echo]]**, **[[Leo Eisenfaust]]** und **[[Rhuk]]** – aus dem stinkenden Insektenbau auf und folgt Hinweisen zu einem scheinbar normalen Wasserfall. Der angrenzende See entpuppt sich jedoch als unnatürlich: Das Wasser ist vollkommen still, ohne Zu- oder Abfluss, Sand wird nicht aufgewirbelt, Feuer zeigt keine Wirkung, und selbst reinigende Magie bleibt wirkungslos. Zwei Monde stehen am Himmel, der Wald ist still – und dennoch fühlt sich alles trügerisch normal an.
+Nach den letzten Ereignissen entwickelt die Gruppe eine Resistenz gegen die bewusstseinsbeeinflussenden Effekte des Drachen [[Berliath]]. In der folgenden Downtime gehen alle unterschiedliche Wege: **[[Echo]]** heilt, lernt Draconic, begeht Diebstähle und erhält ein verstörendes Paket mit einer blutverschmierten Statue der [[Lolth]]. **[[Castor Aegis]]** arbeitet als Heiler und Forscher und gelangt schließlich zu einer vollständigen Plattenrüstung. **[[Rhuk]]** sammelt Informationen, hält Kontakt zum Zirkus, lernt gebrochenes Sylvan und erhält einen mysteriösen Brief mit Bezug zur *Dame im See*. **[[Leo Eisenfaust]]** trainiert intensiv mit der Stadtwache und stärkt seine Kampffähigkeiten. Gleichzeitig bleibt **[[Vicari]]** verschwunden, die Stadt rüstet massiv gegen Drachen auf, und die Handelswege werden zunehmend unsicher.
 
-Unter der Wasseroberfläche entdecken sie eine massive Struktur: eine siebenstufige Pyramide aus Sandstein, umgeben von vier **Obsidian**-Säulen, bedeckt mit uralten Schriftzeichen, die älter wirken als jede bekannte Sprache. Zeit und Wahrnehmung beginnen sich zu verzerren. Die Gruppe erlebt Illusionen, Gespräche verlaufen ins Leere, und auf der Spitze der Pyramide erscheinen lebensechte Doppelgänger der Abenteurer selbst. Erst nachdem ein verborgenes Mechanismus-Ritual ausgelöst wird, öffnet sich ein Abstieg in die Tiefe.
+Die Gruppe nimmt den Auftrag an, die Vorfälle auf den Handelsrouten zu untersuchen und die Hauptstadt [[Du'ul Fus Bornah]] zu informieren, getarnt als Händlerkarawane. Die Reise verläuft zunächst ruhig, bis sie im Sumpf von Gnollen angegriffen werden, die nach dem Tod als Geister zurückkehren. Eine nekromantische Waffe paralysiert Echo, die im Kampf erneut stirbt. Zwar wird sie zurückgeholt, doch es ist ihr dritter Tod: Ihr Zustand verschlechtert sich dauerhaft, und Wiederbelebungen sind künftig nur noch durch mächtigste Magie möglich. Nach dem Kampf verkauft die Gruppe den erbeuteten Loot, begleicht Schulden und setzt die Reise fort.
 
-Unterhalb der Pyramide erstreckt sich eine gigantische, kilometerweite Pilzhöhle. Holzstege, Leitern und Plattformen verbinden verschiedene Ebenen, riesige Pilze wachsen zwischen trüben Kristallen. In der Ferne ragt ein halb verfallener Turm aus einem unterirdischen See. Während die Gruppe Proben sammelt, werden sie von **Yuan-Ti** angegriffen. Mehrere der schlangenartigen Humanoiden wirken Magie und flüstern Suggestionen, die insbesondere **[[Leo Eisenfaust]]** und **[[Rhuk]]** beinahe dazu zwingen, sich dem Turm zu nähern.
+In der Wüste stoßen sie schließlich auf die Ruinen eines uralten, von Schlangenmotiven geprägten Palastes. Unter Sand und Trümmern entdecken sie eine gewaltige Schatzkammer sowie zahlreiche Skelette der [[Yuan-Ti]]. Ein verborgener Mechanismus im Thron enthüllt zudem ein außergewöhnliches Großschwert von großer Macht, das Leo an sich nimmt. Schwer beladen, mit neuem Reichtum, alten Wunden und einem Artefakt von unklarer Bedeutung setzt die Gruppe ihre Reise fort – in dem Wissen, dass die eigentlichen Konsequenzen dieser Entdeckungen noch vor ihnen liegen.
 
-Die Gruppe zieht sich zurück. **[[Castor Aegis]]** trifft eine riskante Entscheidung: Er wird unsichtbar und macht sich allein auf den Weg, um den Turm auszukundschaften.
-
-**Die Session endet**, als Castor lautlos auf den halb verfallenen Turm zuschleicht – während unter ihm die pilzüberwucherte Tiefe wie ein lebendiger Organismus atmet.
 
