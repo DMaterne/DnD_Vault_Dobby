@@ -21,7 +21,8 @@ castor spammt fire bolt bis dieser zerschellt. leo hackt sich ein.
 leo und castor würfeln d100. castor 78, leo 9. Flüche? castors gedanken werden primitiv. nur noch einsilbige worte, sonst 1d4 schaden.
 kommen auf plattform mit rhuk an. 
 echo auch gerettet. echo trink aus brunnen, verschmilzt mit rüstung. fluch warforged. leo nimmt probe. schritte aus drei richtungen. vorne links und rechts. vor uns jeweils zwei paare leute in lederrüstung. mit seiden-outfits. edel. rote augen lange ohren. gehen zu brunnen. alter dude fragt ob wir den brunnen aktiviert haben. wollen blut von uns. rhuk spendet mit deren dolch. castor mit axt. echo mit kralle und leo auch mit dolch.
-leo fragt nach den augen. drücken mit daumen im quadrat auf den oberkörper, start rechts oben gegen uhrzeigersinn. 11 gehen nach rechts weg. einer zeigt uns weg weg. gehen zurück zur ersten gabelung. kommen zu holzbrücke, gehen weiter zu einer wohnlichen höhle. schlafrollen und feuer, kisten mit kleidung und mehr. verlassenes lager. vlt. 1-2 tage verlassen. blut auf stofffetzen. wir rasten im banditenlager. wachen auf weil der see zurück kommt. tauchen raus. leo und rhuk schlucken wasser -> rhuk: normale michael: kann keine hose tragen und hat dis auf charisma. leo paranoid.
+leo fragt nach den augen. drücken mit daumen im quadrat auf den oberkörper, start rechts oben gegen uhrzeigersinn. 11 gehen nach rechts weg. einer zeigt uns weg weg. gehen zurück zur ersten gabelung. kommen zu holzbrücke, gehen weiter zu einer wohnlichen höhle. schlafrollen und feuer, kisten mit kleidung und mehr. verlassenes lager. vlt. 1-2 tage verlassen. blut auf stofffetzen. wir rasten im banditenlager. wachen auf weil der see zurück kommt. tauchen raus. leo und rhuk schlucken wasser -> rhuk: normale michael: kann keine hose tragen und hat dis auf charisma. leo paranoid. rasten
+folgen am nächsten tag spuren
 
 
 ###  **Protokoll:**
