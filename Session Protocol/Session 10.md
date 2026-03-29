@@ -26,7 +26,8 @@ reden. guten abend. kampf nicht mehr weit entfernt. wirken auf ihn interessant. 
 echo fragt nach ihrem zustand: könig interesssirt und untersucht echo. echo bald dead. wird uns 1-3 fragen beantworten wenn wir überleben.
 dach wird durchsihtig. material mausoleum ist leichenstein. 
 könig steht auf und will sich kloppen
-
+phase 1: ihn kloppen
+phase 2: reißt rüstung ab und beschwört drei magier. chillt selber auf thron
 
 ###  **Protokoll:**
 
