@@ -31,7 +31,8 @@ phase 2: reißt rüstung ab und beschwört drei magier. chillt selber auf thron
 nur magie schaden an magiern. letzter magier haut ab nachdem er sich vor könig verneigt. priester vor könig. werden auf max hp geheilt. priester verschwindet. soenrim tritt vor. zweihänder in rechten hand. hat misty step
 phase 3: str save nach attack -> 5ft. rückwurf
 jarvis kaputt
-
+tpk
+6 dmg zu wenig
 
 ###  **Protokoll:**
 
