@@ -1426,12 +1426,19 @@ async function renderNotes() {
   notesBox.style.borderRadius = "10px";
   notesBox.style.lineHeight = "1.5";
 
+  const MarkdownRenderer = window?.obsidian?.MarkdownRenderer;
+
+  if (!MarkdownRenderer) {
+    notesBox.setText(notesSection);
+    return;
+  }
+
   await MarkdownRenderer.render(
     app,
     notesSection,
     notesBox,
     CHARACTER_PATH,
-    dv.container
+    null
   );
 }
 
@@ -1455,11 +1462,22 @@ async function renderNotes() {
   }
 
 async function renderActiveTab() {
-  if (activeTab === "actions") renderActions();
-  if (activeTab === "features") renderFeatures();
-  if (activeTab === "inventory") renderInventory();
-  if (activeTab === "spells") renderSpells();
-  if (activeTab === "notes") await renderNotes();
+  updateTabStyles();
+
+  try {
+    if (activeTab === "actions") renderActions();
+    if (activeTab === "features") renderFeatures();
+    if (activeTab === "inventory") renderInventory();
+    if (activeTab === "spells") renderSpells();
+    if (activeTab === "notes") await renderNotes();
+  } catch (err) {
+    clearEl(tabContent);
+    tabContent.createEl("div", {
+      text: `Fehler beim Laden des Tabs: ${err.message ?? err}`
+    });
+    console.error(err);
+  }
+
   updateTabStyles();
 }
 
