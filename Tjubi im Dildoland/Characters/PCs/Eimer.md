@@ -1342,13 +1342,76 @@ function renderSpells() {
   });
 }
 
-  function renderNotes() {
-    clearEl(tabContent);
-    tabContent.createEl("div", { text: "Notes" }).style.fontWeight = "600";
-    tabContent.createEl("div", {
-      text: c.notes ?? "Hier können freie Notizen zum Charakter stehen."
-    });
+async function renderNotes() {
+  clearEl(tabContent);
+
+  const title = tabContent.createEl("div", { text: "Notes" });
+  title.style.fontWeight = "700";
+  title.style.fontSize = "1.05em";
+  title.style.marginBottom = "10px";
+
+  const file = app.vault.getAbstractFileByPath(CHARACTER_PATH);
+  if (!file) {
+    tabContent.createEl("div", { text: `Character-Datei nicht gefunden: ${CHARACTER_PATH}` });
+    return;
   }
+
+  const content = await app.vault.cachedRead(file);
+
+  function extractSection(markdown, headingName) {
+    const lines = markdown.split(/\r?\n/);
+    const target = headingName.trim().toLowerCase();
+
+    let start = -1;
+    let baseLevel = -1;
+
+    for (let i = 0; i < lines.length; i++) {
+      const match = lines[i].match(/^(#{1,6})\s+(.*?)\s*$/);
+      if (!match) continue;
+
+      const level = match[1].length;
+      const text = match[2].trim().toLowerCase();
+
+      if (text === target) {
+        start = i + 1;
+        baseLevel = level;
+        break;
+      }
+    }
+
+    if (start === -1) return null;
+
+    let end = lines.length;
+    for (let i = start; i < lines.length; i++) {
+      const match = lines[i].match(/^(#{1,6})\s+(.*?)\s*$/);
+      if (!match) continue;
+
+      const level = match[1].length;
+      if (level <= baseLevel) {
+        end = i;
+        break;
+      }
+    }
+
+    return lines.slice(start, end).join("\n").trim();
+  }
+
+  const notesSection = extractSection(content, "Notes");
+
+  if (!notesSection) {
+    tabContent.createEl("div", { text: "Kein Abschnitt '## Notes' gefunden." });
+    return;
+  }
+
+  const notesBox = tabContent.createEl("div");
+  notesBox.style.padding = "10px";
+  notesBox.style.border = "1px solid var(--background-modifier-border)";
+  notesBox.style.borderRadius = "10px";
+  notesBox.style.whiteSpace = "pre-wrap";
+  notesBox.style.lineHeight = "1.5";
+
+  notesBox.setText(notesSection);
+}
 
   function updateTabStyles() {
     for (const key in tabButtons) {
@@ -1369,12 +1432,12 @@ function renderSpells() {
     }
   }
 
-  function renderActiveTab() {
+async function renderActiveTab() {
   if (activeTab === "actions") renderActions();
   if (activeTab === "features") renderFeatures();
   if (activeTab === "inventory") renderInventory();
   if (activeTab === "spells") renderSpells();
-  if (activeTab === "notes") renderNotes();
+  if (activeTab === "notes") await renderNotes();
   updateTabStyles();
 }
 
