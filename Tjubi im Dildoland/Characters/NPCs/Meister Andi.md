@@ -1,7 +1,7 @@
 ## Overview
 
 ```dataviewjs  
-const CHARACTER_PATH = "Public/3 Backend/EIMER.md";
+const CHARACTER_PATH = "Public/3 Backend/Meister Andi.md";
 const c = dv.page(CHARACTER_PATH);
 
 function modFromScore(score) {
@@ -107,7 +107,7 @@ portraitWrap.style.justifyContent = "center";
 portraitWrap.style.alignItems = "center";
 portraitWrap.style.gap = "8px";
 
-const portraitPath = c.portrait ?? "Public/1 Assets/Bilder/EIMER.png";
+const portraitPath = c.portrait ?? "Public/1 Assets/Bilder/NPC und Monster/NPC_Placeholder.png";
 const portraitFile = app.vault.getAbstractFileByPath(portraitPath);
 const portraitUrl = app.vault.adapter.getResourcePath(portraitPath);
 
