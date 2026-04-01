@@ -59,7 +59,7 @@ features:
 hp_temp: 0
 
 actions:
-  - Private/Actions/Unarmed Strike.md
+  - Public/3 Backend/Actions/Unarmed Strike.md
   
 spellcasting_ability: int
 ---

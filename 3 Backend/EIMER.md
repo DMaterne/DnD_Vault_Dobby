@@ -15,7 +15,7 @@ int: 16
 wis: 10
 cha: 8
 proficiency_bonus: 2
-hp_current: 11
+hp_current: 0
 hp_max: 11
 ac: 16
 speed: 30
@@ -71,18 +71,16 @@ features:
     notes: Auf Stufe 1 kannst du mit Diebeswerkzeug oder Handwerkszeug einfache, winzige, nichtmagische Gegenstände verzaubern. Dazu berührst du den Gegenstand als Aktion und verleihst ihm einen magischen Effekt. Er kann Licht aussenden, eine kurze aufgezeichnete Botschaft abspielen, einen Geruch oder ein Geräusch dauerhaft erzeugen oder einen einfachen visuellen Effekt wie Text, Symbole oder ein Bild zeigen. Der Effekt bleibt bestehen, bis du ihn beendest. Ein Gegenstand kann immer nur einen Effekt gleichzeitig haben. Du kannst mehrere Gegenstände auf diese Weise verzaubern, aber nur bis zu einer Anzahl in Höhe deines Intelligenzmodifikators, mindestens jedoch einen. Wenn du diese Grenze überschreitest, endet der älteste Effekt sofort.
 hp_temp: 0
 actions:
-  - Private/Actions/Absorb Elements.md
-  - Private/Actions/Opportunity Attack.md
-  - Private/Actions/Thunderclap.md
-  - Private/Actions/Mending.md
-  - Private/Actions/Sichel.md
-  - Private/Actions/Hammer.md
-  - Private/Actions/Unarmed Strike.md
-  - Private/Actions/Cure Wounds.md
-  - Private/Actions/Feather Fall.md
-  - Private/Actions/Light Crossbow.md
-
-
+  - Public/3 Backend/Actions/Absorb Elements.md
+  - Public/3 Backend/Actions/Opportunity Attack.md
+  - Public/3 Backend/Actions/Thunderclap.md
+  - Public/3 Backend/Actions/Mending.md
+  - Public/3 Backend/Actions/Sichel.md
+  - Public/3 Backend/Actions/Hammer.md
+  - Public/3 Backend/Actions/Unarmed Strike.md
+  - Public/3 Backend/Actions/Cure Wounds.md
+  - Public/3 Backend/Actions/Feather Fall.md
+  - Public/3 Backend/Actions/Light Crossbow.md
 spellcasting_ability: int
 ---
 
