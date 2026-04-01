@@ -78,7 +78,23 @@ features:
 hp_temp: 0
 ---
 
-# KLLANK-R
+## Notes 
 
-## Notizen
-Hier kannst du Fluff, Hintergrund, Inventar oder Klassenfeatures eintragen.
+### Backstory
+KLLANK-R erinnert sich nicht an ein eigentliches Leben vor seiner Existenz als Konstrukt. Seine Vergangenheit liegt in Scherben vor ihm – zerbrochene Bilder, undeutliche Stimmen, Schmerzen, Feuer und Metall. Alles, was ihm geblieben ist, sind einzelne Erinnerungsfragmente, die ihn manchmal im Schlaf, manchmal mitten am Tag wie ein Schlag treffen.
+
+Gefunden wurde er vor einigen Jahren von Andis Schwager, der ihn halb vergraben und stark beschädigt außerhalb der Stadt entdeckte. Man barg ihn, brachte ihn in Sicherheit und setzte ihn notdürftig wieder instand. Seitdem lebt KLLANK-R auf dem Hof der Familie und arbeitet dort als verlässliche Hilfe bei schweren und einfachen Arbeiten gleichermaßen. Gleichzeitig ist er in der Lehre bei Meister Andi, der in ihm nicht nur eine nützliche Maschine sieht, sondern ein Wesen mit Verstand, Potenzial und vielleicht sogar einer Seele.
+
+Doch tief in seinem Inneren regt sich etwas, das sich nicht mit Schrauben und Reparaturen erklären lässt.
+
+In seinen Erinnerungsfetzen sieht KLLANK-R nicht nur Metall und Runen, sondern auch den grausamen Moment seiner Erschaffung: das Gefühl, dass etwas Menschliches, etwas Lebendiges, gegen seinen Willen in einen Körper aus Stahl und Magie gezwungen wurde. Er weiß nicht, wer oder was er vorher war. Er weiß nur, dass seine Existenz als Warforged nicht natürlich begann, sondern das Ergebnis eines gewaltsamen Vorgangs war.
+
+Danach folgen nur Bruchstücke eines anderen Lebens – eines Daseins als Waffe. Schlachtfelder. Befehle. Gewalt. Das stumpfe Wissen, kämpfen zu müssen, ohne selbst entscheiden zu dürfen. Er erinnert sich an das Gefühl fremder Kontrolle, als hätte etwas seinen Willen unterdrückt und ihn zu einem Werkzeug gemacht.
+
+Die letzte klare Erinnerung ist ein Bild aus Feuer und Vernichtung: ein uralter roter Drache. Gewaltig. Unaufhaltsam. In dieser Erinnerung wird KLLANK-R im Kampf vernichtend geschlagen, sein Körper aufgebrochen, sein Metall zerschmettert. Doch inmitten dieser Niederlage geschieht etwas Entscheidendes: Das Kontrollgerät, das ihn an fremde Befehle band, wird zerstört.
+
+Als KLLANK-R später aus dem Dunkel wieder auftauchte, war von seinem früheren Zweck kaum noch etwas übrig. Nur die Trümmer seines Körpers, die Narben seiner Vergangenheit und die Freiheit, die aus seiner Zerstörung geboren wurde.
+
+Heute versucht KLLANK-R, aus den Resten dessen, was er war, etwas Eigenes zu formen. Auf dem Hof hat er zum ersten Mal eine Art Alltag kennengelernt. In seiner Lehre bei Andi beginnt er zu begreifen, dass er mehr sein kann als ein Werkzeug des Krieges. Dennoch bleibt die Frage, wer er einst war, was aus ihm gemacht wurde und wer ihn kontrollierte.
+
+Und irgendwo in den tiefsten Schichten seines zerschlagenen Gedächtnisses brennt noch immer das Bild des Drachen, der ihn einst vernichtete — und ihm damit vielleicht erst die Freiheit schenkte.
