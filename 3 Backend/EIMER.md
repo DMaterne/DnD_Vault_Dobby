@@ -15,7 +15,7 @@ int: 16
 wis: 10
 cha: 8
 proficiency_bonus: 2
-hp_current: 0
+hp_current: 11
 hp_max: 11
 ac: 16
 speed: 30
