@@ -67,4 +67,4 @@ spellcasting_ability: int
 ## Notes 
 
 Familie:
-Bruder von [[Public/3 Backend/Georgius Obermüller|Georgius Obermüller]].
+Bruder von [[Public/Tjubi im Dildoland/Characters/NPCs/Georgius Obermüller|Georgius Obermüller]].

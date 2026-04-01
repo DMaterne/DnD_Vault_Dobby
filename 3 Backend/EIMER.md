@@ -91,7 +91,7 @@ spellcasting_ability: int
 Backstory:
 Eimer (Einheit für Infiltration, Mobilisation, Eliminierungen und Rückeroberung) erinnert sich nicht an ein eigentliches Leben vor seiner Existenz als Konstrukt. Seine Vergangenheit liegt in Scherben vor ihm – zerbrochene Bilder, undeutliche Stimmen, Schmerzen, Feuer und Metall. Alles, was ihm geblieben ist, sind einzelne Erinnerungsfragmente, die ihn manchmal im Schlaf, manchmal mitten am Tag wie ein Schlag treffen.
 
-Gefunden wurde er vor einigen Jahren von Andis Schwager, der ihn halb vergraben und stark beschädigt außerhalb der Stadt entdeckte. Man barg ihn, brachte ihn in Sicherheit und setzte ihn notdürftig wieder instand. Seitdem lebt Eimer auf dem Hof der Familie und arbeitet dort als verlässliche Hilfe bei schweren und einfachen Arbeiten gleichermaßen. Gleichzeitig ist er in der Lehre bei Meister Andi, der in ihm nicht nur eine nützliche Maschine sieht, sondern ein Wesen mit Verstand, Potenzial und vielleicht sogar einer Seele.
+Gefunden wurde er vor einigen Jahren von [[Public/Tjubi im Dildoland/Characters/NPCs/Meister Andi|Andis]] [[Public/Tjubi im Dildoland/Characters/NPCs/Georgius Obermüller|Schwager ]], der ihn halb vergraben und stark beschädigt außerhalb der Stadt entdeckte. Man barg ihn, brachte ihn in Sicherheit und setzte ihn notdürftig wieder instand. Seitdem lebt Eimer auf dem Hof der Familie und arbeitet dort als verlässliche Hilfe bei schweren und einfachen Arbeiten gleichermaßen. Gleichzeitig ist er in der Lehre bei Meister Andi, der in ihm nicht nur eine nützliche Maschine sieht, sondern ein Wesen mit Verstand, Potenzial und vielleicht sogar einer Seele.
 
 Doch tief in seinem Inneren regt sich etwas, das sich nicht mit Schrauben und Reparaturen erklären lässt.
 

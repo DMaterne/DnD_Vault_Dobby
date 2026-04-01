@@ -1368,8 +1368,11 @@ async function renderNotes() {
   title.style.marginBottom = "10px";
 
   const file = app.vault.getAbstractFileByPath(CHARACTER_PATH);
-  if (!file) {
-    tabContent.createEl("div", { text: `Character-Datei nicht gefunden: ${CHARACTER_PATH}` });
+
+  if (!file || !file.path) {
+    tabContent.createEl("div", {
+      text: `Character-Datei nicht gefunden: ${CHARACTER_PATH}`,
+    });
     return;
   }
 
@@ -1424,27 +1427,147 @@ async function renderNotes() {
   notesBox.style.padding = "10px";
   notesBox.style.border = "1px solid var(--background-modifier-border)";
   notesBox.style.borderRadius = "10px";
-  notesBox.style.lineHeight = "1.5";
+  notesBox.style.lineHeight = "1.6";
 
-  const MarkdownRenderer = window?.obsidian?.MarkdownRenderer;
-  const Component = window?.obsidian?.Component;
-
-  if (!MarkdownRenderer || !Component) {
-    notesBox.setText(notesSection);
-    return;
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
   }
 
-  notesBox.innerHTML = "";
+  function renderInlineMarkdown(line) {
+    let html = escapeHtml(line);
 
-  const rendererComponent = new Component();
+    // WikiLinks: [[Ziel]] / [[Ziel|Alias]] / [[Ziel#Heading|Alias]]
+    html = html.replace(/\[\[([^\]|]+)(\|([^\]]+))?\]\]/g, (match, target, _aliasPart, alias) => {
+      const rawTarget = String(target ?? "").trim();
+      const linkText = String(alias ?? rawTarget).trim();
 
-  await MarkdownRenderer.render(
-    app,
-    notesSection,
-    notesBox,
-    CHARACTER_PATH,
-    rendererComponent
-  );
+      return `<a href="#" class="custom-obsidian-link" data-href="${escapeHtml(rawTarget)}">${escapeHtml(linkText)}</a>`;
+    });
+
+    // Externe Markdown-Links: [Text](https://...)
+    html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_match, text, url) => {
+      const safeText = escapeHtml(text);
+      const safeUrl = escapeHtml(url);
+      return `<a href="${safeUrl}" target="_blank" rel="noopener">${safeText}</a>`;
+    });
+
+    // Fett
+    html = html.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+
+    // Kursiv
+    html = html.replace(/\*(.+?)\*/g, "<em>$1</em>");
+
+    // Inline-Code
+    html = html.replace(/`([^`]+)`/g, "<code>$1</code>");
+
+    return html;
+  }
+
+  function renderSimpleMarkdown(md) {
+    const lines = md.split(/\r?\n/);
+    const htmlParts = [];
+
+    let inList = false;
+    let inCodeBlock = false;
+    let codeBuffer = [];
+
+    function closeList() {
+      if (inList) {
+        htmlParts.push("</ul>");
+        inList = false;
+      }
+    }
+
+    function closeCodeBlock() {
+      if (inCodeBlock) {
+        htmlParts.push(`<pre><code>${escapeHtml(codeBuffer.join("\n"))}</code></pre>`);
+        inCodeBlock = false;
+        codeBuffer = [];
+      }
+    }
+
+    for (const rawLine of lines) {
+      const line = rawLine ?? "";
+
+      if (line.trim().startsWith("```")) {
+        closeList();
+
+        if (!inCodeBlock) {
+          inCodeBlock = true;
+          codeBuffer = [];
+        } else {
+          closeCodeBlock();
+        }
+        continue;
+      }
+
+      if (inCodeBlock) {
+        codeBuffer.push(line);
+        continue;
+      }
+
+      if (/^\s*[-*]\s+/.test(line)) {
+        if (!inList) {
+          htmlParts.push("<ul>");
+          inList = true;
+        }
+        const itemText = line.replace(/^\s*[-*]\s+/, "");
+        htmlParts.push(`<li>${renderInlineMarkdown(itemText)}</li>`);
+        continue;
+      } else {
+        closeList();
+      }
+
+      if (/^###\s+/.test(line)) {
+        htmlParts.push(`<h3>${renderInlineMarkdown(line.replace(/^###\s+/, ""))}</h3>`);
+        continue;
+      }
+
+      if (/^##\s+/.test(line)) {
+        htmlParts.push(`<h2>${renderInlineMarkdown(line.replace(/^##\s+/, ""))}</h2>`);
+        continue;
+      }
+
+      if (/^#\s+/.test(line)) {
+        htmlParts.push(`<h1>${renderInlineMarkdown(line.replace(/^#\s+/, ""))}</h1>`);
+        continue;
+      }
+
+      if (line.trim() === "") {
+        htmlParts.push("<div style='height: 0.6em;'></div>");
+        continue;
+      }
+
+      htmlParts.push(`<p style="margin: 0 0 0.6em 0;">${renderInlineMarkdown(line)}</p>`);
+    }
+
+    closeList();
+    closeCodeBlock();
+
+    return htmlParts.join("\n");
+  }
+
+  notesBox.innerHTML = renderSimpleMarkdown(notesSection);
+
+  notesBox.querySelectorAll("a.custom-obsidian-link").forEach((linkEl) => {
+    linkEl.style.color = "var(--link-color)";
+    linkEl.style.textDecoration = "underline";
+    linkEl.style.cursor = "pointer";
+
+    linkEl.addEventListener("click", async (evt) => {
+      evt.preventDefault();
+      evt.stopPropagation();
+
+      const target = linkEl.getAttribute("data-href");
+      if (!target) return;
+
+      await app.workspace.openLinkText(target, file.path, true);
+    });
+  });
 }
 
   function updateTabStyles() {
