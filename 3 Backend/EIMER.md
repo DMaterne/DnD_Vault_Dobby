@@ -53,18 +53,26 @@ spell_slots:
   "4": 0
   "5": 0
 inventory:
-  - name: Longsword
+  - name: Crossbow Bolts
+    weight: 1.5
+    quantity: 20
+    notes: Crossbow bolts are used with a weapon that has the ammunition property to make a ranged attack. Each time you attack with the weapon, you expend one piece of ammunition. Drawing the ammunition from a quiver, case, or other container is part of the attack (you need a free hand to load a one-handed weapon). At the end of the battle, you can recover half your expended ammunition by taking a minute to search the battlefield.
+  - name: Light Crossbow
+    weight: 5
+    quantity: 1
+    notes: Proficiency with a Light Crossbow allows you to add your proficiency bonus to the attack roll for any attack you make with it.
+  - name: Hammer
     weight: 3
     quantity: 1
-    notes: Versilbert
-  - name: Torch
-    weight: 1
-    quantity: 5
-    notes: Noch 5 Stück übrig
-  - name: Rope
-    weight: 10
+    notes: Proficiency with a Hammer allows you to add your proficiency bonus to the attack roll for any attack you make with it.
+  - name: Sichel
+    weight: 2
     quantity: 1
-    notes: 50 ft hempen rope
+    notes: Proficiency with a Sickle allows you to add your proficiency bonus to the attack roll for any attack you make with it.
+  - name: Scale Mail
+    weight: 45
+    quantity: 1
+    notes: Proficiency with a Sickle allows you to add your proficiency bonus to the attack roll for any attack you make with it.
 features:
   - name: Magical Tinkering
     source: Artificer
