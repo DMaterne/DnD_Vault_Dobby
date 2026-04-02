@@ -72,7 +72,7 @@ inventory:
   - name: Scale Mail
     weight: 45
     quantity: 1
-    notes: Proficiency with a Sickle allows you to add your proficiency bonus to the attack roll for any attack you make with it.
+    notes: This armor consists of a coat and leggings (and perhaps a separate skirt) of leather covered with overlapping pieces of metal, much like the scales of a fish. The suit includes gauntlets.
 features:
   - name: Magical Tinkering
     source: Artificer
