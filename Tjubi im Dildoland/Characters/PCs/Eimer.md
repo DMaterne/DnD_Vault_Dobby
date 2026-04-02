@@ -244,7 +244,7 @@ actionRow.style.alignItems = "center";
 
 const hpValueInput = actionRow.createEl("input");
 hpValueInput.type = "number";
-hpValueInput.placeholder = "Wert eingeben";
+hpValueInput.placeholder = "Value";
 hpValueInput.style.width = "100%";
 hpValueInput.style.padding = "8px 10px";
 hpValueInput.style.border = "1px solid var(--background-modifier-border)";
@@ -573,7 +573,7 @@ rightCol.style.gap = "9px";
 
   const searchInput = searchWrap.createEl("input");
   searchInput.type = "text";
-  searchInput.placeholder = "Features durchsuchen...";
+  searchInput.placeholder = "Search Features";
   searchInput.style.width = "100%";
   searchInput.style.padding = "8px 10px";
   searchInput.style.border = "1px solid var(--background-modifier-border)";
@@ -710,7 +710,7 @@ rightCol.style.gap = "9px";
 
   const searchInput = searchWrap.createEl("input");
   searchInput.type = "text";
-  searchInput.placeholder = "Inventar durchsuchen...";
+  searchInput.placeholder = "Search Inventory";
   searchInput.style.width = "100%";
   searchInput.style.padding = "8px 10px";
   searchInput.style.border = "1px solid var(--background-modifier-border)";
@@ -829,8 +829,8 @@ function renderActions() {
 
   const title = tabContent.createEl("div");
   title.style.display = "grid";
-  title.style.gridTemplateColumns = "220px 80px 120px";
-  title.style.gap = "100px";
+  title.style.gridTemplateColumns = "2fr 1fr 120px";
+  title.style.gap = "12px";
   title.style.fontWeight = "700";
   title.style.marginBottom = "8px";
   title.style.padding = "0 10px";
@@ -844,7 +844,7 @@ function renderActions() {
 
   const searchInput = searchWrap.createEl("input");
   searchInput.type = "text";
-  searchInput.placeholder = "Actions durchsuchen...";
+  searchInput.placeholder = "Search Actions";
   searchInput.style.width = "100%";
   searchInput.style.padding = "8px 10px";
   searchInput.style.border = "1px solid var(--background-modifier-border)";
@@ -890,36 +890,36 @@ function renderActions() {
 
   const actionRefs = Array.isArray(c.actions) ? c.actions : [];
 
-const actions = actionRefs
-  .map(path => dv.page(String(path)))
-  .filter(p => p)
-  .filter(p => {
-    const category = String(p.category ?? "").trim().toLowerCase();
-    const rawType = String(p.action_type ?? "").trim().toLowerCase();
-    const type = rawType.replace(/\s+/g, "_");
+  const actions = actionRefs
+    .map(path => dv.page(String(path)))
+    .filter(p => p)
+    .filter(p => {
+      const category = String(p.category ?? "").trim().toLowerCase();
+      const rawType = String(p.action_type ?? "").trim().toLowerCase();
+      const type = rawType.replace(/\s+/g, "_");
 
-    return category !== "spell" && (
-      type === "" ||
-      type === "action" ||
-      type === "bonus_action" ||
-      type === "reaction"
-    );
+      return category !== "spell" && (
+        type === "" ||
+        type === "action" ||
+        type === "bonus_action" ||
+        type === "reaction"
+      );
+    });
+
+  const actionList = Array.from(actions).sort((a, b) => {
+    const order = { action: 0, bonus_action: 1, reaction: 2 };
+
+    const typeA = String(a.action_type ?? "").trim().toLowerCase().replace(/\s+/g, "_");
+    const typeB = String(b.action_type ?? "").trim().toLowerCase().replace(/\s+/g, "_");
+
+    if ((order[typeA] ?? 99) !== (order[typeB] ?? 99)) {
+      return (order[typeA] ?? 99) - (order[typeB] ?? 99);
+    }
+
+    const nameA = String(a.name ?? a.file.name);
+    const nameB = String(b.name ?? b.file.name);
+    return nameA.localeCompare(nameB);
   });
-
-const actionList = Array.from(actions).sort((a, b) => {
-  const order = { action: 0, bonus_action: 1, reaction: 2 };
-
-  const typeA = String(a.action_type ?? "").trim().toLowerCase().replace(/\s+/g, "_");
-  const typeB = String(b.action_type ?? "").trim().toLowerCase().replace(/\s+/g, "_");
-
-  if ((order[typeA] ?? 99) !== (order[typeB] ?? 99)) {
-    return (order[typeA] ?? 99) - (order[typeB] ?? 99);
-  }
-
-  const nameA = String(a.name ?? a.file.name);
-  const nameB = String(b.name ?? b.file.name);
-  return nameA.localeCompare(nameB);
-});
 
   if (actionList.length === 0) {
     actionContainer.createEl("div", { text: "Keine Actions gefunden." });
@@ -988,8 +988,8 @@ const actionList = Array.from(actions).sort((a, b) => {
         summaryEl.style.cursor = "pointer";
         summaryEl.style.padding = "10px";
         summaryEl.style.display = "grid";
-        summaryEl.style.gridTemplateColumns = "220px 80px 120px";
-        summaryEl.style.gap = "100px";
+        summaryEl.style.gridTemplateColumns = "2fr 1fr 120px";
+        summaryEl.style.gap = "12px";
         summaryEl.style.alignItems = "center";
         summaryEl.style.fontWeight = "700";
         summaryEl.style.listStyle = "none";
@@ -1105,7 +1105,7 @@ function renderSpells() {
 
   const searchInput = searchWrap.createEl("input");
   searchInput.type = "text";
-  searchInput.placeholder = "Spells durchsuchen...";
+  searchInput.placeholder = "Search Spells";
   searchInput.style.width = "100%";
   searchInput.style.padding = "8px 10px";
   searchInput.style.border = "1px solid var(--background-modifier-border)";
