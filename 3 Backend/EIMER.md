@@ -73,6 +73,46 @@ inventory:
     weight: 45
     quantity: 1
     notes: This armor consists of a coat and leggings (and perhaps a separate skirt) of leather covered with overlapping pieces of metal, much like the scales of a fish. The suit includes gauntlets.
+  - name: Thieves Tools
+    weight: 1
+    quantity: 1
+    notes: This set of tools includes a small file, a set of lock picks, a small mirror mounted on a metal handle, a set of narrow-bladed scissors, and a pair of pliers. Proficiency with these tools lets you add your proficiency bonus to any ability checks you make to disarm traps or open locks.
+  - name: Crowbar
+    weight: 5
+    quantity: 1
+    notes: Using a crowbar grants advantage to Strength checks where the crowbar's leverage can be applied.
+  - name: Hammer
+    weight: 3
+    quantity: 1
+    notes: This one-handed hammer with an iron head is useful for pounding pitons into a wall.
+  - name: Piton
+    weight: 2.5
+    quantity: 10
+    notes: When a wall doesn’t offer handholds and footholds, you can make your own. A piton is a steel spike with an eye through which you can loop a rope.
+  - name: Rations (1 day)
+    weight: 20
+    quantity: 1
+    notes: Rations consist of dry foods suitable for extended travel, including jerky, dried fruit, hardtack, and nuts
+  - name: Tinderbox
+    weight: 1
+    quantity: 1
+    notes: This small container holds flint, fire steel, and tinder (usually dry cloth soaked in light oil) used to kindle a fire. Using it to light a torch -- or anything else with abundant, exposed fuel -- takes an action. Lighting any other fire takes 1 minute.
+  - name: Torch
+    weight: 10
+    quantity: 10
+    notes: A torch burns for 1 hour, providing bright light in a 20-foot radius and dim light for an additional 20 feet. If you make a melee attack with a burning torch and hit, it deals 1 fire damage.
+  - name: Waterskin
+    weight: 5
+    quantity: 1
+    notes: A waterskin can hold 4 pints (retard unit) of liquid.
+  - name: Rope (50ft, Hempen)
+    weight: 10
+    quantity: 1
+    notes: Rope, has 2 hit points and can be burst with a DC 17 Strength check.
+  - name: Eimer's Control Unit
+    weight: 10
+    quantity: 1
+    notes: Ds Kontrollgerät, mit dem Eimer in seiner Vergangenheit gezugen wurde, Befehle zu befolgen. Es ist beschädigt. Die verwendete Technologie ist extrem Fortgeschritten und ein Beweis dafür, wie viel Wissen aus der Vergangenheit verloren gegangen ist.
 features:
   - name: Magical Tinkering
     source: Artificer
