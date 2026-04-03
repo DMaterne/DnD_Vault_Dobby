@@ -727,6 +727,26 @@ function renderInventory() {
   tableWrap.style.flexDirection = "column";
   tableWrap.style.gap = "6px";
 
+  const resolvedInventory = inventory
+    .map(entry => {
+      const itemPath = String(entry?.item ?? "").trim();
+      const itemPage = itemPath ? dv.page(itemPath) : null;
+
+      if (!itemPage) return null;
+
+      return {
+        entry,
+        itemPage,
+        name: String(itemPage.name ?? itemPage.file?.name ?? "Unknown Item"),
+        notes: String(itemPage.notes ?? ""),
+        weight: Number(itemPage.weight ?? 0),
+        quantity: Number(entry?.quantity ?? 1),
+        equipped: entry?.equipped === true,
+        equipment: itemPage?.equipment === true
+      };
+    })
+    .filter(x => x);
+
   function matchesFilter(item, filterText = "") {
     const name = String(item?.name ?? "").toLowerCase();
     const notes = String(item?.notes ?? "").toLowerCase();
@@ -808,9 +828,7 @@ function renderInventory() {
   }
 
   function createInventoryRow(parent, item) {
-    const initialWeight = Number(item?.weight ?? 0);
-    const qty = Number(item?.quantity ?? 1);
-    const rowWeight = initialWeight * qty;
+    const rowWeight = item.weight * item.quantity;
 
     const row = parent.createEl("div");
     row.style.border = "1px solid var(--background-modifier-border)";
@@ -824,8 +842,8 @@ function renderInventory() {
     summary.style.padding = "10px";
     summary.style.alignItems = "center";
 
-    summary.createEl("div", { text: String(item?.name ?? "-") });
-    summary.createEl("div", { text: String(qty) });
+    summary.createEl("div", { text: item.name });
+    summary.createEl("div", { text: String(item.quantity) });
     summary.createEl("div", { text: String(rowWeight) });
 
     makeNotesButton(summary, row, item);
@@ -836,7 +854,8 @@ function renderInventory() {
   function renderInventoryRows(filterText = "") {
     tableWrap.innerHTML = "";
 
-    const filtered = inventory.filter(item => matchesFilter(item, filterText));
+    const filtered = resolvedInventory
+      .filter(item => matchesFilter(item, filterText));
 
     if (filtered.length === 0) {
       const empty = tableWrap.createEl("div", { text: "Keine passenden Einträge gefunden." });
@@ -846,12 +865,12 @@ function renderInventory() {
     }
 
     const equippedItems = filtered
-      .filter(item => item?.equipment === true && item?.equipped === true)
-      .sort((a, b) => String(a?.name ?? "").localeCompare(String(b?.name ?? ""), "de"));
+      .filter(item => item.equipment === true && item.equipped === true)
+      .sort((a, b) => a.name.localeCompare(b.name, "de"));
 
     const normalItems = filtered
-      .filter(item => !(item?.equipment === true && item?.equipped === true))
-      .sort((a, b) => String(a?.name ?? "").localeCompare(String(b?.name ?? ""), "de"));
+      .filter(item => !(item.equipment === true && item.equipped === true))
+      .sort((a, b) => a.name.localeCompare(b.name, "de"));
 
     const maxCarryWeight = Number(c.str ?? 10) * 15;
     let totalWeight = 0;
