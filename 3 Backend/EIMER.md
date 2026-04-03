@@ -154,3 +154,27 @@ Heute versucht Eimer, aus den Resten dessen, was er war, etwas Eigenes zu formen
 Dennoch bleibt die Frage offen, wer er einst war, was aus ihm gemacht wurde und wer ihn kontrollierte.
 
 Und irgendwo in den tiefsten Schichten seines zerschlagenen Gedächtnisses brennt noch immer das Bild seiner letzten Schlacht, die ihn vernichtete — und ihm damit vielleicht erst die Freiheit schenkte.
+
+### Bewerbung für die Expedition
+
+Sehr geehrter Bürgermeister und Rat von Arborgas,
+
+mit diesem Schreiben bewerbe ich mich offiziell für die Expeditionstruppe.
+
+Meine Bezeichnung lautet Eimer. Ich bin ein magisches Konstrukt und lebe seit meiner Bergung außerhalb der Stadt auf dem Hof der Familie Obermüller. Dort unterstütze ich die Familie bei Hofarbeiten. Außerdem befinde mich zugleich in der Lehre bei Meister Andi.
+
+Der Großteil meiner Existenz liegt außerhalb meines Zugriffs. Meine Vergangenheit ist unklar. Die Welt hinter der Barriere ist es ebenfalls. Deshalb sehe ich in dieser Expedition nicht nur eine Notwendigkeit für unsere Stadt, sondern auch eine Gelegenheit zur Erkenntnis. Was dort draußen wartet, sollte nicht länger nur gefürchtet, sondern verstanden werden.
+
+Ich verfüge über Fähigkeiten, die für eine solche Unternehmung von Nutzen sind. Ich kann Magie der ersten Stufe und mehrere Zaubertricks wirken, bin handwerklich effizient und kann magische Unterstützungsgegenstände anfertigen. Ich bin belastbar, einsatzfähig und für Situationen geeignet, in denen Kraft, Präzision und Standhaftigkeit benötigt werden.
+Deshalb bewerbe ich mich.
+
+Die Expedition bedeutet für Arborgas die Chance auf neues Land, neues Wissen und eine neue Zukunft. Für mich bedeutet sie zusätzlich die Möglichkeit, mehr über die Welt zu erfahren, aus der ich stamme, und vielleicht auch über mich selbst. Ich halte es für sinnvoll, beides miteinander zu verbinden.
+
+Ich verfüge über Fähigkeiten, die für eine solche Unternehmung von Nutzen sind. Ich bin belastbar, arbeitsfähig und an körperliche wie gefährliche Aufgaben gewöhnt. Zusätzlich befinde ich mich in handwerklicher Ausbildung bei Meister Andi und lerne, nicht nur zu dienen oder zu kämpfen, sondern auch zu erschaffen. Ich möchte dieses Wissen erweitern und praktisch für Arborgas einsetzen.
+
+Ich war einst ein Werkzeug für Zwecke, die ich selbst nicht bestimmen konnte. Heute möchte ich aus eigenem Willen Teil von etwas sein, das Zukunft schafft, statt sie zu zerstören.
+
+Sollte Arborgas den Schritt in das Unbekannte wagen, werde ich meinen Teil dazu beitragen, dass dieser Schritt nicht vergeblich ist.
+
+**Hochachtungsvoll**  
+**Eimer**
