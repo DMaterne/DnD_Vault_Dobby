@@ -551,7 +551,7 @@ rightCol.style.gap = "9px";
     el.innerHTML = "";
   }
 
-  function renderFeatures() {
+function renderFeatures() {
   clearEl(tabContent);
 
   const title = tabContent.createEl("div", { text: "Features & Traits" });
@@ -599,15 +599,21 @@ rightCol.style.gap = "9px";
     header.createEl("div", { text: "Source" });
     header.createEl("div", { text: "Notes" });
 
-    const filtered = features.filter(item => {
-      const name = String(item?.name ?? item ?? "").toLowerCase();
-      const source = String(item?.source ?? "").toLowerCase();
-      const notes = String(item?.notes ?? "").toLowerCase();
-      const query = String(filterText ?? "").trim().toLowerCase();
+    const filtered = features
+      .filter(item => {
+        const name = String(item?.name ?? item ?? "").toLowerCase();
+        const source = String(item?.source ?? "").toLowerCase();
+        const notes = String(item?.notes ?? "").toLowerCase();
+        const query = String(filterText ?? "").trim().toLowerCase();
 
-      if (!query) return true;
-      return name.includes(query) || source.includes(query) || notes.includes(query);
-    });
+        if (!query) return true;
+        return name.includes(query) || source.includes(query) || notes.includes(query);
+      })
+      .sort((a, b) => {
+        const nameA = typeof a === "string" ? a : String(a?.name ?? "");
+        const nameB = typeof b === "string" ? b : String(b?.name ?? "");
+        return nameA.localeCompare(nameB, "de");
+      });
 
     if (filtered.length === 0) {
       const empty = tableWrap.createEl("div", { text: "Keine passenden Features gefunden." });
@@ -688,7 +694,7 @@ rightCol.style.gap = "9px";
   });
 }
 
-  function renderInventory() {
+function renderInventory() {
   clearEl(tabContent);
 
   const title = tabContent.createEl("div", { text: "Inventory" });
@@ -721,30 +727,116 @@ rightCol.style.gap = "9px";
   tableWrap.style.flexDirection = "column";
   tableWrap.style.gap = "6px";
 
-  function renderInventoryRows(filterText = "") {
-    tableWrap.innerHTML = "";
+  function matchesFilter(item, filterText = "") {
+    const name = String(item?.name ?? "").toLowerCase();
+    const notes = String(item?.notes ?? "").toLowerCase();
+    const query = String(filterText ?? "").trim().toLowerCase();
 
-    const header = tableWrap.createEl("div");
+    if (!query) return true;
+    return name.includes(query) || notes.includes(query);
+  }
+
+  function makeNotesButton(parent, row, item) {
+    const notesButtonWrap = parent.createEl("div");
+
+    const hasNotes = String(item?.notes ?? "").trim().length > 0;
+    const notesButton = notesButtonWrap.createEl("button", {
+      text: hasNotes ? "Show" : "-"
+    });
+    notesButton.style.padding = "4px 8px";
+    notesButton.style.borderRadius = "6px";
+    notesButton.style.border = "1px solid var(--background-modifier-border)";
+    notesButton.style.cursor = hasNotes ? "pointer" : "default";
+    notesButton.style.background = "var(--background-secondary)";
+    notesButton.style.color = "var(--text-normal)";
+
+    let notesOpen = false;
+    let notesEl = null;
+
+    if (hasNotes) {
+      notesButton.addEventListener("click", () => {
+        notesOpen = !notesOpen;
+
+        if (notesOpen) {
+          notesButton.setText("Hide");
+
+          notesEl = row.createEl("div");
+          notesEl.style.padding = "0 10px 10px 10px";
+          notesEl.style.borderTop = "1px solid var(--background-modifier-border)";
+          notesEl.style.background = "var(--background-primary-alt)";
+
+          const notesTitle = notesEl.createEl("div", { text: "Notes" });
+          notesTitle.style.fontWeight = "600";
+          notesTitle.style.marginTop = "8px";
+          notesTitle.style.marginBottom = "4px";
+          notesTitle.style.opacity = "0.85";
+
+          notesEl.createEl("div", { text: String(item?.notes ?? "") });
+        } else {
+          notesButton.setText("Show");
+          if (notesEl) notesEl.remove();
+          notesEl = null;
+        }
+      });
+    }
+  }
+
+  function createSectionTitle(parent, text) {
+    const sectionTitle = parent.createEl("div", { text });
+    sectionTitle.style.fontWeight = "700";
+    sectionTitle.style.fontSize = "1em";
+    sectionTitle.style.marginTop = "8px";
+    sectionTitle.style.marginBottom = "4px";
+    sectionTitle.style.paddingBottom = "4px";
+    sectionTitle.style.borderBottom = "1px solid var(--background-modifier-border)";
+    return sectionTitle;
+  }
+
+  function createTableHeader(parent) {
+    const header = parent.createEl("div");
     header.style.display = "grid";
-    header.style.gridTemplateColumns = "2fr 80px 80px 120px";
+    header.style.gridTemplateColumns = "2fr 80px 90px 120px";
     header.style.gap = "12px";
     header.style.padding = "8px 10px";
     header.style.fontWeight = "700";
     header.style.borderBottom = "1px solid var(--background-modifier-border)";
 
     header.createEl("div", { text: "Name" });
-    header.createEl("div", { text: "Weight" });
     header.createEl("div", { text: "Qty" });
+    header.createEl("div", { text: "Weight" });
     header.createEl("div", { text: "Notes" });
+  }
 
-    const filtered = inventory.filter(item => {
-      const name = String(item?.name ?? "").toLowerCase();
-      const notes = String(item?.notes ?? "").toLowerCase();
-      const query = String(filterText ?? "").trim().toLowerCase();
+  function createInventoryRow(parent, item) {
+    const initialWeight = Number(item?.weight ?? 0);
+    const qty = Number(item?.quantity ?? 1);
+    const rowWeight = initialWeight * qty;
 
-      if (!query) return true;
-      return name.includes(query) || notes.includes(query);
-    });
+    const row = parent.createEl("div");
+    row.style.border = "1px solid var(--background-modifier-border)";
+    row.style.borderRadius = "8px";
+    row.style.overflow = "hidden";
+
+    const summary = row.createEl("div");
+    summary.style.display = "grid";
+    summary.style.gridTemplateColumns = "2fr 80px 90px 120px";
+    summary.style.gap = "12px";
+    summary.style.padding = "10px";
+    summary.style.alignItems = "center";
+
+    summary.createEl("div", { text: String(item?.name ?? "-") });
+    summary.createEl("div", { text: String(qty) });
+    summary.createEl("div", { text: String(rowWeight) });
+
+    makeNotesButton(summary, row, item);
+
+    return rowWeight;
+  }
+
+  function renderInventoryRows(filterText = "") {
+    tableWrap.innerHTML = "";
+
+    const filtered = inventory.filter(item => matchesFilter(item, filterText));
 
     if (filtered.length === 0) {
       const empty = tableWrap.createEl("div", { text: "Keine passenden Einträge gefunden." });
@@ -753,66 +845,49 @@ rightCol.style.gap = "9px";
       return;
     }
 
-    for (const item of filtered) {
-      const row = tableWrap.createEl("div");
-      row.style.border = "1px solid var(--background-modifier-border)";
-      row.style.borderRadius = "8px";
-      row.style.overflow = "hidden";
+    const equippedItems = filtered
+      .filter(item => item?.equipment === true && item?.equipped === true)
+      .sort((a, b) => String(a?.name ?? "").localeCompare(String(b?.name ?? ""), "de"));
 
-      const summary = row.createEl("div");
-      summary.style.display = "grid";
-      summary.style.gridTemplateColumns = "2fr 80px 80px 120px";
-      summary.style.gap = "12px";
-      summary.style.padding = "10px";
-      summary.style.alignItems = "center";
+    const normalItems = filtered
+      .filter(item => !(item?.equipment === true && item?.equipped === true))
+      .sort((a, b) => String(a?.name ?? "").localeCompare(String(b?.name ?? ""), "de"));
 
-      summary.createEl("div", { text: String(item?.name ?? "-") });
-      summary.createEl("div", { text: String(item?.weight ?? "-") });
-      summary.createEl("div", { text: String(item?.quantity ?? 1) });
+    const maxCarryWeight = Number(c.str ?? 10) * 15;
+    let totalWeight = 0;
 
-      const notesButtonWrap = summary.createEl("div");
+    if (equippedItems.length > 0) {
+      createSectionTitle(tableWrap, "Equipped Equipment");
+      createTableHeader(tableWrap);
 
-      const hasNotes = String(item?.notes ?? "").trim().length > 0;
-      const notesButton = notesButtonWrap.createEl("button", {
-        text: hasNotes ? "Show" : "-"
-      });
-      notesButton.style.padding = "4px 8px";
-      notesButton.style.borderRadius = "6px";
-      notesButton.style.border = "1px solid var(--background-modifier-border)";
-      notesButton.style.cursor = hasNotes ? "pointer" : "default";
-      notesButton.style.background = "var(--background-secondary)";
-      notesButton.style.color = "var(--text-normal)";
-
-      let notesOpen = false;
-      let notesEl = null;
-
-      if (hasNotes) {
-        notesButton.addEventListener("click", () => {
-          notesOpen = !notesOpen;
-
-          if (notesOpen) {
-            notesButton.setText("Hide");
-
-            notesEl = row.createEl("div");
-            notesEl.style.padding = "0 10px 10px 10px";
-            notesEl.style.borderTop = "1px solid var(--background-modifier-border)";
-            notesEl.style.background = "var(--background-primary-alt)";
-
-            const notesTitle = notesEl.createEl("div", { text: "Notes" });
-            notesTitle.style.fontWeight = "600";
-            notesTitle.style.marginTop = "8px";
-            notesTitle.style.marginBottom = "4px";
-            notesTitle.style.opacity = "0.85";
-
-            notesEl.createEl("div", { text: String(item.notes) });
-          } else {
-            notesButton.setText("Show");
-            if (notesEl) notesEl.remove();
-            notesEl = null;
-          }
-        });
+      for (const item of equippedItems) {
+        totalWeight += createInventoryRow(tableWrap, item);
       }
     }
+
+    if (normalItems.length > 0) {
+      createSectionTitle(tableWrap, equippedItems.length > 0 ? "Inventory" : "Items");
+      createTableHeader(tableWrap);
+
+      for (const item of normalItems) {
+        totalWeight += createInventoryRow(tableWrap, item);
+      }
+    }
+
+    const totalRow = tableWrap.createEl("div");
+    totalRow.style.display = "grid";
+    totalRow.style.gridTemplateColumns = "2fr 80px 90px 120px";
+    totalRow.style.gap = "12px";
+    totalRow.style.padding = "10px";
+    totalRow.style.marginTop = "6px";
+    totalRow.style.borderTop = "2px solid var(--background-modifier-border)";
+    totalRow.style.fontWeight = "700";
+    totalRow.style.alignItems = "center";
+
+    totalRow.createEl("div", { text: "Total Weight" });
+    totalRow.createEl("div", { text: "" });
+    totalRow.createEl("div", { text: `${totalWeight} / ${maxCarryWeight}` });
+    totalRow.createEl("div", { text: "" });
   }
 
   renderInventoryRows();
@@ -904,26 +979,6 @@ function renderActions() {
       );
     });
 
-  const actionList = Array.from(actions).sort((a, b) => {
-    const order = { action: 0, bonus_action: 1, reaction: 2 };
-
-    const typeA = String(a.action_type ?? "").trim().toLowerCase().replace(/\s+/g, "_");
-    const typeB = String(b.action_type ?? "").trim().toLowerCase().replace(/\s+/g, "_");
-
-    if ((order[typeA] ?? 99) !== (order[typeB] ?? 99)) {
-      return (order[typeA] ?? 99) - (order[typeB] ?? 99);
-    }
-
-    const nameA = String(a.name ?? a.file.name);
-    const nameB = String(b.name ?? b.file.name);
-    return nameA.localeCompare(nameB);
-  });
-
-  if (actionList.length === 0) {
-    actionContainer.createEl("div", { text: "Keine Actions gefunden." });
-    return;
-  }
-
   const groupedActions = {
     action: [],
     bonus_action: [],
@@ -931,7 +986,7 @@ function renderActions() {
     other: []
   };
 
-  for (const action of actionList) {
+  for (const action of actions) {
     const rawType = String(action.action_type ?? "").trim().toLowerCase();
     const type = rawType.replace(/\s+/g, "_");
 
@@ -940,6 +995,14 @@ function renderActions() {
     } else {
       groupedActions.other.push(action);
     }
+  }
+
+  for (const key of Object.keys(groupedActions)) {
+    groupedActions[key].sort((a, b) => {
+      const nameA = String(a.name ?? a.file.name ?? "");
+      const nameB = String(b.name ?? b.file.name ?? "");
+      return nameA.localeCompare(nameB, "de");
+    });
   }
 
   function renderActionRows(filterText = "") {
@@ -1194,20 +1257,10 @@ function renderSpells() {
 
   const actionRefs = Array.isArray(c.actions) ? c.actions : [];
 
-const spells = actionRefs
-  .map(path => dv.page(String(path)))
-  .filter(p => p)
-  .filter(p => String(p.category ?? "").trim().toLowerCase() === "spell")
-  .sort((a, b) => {
-    const levelA = Number(a.level ?? 99);
-    const levelB = Number(b.level ?? 99);
-
-    if (levelA !== levelB) return levelA - levelB;
-
-    const nameA = String(a.name ?? a.file.name);
-    const nameB = String(b.name ?? b.file.name);
-    return nameA.localeCompare(nameB);
-  });
+  const spells = actionRefs
+    .map(path => dv.page(String(path)))
+    .filter(p => p)
+    .filter(p => String(p.category ?? "").trim().toLowerCase() === "spell");
 
   if (!spells || spells.length === 0) {
     spellContainer.createEl("div", { text: "Keine Spells gefunden." });
@@ -1228,6 +1281,14 @@ const spells = actionRefs
     if (lvl >= 0 && lvl <= 5) {
       groupedSpells[lvl].push(spell);
     }
+  }
+
+  for (let level = 0; level <= 5; level++) {
+    groupedSpells[level].sort((a, b) => {
+      const nameA = String(a.name ?? a.file.name ?? "");
+      const nameB = String(b.name ?? b.file.name ?? "");
+      return nameA.localeCompare(nameB, "de");
+    });
   }
 
   function renderSpellRows(filterText = "") {

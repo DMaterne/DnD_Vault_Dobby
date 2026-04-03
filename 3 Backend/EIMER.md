@@ -54,65 +54,116 @@ spell_slots:
   "5": 0
 inventory:
   - name: Crossbow Bolts
-    weight: 1.5
+    weight: 0.075
     quantity: 20
-    notes: Crossbow bolts are used with a weapon that has the ammunition property to make a ranged attack. Each time you attack with the weapon, you expend one piece of ammunition. Drawing the ammunition from a quiver, case, or other container is part of the attack (you need a free hand to load a one-handed weapon). At the end of the battle, you can recover half your expended ammunition by taking a minute to search the battlefield.
+    equipment: true
+    equipped: true
+    notes: Crossbow bolts are used with a weapon that has the ammunition property to make a ranged attack. Each time you attack with the weapon, you expend one piece of ammunition. Drawing the ammunition from a quiver, case, or other container is part of the attack (you need a free hand to load a one-handed weapon). At the end of the battle, you can recover half your expended ammunition by taking a minute to search the battlefield.
+
   - name: Light Crossbow
     weight: 5
     quantity: 1
+    equipment: true
+    equipped: true
     notes: Proficiency with a Light Crossbow allows you to add your proficiency bonus to the attack roll for any attack you make with it.
+
   - name: Hammer
     weight: 3
     quantity: 1
+    equipment: true
+    equipped: true
     notes: Proficiency with a Hammer allows you to add your proficiency bonus to the attack roll for any attack you make with it.
+
   - name: Sichel
     weight: 2
     quantity: 1
+    equipment: true
+    equipped: true
     notes: Proficiency with a Sickle allows you to add your proficiency bonus to the attack roll for any attack you make with it.
+
   - name: Scale Mail
     weight: 45
     quantity: 1
+    equipment: true
+    equipped: true
     notes: This armor consists of a coat and leggings (and perhaps a separate skirt) of leather covered with overlapping pieces of metal, much like the scales of a fish. The suit includes gauntlets.
+
   - name: Thieves Tools
     weight: 1
     quantity: 1
+    equipment: false
+    equipped: false
     notes: This set of tools includes a small file, a set of lock picks, a small mirror mounted on a metal handle, a set of narrow-bladed scissors, and a pair of pliers. Proficiency with these tools lets you add your proficiency bonus to any ability checks you make to disarm traps or open locks.
+
   - name: Crowbar
     weight: 5
     quantity: 1
+    equipment: false
+    equipped: false
     notes: Using a crowbar grants advantage to Strength checks where the crowbar's leverage can be applied.
+
   - name: Hammer
     weight: 3
     quantity: 1
+    equipment: false
+    equipped: false
     notes: This one-handed hammer with an iron head is useful for pounding pitons into a wall.
+
   - name: Piton
-    weight: 2.5
+    weight: 0.25
     quantity: 10
+    equipment: false
+    equipped: false
     notes: When a wall doesn’t offer handholds and footholds, you can make your own. A piton is a steel spike with an eye through which you can loop a rope.
+
   - name: Rations (1 day)
     weight: 20
-    quantity: 1
+    quantity: 0.5
+    equipment: false
+    equipped: false
     notes: Rations consist of dry foods suitable for extended travel, including jerky, dried fruit, hardtack, and nuts
+
   - name: Tinderbox
     weight: 1
     quantity: 1
+    equipment: false
+    equipped: false
     notes: This small container holds flint, fire steel, and tinder (usually dry cloth soaked in light oil) used to kindle a fire. Using it to light a torch -- or anything else with abundant, exposed fuel -- takes an action. Lighting any other fire takes 1 minute.
+
   - name: Torch
-    weight: 10
+    weight: 1
     quantity: 10
+    equipment: false
+    equipped: false
     notes: A torch burns for 1 hour, providing bright light in a 20-foot radius and dim light for an additional 20 feet. If you make a melee attack with a burning torch and hit, it deals 1 fire damage.
+
   - name: Waterskin
     weight: 5
     quantity: 1
-    notes: A waterskin can hold 4 pints (retard unit) of liquid.
+    equipment: false
+    equipped: false
+    notes: A waterskin can hold 4 pints (retard unit) of liquid.
+
   - name: Rope (50ft, Hempen)
     weight: 10
     quantity: 1
-    notes: Rope, has 2 hit points and can be burst with a DC 17 Strength check.
+    equipment: false
+    equipped: false
+    notes: Rope has 2 hit points and can be burst with a DC 17 Strength check.
+
   - name: Eimer's Control Unit
     weight: 10
     quantity: 1
+    equipment: false
+    equipped: false
     notes: Ds Kontrollgerät, mit dem Eimer in seiner Vergangenheit gezugen wurde, Befehle zu befolgen. Es ist beschädigt. Die verwendete Technologie ist extrem Fortgeschritten und ein Beweis dafür, wie viel Wissen aus der Vergangenheit verloren gegangen ist.
+  
+  - name: Backpack
+    weight: 10
+    quantity: 1
+    equipment: true
+    equipped: true
+    notes: A backpack is a leather pack carried on the back, typically with straps to secure it. A backpack can hold 1 cubic foot/ 30 pounds of gear. You can also strap items, such as a bedroll or a coil of rope, to the outside of a backpack.
 features:
   - name: Magical Tinkering
     source: Artificer
@@ -123,7 +174,7 @@ actions:
   - Public/3 Backend/Actions/Opportunity Attack.md
   - Public/3 Backend/Actions/Thunderclap.md
   - Public/3 Backend/Actions/Mending.md
-  - Public/3 Backend/Actions/Sickle.md
+  - Public/3 Backend/Actions/Sichel.md
   - Public/3 Backend/Actions/Hammer.md
   - Public/3 Backend/Actions/Unarmed Strike.md
   - Public/3 Backend/Actions/Cure Wounds.md
@@ -161,11 +212,10 @@ Sehr geehrter Bürgermeister und Rat von Arborgas,
 
 mit diesem Schreiben bewerbe ich mich offiziell für die Expeditionstruppe.
 
-Meine Bezeichnung lautet Eimer. Ich bin ein magisches Konstrukt und lebe seit meiner Bergung außerhalb der Stadt auf dem Hof der Familie Obermüller. Dort unterstütze ich die Familie bei Hofarbeiten. Außerdem befinde mich zugleich in der Lehre bei Meister Andi.
+Meine Bezeichnung lautet Eimer. Ich bin ein magisches Konstrukt und lebe seit meiner Bergung außerhalb der Stadt auf dem Hof der Familie Obermüller. Dort unterstütze ich die Familie bei Hofarbeiten.  Außerdem befinde mich zugleich in der Lehre bei Meister Andi.
 
-Der Großteil meiner Existenz liegt außerhalb meines Zugriffs. Meine Vergangenheit ist unklar. Die Welt hinter der Barriere ist es ebenfalls. Deshalb sehe ich in dieser Expedition nicht nur eine Notwendigkeit für unsere Stadt, sondern auch eine Gelegenheit zur Erkenntnis. Was dort draußen wartet, sollte nicht länger nur gefürchtet, sondern verstanden werden.
+Meine Vergangenheit ist unvollständig. Ich erinnere mich nicht an ein Leben vor meiner Existenz als Konstrukt. Was mir geblieben ist, sind Fragmente: Feuer. Metall. Schmerzen. Schlachtfelder. Befehle. Bilder einer Welt, die zerstört wurde oder sich selbst zerstörte. Diese Bruchstücke reichen nicht aus, um zu verstehen, wer ich einst war. Aber sie reichen aus, um zu verstehen, dass die Welt außerhalb unserer Barriere Antworten bereithalten könnte.
 
-Ich verfüge über Fähigkeiten, die für eine solche Unternehmung von Nutzen sind. Ich kann Magie der ersten Stufe und mehrere Zaubertricks wirken, bin handwerklich effizient und kann magische Unterstützungsgegenstände anfertigen. Ich bin belastbar, einsatzfähig und für Situationen geeignet, in denen Kraft, Präzision und Standhaftigkeit benötigt werden.
 Deshalb bewerbe ich mich.
 
 Die Expedition bedeutet für Arborgas die Chance auf neues Land, neues Wissen und eine neue Zukunft. Für mich bedeutet sie zusätzlich die Möglichkeit, mehr über die Welt zu erfahren, aus der ich stamme, und vielleicht auch über mich selbst. Ich halte es für sinnvoll, beides miteinander zu verbinden.
