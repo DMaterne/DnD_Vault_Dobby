@@ -1,0 +1,62 @@
+%% tags: #city %%
+
+> [!infobox]
+> # Arborgas
+> ![[DilosFeykar.png|cover hsmall]]
+> ###### [[DilosFeykar.png|Vollbild]]
+> ###### Stats
+> | Typ |  Stat |
+> | ---- | ---- |
+> | Kontinent | [[???]] |
+> | Bevölkerung | ??? |
+> | Oberhaupt | ??? |
+
+## Geschichte
+<div style="min-height: 410px; padding: 12px; border: 0px solid var(--text-faint); border-radius: 10px; background-color: var(--background-secondary); line-height: 1.5;">Arborgas ist die letzte bekannte Stadt der Welt. Vor hunderten von Jahren, zur Zeit der [[Apokalypse]] wurde die Stadt durch den großen [[Magier O]] gerettet. Er opferte sein eigenes Leben um eine Barriere zu erschaffen, die die Stadt schützt. Jedoch war das Leben nach der [[Apokalypse]] nicht einfach. Verschiedenste unbekannte Faktoren resultierten in den Verlust der Geschichte dieser Welt vor ihrem Ende. Die Außenwelt ist unbekannt und Gefährlich. Außerhalb der Barriere kommt es häufig zu Monstersichtungen und Angriffen. 
+Der Großteil der Bevölkerung lebt innerhalb der Barriere, nur Landwirtschaft wird außerhalb von dieser betrieben.</div>
+
+## Heute
+Heute ist Arborgas am Limit seiner Kapazität. Über Jahrhunderte wuchs die Bevölkerung stetig, jedoch bleibt der Platz innerhalb der Barriere begrenzt. Da in den letzten Jahren die Anzahl an Monstersichtungen rapide gesunken ist, hat die Stadt beschlossen, eine Expeditionstruppe zusammenzustellen, welche die Außenwelt erkunden soll. Mithilfe eines Bewerbungsverfahrens, sollen fähige Kandidaten gefunden werden, welche diesen Auftrag annehmen sollen. 
+Folgendes **Flugblatt** wurden verteilt um diese zu finden: 
+
+<p align="center"><i>Mitbürger von Arborgas, unserer Stadt des Friedens</i></p>
+
+<p align="center"><i>Seit Jahrhunderten sind wir schon in unserem Käfig gefangen und unsere Platznot wird immer größer, auch Nahrungsknappheit wird ein immer dringenderes Problem das bewältigt werden muss. Doch noch ist die Hoffnung nicht aufzugeben! Die Monstersichtungen werden immer seltener, bereits 2 Jahre seit dem letzten Kontakt!</i></p>
+
+<p align="center"><i>Es ist an der Zeit unsere Welt zu erkunden!</i></p>
+
+<p align="center"><i>Es ist an der Zeit neuen Lebensraum zu schaffen!</i></p>
+
+<p align="center"><i>Es ist an der Zeit uns zurückzuholen was einst unser war!</i></p>
+
+<p align="center"><i>Dafür benötigen wir euch oh mutige Bürger Arborgas. Der Bürgermeister und Rat stellen eine Erkundungstruppe zusammen um das Weite Unbekannte zu entdecken und zu sichern, auf dass die Bürger Arborgas bald die Süße der Natur kosten und unsere Zivilisation gedeihen kann. Dafür rufen wir alle denen Arborgas am Herzen liegt dazu auf sich im Rathaus schriftlich zu bewerben.</i></p>
+
+<p align="center"><i>Lasst uns dem großen Magier O danken indem wir ihm seine letzte Ruhe gewähren!</i></p>
+
+## **Wichtige Orte**
+
+
+## **Gruppierungen**
+
+
+## **Bekannte Persönlichkeiten**
+
+
+## **Timeline**
+
+```timeline
+[line-3, body-2]
++ pre</br> 17th century
++ Origins of coffee
++ The modern version of roasted coffee originated in Arabia. During the 13th century, coffee was extremely popular with the Muslim community for its stimulant powers, which proved useful during long prayer sessions. By parching and boiling the coffee beans, rendering them infertile, the Arabs were able to corner the market on coffee crops. In fact, tradition says that not a single coffee plant existed outside of Arabia or Africa until the 1600s, when Baba Budan, an Indian pilgrim, left Mecca with fertile beans fastened to a strap across his abdomen. Baba’s beans resulted in a new and competitive European coffee trade.
+
++ 17th century
++ Europe and coffee
++ In 1616, the Dutch founded the first European-owned coffee estate in Sri Lanka, then Ceylon, then Java in 1696. The French began growing coffee in the Caribbean, followed by the Spanish in Central America and the Portuguese in Brazil. European coffee houses sprang up in Italy and later France, where they reached a new level of popularity. Now, it is de _rigueur_ for Parisians to indulge in a cup of coffee and a baguette or croissant at the numerous coffee cafes throughout Paris.
+```
+
+## **Verwandte Seiten**
+
+```dataview
+list from [[Arborgas]]
+```

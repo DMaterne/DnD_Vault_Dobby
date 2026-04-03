@@ -132,18 +132,18 @@ actions:
 spellcasting_ability: int
 ---
 
-## Notes 
+# Notes 
 
 ### Backstory:
 Eimer (Einheit für Infiltration, Mobilisation, Eliminierungen und Rückeroberung) erinnert sich nicht an ein eigentliches Leben vor seiner Existenz als Konstrukt. Seine Vergangenheit liegt in Scherben vor ihm – zerbrochene Bilder, undeutliche Stimmen, Schmerzen, Feuer und Metall. Alles, was ihm geblieben ist, sind einzelne Erinnerungsfragmente, die ihn manchmal im Schlaf, manchmal mitten am Tag wie ein Schlag treffen.
 
-Gefunden wurde er vor einigen Jahren von [[Public/Tjubi im Dildoland/Characters/NPCs/Meister Andi|Andis]] [[Public/Tjubi im Dildoland/Characters/NPCs/Georgius Obermüller|Schwager ]], der ihn halb vergraben und stark beschädigt außerhalb der Stadt entdeckte. Man barg ihn, brachte ihn in Sicherheit und setzte ihn notdürftig wieder instand. Seitdem lebt Eimer auf dem Hof der Familie und arbeitet dort als verlässliche Hilfe bei schweren und einfachen Arbeiten gleichermaßen. Gleichzeitig ist er in der Lehre bei Meister Andi, der in ihm nicht nur eine nützliche Maschine sieht, sondern ein Wesen mit Verstand, Potenzial und vielleicht sogar einer Seele.
+Gefunden wurde er vor einigen Jahren von [[Public/Tjubi im Dildoland/Characters/NPCs/Meister Andi|Andis]] [[Public/Tjubi im Dildoland/Characters/NPCs/Georgius Obermüller|Schwager, Georgius Obermüller]], der ihn halb vergraben und stark beschädigt außerhalb der Stadt entdeckte. Man barg ihn, brachte ihn in Sicherheit und setzte ihn notdürftig wieder instand. Seitdem lebt Eimer auf dem Hof der Familie und arbeitet dort als verlässliche Hilfe bei schweren und einfachen Arbeiten gleichermaßen. Gleichzeitig ist er in der Lehre bei Meister Andi, der in ihm nicht nur eine nützliche Maschine sieht, sondern ein Wesen mit Verstand, Potenzial und vielleicht sogar einer Seele.
 
 Doch tief in seinem Inneren regt sich etwas, das sich nicht mit Schrauben und Reparaturen erklären lässt.
 
 In seinen Erinnerungsfetzen sieht Eimer nicht nur Metall und Runen, sondern auch den grausamen Moment seiner Erschaffung: das Gefühl, dass etwas Menschliches, etwas Lebendiges, gegen seinen Willen in einen Körper aus Stahl und Magie gezwungen wurde. Er weiß nicht, wer oder was er vorher war. Er weiß nur, dass seine Existenz als Warforged nicht natürlich begann, sondern das Ergebnis eines gewaltsamen Vorgangs war. 
 
-Danach folgen nur Bruchstücke eines anderen Lebens – eines Daseins als Waffe. Schlachtfelder. Befehle. Gewalt. Das stumpfe Wissen, kämpfen zu müssen, ohne selbst entscheiden zu dürfen. Er erinnert sich an das Gefühl fremder Kontrolle, als hätte etwas seinen Willen unterdrückt und ihn zu einem Werkzeug gemacht. Er wurde von dem militaristischen Kaiserreich Flaniros in den Kampf geschickt, jedoch liegen Grund und Widersacher der Kampfes im schwarzen.
+Danach folgen nur Bruchstücke eines anderen Lebens – eines Daseins als Waffe. Schlachtfelder. Befehle. Gewalt. Das stumpfe Wissen, kämpfen zu müssen, ohne selbst entscheiden zu dürfen. Er erinnert sich an das Gefühl fremder Kontrolle, als hätte etwas seinen Willen unterdrückt und ihn zu einem Werkzeug gemacht. Er wurde von dem militaristischen Kaiserreich [[Flaniros]] in den Kampf geschickt, jedoch liegen Grund und Widersacher der Kampfes im schwarzen.
 
 Die letzte klare Erinnerung ist ein Bild aus Feuer und Vernichtung: Umgeben vom einem Flammenmeer bricht er auf einem Schlachtfeld zusammen. Doch inmitten dieser Niederlage geschieht etwas Entscheidendes: Das Kontrollgerät, das ihn an fremde Befehle band, wird beschädigt. Wut, Verzweiflung und ein Gefühl von Machtlosigkeit überkommen ihn. Doch gegen wen sich sein Hass richtet ist ihm selbst unklar. 
 
