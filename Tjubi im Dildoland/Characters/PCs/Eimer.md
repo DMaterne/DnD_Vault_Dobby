@@ -936,55 +936,55 @@ function uniquePages(pages) {
   return result;
 }
 
-function getCharacterActionPages() {
+function getAllCharacterActions() {
+  const collectedActions = [];
+
+  // 1) Klassische Actions direkt vom Character
   const explicitActionRefs = Array.isArray(c.actions) ? c.actions : [];
-  const inventoryEntries = Array.isArray(c.inventory) ? c.inventory : [];
 
-  // 1) Direkt auf dem Charakter verlinkte Actions
-  const explicitActions = explicitActionRefs
-    .map(path => dv.page(String(path)))
-    .filter(p => p);
+  for (const actionRef of explicitActionRefs) {
+    const actionPage = dv.page(String(actionRef));
+    if (!actionPage) continue;
 
-  // 2) Alle Item-Seiten aus dem Inventar laden
-  const itemPages = inventoryEntries
-    .map(entry => {
-      const itemPath = String(entry?.item ?? "").trim();
-      return itemPath ? dv.page(itemPath) : null;
-    })
-    .filter(p => p);
-
-  // 3) Alle Action/Spell-Seiten aus dem Vault als Suchbasis
-  const allActionLikePages = dv.pages()
-    .where(p => {
-      const category = normalizeText(p.category);
-      return category === "action" || category === "spell";
-    })
-    .array();
-
-  const itemDerivedActions = [];
-
-  for (const itemPage of itemPages) {
-    // Variante A: Item hat explizite Action-Referenzen
-    const itemActionRefs = Array.isArray(itemPage.actions) ? itemPage.actions : [];
-    const linkedActions = itemActionRefs
-      .map(path => dv.page(String(path)))
-      .filter(p => p);
-
-    itemDerivedActions.push(...linkedActions);
-
-    // Variante B: Fallback über gleichen Namen
-    const itemName = normalizeText(itemPage.name ?? itemPage.file?.name);
-    if (!itemName) continue;
-
-    const sameNameActions = allActionLikePages.filter(p => {
-      const pageName = normalizeText(p.name ?? p.file?.name);
-      return pageName === itemName;
+    collectedActions.push({
+      ...actionPage,
+      source_type: "character",
+      source_label: "Character Sheet",
+      file: actionPage.file
     });
-
-    itemDerivedActions.push(...sameNameActions);
   }
 
-  return uniquePages([...explicitActions, ...itemDerivedActions]);
+  // 2) Actions aus Items im Inventar
+  const inventoryEntries = Array.isArray(c.inventory) ? c.inventory : [];
+
+  for (const entry of inventoryEntries) {
+    const itemPath = String(entry?.item ?? "").trim();
+    if (!itemPath) continue;
+
+    const itemPage = dv.page(itemPath);
+    if (!itemPage) continue;
+
+    const itemActions = Array.isArray(itemPage.actions) ? itemPage.actions : [];
+    if (itemActions.length === 0) continue;
+
+    for (const action of itemActions) {
+      if (!action || typeof action !== "object") continue;
+
+      collectedActions.push({
+        ...action,
+        source_type: "item",
+        source_item_name: itemPage.name ?? itemPage.file?.name ?? "Unknown Item",
+        source_item_path: itemPage.file?.path ?? itemPath,
+        source_label: itemPage.name ?? itemPage.file?.name ?? "Unknown Item",
+        file: {
+          name: action.name ?? itemPage.name ?? itemPage.file?.name ?? "Unnamed Action",
+          path: itemPage.file?.path ?? itemPath
+        }
+      });
+    }
+  }
+
+  return collectedActions;
 }
 
 function renderActions() {
@@ -1051,19 +1051,19 @@ function renderActions() {
     return 0;
   }
 
-  const actions = getCharacterActionPages()
-  .filter(p => {
-    const category = String(p.category ?? "").trim().toLowerCase();
-    const rawType = String(p.action_type ?? "").trim().toLowerCase();
-    const type = rawType.replace(/\s+/g, "_");
+  const actions = getAllCharacterActions()
+    .filter(action => {
+      const category = String(action.category ?? "").trim().toLowerCase();
+      const rawType = String(action.action_type ?? "").trim().toLowerCase();
+      const type = rawType.replace(/\s+/g, "_");
 
-    return category !== "spell" && (
-      type === "" ||
-      type === "action" ||
-      type === "bonus_action" ||
-      type === "reaction"
-    );
-  });
+      return category !== "spell" && (
+        type === "" ||
+        type === "action" ||
+        type === "bonus_action" ||
+        type === "reaction"
+      );
+    });
 
   const groupedActions = {
     action: [],
@@ -1085,8 +1085,8 @@ function renderActions() {
 
   for (const key of Object.keys(groupedActions)) {
     groupedActions[key].sort((a, b) => {
-      const nameA = String(a.name ?? a.file.name ?? "");
-      const nameB = String(b.name ?? b.file.name ?? "");
+      const nameA = String(a.name ?? a.file?.name ?? "");
+      const nameB = String(b.name ?? b.file?.name ?? "");
       return nameA.localeCompare(nameB, "de");
     });
   }
@@ -1097,17 +1097,19 @@ function renderActions() {
 
     for (const type of ["action", "bonus_action", "reaction", "other"]) {
       const entries = groupedActions[type].filter(action => {
-        const name = String(action.name ?? action.file.name ?? "").toLowerCase();
+        const name = String(action.name ?? action.file?.name ?? "").toLowerCase();
         const notes = String(action.notes ?? action.effect ?? "").toLowerCase();
         const mode = String(action.mode ?? "").toLowerCase();
         const damageType = String(action.damage_type ?? "").toLowerCase();
+        const sourceItem = String(action.source_item_name ?? "").toLowerCase();
 
         if (!query) return true;
         return (
           name.includes(query) ||
           notes.includes(query) ||
           mode.includes(query) ||
-          damageType.includes(query)
+          damageType.includes(query) ||
+          sourceItem.includes(query)
         );
       });
 
@@ -1141,10 +1143,22 @@ function renderActions() {
         summaryEl.style.fontWeight = "700";
         summaryEl.style.listStyle = "none";
 
-        const leftSummary = summaryEl.createEl("div", {
-          text: action.name ?? action.file.name
+        const leftWrap = summaryEl.createEl("div");
+
+        const leftSummary = leftWrap.createEl("div", {
+          text: action.name ?? action.file?.name ?? "Unnamed Action"
         });
         leftSummary.style.fontSize = "1.05em";
+
+        if (action.source_item_name) {
+          const sourceEl = leftWrap.createEl("div", {
+            text: `from ${action.source_item_name}`
+          });
+          sourceEl.style.fontSize = "0.8em";
+          sourceEl.style.opacity = "0.7";
+          sourceEl.style.fontWeight = "400";
+          sourceEl.style.marginTop = "2px";
+        }
 
         const attackStat = action.attack_stat ?? action.damage_bonus_stat ?? "str";
         const attackMod = getAbilityModForAction(attackStat);
@@ -1191,6 +1205,10 @@ function renderActions() {
         addInfoRow(infoBlock, "Mode", action.mode ?? "-");
         addInfoRow(infoBlock, "Shape", action.shape ?? "-");
 
+        if (action.source_item_name) {
+          addInfoRow(infoBlock, "Item", action.source_item_name);
+        }
+
         if (action.range != null) addInfoRow(infoBlock, "Range", action.range);
         if (action.radius != null) addInfoRow(infoBlock, "Radius", action.radius);
         if (action.damage_type != null) addInfoRow(infoBlock, "Damage Type", action.damage_type);
@@ -1199,7 +1217,14 @@ function renderActions() {
         if (action.damage) {
           damageText = `${action.damage}${action.damage_type ? ` ${action.damage_type}` : ""}`;
         } else if (action.dice_count && action.dice_size) {
-          damageText = `${action.dice_count}d${action.dice_size}${action.damage_bonus ? ` + ${action.damage_bonus}` : ""}${action.damage_type ? ` ${action.damage_type}` : ""}`;
+          const dmgBonus =
+            Number(action.damage_bonus ?? 0) +
+            getAbilityModForAction(action.damage_bonus_stat);
+
+          damageText = `${action.dice_count}d${action.dice_size}`;
+          if (dmgBonus > 0) damageText += ` + ${dmgBonus}`;
+          if (dmgBonus < 0) damageText += ` ${dmgBonus}`;
+          if (action.damage_type) damageText += ` ${action.damage_type}`;
         }
         addInfoRow(infoBlock, "Damage", damageText);
 
