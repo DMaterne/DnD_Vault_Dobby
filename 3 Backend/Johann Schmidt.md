@@ -18,7 +18,7 @@ hp_current: 80
 hp_max: 50
 ac: 18
 speed: 30
-initiative_bonus: 0
+initiative_bonus: 2
 passive_perception: 10
 hit_dice: 1d8
 str_save_prof: true
