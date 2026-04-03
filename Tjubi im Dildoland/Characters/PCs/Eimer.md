@@ -1,5 +1,8 @@
 ```dataviewjs  
 const CHARACTER_PATH = "Public/3 Backend/EIMER.md";
+const ACTIONS_FOLDER = "Public/3 Backend/Actions/";
+const SPELLS_FOLDER = "Public/3 Backend/Spells/";
+
 const c = dv.page(CHARACTER_PATH);
 
 function modFromScore(score) {
@@ -25,6 +28,150 @@ function getAbilityModByName(name) {
   return 0;
 }
 
+function isInFolder(filePath, folderPath) {
+  return String(filePath ?? "").startsWith(folderPath);
+}
+
+function uniqueActionObjects(entries) {
+  const seen = new Set();
+  const result = [];
+
+  for (const entry of entries) {
+    const sourceType = String(entry?.source_type ?? "");
+    const sourcePath = String(entry?.source_item_path ?? entry?.file?.path ?? "");
+    const name = String(entry?.name ?? entry?.file?.name ?? "");
+    const actionType = String(entry?.action_type ?? "");
+    const category = String(entry?.category ?? "");
+    const key = `${sourceType}::${sourcePath}::${name}::${actionType}::${category}`;
+
+    if (seen.has(key)) continue;
+    seen.add(key);
+    result.push(entry);
+  }
+
+  return result;
+}
+
+function getAllCharacterActions() {
+  const collectedActions = [];
+
+  // 1) Explizite Character-Actions aus Dateien
+  const explicitActionRefs = Array.isArray(c.actions) ? c.actions : [];
+
+  for (const actionRef of explicitActionRefs) {
+    const actionPage = dv.page(String(actionRef));
+    if (!actionPage) continue;
+
+    const path = String(actionPage.file?.path ?? "");
+    if (!isInFolder(path, ACTIONS_FOLDER)) continue;
+
+    const category = String(actionPage.category ?? "").trim().toLowerCase();
+    if (category === "spell") continue;
+
+    collectedActions.push({
+      ...actionPage,
+      source_type: "character",
+      source_label: "Character Sheet",
+      file: actionPage.file
+    });
+  }
+
+  // 2) Actions aus Items
+  const inventoryEntries = Array.isArray(c.inventory) ? c.inventory : [];
+
+  for (const entry of inventoryEntries) {
+    const itemPath = String(entry?.item ?? "").trim();
+    if (!itemPath) continue;
+
+    const itemPage = dv.page(itemPath);
+    if (!itemPage) continue;
+
+    const itemActions = Array.isArray(itemPage.actions) ? itemPage.actions : [];
+    if (itemActions.length === 0) continue;
+
+    for (const action of itemActions) {
+      if (!action || typeof action !== "object") continue;
+
+      const category = String(action.category ?? "").trim().toLowerCase();
+      if (category === "spell") continue;
+
+      collectedActions.push({
+        ...action,
+        source_type: "item",
+        source_item_name: itemPage.name ?? itemPage.file?.name ?? "Unknown Item",
+        source_item_path: itemPage.file?.path ?? itemPath,
+        source_label: itemPage.name ?? itemPage.file?.name ?? "Unknown Item",
+        file: {
+          name: action.name ?? itemPage.name ?? itemPage.file?.name ?? "Unnamed Action",
+          path: itemPage.file?.path ?? itemPath
+        }
+      });
+    }
+  }
+
+  return uniqueActionObjects(collectedActions);
+}
+
+function getAllCharacterSpells() {
+  const collectedSpells = [];
+
+  // 1) Explizite Character-Spells aus Dateien
+  const explicitSpellRefs = Array.isArray(c.spells) ? c.spells : [];
+
+  for (const spellRef of explicitSpellRefs) {
+    const spellPage = dv.page(String(spellRef));
+    if (!spellPage) continue;
+
+    const path = String(spellPage.file?.path ?? "");
+    if (!isInFolder(path, SPELLS_FOLDER)) continue;
+
+    const category = String(spellPage.category ?? "").trim().toLowerCase();
+    if (category && category !== "spell") continue;
+
+    collectedSpells.push({
+      ...spellPage,
+      source_type: "character",
+      source_label: "Character Sheet",
+      file: spellPage.file
+    });
+  }
+
+  // 2) Spells aus Items
+  const inventoryEntries = Array.isArray(c.inventory) ? c.inventory : [];
+
+  for (const entry of inventoryEntries) {
+    const itemPath = String(entry?.item ?? "").trim();
+    if (!itemPath) continue;
+
+    const itemPage = dv.page(itemPath);
+    if (!itemPage) continue;
+
+    const itemActions = Array.isArray(itemPage.actions) ? itemPage.actions : [];
+    if (itemActions.length === 0) continue;
+
+    for (const action of itemActions) {
+      if (!action || typeof action !== "object") continue;
+
+      const category = String(action.category ?? "").trim().toLowerCase();
+      if (category !== "spell") continue;
+
+      collectedSpells.push({
+        ...action,
+        source_type: "item",
+        source_item_name: itemPage.name ?? itemPage.file?.name ?? "Unknown Item",
+        source_item_path: itemPage.file?.path ?? itemPath,
+        source_label: itemPage.name ?? itemPage.file?.name ?? "Unknown Item",
+        file: {
+          name: action.name ?? itemPage.name ?? itemPage.file?.name ?? "Unnamed Spell",
+          path: itemPage.file?.path ?? itemPath
+        }
+      });
+    }
+  }
+
+  return uniqueActionObjects(collectedSpells);
+}
+
 if (!c) {
   dv.paragraph("Character-Datei nicht gefunden.");
 } else {
@@ -35,338 +182,337 @@ if (!c) {
 
   // HEADER
   const headerRow = wrapper.createEl("div");
-headerRow.style.display = "grid";
-headerRow.style.gridTemplateColumns = "1fr 220px 260px";
-headerRow.style.gap = "18px";
-headerRow.style.alignItems = "stretch";
+  headerRow.style.display = "grid";
+  headerRow.style.gridTemplateColumns = "1fr 220px 260px";
+  headerRow.style.gap = "18px";
+  headerRow.style.alignItems = "stretch";
 
-// LEFT: HEADER CARD
-const header = headerRow.createEl("div");
-header.style.padding = "16px";
-header.style.border = "1px solid var(--background-modifier-border)";
-header.style.borderRadius = "14px";
-header.style.display = "grid";
-header.style.gridTemplateColumns = "1fr 360px";
-header.style.gap = "16px";
-header.style.alignItems = "center";
+  // LEFT: HEADER CARD
+  const header = headerRow.createEl("div");
+  header.style.padding = "16px";
+  header.style.border = "1px solid var(--background-modifier-border)";
+  header.style.borderRadius = "14px";
+  header.style.display = "grid";
+  header.style.gridTemplateColumns = "1fr 360px";
+  header.style.gap = "16px";
+  header.style.alignItems = "center";
 
-const headerText = header.createEl("div");
+  const headerText = header.createEl("div");
 
-const title = headerText.createEl("div", { text: c.name ?? "Unbenannter Charakter" });
-title.style.fontSize = "1.8em";
-title.style.fontWeight = "700";
+  const title = headerText.createEl("div", { text: c.name ?? "Unbenannter Charakter" });
+  title.style.fontSize = "1.8em";
+  title.style.fontWeight = "700";
 
-const subtitle = headerText.createEl("div");
-subtitle.style.opacity = "0.75";
-subtitle.style.marginTop = "4px";
-subtitle.style.display = "flex";
-subtitle.style.flexDirection = "column";
-subtitle.style.gap = "4px";
+  const subtitle = headerText.createEl("div");
+  subtitle.style.opacity = "0.75";
+  subtitle.style.marginTop = "4px";
+  subtitle.style.display = "flex";
+  subtitle.style.flexDirection = "column";
+  subtitle.style.gap = "4px";
 
-function addHeaderInfoRow(parent, label, value) {
-  const row = parent.createEl("div");
-  
-  const labelEl = row.createEl("span", { text: `${label}: ` });
-  labelEl.style.fontWeight = "600";
+  function addHeaderInfoRow(parent, label, value) {
+    const row = parent.createEl("div");
 
-  row.createEl("span", { text: String(value ?? "-") });
-}
+    const labelEl = row.createEl("span", { text: `${label}: ` });
+    labelEl.style.fontWeight = "600";
 
-addHeaderInfoRow(subtitle, "Race", c.race ?? "Unknown Race");
-addHeaderInfoRow(subtitle, "Class", c.class ?? "Unknown Class");
-addHeaderInfoRow(subtitle, "Subclass", c.subclass ?? "-");
-addHeaderInfoRow(subtitle, "Level", c.level ?? 1);
-
-const meta = headerText.createEl("div");
-meta.style.opacity = "0.7";
-meta.style.marginTop = "6px";
-meta.style.fontSize = "0.95em";
-meta.style.display = "flex";
-meta.style.flexDirection = "column";
-meta.style.gap = "4px";
-
-function addMetaInfoRow(parent, label, value) {
-  const row = parent.createEl("div");
-
-  const labelEl = row.createEl("span", { text: `${label}: ` });
-  labelEl.style.fontWeight = "600";
-
-  row.createEl("span", { text: String(value ?? "-") });
-}
-
-addMetaInfoRow(meta, "Background", c.background ?? "-");
-addMetaInfoRow(meta, "Alignment", c.alignment ?? "-");
-addMetaInfoRow(meta, "Player", c.player ?? "-");
-
-const portraitWrap = header.createEl("div");
-portraitWrap.style.display = "flex";
-portraitWrap.style.flexDirection = "column";
-portraitWrap.style.justifyContent = "center";
-portraitWrap.style.alignItems = "center";
-portraitWrap.style.gap = "8px";
-
-const portraitPath = c.portrait ?? "Public/1 Assets/Bilder/EIMER.png";
-const portraitFile = app.vault.getAbstractFileByPath(portraitPath);
-const portraitUrl = app.vault.adapter.getResourcePath(portraitPath);
-
-const portraitAnchor = portraitWrap.createEl("a");
-portraitAnchor.href = "#";
-portraitAnchor.style.display = "block";
-portraitAnchor.style.width = "240px";
-portraitAnchor.style.height = "240px";
-portraitAnchor.style.flexShrink = "0";
-
-portraitAnchor.addEventListener("click", async (evt) => {
-  evt.preventDefault();
-  if (portraitFile) {
-    await app.workspace.getLeaf(true).openFile(portraitFile);
+    row.createEl("span", { text: String(value ?? "-") });
   }
-});
 
-const portrait = portraitAnchor.createEl("img");
-portrait.src = portraitUrl;
-portrait.alt = c.name ?? "Character Portrait";
-portrait.style.width = "240px";
-portrait.style.height = "240px";
-portrait.style.minWidth = "240px";
-portrait.style.maxWidth = "240px";
-portrait.style.minHeight = "240px";
-portrait.style.maxHeight = "240px";
-portrait.style.objectFit = "cover";
-portrait.style.objectPosition = "center center";
-portrait.style.display = "block";
-portrait.style.borderRadius = "20px";
-portrait.style.border = "1px solid var(--background-modifier-border)";
-portrait.style.background = "var(--background-secondary)";
-portrait.style.boxSizing = "border-box";
+  addHeaderInfoRow(subtitle, "Race", c.race ?? "Unknown Race");
+  addHeaderInfoRow(subtitle, "Class", c.class ?? "Unknown Class");
+  addHeaderInfoRow(subtitle, "Subclass", c.subclass ?? "-");
+  addHeaderInfoRow(subtitle, "Level", c.level ?? 1);
 
+  const meta = headerText.createEl("div");
+  meta.style.opacity = "0.7";
+  meta.style.marginTop = "6px";
+  meta.style.fontSize = "0.95em";
+  meta.style.display = "flex";
+  meta.style.flexDirection = "column";
+  meta.style.gap = "4px";
 
-// MIDDLE: COMBAT VALUES CARD
-const comValCard = headerRow.createEl("div");
-comValCard.style.padding = "16px";
-comValCard.style.border = "1px solid var(--background-modifier-border)";
-comValCard.style.borderRadius = "14px";
-comValCard.style.display = "flex";
-comValCard.style.flexDirection = "column";
-comValCard.style.gap = "10px";
+  function addMetaInfoRow(parent, label, value) {
+    const row = parent.createEl("div");
 
-const comValTitle = comValCard.createEl("div", { text: "Combat Values" });
-comValTitle.style.fontWeight = "700";
-comValTitle.style.fontSize = "1.1em";
-comValTitle.style.marginBottom = "4px";
+    const labelEl = row.createEl("span", { text: `${label}: ` });
+    labelEl.style.fontWeight = "600";
 
-const comValGrid = comValCard.createEl("div");
-comValGrid.style.display = "grid";
-comValGrid.style.gridTemplateColumns = "1fr";
-comValGrid.style.gap = "8px";
+    row.createEl("span", { text: String(value ?? "-") });
+  }
 
-const combatValues = [
-  ["Armor Class", c.ac ?? 10],
-  ["Initiative", modString(c.initiative_bonus ?? modFromScore(c.dex ?? 10))],
-  ["Speed", `${c.speed ?? 30} ft`],
-];
+  addMetaInfoRow(meta, "Background", c.background ?? "-");
+  addMetaInfoRow(meta, "Alignment", c.alignment ?? "-");
+  addMetaInfoRow(meta, "Player", c.player ?? "-");
 
-for (const [label, value] of combatValues) {
-  const row = comValGrid.createEl("div");
-  row.style.padding = "10px";
-  row.style.border = "1px solid var(--background-modifier-border)";
-  row.style.borderRadius = "10px";
-  row.style.textAlign = "center";
+  const portraitWrap = header.createEl("div");
+  portraitWrap.style.display = "flex";
+  portraitWrap.style.flexDirection = "column";
+  portraitWrap.style.justifyContent = "center";
+  portraitWrap.style.alignItems = "center";
+  portraitWrap.style.gap = "8px";
 
-  const labelEl = row.createEl("div", { text: label });
-  labelEl.style.fontSize = "0.8em";
-  labelEl.style.opacity = "0.7";
-  labelEl.style.marginBottom = "4px";
+  const portraitPath = c.portrait ?? "Public/1 Assets/Bilder/EIMER.png";
+  const portraitFile = app.vault.getAbstractFileByPath(portraitPath);
+  const portraitUrl = app.vault.adapter.getResourcePath(portraitPath);
 
-  const valueEl = row.createEl("div", { text: String(value) });
-  valueEl.style.fontSize = "1.2em";
-  valueEl.style.fontWeight = "700";
-}
+  const portraitAnchor = portraitWrap.createEl("a");
+  portraitAnchor.href = "#";
+  portraitAnchor.style.display = "block";
+  portraitAnchor.style.width = "240px";
+  portraitAnchor.style.height = "240px";
+  portraitAnchor.style.flexShrink = "0";
 
-// RIGHT: HP CARD
-const hpCard = headerRow.createEl("div");
-hpCard.style.padding = "16px";
-hpCard.style.border = "1px solid var(--background-modifier-border)";
-hpCard.style.borderRadius = "14px";
-hpCard.style.display = "flex";
-hpCard.style.flexDirection = "column";
-hpCard.style.gap = "12px";
-
-const hpTitle = hpCard.createEl("div", { text: "Hit Points" });
-hpTitle.style.fontWeight = "700";
-hpTitle.style.fontSize = "1.1em";
-
-const characterFile = app.vault.getAbstractFileByPath(CHARACTER_PATH);
-
-let currentHp = Number(c.hp_current ?? 0);
-const maxHp = Number(c.hp_max ?? 0);
-let tempHpValue = Number(c.hp_temp ?? 0);
-
-const hpMain = hpCard.createEl("div", {
-  text: `${currentHp} / ${maxHp}`
-});
-hpMain.style.fontSize = "1.8em";
-hpMain.style.fontWeight = "700";
-hpMain.style.textAlign = "center";
-hpMain.style.padding = "8px";
-hpMain.style.border = "1px solid var(--background-modifier-border)";
-hpMain.style.borderRadius = "10px";
-
-const tempHp = hpCard.createEl("div", {
-  text: `Temp HP: ${tempHpValue}`
-});
-tempHp.style.opacity = "0.8";
-tempHp.style.textAlign = "center";
-
-function refreshHpDisplay() {
-  hpMain.setText(`${currentHp} / ${maxHp}`);
-  tempHp.setText(`Temp HP: ${tempHpValue}`);
-  tempInput.value = String(tempHpValue);
-  deathSavesCard.style.display = currentHp <= 0 ? "block" : "none";
-}
-
-async function saveHpValues() {
-  if (!characterFile) return;
-
-  await app.fileManager.processFrontMatter(characterFile, (fm) => {
-    fm.hp_current = currentHp;
-    fm.hp_temp = tempHpValue;
+  portraitAnchor.addEventListener("click", async (evt) => {
+    evt.preventDefault();
+    if (portraitFile) {
+      await app.workspace.getLeaf(true).openFile(portraitFile);
+    }
   });
-}
 
-const actionRow = hpCard.createEl("div");
-actionRow.style.display = "grid";
-actionRow.style.gridTemplateColumns = "1fr auto auto";
-actionRow.style.gap = "8px";
-actionRow.style.alignItems = "center";
+  const portrait = portraitAnchor.createEl("img");
+  portrait.src = portraitUrl;
+  portrait.alt = c.name ?? "Character Portrait";
+  portrait.style.width = "240px";
+  portrait.style.height = "240px";
+  portrait.style.minWidth = "240px";
+  portrait.style.maxWidth = "240px";
+  portrait.style.minHeight = "240px";
+  portrait.style.maxHeight = "240px";
+  portrait.style.objectFit = "cover";
+  portrait.style.objectPosition = "center center";
+  portrait.style.display = "block";
+  portrait.style.borderRadius = "20px";
+  portrait.style.border = "1px solid var(--background-modifier-border)";
+  portrait.style.background = "var(--background-secondary)";
+  portrait.style.boxSizing = "border-box";
 
-const hpValueInput = actionRow.createEl("input");
-hpValueInput.type = "number";
-hpValueInput.placeholder = "Value";
-hpValueInput.style.width = "100%";
-hpValueInput.style.padding = "8px 10px";
-hpValueInput.style.border = "1px solid var(--background-modifier-border)";
-hpValueInput.style.borderRadius = "8px";
-hpValueInput.style.background = "var(--background-primary)";
-hpValueInput.style.color = "var(--text-normal)";
+  // MIDDLE: COMBAT VALUES CARD
+  const comValCard = headerRow.createEl("div");
+  comValCard.style.padding = "16px";
+  comValCard.style.border = "1px solid var(--background-modifier-border)";
+  comValCard.style.borderRadius = "14px";
+  comValCard.style.display = "flex";
+  comValCard.style.flexDirection = "column";
+  comValCard.style.gap = "10px";
 
-const damageBtn = actionRow.createEl("button", { text: "Damage" });
-damageBtn.style.padding = "8px 12px";
-damageBtn.style.borderRadius = "8px";
-damageBtn.style.border = "1px solid var(--background-modifier-border)";
-damageBtn.style.cursor = "pointer";
-damageBtn.style.background = "var(--background-secondary)";
-damageBtn.style.color = "var(--text-normal)";
-damageBtn.style.fontWeight = "600";
+  const comValTitle = comValCard.createEl("div", { text: "Combat Values" });
+  comValTitle.style.fontWeight = "700";
+  comValTitle.style.fontSize = "1.1em";
+  comValTitle.style.marginBottom = "4px";
 
-const healBtn = actionRow.createEl("button", { text: "Heal" });
-healBtn.style.padding = "8px 12px";
-healBtn.style.borderRadius = "8px";
-healBtn.style.border = "1px solid var(--background-modifier-border)";
-healBtn.style.cursor = "pointer";
-healBtn.style.background = "var(--background-secondary)";
-healBtn.style.color = "var(--text-normal)";
-healBtn.style.fontWeight = "600";
+  const comValGrid = comValCard.createEl("div");
+  comValGrid.style.display = "grid";
+  comValGrid.style.gridTemplateColumns = "1fr";
+  comValGrid.style.gap = "8px";
 
-const tempRow = hpCard.createEl("div");
-tempRow.style.display = "grid";
-tempRow.style.gridTemplateColumns = "70px 1fr auto";
-tempRow.style.gap = "8px";
-tempRow.style.alignItems = "center";
+  const combatValues = [
+    ["Armor Class", c.ac ?? 10],
+    ["Initiative", modString(c.initiative_bonus ?? modFromScore(c.dex ?? 10))],
+    ["Speed", `${c.speed ?? 30} ft`],
+  ];
 
-const tempLabel = tempRow.createEl("div", { text: "Temp HP" });
-tempLabel.style.fontWeight = "600";
+  for (const [label, value] of combatValues) {
+    const row = comValGrid.createEl("div");
+    row.style.padding = "10px";
+    row.style.border = "1px solid var(--background-modifier-border)";
+    row.style.borderRadius = "10px";
+    row.style.textAlign = "center";
 
-const tempInput = tempRow.createEl("input");
-tempInput.type = "number";
-tempInput.placeholder = String(tempHpValue);
-tempInput.value = String(tempHpValue);
-tempInput.style.width = "100%";
-tempInput.style.padding = "8px 10px";
-tempInput.style.border = "1px solid var(--background-modifier-border)";
-tempInput.style.borderRadius = "8px";
-tempInput.style.background = "var(--background-primary)";
-tempInput.style.color = "var(--text-normal)";
+    const labelEl = row.createEl("div", { text: label });
+    labelEl.style.fontSize = "0.8em";
+    labelEl.style.opacity = "0.7";
+    labelEl.style.marginBottom = "4px";
 
-const tempSaveBtn = tempRow.createEl("button", { text: "Set" });
-tempSaveBtn.style.padding = "8px 12px";
-tempSaveBtn.style.borderRadius = "8px";
-tempSaveBtn.style.border = "1px solid var(--background-modifier-border)";
-tempSaveBtn.style.cursor = "pointer";
-tempSaveBtn.style.background = "var(--background-secondary)";
-tempSaveBtn.style.color = "var(--text-normal)";
-tempSaveBtn.style.fontWeight = "600";
-
-damageBtn.addEventListener("click", async () => {
-  let amount = Number(hpValueInput.value ?? 0);
-  if (!Number.isFinite(amount) || amount <= 0) return;
-
-  amount = Math.floor(amount);
-
-  if (tempHpValue > 0) {
-    const absorbed = Math.min(tempHpValue, amount);
-    tempHpValue -= absorbed;
-    amount -= absorbed;
+    const valueEl = row.createEl("div", { text: String(value) });
+    valueEl.style.fontSize = "1.2em";
+    valueEl.style.fontWeight = "700";
   }
 
-  if (amount > 0) {
-    currentHp = Math.max(0, currentHp - amount);
+  // RIGHT: HP CARD
+  const hpCard = headerRow.createEl("div");
+  hpCard.style.padding = "16px";
+  hpCard.style.border = "1px solid var(--background-modifier-border)";
+  hpCard.style.borderRadius = "14px";
+  hpCard.style.display = "flex";
+  hpCard.style.flexDirection = "column";
+  hpCard.style.gap = "12px";
+
+  const hpTitle = hpCard.createEl("div", { text: "Hit Points" });
+  hpTitle.style.fontWeight = "700";
+  hpTitle.style.fontSize = "1.1em";
+
+  const characterFile = app.vault.getAbstractFileByPath(CHARACTER_PATH);
+
+  let currentHp = Number(c.hp_current ?? 0);
+  const maxHp = Number(c.hp_max ?? 0);
+  let tempHpValue = Number(c.hp_temp ?? 0);
+
+  const hpMain = hpCard.createEl("div", {
+    text: `${currentHp} / ${maxHp}`
+  });
+  hpMain.style.fontSize = "1.8em";
+  hpMain.style.fontWeight = "700";
+  hpMain.style.textAlign = "center";
+  hpMain.style.padding = "8px";
+  hpMain.style.border = "1px solid var(--background-modifier-border)";
+  hpMain.style.borderRadius = "10px";
+
+  const tempHp = hpCard.createEl("div", {
+    text: `Temp HP: ${tempHpValue}`
+  });
+  tempHp.style.opacity = "0.8";
+  tempHp.style.textAlign = "center";
+
+  function refreshHpDisplay() {
+    hpMain.setText(`${currentHp} / ${maxHp}`);
+    tempHp.setText(`Temp HP: ${tempHpValue}`);
+    tempInput.value = String(tempHpValue);
+    deathSavesCard.style.display = currentHp <= 0 ? "block" : "none";
   }
 
-  hpValueInput.value = "";
-  refreshHpDisplay();
-  await saveHpValues();
-});
+  async function saveHpValues() {
+    if (!characterFile) return;
 
-healBtn.addEventListener("click", async () => {
-  let amount = Number(hpValueInput.value ?? 0);
-  if (!Number.isFinite(amount) || amount <= 0) return;
-
-  amount = Math.floor(amount);
-  currentHp = Math.min(maxHp, currentHp + amount);
-
-  hpValueInput.value = "";
-  refreshHpDisplay();
-  await saveHpValues();
-});
-
-tempSaveBtn.addEventListener("click", async () => {
-  const value = Number(tempInput.value ?? 0);
-  tempHpValue = Math.max(0, Math.floor(value || 0));
-  refreshHpDisplay();
-  await saveHpValues();
-});
-
-const deathSavesCard = hpCard.createEl("div");
-deathSavesCard.style.marginTop = "8px";
-deathSavesCard.style.padding = "10px";
-deathSavesCard.style.border = "1px solid var(--background-modifier-border)";
-deathSavesCard.style.borderRadius = "10px";
-deathSavesCard.style.display = currentHp <= 0 ? "block" : "none";
-
-const deathSavesTitle = deathSavesCard.createEl("div", { text: "Death Saves" });
-deathSavesTitle.style.fontWeight = "700";
-deathSavesTitle.style.marginBottom = "8px";
-
-function createDeathSaveRow(labelText) {
-  const row = deathSavesCard.createEl("div");
-  row.style.display = "grid";
-  row.style.gridTemplateColumns = "70px repeat(3, 20px)";
-  row.style.gap = "8px";
-  row.style.alignItems = "center";
-  row.style.marginBottom = "6px";
-
-  const label = row.createEl("div", { text: labelText });
-  label.style.fontWeight = "600";
-
-  for (let i = 0; i < 3; i++) {
-    const checkbox = row.createEl("input");
-    checkbox.type = "checkbox";
+    await app.fileManager.processFrontMatter(characterFile, (fm) => {
+      fm.hp_current = currentHp;
+      fm.hp_temp = tempHpValue;
+    });
   }
-}
 
-createDeathSaveRow("Fail");
-createDeathSaveRow("Success");
+  const actionRow = hpCard.createEl("div");
+  actionRow.style.display = "grid";
+  actionRow.style.gridTemplateColumns = "1fr auto auto";
+  actionRow.style.gap = "8px";
+  actionRow.style.alignItems = "center";
+
+  const hpValueInput = actionRow.createEl("input");
+  hpValueInput.type = "number";
+  hpValueInput.placeholder = "Value";
+  hpValueInput.style.width = "100%";
+  hpValueInput.style.padding = "8px 10px";
+  hpValueInput.style.border = "1px solid var(--background-modifier-border)";
+  hpValueInput.style.borderRadius = "8px";
+  hpValueInput.style.background = "var(--background-primary)";
+  hpValueInput.style.color = "var(--text-normal)";
+
+  const damageBtn = actionRow.createEl("button", { text: "Damage" });
+  damageBtn.style.padding = "8px 12px";
+  damageBtn.style.borderRadius = "8px";
+  damageBtn.style.border = "1px solid var(--background-modifier-border)";
+  damageBtn.style.cursor = "pointer";
+  damageBtn.style.background = "var(--background-secondary)";
+  damageBtn.style.color = "var(--text-normal)";
+  damageBtn.style.fontWeight = "600";
+
+  const healBtn = actionRow.createEl("button", { text: "Heal" });
+  healBtn.style.padding = "8px 12px";
+  healBtn.style.borderRadius = "8px";
+  healBtn.style.border = "1px solid var(--background-modifier-border)";
+  healBtn.style.cursor = "pointer";
+  healBtn.style.background = "var(--background-secondary)";
+  healBtn.style.color = "var(--text-normal)";
+  healBtn.style.fontWeight = "600";
+
+  const tempRow = hpCard.createEl("div");
+  tempRow.style.display = "grid";
+  tempRow.style.gridTemplateColumns = "70px 1fr auto";
+  tempRow.style.gap = "8px";
+  tempRow.style.alignItems = "center";
+
+  const tempLabel = tempRow.createEl("div", { text: "Temp HP" });
+  tempLabel.style.fontWeight = "600";
+
+  const tempInput = tempRow.createEl("input");
+  tempInput.type = "number";
+  tempInput.placeholder = String(tempHpValue);
+  tempInput.value = String(tempHpValue);
+  tempInput.style.width = "100%";
+  tempInput.style.padding = "8px 10px";
+  tempInput.style.border = "1px solid var(--background-modifier-border)";
+  tempInput.style.borderRadius = "8px";
+  tempInput.style.background = "var(--background-primary)";
+  tempInput.style.color = "var(--text-normal)";
+
+  const tempSaveBtn = tempRow.createEl("button", { text: "Set" });
+  tempSaveBtn.style.padding = "8px 12px";
+  tempSaveBtn.style.borderRadius = "8px";
+  tempSaveBtn.style.border = "1px solid var(--background-modifier-border)";
+  tempSaveBtn.style.cursor = "pointer";
+  tempSaveBtn.style.background = "var(--background-secondary)";
+  tempSaveBtn.style.color = "var(--text-normal)";
+  tempSaveBtn.style.fontWeight = "600";
+
+  damageBtn.addEventListener("click", async () => {
+    let amount = Number(hpValueInput.value ?? 0);
+    if (!Number.isFinite(amount) || amount <= 0) return;
+
+    amount = Math.floor(amount);
+
+    if (tempHpValue > 0) {
+      const absorbed = Math.min(tempHpValue, amount);
+      tempHpValue -= absorbed;
+      amount -= absorbed;
+    }
+
+    if (amount > 0) {
+      currentHp = Math.max(0, currentHp - amount);
+    }
+
+    hpValueInput.value = "";
+    refreshHpDisplay();
+    await saveHpValues();
+  });
+
+  healBtn.addEventListener("click", async () => {
+    let amount = Number(hpValueInput.value ?? 0);
+    if (!Number.isFinite(amount) || amount <= 0) return;
+
+    amount = Math.floor(amount);
+    currentHp = Math.min(maxHp, currentHp + amount);
+
+    hpValueInput.value = "";
+    refreshHpDisplay();
+    await saveHpValues();
+  });
+
+  tempSaveBtn.addEventListener("click", async () => {
+    const value = Number(tempInput.value ?? 0);
+    tempHpValue = Math.max(0, Math.floor(value || 0));
+    refreshHpDisplay();
+    await saveHpValues();
+  });
+
+  const deathSavesCard = hpCard.createEl("div");
+  deathSavesCard.style.marginTop = "8px";
+  deathSavesCard.style.padding = "10px";
+  deathSavesCard.style.border = "1px solid var(--background-modifier-border)";
+  deathSavesCard.style.borderRadius = "10px";
+  deathSavesCard.style.display = currentHp <= 0 ? "block" : "none";
+
+  const deathSavesTitle = deathSavesCard.createEl("div", { text: "Death Saves" });
+  deathSavesTitle.style.fontWeight = "700";
+  deathSavesTitle.style.marginBottom = "8px";
+
+  function createDeathSaveRow(labelText) {
+    const row = deathSavesCard.createEl("div");
+    row.style.display = "grid";
+    row.style.gridTemplateColumns = "70px repeat(3, 20px)";
+    row.style.gap = "8px";
+    row.style.alignItems = "center";
+    row.style.marginBottom = "6px";
+
+    const label = row.createEl("div", { text: labelText });
+    label.style.fontWeight = "600";
+
+    for (let i = 0; i < 3; i++) {
+      const checkbox = row.createEl("input");
+      checkbox.type = "checkbox";
+    }
+  }
+
+  createDeathSaveRow("Fail");
+  createDeathSaveRow("Success");
 
   // ABILITY SCORES
   const abilitiesCard = wrapper.createEl("div");
@@ -418,25 +564,25 @@ createDeathSaveRow("Success");
   }
 
   // MAIN GRID
-const mainGrid = wrapper.createEl("div");
-mainGrid.style.display = "grid";
-mainGrid.style.gridTemplateColumns = "1fr 1fr 2fr";
-mainGrid.style.gap = "18px";
+  const mainGrid = wrapper.createEl("div");
+  mainGrid.style.display = "grid";
+  mainGrid.style.gridTemplateColumns = "1fr 1fr 2fr";
+  mainGrid.style.gap = "18px";
 
-const leftCol = mainGrid.createEl("div");
-leftCol.style.display = "flex";
-leftCol.style.flexDirection = "column";
-leftCol.style.gap = "9px";
+  const leftCol = mainGrid.createEl("div");
+  leftCol.style.display = "flex";
+  leftCol.style.flexDirection = "column";
+  leftCol.style.gap = "9px";
 
-const middleCol = mainGrid.createEl("div");
-middleCol.style.display = "flex";
-middleCol.style.flexDirection = "column";
-middleCol.style.gap = "9px";
+  const middleCol = mainGrid.createEl("div");
+  middleCol.style.display = "flex";
+  middleCol.style.flexDirection = "column";
+  middleCol.style.gap = "9px";
 
-const rightCol = mainGrid.createEl("div");
-rightCol.style.display = "flex";
-rightCol.style.flexDirection = "column";
-rightCol.style.gap = "9px";
+  const rightCol = mainGrid.createEl("div");
+  rightCol.style.display = "flex";
+  rightCol.style.flexDirection = "column";
+  rightCol.style.gap = "9px";
 
   // SAVING THROWS
   const savesCard = leftCol.createEl("div");
@@ -551,100 +697,215 @@ rightCol.style.gap = "9px";
     el.innerHTML = "";
   }
 
-function renderFeatures() {
-  clearEl(tabContent);
+  function renderFeatures() {
+    clearEl(tabContent);
 
-  const title = tabContent.createEl("div", { text: "Features & Traits" });
-  title.style.fontWeight = "700";
-  title.style.fontSize = "1.05em";
-  title.style.marginBottom = "10px";
+    const title = tabContent.createEl("div", { text: "Features & Traits" });
+    title.style.fontWeight = "700";
+    title.style.fontSize = "1.05em";
+    title.style.marginBottom = "10px";
 
-  const features = Array.isArray(c.features) ? c.features : [];
+    const features = Array.isArray(c.features) ? c.features : [];
 
-  if (features.length === 0) {
-    tabContent.createEl("div", { text: "Keine Features eingetragen." });
-    return;
-  }
-
-  const searchWrap = tabContent.createEl("div");
-  searchWrap.style.marginBottom = "10px";
-
-  const searchInput = searchWrap.createEl("input");
-  searchInput.type = "text";
-  searchInput.placeholder = "Search Features";
-  searchInput.style.width = "100%";
-  searchInput.style.padding = "8px 10px";
-  searchInput.style.border = "1px solid var(--background-modifier-border)";
-  searchInput.style.borderRadius = "8px";
-  searchInput.style.background = "var(--background-primary)";
-  searchInput.style.color = "var(--text-normal)";
-
-  const tableWrap = tabContent.createEl("div");
-  tableWrap.style.display = "flex";
-  tableWrap.style.flexDirection = "column";
-  tableWrap.style.gap = "6px";
-
-  function renderFeatureRows(filterText = "") {
-    tableWrap.innerHTML = "";
-
-    const header = tableWrap.createEl("div");
-    header.style.display = "grid";
-    header.style.gridTemplateColumns = "2fr 1fr 120px";
-    header.style.gap = "12px";
-    header.style.padding = "8px 10px";
-    header.style.fontWeight = "700";
-    header.style.borderBottom = "1px solid var(--background-modifier-border)";
-
-    header.createEl("div", { text: "Name" });
-    header.createEl("div", { text: "Source" });
-    header.createEl("div", { text: "Notes" });
-
-    const filtered = features
-      .filter(item => {
-        const name = String(item?.name ?? item ?? "").toLowerCase();
-        const source = String(item?.source ?? "").toLowerCase();
-        const notes = String(item?.notes ?? "").toLowerCase();
-        const query = String(filterText ?? "").trim().toLowerCase();
-
-        if (!query) return true;
-        return name.includes(query) || source.includes(query) || notes.includes(query);
-      })
-      .sort((a, b) => {
-        const nameA = typeof a === "string" ? a : String(a?.name ?? "");
-        const nameB = typeof b === "string" ? b : String(b?.name ?? "");
-        return nameA.localeCompare(nameB, "de");
-      });
-
-    if (filtered.length === 0) {
-      const empty = tableWrap.createEl("div", { text: "Keine passenden Features gefunden." });
-      empty.style.padding = "10px";
-      empty.style.opacity = "0.7";
+    if (features.length === 0) {
+      tabContent.createEl("div", { text: "Keine Features eingetragen." });
       return;
     }
 
-    for (const item of filtered) {
-      const featureName = typeof item === "string" ? item : String(item?.name ?? "-");
-      const featureSource = typeof item === "string" ? "-" : String(item?.source ?? "-");
-      const featureNotes = typeof item === "string" ? "" : String(item?.notes ?? "");
+    const searchWrap = tabContent.createEl("div");
+    searchWrap.style.marginBottom = "10px";
 
-      const row = tableWrap.createEl("div");
-      row.style.border = "1px solid var(--background-modifier-border)";
-      row.style.borderRadius = "8px";
-      row.style.overflow = "hidden";
+    const searchInput = searchWrap.createEl("input");
+    searchInput.type = "text";
+    searchInput.placeholder = "Search Features";
+    searchInput.style.width = "100%";
+    searchInput.style.padding = "8px 10px";
+    searchInput.style.border = "1px solid var(--background-modifier-border)";
+    searchInput.style.borderRadius = "8px";
+    searchInput.style.background = "var(--background-primary)";
+    searchInput.style.color = "var(--text-normal)";
 
-      const summary = row.createEl("div");
-      summary.style.display = "grid";
-      summary.style.gridTemplateColumns = "2fr 1fr 120px";
-      summary.style.gap = "12px";
-      summary.style.padding = "10px";
-      summary.style.alignItems = "center";
+    const tableWrap = tabContent.createEl("div");
+    tableWrap.style.display = "flex";
+    tableWrap.style.flexDirection = "column";
+    tableWrap.style.gap = "6px";
 
-      summary.createEl("div", { text: featureName });
-      summary.createEl("div", { text: featureSource });
+    function renderFeatureRows(filterText = "") {
+      tableWrap.innerHTML = "";
 
-      const notesButtonWrap = summary.createEl("div");
-      const hasNotes = featureNotes.trim().length > 0;
+      const header = tableWrap.createEl("div");
+      header.style.display = "grid";
+      header.style.gridTemplateColumns = "2fr 1fr 120px";
+      header.style.gap = "12px";
+      header.style.padding = "8px 10px";
+      header.style.fontWeight = "700";
+      header.style.borderBottom = "1px solid var(--background-modifier-border)";
 
+      header.createEl("div", { text: "Name" });
+      header.createEl("div", { text: "Source" });
+      header.createEl("div", { text: "Notes" });
+
+      const filtered = features
+        .filter(item => {
+          const name = String(item?.name ?? item ?? "").toLowerCase();
+          const source = String(item?.source ?? "").toLowerCase();
+          const notes = String(item?.notes ?? "").toLowerCase();
+          const query = String(filterText ?? "").trim().toLowerCase();
+
+          if (!query) return true;
+          return name.includes(query) || source.includes(query) || notes.includes(query);
+        })
+        .sort((a, b) => {
+          const nameA = typeof a === "string" ? a : String(a?.name ?? "");
+          const nameB = typeof b === "string" ? b : String(b?.name ?? "");
+          return nameA.localeCompare(nameB, "de");
+        });
+
+      if (filtered.length === 0) {
+        const empty = tableWrap.createEl("div", { text: "Keine passenden Features gefunden." });
+        empty.style.padding = "10px";
+        empty.style.opacity = "0.7";
+        return;
+      }
+
+      for (const item of filtered) {
+        const featureName = typeof item === "string" ? item : String(item?.name ?? "-");
+        const featureSource = typeof item === "string" ? "-" : String(item?.source ?? "-");
+        const featureNotes = typeof item === "string" ? "" : String(item?.notes ?? "");
+
+        const row = tableWrap.createEl("div");
+        row.style.border = "1px solid var(--background-modifier-border)";
+        row.style.borderRadius = "8px";
+        row.style.overflow = "hidden";
+
+        const summary = row.createEl("div");
+        summary.style.display = "grid";
+        summary.style.gridTemplateColumns = "2fr 1fr 120px";
+        summary.style.gap = "12px";
+        summary.style.padding = "10px";
+        summary.style.alignItems = "center";
+
+        summary.createEl("div", { text: featureName });
+        summary.createEl("div", { text: featureSource });
+
+        const notesButtonWrap = summary.createEl("div");
+        const hasNotes = featureNotes.trim().length > 0;
+
+        const notesButton = notesButtonWrap.createEl("button", {
+          text: hasNotes ? "Show" : "-"
+        });
+        notesButton.style.padding = "4px 8px";
+        notesButton.style.borderRadius = "6px";
+        notesButton.style.border = "1px solid var(--background-modifier-border)";
+        notesButton.style.cursor = hasNotes ? "pointer" : "default";
+        notesButton.style.background = "var(--background-secondary)";
+        notesButton.style.color = "var(--text-normal)";
+
+        let notesOpen = false;
+        let notesEl = null;
+
+        if (hasNotes) {
+          notesButton.addEventListener("click", () => {
+            notesOpen = !notesOpen;
+
+            if (notesOpen) {
+              notesButton.setText("Hide");
+
+              notesEl = row.createEl("div");
+              notesEl.style.padding = "0 10px 10px 10px";
+              notesEl.style.borderTop = "1px solid var(--background-modifier-border)";
+              notesEl.style.background = "var(--background-primary-alt)";
+
+              const notesTitle = notesEl.createEl("div", { text: "Notes" });
+              notesTitle.style.fontWeight = "600";
+              notesTitle.style.marginTop = "8px";
+              notesTitle.style.marginBottom = "4px";
+              notesTitle.style.opacity = "0.85";
+
+              notesEl.createEl("div", { text: featureNotes });
+            } else {
+              notesButton.setText("Show");
+              if (notesEl) notesEl.remove();
+              notesEl = null;
+            }
+          });
+        }
+      }
+    }
+
+    renderFeatureRows();
+
+    searchInput.addEventListener("input", () => {
+      renderFeatureRows(searchInput.value);
+    });
+  }
+
+  function renderInventory() {
+    clearEl(tabContent);
+
+    const title = tabContent.createEl("div", { text: "Inventory" });
+    title.style.fontWeight = "700";
+    title.style.fontSize = "1.05em";
+    title.style.marginBottom = "10px";
+
+    const inventory = Array.isArray(c.inventory) ? c.inventory : [];
+
+    if (inventory.length === 0) {
+      tabContent.createEl("div", { text: "Kein Inventar eingetragen." });
+      return;
+    }
+
+    const searchWrap = tabContent.createEl("div");
+    searchWrap.style.marginBottom = "10px";
+
+    const searchInput = searchWrap.createEl("input");
+    searchInput.type = "text";
+    searchInput.placeholder = "Search Inventory";
+    searchInput.style.width = "100%";
+    searchInput.style.padding = "8px 10px";
+    searchInput.style.border = "1px solid var(--background-modifier-border)";
+    searchInput.style.borderRadius = "8px";
+    searchInput.style.background = "var(--background-primary)";
+    searchInput.style.color = "var(--text-normal)";
+
+    const tableWrap = tabContent.createEl("div");
+    tableWrap.style.display = "flex";
+    tableWrap.style.flexDirection = "column";
+    tableWrap.style.gap = "6px";
+
+    const resolvedInventory = inventory
+      .map(entry => {
+        const itemPath = String(entry?.item ?? "").trim();
+        const itemPage = itemPath ? dv.page(itemPath) : null;
+
+        if (!itemPage) return null;
+
+        return {
+          entry,
+          itemPage,
+          name: String(itemPage.name ?? itemPage.file?.name ?? "Unknown Item"),
+          notes: String(itemPage.notes ?? ""),
+          weight: Number(itemPage.weight ?? 0),
+          quantity: Number(entry?.quantity ?? 1),
+          equipped: entry?.equipped === true,
+          equipment: itemPage?.equipment === true
+        };
+      })
+      .filter(x => x);
+
+    function matchesFilter(item, filterText = "") {
+      const name = String(item?.name ?? "").toLowerCase();
+      const notes = String(item?.notes ?? "").toLowerCase();
+      const query = String(filterText ?? "").trim().toLowerCase();
+
+      if (!query) return true;
+      return name.includes(query) || notes.includes(query);
+    }
+
+    function makeNotesButton(parent, row, item) {
+      const notesButtonWrap = parent.createEl("div");
+
+      const hasNotes = String(item?.notes ?? "").trim().length > 0;
       const notesButton = notesButtonWrap.createEl("button", {
         text: hasNotes ? "Show" : "-"
       });
@@ -676,7 +937,7 @@ function renderFeatures() {
             notesTitle.style.marginBottom = "4px";
             notesTitle.style.opacity = "0.85";
 
-            notesEl.createEl("div", { text: featureNotes });
+            notesEl.createEl("div", { text: String(item?.notes ?? "") });
           } else {
             notesButton.setText("Show");
             if (notesEl) notesEl.remove();
@@ -685,1060 +946,877 @@ function renderFeatures() {
         });
       }
     }
-  }
 
-  renderFeatureRows();
+    function createSectionTitle(parent, text) {
+      const sectionTitle = parent.createEl("div", { text });
+      sectionTitle.style.fontWeight = "700";
+      sectionTitle.style.fontSize = "1em";
+      sectionTitle.style.marginTop = "8px";
+      sectionTitle.style.marginBottom = "4px";
+      sectionTitle.style.paddingBottom = "4px";
+      sectionTitle.style.borderBottom = "1px solid var(--background-modifier-border)";
+      return sectionTitle;
+    }
 
-  searchInput.addEventListener("input", () => {
-    renderFeatureRows(searchInput.value);
-  });
-}
+    function createTableHeader(parent) {
+      const header = parent.createEl("div");
+      header.style.display = "grid";
+      header.style.gridTemplateColumns = "2fr 80px 90px 120px";
+      header.style.gap = "12px";
+      header.style.padding = "8px 10px";
+      header.style.fontWeight = "700";
+      header.style.borderBottom = "1px solid var(--background-modifier-border)";
 
-function renderInventory() {
-  clearEl(tabContent);
+      header.createEl("div", { text: "Name" });
+      header.createEl("div", { text: "Qty" });
+      header.createEl("div", { text: "Weight" });
+      header.createEl("div", { text: "Notes" });
+    }
 
-  const title = tabContent.createEl("div", { text: "Inventory" });
-  title.style.fontWeight = "700";
-  title.style.fontSize = "1.05em";
-  title.style.marginBottom = "10px";
+    function createInventoryRow(parent, item) {
+      const rowWeight = item.weight * item.quantity;
 
-  const inventory = Array.isArray(c.inventory) ? c.inventory : [];
+      const row = parent.createEl("div");
+      row.style.border = "1px solid var(--background-modifier-border)";
+      row.style.borderRadius = "8px";
+      row.style.overflow = "hidden";
 
-  if (inventory.length === 0) {
-    tabContent.createEl("div", { text: "Kein Inventar eingetragen." });
-    return;
-  }
+      const summary = row.createEl("div");
+      summary.style.display = "grid";
+      summary.style.gridTemplateColumns = "2fr 80px 90px 120px";
+      summary.style.gap = "12px";
+      summary.style.padding = "10px";
+      summary.style.alignItems = "center";
 
-  const searchWrap = tabContent.createEl("div");
-  searchWrap.style.marginBottom = "10px";
+      summary.createEl("div", { text: item.name });
+      summary.createEl("div", { text: String(item.quantity) });
+      summary.createEl("div", { text: String(rowWeight) });
 
-  const searchInput = searchWrap.createEl("input");
-  searchInput.type = "text";
-  searchInput.placeholder = "Search Inventory";
-  searchInput.style.width = "100%";
-  searchInput.style.padding = "8px 10px";
-  searchInput.style.border = "1px solid var(--background-modifier-border)";
-  searchInput.style.borderRadius = "8px";
-  searchInput.style.background = "var(--background-primary)";
-  searchInput.style.color = "var(--text-normal)";
+      makeNotesButton(summary, row, item);
 
-  const tableWrap = tabContent.createEl("div");
-  tableWrap.style.display = "flex";
-  tableWrap.style.flexDirection = "column";
-  tableWrap.style.gap = "6px";
+      return rowWeight;
+    }
 
-  const resolvedInventory = inventory
-    .map(entry => {
-      const itemPath = String(entry?.item ?? "").trim();
-      const itemPage = itemPath ? dv.page(itemPath) : null;
+    function renderInventoryRows(filterText = "") {
+      tableWrap.innerHTML = "";
 
-      if (!itemPage) return null;
+      const filtered = resolvedInventory
+        .filter(item => matchesFilter(item, filterText));
 
-      return {
-        entry,
-        itemPage,
-        name: String(itemPage.name ?? itemPage.file?.name ?? "Unknown Item"),
-        notes: String(itemPage.notes ?? ""),
-        weight: Number(itemPage.weight ?? 0),
-        quantity: Number(entry?.quantity ?? 1),
-        equipped: entry?.equipped === true,
-        equipment: itemPage?.equipment === true
-      };
-    })
-    .filter(x => x);
+      if (filtered.length === 0) {
+        const empty = tableWrap.createEl("div", { text: "Keine passenden Einträge gefunden." });
+        empty.style.padding = "10px";
+        empty.style.opacity = "0.7";
+        return;
+      }
 
-  function matchesFilter(item, filterText = "") {
-    const name = String(item?.name ?? "").toLowerCase();
-    const notes = String(item?.notes ?? "").toLowerCase();
-    const query = String(filterText ?? "").trim().toLowerCase();
+      const equippedItems = filtered
+        .filter(item => item.equipment === true && item.equipped === true)
+        .sort((a, b) => a.name.localeCompare(b.name, "de"));
 
-    if (!query) return true;
-    return name.includes(query) || notes.includes(query);
-  }
+      const normalItems = filtered
+        .filter(item => !(item.equipment === true && item.equipped === true))
+        .sort((a, b) => a.name.localeCompare(b.name, "de"));
 
-  function makeNotesButton(parent, row, item) {
-    const notesButtonWrap = parent.createEl("div");
+      const maxCarryWeight = Number(c.str ?? 10) * 15;
+      let totalWeight = 0;
 
-    const hasNotes = String(item?.notes ?? "").trim().length > 0;
-    const notesButton = notesButtonWrap.createEl("button", {
-      text: hasNotes ? "Show" : "-"
-    });
-    notesButton.style.padding = "4px 8px";
-    notesButton.style.borderRadius = "6px";
-    notesButton.style.border = "1px solid var(--background-modifier-border)";
-    notesButton.style.cursor = hasNotes ? "pointer" : "default";
-    notesButton.style.background = "var(--background-secondary)";
-    notesButton.style.color = "var(--text-normal)";
+      if (equippedItems.length > 0) {
+        createSectionTitle(tableWrap, "Equipped Equipment");
+        createTableHeader(tableWrap);
 
-    let notesOpen = false;
-    let notesEl = null;
-
-    if (hasNotes) {
-      notesButton.addEventListener("click", () => {
-        notesOpen = !notesOpen;
-
-        if (notesOpen) {
-          notesButton.setText("Hide");
-
-          notesEl = row.createEl("div");
-          notesEl.style.padding = "0 10px 10px 10px";
-          notesEl.style.borderTop = "1px solid var(--background-modifier-border)";
-          notesEl.style.background = "var(--background-primary-alt)";
-
-          const notesTitle = notesEl.createEl("div", { text: "Notes" });
-          notesTitle.style.fontWeight = "600";
-          notesTitle.style.marginTop = "8px";
-          notesTitle.style.marginBottom = "4px";
-          notesTitle.style.opacity = "0.85";
-
-          notesEl.createEl("div", { text: String(item?.notes ?? "") });
-        } else {
-          notesButton.setText("Show");
-          if (notesEl) notesEl.remove();
-          notesEl = null;
+        for (const item of equippedItems) {
+          totalWeight += createInventoryRow(tableWrap, item);
         }
-      });
-    }
-  }
-
-  function createSectionTitle(parent, text) {
-    const sectionTitle = parent.createEl("div", { text });
-    sectionTitle.style.fontWeight = "700";
-    sectionTitle.style.fontSize = "1em";
-    sectionTitle.style.marginTop = "8px";
-    sectionTitle.style.marginBottom = "4px";
-    sectionTitle.style.paddingBottom = "4px";
-    sectionTitle.style.borderBottom = "1px solid var(--background-modifier-border)";
-    return sectionTitle;
-  }
-
-  function createTableHeader(parent) {
-    const header = parent.createEl("div");
-    header.style.display = "grid";
-    header.style.gridTemplateColumns = "2fr 80px 90px 120px";
-    header.style.gap = "12px";
-    header.style.padding = "8px 10px";
-    header.style.fontWeight = "700";
-    header.style.borderBottom = "1px solid var(--background-modifier-border)";
-
-    header.createEl("div", { text: "Name" });
-    header.createEl("div", { text: "Qty" });
-    header.createEl("div", { text: "Weight" });
-    header.createEl("div", { text: "Notes" });
-  }
-
-  function createInventoryRow(parent, item) {
-    const rowWeight = item.weight * item.quantity;
-
-    const row = parent.createEl("div");
-    row.style.border = "1px solid var(--background-modifier-border)";
-    row.style.borderRadius = "8px";
-    row.style.overflow = "hidden";
-
-    const summary = row.createEl("div");
-    summary.style.display = "grid";
-    summary.style.gridTemplateColumns = "2fr 80px 90px 120px";
-    summary.style.gap = "12px";
-    summary.style.padding = "10px";
-    summary.style.alignItems = "center";
-
-    summary.createEl("div", { text: item.name });
-    summary.createEl("div", { text: String(item.quantity) });
-    summary.createEl("div", { text: String(rowWeight) });
-
-    makeNotesButton(summary, row, item);
-
-    return rowWeight;
-  }
-
-  function renderInventoryRows(filterText = "") {
-    tableWrap.innerHTML = "";
-
-    const filtered = resolvedInventory
-      .filter(item => matchesFilter(item, filterText));
-
-    if (filtered.length === 0) {
-      const empty = tableWrap.createEl("div", { text: "Keine passenden Einträge gefunden." });
-      empty.style.padding = "10px";
-      empty.style.opacity = "0.7";
-      return;
-    }
-
-    const equippedItems = filtered
-      .filter(item => item.equipment === true && item.equipped === true)
-      .sort((a, b) => a.name.localeCompare(b.name, "de"));
-
-    const normalItems = filtered
-      .filter(item => !(item.equipment === true && item.equipped === true))
-      .sort((a, b) => a.name.localeCompare(b.name, "de"));
-
-    const maxCarryWeight = Number(c.str ?? 10) * 15;
-    let totalWeight = 0;
-
-    if (equippedItems.length > 0) {
-      createSectionTitle(tableWrap, "Equipped Equipment");
-      createTableHeader(tableWrap);
-
-      for (const item of equippedItems) {
-        totalWeight += createInventoryRow(tableWrap, item);
       }
-    }
 
-    if (normalItems.length > 0) {
-      createSectionTitle(tableWrap, equippedItems.length > 0 ? "Inventory" : "Items");
-      createTableHeader(tableWrap);
+      if (normalItems.length > 0) {
+        createSectionTitle(tableWrap, equippedItems.length > 0 ? "Inventory" : "Items");
+        createTableHeader(tableWrap);
 
-      for (const item of normalItems) {
-        totalWeight += createInventoryRow(tableWrap, item);
+        for (const item of normalItems) {
+          totalWeight += createInventoryRow(tableWrap, item);
+        }
       }
+
+      const totalRow = tableWrap.createEl("div");
+      totalRow.style.display = "grid";
+      totalRow.style.gridTemplateColumns = "2fr 80px 90px 120px";
+      totalRow.style.gap = "12px";
+      totalRow.style.padding = "10px";
+      totalRow.style.marginTop = "6px";
+      totalRow.style.borderTop = "2px solid var(--background-modifier-border)";
+      totalRow.style.fontWeight = "700";
+      totalRow.style.alignItems = "center";
+
+      totalRow.createEl("div", { text: "Total Weight" });
+      totalRow.createEl("div", { text: "" });
+      totalRow.createEl("div", { text: `${totalWeight} / ${maxCarryWeight}` });
+      totalRow.createEl("div", { text: "" });
     }
 
-    const totalRow = tableWrap.createEl("div");
-    totalRow.style.display = "grid";
-    totalRow.style.gridTemplateColumns = "2fr 80px 90px 120px";
-    totalRow.style.gap = "12px";
-    totalRow.style.padding = "10px";
-    totalRow.style.marginTop = "6px";
-    totalRow.style.borderTop = "2px solid var(--background-modifier-border)";
-    totalRow.style.fontWeight = "700";
-    totalRow.style.alignItems = "center";
+    renderInventoryRows();
 
-    totalRow.createEl("div", { text: "Total Weight" });
-    totalRow.createEl("div", { text: "" });
-    totalRow.createEl("div", { text: `${totalWeight} / ${maxCarryWeight}` });
-    totalRow.createEl("div", { text: "" });
-  }
-
-  renderInventoryRows();
-
-  searchInput.addEventListener("input", () => {
-    renderInventoryRows(searchInput.value);
-  });
-}
-
-function normalizeText(value) {
-  return String(value ?? "")
-    .trim()
-    .toLowerCase();
-}
-
-function uniquePages(pages) {
-  const seen = new Set();
-  const result = [];
-
-  for (const p of pages) {
-    if (!p?.file?.path) continue;
-    if (seen.has(p.file.path)) continue;
-    seen.add(p.file.path);
-    result.push(p);
-  }
-
-  return result;
-}
-
-function getAllCharacterActions() {
-  const collectedActions = [];
-
-  // 1) Klassische Actions direkt vom Character
-  const explicitActionRefs = Array.isArray(c.actions) ? c.actions : [];
-
-  for (const actionRef of explicitActionRefs) {
-    const actionPage = dv.page(String(actionRef));
-    if (!actionPage) continue;
-
-    collectedActions.push({
-      ...actionPage,
-      source_type: "character",
-      source_label: "Character Sheet",
-      file: actionPage.file
+    searchInput.addEventListener("input", () => {
+      renderInventoryRows(searchInput.value);
     });
   }
 
-  // 2) Actions aus Items im Inventar
-  const inventoryEntries = Array.isArray(c.inventory) ? c.inventory : [];
+  function renderActions() {
+    clearEl(tabContent);
 
-  for (const entry of inventoryEntries) {
-    const itemPath = String(entry?.item ?? "").trim();
-    if (!itemPath) continue;
+    const title = tabContent.createEl("div");
+    title.style.display = "grid";
+    title.style.gridTemplateColumns = "2fr 1fr 120px";
+    title.style.gap = "12px";
+    title.style.fontWeight = "700";
+    title.style.marginBottom = "8px";
+    title.style.padding = "0 10px";
 
-    const itemPage = dv.page(itemPath);
-    if (!itemPage) continue;
+    title.createEl("div", { text: "Actions" });
+    title.createEl("div", { text: "Hit" });
+    title.createEl("div", { text: "Damage" });
 
-    const itemActions = Array.isArray(itemPage.actions) ? itemPage.actions : [];
-    if (itemActions.length === 0) continue;
+    const searchWrap = tabContent.createEl("div");
+    searchWrap.style.marginBottom = "10px";
 
-    for (const action of itemActions) {
-      if (!action || typeof action !== "object") continue;
+    const searchInput = searchWrap.createEl("input");
+    searchInput.type = "text";
+    searchInput.placeholder = "Search Actions";
+    searchInput.style.width = "100%";
+    searchInput.style.padding = "8px 10px";
+    searchInput.style.border = "1px solid var(--background-modifier-border)";
+    searchInput.style.borderRadius = "8px";
+    searchInput.style.background = "var(--background-primary)";
+    searchInput.style.color = "var(--text-normal)";
 
-      collectedActions.push({
-        ...action,
-        source_type: "item",
-        source_item_name: itemPage.name ?? itemPage.file?.name ?? "Unknown Item",
-        source_item_path: itemPage.file?.path ?? itemPath,
-        source_label: itemPage.name ?? itemPage.file?.name ?? "Unknown Item",
-        file: {
-          name: action.name ?? itemPage.name ?? itemPage.file?.name ?? "Unnamed Action",
-          path: itemPage.file?.path ?? itemPath
-        }
-      });
+    const actionContainer = tabContent.createEl("div");
+
+    function sectionLabel(type) {
+      if (type === "action") return "Action";
+      if (type === "bonus_action") return "Bonus Action";
+      if (type === "reaction") return "Reaction";
+      if (type === "other") return "Other";
+      return type;
     }
-  }
 
-  return collectedActions;
-}
+    function addInfoRow(parent, label, value) {
+      const row = parent.createEl("div");
+      row.style.display = "flex";
+      row.style.justifyContent = "space-between";
+      row.style.gap = "10px";
+      row.style.padding = "2px 0";
 
-function renderActions() {
-  clearEl(tabContent);
+      const left = row.createEl("div", { text: label });
+      left.style.opacity = "0.7";
 
-  const title = tabContent.createEl("div");
-  title.style.display = "grid";
-  title.style.gridTemplateColumns = "2fr 1fr 120px";
-  title.style.gap = "12px";
-  title.style.fontWeight = "700";
-  title.style.marginBottom = "8px";
-  title.style.padding = "0 10px";
+      const right = row.createEl("div", { text: String(value ?? "-") });
+      right.style.fontWeight = "600";
+      right.style.textAlign = "right";
+    }
 
-  title.createEl("div", { text: "Actions" });
-  title.createEl("div", { text: "Hit" });
-  title.createEl("div", { text: "Damage" });
+    function getAbilityModForAction(statName) {
+      const key = String(statName ?? "").trim().toLowerCase();
+      if (key === "str") return modFromScore(c.str ?? 10);
+      if (key === "dex") return modFromScore(c.dex ?? 10);
+      if (key === "con") return modFromScore(c.con ?? 10);
+      if (key === "int") return modFromScore(c.int ?? 10);
+      if (key === "wis") return modFromScore(c.wis ?? 10);
+      if (key === "cha") return modFromScore(c.cha ?? 10);
+      return 0;
+    }
 
-  const searchWrap = tabContent.createEl("div");
-  searchWrap.style.marginBottom = "10px";
+    const actions = getAllCharacterActions()
+      .filter(action => {
+        const rawType = String(action.action_type ?? "").trim().toLowerCase();
+        const type = rawType.replace(/\s+/g, "_");
 
-  const searchInput = searchWrap.createEl("input");
-  searchInput.type = "text";
-  searchInput.placeholder = "Search Actions";
-  searchInput.style.width = "100%";
-  searchInput.style.padding = "8px 10px";
-  searchInput.style.border = "1px solid var(--background-modifier-border)";
-  searchInput.style.borderRadius = "8px";
-  searchInput.style.background = "var(--background-primary)";
-  searchInput.style.color = "var(--text-normal)";
+        return (
+          type === "" ||
+          type === "action" ||
+          type === "bonus_action" ||
+          type === "reaction"
+        );
+      });
 
-  const actionContainer = tabContent.createEl("div");
+    const groupedActions = {
+      action: [],
+      bonus_action: [],
+      reaction: [],
+      other: []
+    };
 
-  function sectionLabel(type) {
-    if (type === "action") return "Action";
-    if (type === "bonus_action") return "Bonus Action";
-    if (type === "reaction") return "Reaction";
-    if (type === "other") return "Other";
-    return type;
-  }
-
-  function addInfoRow(parent, label, value) {
-    const row = parent.createEl("div");
-    row.style.display = "flex";
-    row.style.justifyContent = "space-between";
-    row.style.gap = "10px";
-    row.style.padding = "2px 0";
-
-    const left = row.createEl("div", { text: label });
-    left.style.opacity = "0.7";
-
-    const right = row.createEl("div", { text: String(value ?? "-") });
-    right.style.fontWeight = "600";
-    right.style.textAlign = "right";
-  }
-
-  function getAbilityModForAction(statName) {
-    const key = String(statName ?? "").trim().toLowerCase();
-    if (key === "str") return modFromScore(c.str ?? 10);
-    if (key === "dex") return modFromScore(c.dex ?? 10);
-    if (key === "con") return modFromScore(c.con ?? 10);
-    if (key === "int") return modFromScore(c.int ?? 10);
-    if (key === "wis") return modFromScore(c.wis ?? 10);
-    if (key === "cha") return modFromScore(c.cha ?? 10);
-    return 0;
-  }
-
-  const actions = getAllCharacterActions()
-    .filter(action => {
-      const category = String(action.category ?? "").trim().toLowerCase();
+    for (const action of actions) {
       const rawType = String(action.action_type ?? "").trim().toLowerCase();
       const type = rawType.replace(/\s+/g, "_");
 
-      return category !== "spell" && (
-        type === "" ||
-        type === "action" ||
-        type === "bonus_action" ||
-        type === "reaction"
-      );
-    });
-
-  const groupedActions = {
-    action: [],
-    bonus_action: [],
-    reaction: [],
-    other: []
-  };
-
-  for (const action of actions) {
-    const rawType = String(action.action_type ?? "").trim().toLowerCase();
-    const type = rawType.replace(/\s+/g, "_");
-
-    if (groupedActions[type]) {
-      groupedActions[type].push(action);
-    } else {
-      groupedActions.other.push(action);
-    }
-  }
-
-  for (const key of Object.keys(groupedActions)) {
-    groupedActions[key].sort((a, b) => {
-      const nameA = String(a.name ?? a.file?.name ?? "");
-      const nameB = String(b.name ?? b.file?.name ?? "");
-      return nameA.localeCompare(nameB, "de");
-    });
-  }
-
-  function renderActionRows(filterText = "") {
-    actionContainer.innerHTML = "";
-    const query = String(filterText ?? "").trim().toLowerCase();
-
-    for (const type of ["action", "bonus_action", "reaction", "other"]) {
-      const entries = groupedActions[type].filter(action => {
-        const name = String(action.name ?? action.file?.name ?? "").toLowerCase();
-        const notes = String(action.notes ?? action.effect ?? "").toLowerCase();
-        const mode = String(action.mode ?? "").toLowerCase();
-        const damageType = String(action.damage_type ?? "").toLowerCase();
-        const sourceItem = String(action.source_item_name ?? "").toLowerCase();
-
-        if (!query) return true;
-        return (
-          name.includes(query) ||
-          notes.includes(query) ||
-          mode.includes(query) ||
-          damageType.includes(query) ||
-          sourceItem.includes(query)
-        );
-      });
-
-      if (!entries || entries.length === 0) continue;
-
-      const section = actionContainer.createEl("div");
-      section.style.marginTop = "12px";
-
-      const sectionTitle = section.createEl("div", { text: sectionLabel(type) });
-      sectionTitle.style.fontWeight = "700";
-      sectionTitle.style.fontSize = "1.05em";
-      sectionTitle.style.marginBottom = "8px";
-      sectionTitle.style.paddingBottom = "4px";
-      sectionTitle.style.borderBottom = "1px solid var(--background-modifier-border)";
-
-      for (const action of entries) {
-        const details = section.createEl("details");
-        details.style.border = "1px solid var(--background-modifier-border)";
-        details.style.borderRadius = "10px";
-        details.style.marginTop = "8px";
-        details.style.padding = "0";
-        details.style.overflow = "hidden";
-
-        const summaryEl = details.createEl("summary");
-        summaryEl.style.cursor = "pointer";
-        summaryEl.style.padding = "10px";
-        summaryEl.style.display = "grid";
-        summaryEl.style.gridTemplateColumns = "2fr 1fr 120px";
-        summaryEl.style.gap = "12px";
-        summaryEl.style.alignItems = "center";
-        summaryEl.style.fontWeight = "700";
-        summaryEl.style.listStyle = "none";
-
-        const leftWrap = summaryEl.createEl("div");
-
-        const leftSummary = leftWrap.createEl("div", {
-          text: action.name ?? action.file?.name ?? "Unnamed Action"
-        });
-        leftSummary.style.fontSize = "1.05em";
-
-        if (action.source_item_name) {
-          const sourceEl = leftWrap.createEl("div", {
-            text: `from ${action.source_item_name}`
-          });
-          sourceEl.style.fontSize = "0.8em";
-          sourceEl.style.opacity = "0.7";
-          sourceEl.style.fontWeight = "400";
-          sourceEl.style.marginTop = "2px";
-        }
-
-        const attackStat = action.attack_stat ?? action.damage_bonus_stat ?? "str";
-        const attackMod = getAbilityModForAction(attackStat);
-        const profBonus = c.proficiency_bonus ?? 2;
-        const isProficient = action.proficient ?? true;
-        const toHitBonus = attackMod + (isProficient ? profBonus : 0);
-
-        let damageTextA = "-";
-        if (action.dice_count && action.dice_size) {
-          damageTextA = `${action.dice_count}d${action.dice_size}`;
-
-          const dmgBonus =
-            Number(action.damage_bonus ?? 0) +
-            getAbilityModForAction(action.damage_bonus_stat);
-
-          if (dmgBonus > 0) damageTextA += `+${dmgBonus}`;
-          if (dmgBonus < 0) damageTextA += `${dmgBonus}`;
-        } else if (action.damage) {
-          damageTextA = String(action.damage);
-        }
-
-        const hitText =
-          String(action.mode ?? "").toLowerCase() === "attack"
-            ? modString(toHitBonus)
-            : "-";
-
-        const hitEl = summaryEl.createEl("div", { text: hitText });
-        hitEl.style.opacity = "0.7";
-        hitEl.style.fontSize = "0.9em";
-        hitEl.style.fontWeight = "400";
-
-        const damageEl = summaryEl.createEl("div", { text: damageTextA });
-        damageEl.style.opacity = "0.7";
-        damageEl.style.fontSize = "0.9em";
-        damageEl.style.fontWeight = "400";
-
-        const card = details.createEl("div");
-        card.style.padding = "10px";
-        card.style.borderTop = "1px solid var(--background-modifier-border)";
-
-        const infoBlock = card.createEl("div");
-
-        addInfoRow(infoBlock, "Type", sectionLabel(type));
-        addInfoRow(infoBlock, "Mode", action.mode ?? "-");
-        addInfoRow(infoBlock, "Shape", action.shape ?? "-");
-
-        if (action.source_item_name) {
-          addInfoRow(infoBlock, "Item", action.source_item_name);
-        }
-
-        if (action.range != null) addInfoRow(infoBlock, "Range", action.range);
-        if (action.radius != null) addInfoRow(infoBlock, "Radius", action.radius);
-        if (action.damage_type != null) addInfoRow(infoBlock, "Damage Type", action.damage_type);
-
-        let damageText = "-";
-        if (action.damage) {
-          damageText = `${action.damage}${action.damage_type ? ` ${action.damage_type}` : ""}`;
-        } else if (action.dice_count && action.dice_size) {
-          const dmgBonus =
-            Number(action.damage_bonus ?? 0) +
-            getAbilityModForAction(action.damage_bonus_stat);
-
-          damageText = `${action.dice_count}d${action.dice_size}`;
-          if (dmgBonus > 0) damageText += ` + ${dmgBonus}`;
-          if (dmgBonus < 0) damageText += ` ${dmgBonus}`;
-          if (action.damage_type) damageText += ` ${action.damage_type}`;
-        }
-        addInfoRow(infoBlock, "Damage", damageText);
-
-        if (String(action.mode ?? "").toLowerCase() === "attack") {
-          addInfoRow(infoBlock, "To Hit", modString(toHitBonus));
-        }
-
-        if (action.save_ability) addInfoRow(infoBlock, "Save", String(action.save_ability).toUpperCase());
-        if (action.resource_cost != null) addInfoRow(infoBlock, "Resource Cost", action.resource_cost);
-        if (action.requires_los != null) addInfoRow(infoBlock, "Requires LoS", action.requires_los ? "Ja" : "Nein");
-        if (action.friendly_fire != null) addInfoRow(infoBlock, "Friendly Fire", action.friendly_fire ? "Ja" : "Nein");
-
-        const effectBlock = card.createEl("div");
-        effectBlock.style.marginTop = "8px";
-
-        const effectTitle = effectBlock.createEl("div", { text: "Notes / Effect" });
-        effectTitle.style.fontWeight = "600";
-        effectTitle.style.marginBottom = "4px";
-        effectTitle.style.opacity = "0.85";
-
-        effectBlock.createEl("div", {
-          text: action.effect ?? action.notes ?? "Kein Effekttext eingetragen."
-        });
+      if (groupedActions[type]) {
+        groupedActions[type].push(action);
+      } else {
+        groupedActions.other.push(action);
       }
     }
 
-    if (actionContainer.innerHTML.trim() === "") {
-      const empty = actionContainer.createEl("div", { text: "Keine passenden Actions gefunden." });
-      empty.style.padding = "10px";
-      empty.style.opacity = "0.7";
+    for (const key of Object.keys(groupedActions)) {
+      groupedActions[key].sort((a, b) => {
+        const nameA = String(a.name ?? a.file?.name ?? "");
+        const nameB = String(b.name ?? b.file?.name ?? "");
+        return nameA.localeCompare(nameB, "de");
+      });
     }
-  }
 
-  renderActionRows();
+    function renderActionRows(filterText = "") {
+      actionContainer.innerHTML = "";
+      const query = String(filterText ?? "").trim().toLowerCase();
 
-  searchInput.addEventListener("input", () => {
-    renderActionRows(searchInput.value);
-  });
-}
+      for (const type of ["action", "bonus_action", "reaction", "other"]) {
+        const entries = groupedActions[type].filter(action => {
+          const name = String(action.name ?? action.file?.name ?? "").toLowerCase();
+          const notes = String(action.notes ?? action.effect ?? "").toLowerCase();
+          const mode = String(action.mode ?? "").toLowerCase();
+          const damageType = String(action.damage_type ?? "").toLowerCase();
+          const sourceItem = String(action.source_item_name ?? "").toLowerCase();
 
-function renderSpells() {
-  clearEl(tabContent);
+          if (!query) return true;
+          return (
+            name.includes(query) ||
+            notes.includes(query) ||
+            mode.includes(query) ||
+            damageType.includes(query) ||
+            sourceItem.includes(query)
+          );
+        });
 
-  const title = tabContent.createEl("div", { text: "Spells" });
-  title.style.fontWeight = "600";
-  title.style.marginBottom = "10px";
+        if (!entries || entries.length === 0) continue;
 
-  const searchWrap = tabContent.createEl("div");
-  searchWrap.style.marginBottom = "10px";
+        const section = actionContainer.createEl("div");
+        section.style.marginTop = "12px";
 
-  const searchInput = searchWrap.createEl("input");
-  searchInput.type = "text";
-  searchInput.placeholder = "Search Spells";
-  searchInput.style.width = "100%";
-  searchInput.style.padding = "8px 10px";
-  searchInput.style.border = "1px solid var(--background-modifier-border)";
-  searchInput.style.borderRadius = "8px";
-  searchInput.style.background = "var(--background-primary)";
-  searchInput.style.color = "var(--text-normal)";
+        const sectionTitle = section.createEl("div", { text: sectionLabel(type) });
+        sectionTitle.style.fontWeight = "700";
+        sectionTitle.style.fontSize = "1.05em";
+        sectionTitle.style.marginBottom = "8px";
+        sectionTitle.style.paddingBottom = "4px";
+        sectionTitle.style.borderBottom = "1px solid var(--background-modifier-border)";
 
-  const spellcastingAbility = String(c.spellcasting_ability ?? "int").toLowerCase();
-  const spellMod = getAbilityModByName(spellcastingAbility);
-  const prof = c.proficiency_bonus ?? 2;
-  const spellAttackBonus = c.spell_attack_bonus ?? (spellMod + prof);
-  const spellSaveDC = c.spell_save_dc ?? (8 + spellMod + prof);
+        for (const action of entries) {
+          const details = section.createEl("details");
+          details.style.border = "1px solid var(--background-modifier-border)";
+          details.style.borderRadius = "10px";
+          details.style.marginTop = "8px";
+          details.style.padding = "0";
+          details.style.overflow = "hidden";
 
-  function addSummaryBox(parent, label, value) {
-    const box = parent.createEl("div");
-    box.style.padding = "8px";
-    box.style.border = "1px solid var(--background-modifier-border)";
-    box.style.borderRadius = "8px";
-    box.style.textAlign = "center";
+          const summaryEl = details.createEl("summary");
+          summaryEl.style.cursor = "pointer";
+          summaryEl.style.padding = "10px";
+          summaryEl.style.display = "grid";
+          summaryEl.style.gridTemplateColumns = "2fr 1fr 120px";
+          summaryEl.style.gap = "12px";
+          summaryEl.style.alignItems = "center";
+          summaryEl.style.fontWeight = "700";
+          summaryEl.style.listStyle = "none";
 
-    const labelEl = box.createEl("div", { text: label });
-    labelEl.style.fontSize = "0.8em";
-    labelEl.style.opacity = "0.7";
+          const leftWrap = summaryEl.createEl("div");
 
-    const valueEl = box.createEl("div", { text: String(value) });
-    valueEl.style.fontSize = "1.2em";
-    valueEl.style.fontWeight = "700";
-    valueEl.style.marginTop = "4px";
-  }
+          const leftSummary = leftWrap.createEl("div", {
+            text: action.name ?? action.file?.name ?? "Unnamed Action"
+          });
+          leftSummary.style.fontSize = "1.05em";
 
-  function addInfoRow(parent, label, value) {
-    const row = parent.createEl("div");
-    row.style.display = "flex";
-    row.style.justifyContent = "space-between";
-    row.style.gap = "10px";
-    row.style.padding = "2px 0";
+          const sourceText =
+            action.source_type === "item" && action.source_item_name
+              
+          if (sourceText) {
+            const sourceEl = leftWrap.createEl("div", { text: sourceText });
+            sourceEl.style.fontSize = "0.8em";
+            sourceEl.style.opacity = "0.7";
+            sourceEl.style.fontWeight = "400";
+            sourceEl.style.marginTop = "2px";
+          }
 
-    const left = row.createEl("div", { text: label });
-    left.style.opacity = "0.7";
+          const attackStat = action.attack_stat ?? action.damage_bonus_stat ?? "str";
+          const attackMod = getAbilityModForAction(attackStat);
+          const profBonus = c.proficiency_bonus ?? 2;
+          const isProficient = action.proficient ?? true;
+          const toHitBonus = attackMod + (isProficient ? profBonus : 0);
 
-    const right = row.createEl("div", { text: String(value ?? "-") });
-    right.style.fontWeight = "600";
-    right.style.textAlign = "right";
-  }
+          let damageTextA = "-";
+          if (action.dice_count && action.dice_size) {
+            damageTextA = `${action.dice_count}d${action.dice_size}`;
 
-  function levelLabel(level) {
-    return level === 0 ? "Cantrips" : `Level ${level}`;
-  }
+            const dmgBonus =
+              Number(action.damage_bonus ?? 0) +
+              getAbilityModForAction(action.damage_bonus_stat);
 
-  function addSpellSlotCheckboxes(parent, level, slotCount) {
-    if (level === 0 || slotCount <= 0) return;
+            if (dmgBonus > 0) damageTextA += `+${dmgBonus}`;
+            if (dmgBonus < 0) damageTextA += `${dmgBonus}`;
+          } else if (action.damage) {
+            damageTextA = String(action.damage);
+          }
 
-    const slotWrapper = parent.createEl("div");
-    slotWrapper.style.display = "flex";
-    slotWrapper.style.alignItems = "center";
-    slotWrapper.style.gap = "8px";
-    slotWrapper.style.flexWrap = "wrap";
-    slotWrapper.style.marginTop = "6px";
-    slotWrapper.style.marginBottom = "8px";
+          const hitText =
+            String(action.mode ?? "").toLowerCase() === "attack"
+              ? modString(toHitBonus)
+              : "-";
 
-    const label = slotWrapper.createEl("div", { text: "Slots:" });
-    label.style.fontSize = "0.9em";
-    label.style.opacity = "0.75";
+          const hitEl = summaryEl.createEl("div", { text: hitText });
+          hitEl.style.opacity = "0.7";
+          hitEl.style.fontSize = "0.9em";
+          hitEl.style.fontWeight = "400";
 
-    for (let i = 0; i < slotCount; i++) {
-      const boxLabel = slotWrapper.createEl("label");
-      boxLabel.style.display = "flex";
-      boxLabel.style.alignItems = "center";
-      boxLabel.style.gap = "4px";
-      boxLabel.style.cursor = "pointer";
+          const damageEl = summaryEl.createEl("div", { text: damageTextA });
+          damageEl.style.opacity = "0.7";
+          damageEl.style.fontSize = "0.9em";
+          damageEl.style.fontWeight = "400";
 
-      const checkbox = boxLabel.createEl("input");
-      checkbox.type = "checkbox";
+          const card = details.createEl("div");
+          card.style.padding = "10px";
+          card.style.borderTop = "1px solid var(--background-modifier-border)";
+
+          const infoBlock = card.createEl("div");
+
+          addInfoRow(infoBlock, "Type", sectionLabel(type));
+          addInfoRow(infoBlock, "Mode", action.mode ?? "-");
+          addInfoRow(infoBlock, "Shape", action.shape ?? "-");
+
+          if (action.source_item_name) {
+            addInfoRow(infoBlock, "Item", action.source_item_name);
+          }
+
+          if (action.range != null) addInfoRow(infoBlock, "Range", action.range);
+          if (action.radius != null) addInfoRow(infoBlock, "Radius", action.radius);
+          if (action.damage_type != null) addInfoRow(infoBlock, "Damage Type", action.damage_type);
+
+          let damageText = "-";
+          if (action.damage) {
+            damageText = `${action.damage}${action.damage_type ? ` ${action.damage_type}` : ""}`;
+          } else if (action.dice_count && action.dice_size) {
+            const dmgBonus =
+              Number(action.damage_bonus ?? 0) +
+              getAbilityModForAction(action.damage_bonus_stat);
+
+            damageText = `${action.dice_count}d${action.dice_size}`;
+            if (dmgBonus > 0) damageText += ` + ${dmgBonus}`;
+            if (dmgBonus < 0) damageText += ` ${dmgBonus}`;
+            if (action.damage_type) damageText += ` ${action.damage_type}`;
+          }
+          addInfoRow(infoBlock, "Damage", damageText);
+
+          if (String(action.mode ?? "").toLowerCase() === "attack") {
+            addInfoRow(infoBlock, "To Hit", modString(toHitBonus));
+          }
+
+          if (action.save_ability) addInfoRow(infoBlock, "Save", String(action.save_ability).toUpperCase());
+          if (action.resource_cost != null) addInfoRow(infoBlock, "Resource Cost", action.resource_cost);
+          if (action.requires_los != null) addInfoRow(infoBlock, "Requires LoS", action.requires_los ? "Ja" : "Nein");
+          if (action.friendly_fire != null) addInfoRow(infoBlock, "Friendly Fire", action.friendly_fire ? "Ja" : "Nein");
+
+          const effectBlock = card.createEl("div");
+          effectBlock.style.marginTop = "8px";
+
+          const effectTitle = effectBlock.createEl("div", { text: "Notes / Effect" });
+          effectTitle.style.fontWeight = "600";
+          effectTitle.style.marginBottom = "4px";
+          effectTitle.style.opacity = "0.85";
+
+          effectBlock.createEl("div", {
+            text: action.effect ?? action.notes ?? "Kein Effekttext eingetragen."
+          });
+        }
+      }
+
+      if (actionContainer.innerHTML.trim() === "") {
+        const empty = actionContainer.createEl("div", { text: "Keine passenden Actions gefunden." });
+        empty.style.padding = "10px";
+        empty.style.opacity = "0.7";
+      }
     }
+
+    renderActionRows();
+
+    searchInput.addEventListener("input", () => {
+      renderActionRows(searchInput.value);
+    });
   }
 
-  const summaryGrid = tabContent.createEl("div");
-  summaryGrid.style.display = "grid";
-  summaryGrid.style.gridTemplateColumns = "repeat(3, 1fr)";
-  summaryGrid.style.gap = "8px";
-  summaryGrid.style.marginBottom = "12px";
+  function renderSpells() {
+    clearEl(tabContent);
 
-  addSummaryBox(summaryGrid, "Modifier", modString(spellMod));
-  addSummaryBox(summaryGrid, "Spell Attack", modString(spellAttackBonus));
-  addSummaryBox(summaryGrid, "Spell Save DC", spellSaveDC);
+    const title = tabContent.createEl("div", { text: "Spells" });
+    title.style.fontWeight = "600";
+    title.style.marginBottom = "10px";
 
-  const spellContainer = tabContent.createEl("div");
+    const searchWrap = tabContent.createEl("div");
+    searchWrap.style.marginBottom = "10px";
 
-  const actionRefs = Array.isArray(c.actions) ? c.actions : [];
+    const searchInput = searchWrap.createEl("input");
+    searchInput.type = "text";
+    searchInput.placeholder = "Search Spells";
+    searchInput.style.width = "100%";
+    searchInput.style.padding = "8px 10px";
+    searchInput.style.border = "1px solid var(--background-modifier-border)";
+    searchInput.style.borderRadius = "8px";
+    searchInput.style.background = "var(--background-primary)";
+    searchInput.style.color = "var(--text-normal)";
 
-  const spells = actionRefs
-    .map(path => dv.page(String(path)))
-    .filter(p => p)
-    .filter(p => String(p.category ?? "").trim().toLowerCase() === "spell");
+    const spellcastingAbility = String(c.spellcasting_ability ?? "int").toLowerCase();
+    const spellMod = getAbilityModByName(spellcastingAbility);
+    const prof = c.proficiency_bonus ?? 2;
+    const spellAttackBonus = c.spell_attack_bonus ?? (spellMod + prof);
+    const spellSaveDC = c.spell_save_dc ?? (8 + spellMod + prof);
 
-  if (!spells || spells.length === 0) {
-    spellContainer.createEl("div", { text: "Keine Spells gefunden." });
-    return;
-  }
+    function addSummaryBox(parent, label, value) {
+      const box = parent.createEl("div");
+      box.style.padding = "8px";
+      box.style.border = "1px solid var(--background-modifier-border)";
+      box.style.borderRadius = "8px";
+      box.style.textAlign = "center";
 
-  const groupedSpells = {
-    0: [],
-    1: [],
-    2: [],
-    3: [],
-    4: [],
-    5: []
-  };
+      const labelEl = box.createEl("div", { text: label });
+      labelEl.style.fontSize = "0.8em";
+      labelEl.style.opacity = "0.7";
 
-  for (const spell of spells) {
-    const lvl = Number(spell.level ?? 0);
-    if (lvl >= 0 && lvl <= 5) {
+      const valueEl = box.createEl("div", { text: String(value) });
+      valueEl.style.fontSize = "1.2em";
+      valueEl.style.fontWeight = "700";
+      valueEl.style.marginTop = "4px";
+    }
+
+    function addInfoRow(parent, label, value) {
+      const row = parent.createEl("div");
+      row.style.display = "flex";
+      row.style.justifyContent = "space-between";
+      row.style.gap = "10px";
+      row.style.padding = "2px 0";
+
+      const left = row.createEl("div", { text: label });
+      left.style.opacity = "0.7";
+
+      const right = row.createEl("div", { text: String(value ?? "-") });
+      right.style.fontWeight = "600";
+      right.style.textAlign = "right";
+    }
+
+    function levelLabel(level) {
+      return level === 0 ? "Cantrips" : `Level ${level}`;
+    }
+
+    function addSpellSlotCheckboxes(parent, level, slotCount) {
+      if (level === 0 || slotCount <= 0) return;
+
+      const slotWrapper = parent.createEl("div");
+      slotWrapper.style.display = "flex";
+      slotWrapper.style.alignItems = "center";
+      slotWrapper.style.gap = "8px";
+      slotWrapper.style.flexWrap = "wrap";
+      slotWrapper.style.marginTop = "6px";
+      slotWrapper.style.marginBottom = "8px";
+
+      const label = slotWrapper.createEl("div", { text: "Slots:" });
+      label.style.fontSize = "0.9em";
+      label.style.opacity = "0.75";
+
+      for (let i = 0; i < slotCount; i++) {
+        const boxLabel = slotWrapper.createEl("label");
+        boxLabel.style.display = "flex";
+        boxLabel.style.alignItems = "center";
+        boxLabel.style.gap = "4px";
+        boxLabel.style.cursor = "pointer";
+
+        const checkbox = boxLabel.createEl("input");
+        checkbox.type = "checkbox";
+      }
+    }
+
+    const summaryGrid = tabContent.createEl("div");
+    summaryGrid.style.display = "grid";
+    summaryGrid.style.gridTemplateColumns = "repeat(3, 1fr)";
+    summaryGrid.style.gap = "8px";
+    summaryGrid.style.marginBottom = "12px";
+
+    addSummaryBox(summaryGrid, "Modifier", modString(spellMod));
+    addSummaryBox(summaryGrid, "Spell Attack", modString(spellAttackBonus));
+    addSummaryBox(summaryGrid, "Spell Save DC", spellSaveDC);
+
+    const spellContainer = tabContent.createEl("div");
+
+    const spells = getAllCharacterSpells();
+
+    if (!spells || spells.length === 0) {
+      spellContainer.createEl("div", { text: "Keine Spells gefunden." });
+      return;
+    }
+
+    const groupedSpells = {};
+
+    for (const spell of spells) {
+      const lvl = Number(spell.level ?? 0);
+      if (!groupedSpells[lvl]) groupedSpells[lvl] = [];
       groupedSpells[lvl].push(spell);
     }
-  }
 
-  for (let level = 0; level <= 5; level++) {
-    groupedSpells[level].sort((a, b) => {
-      const nameA = String(a.name ?? a.file.name ?? "");
-      const nameB = String(b.name ?? b.file.name ?? "");
-      return nameA.localeCompare(nameB, "de");
+    for (const level of Object.keys(groupedSpells)) {
+      groupedSpells[level].sort((a, b) => {
+        const nameA = String(a.name ?? a.file?.name ?? "");
+        const nameB = String(b.name ?? b.file?.name ?? "");
+        return nameA.localeCompare(nameB, "de");
+      });
+    }
+
+    function renderSpellRows(filterText = "") {
+      spellContainer.innerHTML = "";
+      const query = String(filterText ?? "").trim().toLowerCase();
+
+      const sortedLevels = Object.keys(groupedSpells)
+        .map(Number)
+        .sort((a, b) => a - b);
+
+      for (const level of sortedLevels) {
+        const levelSpells = groupedSpells[level].filter(spell => {
+          const name = String(spell.name ?? spell.file?.name ?? "").toLowerCase();
+          const school = String(spell.school ?? "").toLowerCase();
+          const notes = String(spell.notes ?? spell.effect ?? "").toLowerCase();
+          const damageType = String(spell.damage_type ?? "").toLowerCase();
+          const sourceItem = String(spell.source_item_name ?? "").toLowerCase();
+
+          if (!query) return true;
+          return (
+            name.includes(query) ||
+            school.includes(query) ||
+            notes.includes(query) ||
+            damageType.includes(query) ||
+            sourceItem.includes(query)
+          );
+        });
+
+        if (!levelSpells || levelSpells.length === 0) continue;
+
+        const section = spellContainer.createEl("div");
+        section.style.marginTop = "12px";
+
+        const sectionTitle = section.createEl("div", { text: levelLabel(level) });
+        sectionTitle.style.fontWeight = "700";
+        sectionTitle.style.fontSize = "1.05em";
+        sectionTitle.style.marginBottom = "8px";
+        sectionTitle.style.paddingBottom = "4px";
+        sectionTitle.style.borderBottom = "1px solid var(--background-modifier-border)";
+
+        const slotCount = Number(c.spell_slots?.[level] ?? 0);
+        addSpellSlotCheckboxes(section, level, slotCount);
+
+        for (const spell of levelSpells) {
+          const details = section.createEl("details");
+          details.style.border = "1px solid var(--background-modifier-border)";
+          details.style.borderRadius = "10px";
+          details.style.marginTop = "8px";
+          details.style.padding = "0";
+          details.style.overflow = "hidden";
+
+          const summaryEl = details.createEl("summary");
+          summaryEl.style.cursor = "pointer";
+          summaryEl.style.padding = "10px";
+          summaryEl.style.display = "flex";
+          summaryEl.style.justifyContent = "space-between";
+          summaryEl.style.alignItems = "center";
+          summaryEl.style.gap = "10px";
+          summaryEl.style.fontWeight = "700";
+
+          const leftWrap = summaryEl.createEl("div");
+
+          const leftSummary = leftWrap.createEl("div", {
+            text: spell.name ?? spell.file?.name ?? "Unnamed Spell"
+          });
+          leftSummary.style.fontSize = "1.05em";
+
+          const sourceText =
+            spell.source_type === "item" && spell.source_item_name
+
+          if (sourceText) {
+            const sourceEl = leftWrap.createEl("div", { text: sourceText });
+            sourceEl.style.fontSize = "0.8em";
+            sourceEl.style.opacity = "0.7";
+            sourceEl.style.fontWeight = "400";
+            sourceEl.style.marginTop = "2px";
+          }
+
+          const rightSummary = summaryEl.createEl("div", {
+            text: `${spell.school ?? "-"}`
+          });
+          rightSummary.style.opacity = "0.7";
+          rightSummary.style.fontSize = "0.9em";
+          rightSummary.style.fontWeight = "400";
+
+          const card = details.createEl("div");
+          card.style.padding = "10px";
+          card.style.borderTop = "1px solid var(--background-modifier-border)";
+
+          const infoBlock = card.createEl("div");
+
+          if (spell.source_item_name) {
+            addInfoRow(infoBlock, "Item", spell.source_item_name);
+          }
+
+          addInfoRow(infoBlock, "Casting Time", spell.casting_time ?? spell.action_type ?? "-");
+          addInfoRow(infoBlock, "Range", spell.range ?? "-");
+          addInfoRow(infoBlock, "Duration", spell.duration ?? "-");
+          addInfoRow(infoBlock, "Concentration", spell.concentration ? "Ja" : "Nein");
+
+          if (spell.uses_attack_roll) {
+            addInfoRow(infoBlock, "To Hit", modString(spellAttackBonus));
+          } else {
+            addInfoRow(infoBlock, "To Hit", "-");
+          }
+
+          if (spell.uses_save) {
+            addInfoRow(
+              infoBlock,
+              "Save",
+              `${String(spell.save_ability ?? "?").toUpperCase()} DC ${spellSaveDC}`
+            );
+          } else {
+            addInfoRow(infoBlock, "Save", "-");
+          }
+
+          let damageText = "-";
+          if (spell.damage) {
+            damageText = `${spell.damage}${spell.damage_type ? ` ${spell.damage_type}` : ""}`;
+          } else if (spell.dice_count && spell.dice_size) {
+            damageText = `${spell.dice_count}d${spell.dice_size}${spell.damage_type ? ` ${spell.damage_type}` : ""}`;
+          }
+          addInfoRow(infoBlock, "Damage", damageText);
+
+          const effectBlock = card.createEl("div");
+          effectBlock.style.marginTop = "8px";
+
+          const effectTitle = effectBlock.createEl("div", { text: "Effect" });
+          effectTitle.style.fontWeight = "600";
+          effectTitle.style.marginBottom = "4px";
+          effectTitle.style.opacity = "0.85";
+
+          effectBlock.createEl("div", {
+            text: spell.effect ?? spell.notes ?? "Kein Effekttext eingetragen."
+          });
+        }
+      }
+
+      if (spellContainer.innerHTML.trim() === "") {
+        const empty = spellContainer.createEl("div", { text: "Keine passenden Spells gefunden." });
+        empty.style.padding = "10px";
+        empty.style.opacity = "0.7";
+      }
+    }
+
+    renderSpellRows();
+
+    searchInput.addEventListener("input", () => {
+      renderSpellRows(searchInput.value);
     });
   }
 
-  function renderSpellRows(filterText = "") {
-    spellContainer.innerHTML = "";
-    const query = String(filterText ?? "").trim().toLowerCase();
+  async function renderNotes() {
+    clearEl(tabContent);
 
-    for (let level = 0; level <= 5; level++) {
-      const levelSpells = groupedSpells[level].filter(spell => {
-        const name = String(spell.name ?? spell.file.name ?? "").toLowerCase();
-        const school = String(spell.school ?? "").toLowerCase();
-        const notes = String(spell.notes ?? spell.effect ?? "").toLowerCase();
-        const damageType = String(spell.damage_type ?? "").toLowerCase();
+    const title = tabContent.createEl("div", { text: "Notes" });
+    title.style.fontWeight = "700";
+    title.style.fontSize = "1.05em";
+    title.style.marginBottom = "10px";
 
-        if (!query) return true;
-        return (
-          name.includes(query) ||
-          school.includes(query) ||
-          notes.includes(query) ||
-          damageType.includes(query)
-        );
+    const file = app.vault.getAbstractFileByPath(CHARACTER_PATH);
+
+    if (!file || !file.path) {
+      tabContent.createEl("div", {
+        text: `Character-Datei nicht gefunden: ${CHARACTER_PATH}`,
+      });
+      return;
+    }
+
+    const content = await app.vault.cachedRead(file);
+
+    function extractSection(markdown, headingName) {
+      const lines = markdown.split(/\r?\n/);
+      const target = headingName.trim().toLowerCase();
+
+      let start = -1;
+      let baseLevel = -1;
+
+      for (let i = 0; i < lines.length; i++) {
+        const match = lines[i].match(/^(#{1,6})\s+(.*?)\s*$/);
+        if (!match) continue;
+
+        const level = match[1].length;
+        const text = match[2].trim().toLowerCase();
+
+        if (text === target) {
+          start = i + 1;
+          baseLevel = level;
+          break;
+        }
+      }
+
+      if (start === -1) return null;
+
+      let end = lines.length;
+      for (let i = start; i < lines.length; i++) {
+        const match = lines[i].match(/^(#{1,6})\s+(.*?)\s*$/);
+        if (!match) continue;
+
+        const level = match[1].length;
+        if (level <= baseLevel) {
+          end = i;
+          break;
+        }
+      }
+
+      return lines.slice(start, end).join("\n").trim();
+    }
+
+    const notesSection = extractSection(content, "Notes");
+
+    if (!notesSection) {
+      tabContent.createEl("div", { text: "Kein Abschnitt '## Notes' gefunden." });
+      return;
+    }
+
+    const notesBox = tabContent.createEl("div");
+    notesBox.style.padding = "10px";
+    notesBox.style.border = "1px solid var(--background-modifier-border)";
+    notesBox.style.borderRadius = "10px";
+    notesBox.style.lineHeight = "1.6";
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function renderInlineMarkdown(line) {
+      let html = escapeHtml(line);
+
+      html = html.replace(/\[\[([^\]|]+)(\|([^\]]+))?\]\]/g, (match, target, _aliasPart, alias) => {
+        const rawTarget = String(target ?? "").trim();
+        const linkText = String(alias ?? rawTarget).trim();
+
+        return `<a href="#" class="custom-obsidian-link" data-href="${escapeHtml(rawTarget)}">${escapeHtml(linkText)}</a>`;
       });
 
-      if (!levelSpells || levelSpells.length === 0) continue;
+      html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_match, text, url) => {
+        const safeText = escapeHtml(text);
+        const safeUrl = escapeHtml(url);
+        return `<a href="${safeUrl}" target="_blank" rel="noopener">${safeText}</a>`;
+      });
 
-      const section = spellContainer.createEl("div");
-      section.style.marginTop = "12px";
+      html = html.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+      html = html.replace(/\*(.+?)\*/g, "<em>$1</em>");
+      html = html.replace(/`([^`]+)`/g, "<code>$1</code>");
 
-      const sectionTitle = section.createEl("div", { text: levelLabel(level) });
-      sectionTitle.style.fontWeight = "700";
-      sectionTitle.style.fontSize = "1.05em";
-      sectionTitle.style.marginBottom = "8px";
-      sectionTitle.style.paddingBottom = "4px";
-      sectionTitle.style.borderBottom = "1px solid var(--background-modifier-border)";
+      return html;
+    }
 
-      const slotCount = Number(c.spell_slots?.[level] ?? 0);
-      addSpellSlotCheckboxes(section, level, slotCount);
+    function renderSimpleMarkdown(md) {
+      const lines = md.split(/\r?\n/);
+      const htmlParts = [];
 
-      for (const spell of levelSpells) {
-        const details = section.createEl("details");
-        details.style.border = "1px solid var(--background-modifier-border)";
-        details.style.borderRadius = "10px";
-        details.style.marginTop = "8px";
-        details.style.padding = "0";
-        details.style.overflow = "hidden";
+      let inList = false;
+      let inCodeBlock = false;
+      let codeBuffer = [];
 
-        const summaryEl = details.createEl("summary");
-        summaryEl.style.cursor = "pointer";
-        summaryEl.style.padding = "10px";
-        summaryEl.style.display = "flex";
-        summaryEl.style.justifyContent = "space-between";
-        summaryEl.style.alignItems = "center";
-        summaryEl.style.gap = "10px";
-        summaryEl.style.fontWeight = "700";
-
-        const leftSummary = summaryEl.createEl("div", {
-          text: spell.name ?? spell.file.name
-        });
-        leftSummary.style.fontSize = "1.05em";
-
-        const rightSummary = summaryEl.createEl("div", {
-          text: `${spell.school ?? "-"}`
-        });
-        rightSummary.style.opacity = "0.7";
-        rightSummary.style.fontSize = "0.9em";
-        rightSummary.style.fontWeight = "400";
-
-        const card = details.createEl("div");
-        card.style.padding = "10px";
-        card.style.borderTop = "1px solid var(--background-modifier-border)";
-
-        const infoBlock = card.createEl("div");
-
-        addInfoRow(infoBlock, "Casting Time", spell.casting_time ?? spell.action_type ?? "-");
-        addInfoRow(infoBlock, "Range", spell.range ?? "-");
-        addInfoRow(infoBlock, "Duration", spell.duration ?? "-");
-        addInfoRow(infoBlock, "Concentration", spell.concentration ? "Ja" : "Nein");
-
-        if (spell.uses_attack_roll) {
-          addInfoRow(infoBlock, "To Hit", modString(spellAttackBonus));
-        } else {
-          addInfoRow(infoBlock, "To Hit", "-");
+      function closeList() {
+        if (inList) {
+          htmlParts.push("</ul>");
+          inList = false;
         }
-
-        if (spell.uses_save) {
-          addInfoRow(
-            infoBlock,
-            "Save",
-            `${String(spell.save_ability ?? "?").toUpperCase()} DC ${spellSaveDC}`
-          );
-        } else {
-          addInfoRow(infoBlock, "Save", "-");
-        }
-
-        let damageText = "-";
-        if (spell.damage) {
-          damageText = `${spell.damage}${spell.damage_type ? ` ${spell.damage_type}` : ""}`;
-        } else if (spell.dice_count && spell.dice_size) {
-          damageText = `${spell.dice_count}d${spell.dice_size}${spell.damage_type ? ` ${spell.damage_type}` : ""}`;
-        }
-        addInfoRow(infoBlock, "Damage", damageText);
-
-        const effectBlock = card.createEl("div");
-        effectBlock.style.marginTop = "8px";
-
-        const effectTitle = effectBlock.createEl("div", { text: "Effect" });
-        effectTitle.style.fontWeight = "600";
-        effectTitle.style.marginBottom = "4px";
-        effectTitle.style.opacity = "0.85";
-
-        effectBlock.createEl("div", {
-          text: spell.effect ?? spell.notes ?? "Kein Effekttext eingetragen."
-        });
       }
-    }
 
-    if (spellContainer.innerHTML.trim() === "") {
-      const empty = spellContainer.createEl("div", { text: "Keine passenden Spells gefunden." });
-      empty.style.padding = "10px";
-      empty.style.opacity = "0.7";
-    }
-  }
-
-  renderSpellRows();
-
-  searchInput.addEventListener("input", () => {
-    renderSpellRows(searchInput.value);
-  });
-}
-
-async function renderNotes() {
-  clearEl(tabContent);
-
-  const title = tabContent.createEl("div", { text: "Notes" });
-  title.style.fontWeight = "700";
-  title.style.fontSize = "1.05em";
-  title.style.marginBottom = "10px";
-
-  const file = app.vault.getAbstractFileByPath(CHARACTER_PATH);
-
-  if (!file || !file.path) {
-    tabContent.createEl("div", {
-      text: `Character-Datei nicht gefunden: ${CHARACTER_PATH}`,
-    });
-    return;
-  }
-
-  const content = await app.vault.cachedRead(file);
-
-  function extractSection(markdown, headingName) {
-    const lines = markdown.split(/\r?\n/);
-    const target = headingName.trim().toLowerCase();
-
-    let start = -1;
-    let baseLevel = -1;
-
-    for (let i = 0; i < lines.length; i++) {
-      const match = lines[i].match(/^(#{1,6})\s+(.*?)\s*$/);
-      if (!match) continue;
-
-      const level = match[1].length;
-      const text = match[2].trim().toLowerCase();
-
-      if (text === target) {
-        start = i + 1;
-        baseLevel = level;
-        break;
-      }
-    }
-
-    if (start === -1) return null;
-
-    let end = lines.length;
-    for (let i = start; i < lines.length; i++) {
-      const match = lines[i].match(/^(#{1,6})\s+(.*?)\s*$/);
-      if (!match) continue;
-
-      const level = match[1].length;
-      if (level <= baseLevel) {
-        end = i;
-        break;
-      }
-    }
-
-    return lines.slice(start, end).join("\n").trim();
-  }
-
-  const notesSection = extractSection(content, "Notes");
-
-  if (!notesSection) {
-    tabContent.createEl("div", { text: "Kein Abschnitt '## Notes' gefunden." });
-    return;
-  }
-
-  const notesBox = tabContent.createEl("div");
-  notesBox.style.padding = "10px";
-  notesBox.style.border = "1px solid var(--background-modifier-border)";
-  notesBox.style.borderRadius = "10px";
-  notesBox.style.lineHeight = "1.6";
-
-  function escapeHtml(str) {
-    return String(str)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
-  }
-
-  function renderInlineMarkdown(line) {
-    let html = escapeHtml(line);
-
-    // WikiLinks: [[Ziel]] / [[Ziel|Alias]] / [[Ziel#Heading|Alias]]
-    html = html.replace(/\[\[([^\]|]+)(\|([^\]]+))?\]\]/g, (match, target, _aliasPart, alias) => {
-      const rawTarget = String(target ?? "").trim();
-      const linkText = String(alias ?? rawTarget).trim();
-
-      return `<a href="#" class="custom-obsidian-link" data-href="${escapeHtml(rawTarget)}">${escapeHtml(linkText)}</a>`;
-    });
-
-    // Externe Markdown-Links: [Text](https://...)
-    html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_match, text, url) => {
-      const safeText = escapeHtml(text);
-      const safeUrl = escapeHtml(url);
-      return `<a href="${safeUrl}" target="_blank" rel="noopener">${safeText}</a>`;
-    });
-
-    // Fett
-    html = html.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
-
-    // Kursiv
-    html = html.replace(/\*(.+?)\*/g, "<em>$1</em>");
-
-    // Inline-Code
-    html = html.replace(/`([^`]+)`/g, "<code>$1</code>");
-
-    return html;
-  }
-
-  function renderSimpleMarkdown(md) {
-    const lines = md.split(/\r?\n/);
-    const htmlParts = [];
-
-    let inList = false;
-    let inCodeBlock = false;
-    let codeBuffer = [];
-
-    function closeList() {
-      if (inList) {
-        htmlParts.push("</ul>");
-        inList = false;
-      }
-    }
-
-    function closeCodeBlock() {
-      if (inCodeBlock) {
-        htmlParts.push(`<pre><code>${escapeHtml(codeBuffer.join("\n"))}</code></pre>`);
-        inCodeBlock = false;
-        codeBuffer = [];
-      }
-    }
-
-    for (const rawLine of lines) {
-      const line = rawLine ?? "";
-
-      if (line.trim().startsWith("```")) {
-        closeList();
-
-        if (!inCodeBlock) {
-          inCodeBlock = true;
+      function closeCodeBlock() {
+        if (inCodeBlock) {
+          htmlParts.push(`<pre><code>${escapeHtml(codeBuffer.join("\n"))}</code></pre>`);
+          inCodeBlock = false;
           codeBuffer = [];
+        }
+      }
+
+      for (const rawLine of lines) {
+        const line = rawLine ?? "";
+
+        if (line.trim().startsWith("```")) {
+          closeList();
+
+          if (!inCodeBlock) {
+            inCodeBlock = true;
+            codeBuffer = [];
+          } else {
+            closeCodeBlock();
+          }
+          continue;
+        }
+
+        if (inCodeBlock) {
+          codeBuffer.push(line);
+          continue;
+        }
+
+        if (/^\s*[-*]\s+/.test(line)) {
+          if (!inList) {
+            htmlParts.push("<ul>");
+            inList = true;
+          }
+          const itemText = line.replace(/^\s*[-*]\s+/, "");
+          htmlParts.push(`<li>${renderInlineMarkdown(itemText)}</li>`);
+          continue;
         } else {
-          closeCodeBlock();
+          closeList();
         }
-        continue;
-      }
 
-      if (inCodeBlock) {
-        codeBuffer.push(line);
-        continue;
-      }
-
-      if (/^\s*[-*]\s+/.test(line)) {
-        if (!inList) {
-          htmlParts.push("<ul>");
-          inList = true;
+        if (/^###\s+/.test(line)) {
+          htmlParts.push(`<h3>${renderInlineMarkdown(line.replace(/^###\s+/, ""))}</h3>`);
+          continue;
         }
-        const itemText = line.replace(/^\s*[-*]\s+/, "");
-        htmlParts.push(`<li>${renderInlineMarkdown(itemText)}</li>`);
-        continue;
-      } else {
-        closeList();
+
+        if (/^##\s+/.test(line)) {
+          htmlParts.push(`<h2>${renderInlineMarkdown(line.replace(/^##\s+/, ""))}</h2>`);
+          continue;
+        }
+
+        if (/^#\s+/.test(line)) {
+          htmlParts.push(`<h1>${renderInlineMarkdown(line.replace(/^#\s+/, ""))}</h1>`);
+          continue;
+        }
+
+        if (line.trim() === "") {
+          htmlParts.push("<div style='height: 0.6em;'></div>");
+          continue;
+        }
+
+        htmlParts.push(`<p style="margin: 0 0 0.6em 0;">${renderInlineMarkdown(line)}</p>`);
       }
 
-      if (/^###\s+/.test(line)) {
-        htmlParts.push(`<h3>${renderInlineMarkdown(line.replace(/^###\s+/, ""))}</h3>`);
-        continue;
-      }
+      closeList();
+      closeCodeBlock();
 
-      if (/^##\s+/.test(line)) {
-        htmlParts.push(`<h2>${renderInlineMarkdown(line.replace(/^##\s+/, ""))}</h2>`);
-        continue;
-      }
-
-      if (/^#\s+/.test(line)) {
-        htmlParts.push(`<h1>${renderInlineMarkdown(line.replace(/^#\s+/, ""))}</h1>`);
-        continue;
-      }
-
-      if (line.trim() === "") {
-        htmlParts.push("<div style='height: 0.6em;'></div>");
-        continue;
-      }
-
-      htmlParts.push(`<p style="margin: 0 0 0.6em 0;">${renderInlineMarkdown(line)}</p>`);
+      return htmlParts.join("\n");
     }
 
-    closeList();
-    closeCodeBlock();
+    notesBox.innerHTML = renderSimpleMarkdown(notesSection);
 
-    return htmlParts.join("\n");
-  }
+    notesBox.querySelectorAll("a.custom-obsidian-link").forEach((linkEl) => {
+      linkEl.style.color = "var(--link-color)";
+      linkEl.style.textDecoration = "underline";
+      linkEl.style.cursor = "pointer";
 
-  notesBox.innerHTML = renderSimpleMarkdown(notesSection);
+      linkEl.addEventListener("click", async (evt) => {
+        evt.preventDefault();
+        evt.stopPropagation();
 
-  notesBox.querySelectorAll("a.custom-obsidian-link").forEach((linkEl) => {
-    linkEl.style.color = "var(--link-color)";
-    linkEl.style.textDecoration = "underline";
-    linkEl.style.cursor = "pointer";
+        const target = linkEl.getAttribute("data-href");
+        if (!target) return;
 
-    linkEl.addEventListener("click", async (evt) => {
-      evt.preventDefault();
-      evt.stopPropagation();
-
-      const target = linkEl.getAttribute("data-href");
-      if (!target) return;
-
-      await app.workspace.openLinkText(target, file.path, true);
+        await app.workspace.openLinkText(target, file.path, true);
+      });
     });
-  });
-}
+  }
 
   function updateTabStyles() {
     for (const key in tabButtons) {
@@ -1759,25 +1837,25 @@ async function renderNotes() {
     }
   }
 
-async function renderActiveTab() {
-  updateTabStyles();
+  async function renderActiveTab() {
+    updateTabStyles();
 
-  try {
-    if (activeTab === "actions") renderActions();
-    if (activeTab === "features") renderFeatures();
-    if (activeTab === "inventory") renderInventory();
-    if (activeTab === "spells") renderSpells();
-    if (activeTab === "notes") await renderNotes();
-  } catch (err) {
-    clearEl(tabContent);
-    tabContent.createEl("div", {
-      text: `Fehler beim Laden des Tabs: ${err.message ?? err}`
-    });
-    console.error(err);
+    try {
+      if (activeTab === "actions") renderActions();
+      if (activeTab === "features") renderFeatures();
+      if (activeTab === "inventory") renderInventory();
+      if (activeTab === "spells") renderSpells();
+      if (activeTab === "notes") await renderNotes();
+    } catch (err) {
+      clearEl(tabContent);
+      tabContent.createEl("div", {
+        text: `Fehler beim Laden des Tabs: ${err.message ?? err}`
+      });
+      console.error(err);
+    }
+
+    updateTabStyles();
   }
-
-  updateTabStyles();
-}
 
   function makeTabButton(key, label) {
     const btn = tabBar.createEl("button", { text: label });
@@ -1787,7 +1865,7 @@ async function renderActiveTab() {
     });
     tabButtons[key] = btn;
   }
-  
+
   makeTabButton("actions", "Actions");
   makeTabButton("spells", "Spells");
   makeTabButton("inventory", "Inventory");
@@ -1797,44 +1875,44 @@ async function renderActiveTab() {
   renderActiveTab();
 
   const sensesCard = leftCol.createEl("div");
-sensesCard.style.padding = "16px";
-sensesCard.style.border = "1px solid var(--background-modifier-border)";
-sensesCard.style.borderRadius = "14px";
+  sensesCard.style.padding = "16px";
+  sensesCard.style.border = "1px solid var(--background-modifier-border)";
+  sensesCard.style.borderRadius = "14px";
 
-const sensesTitle = sensesCard.createEl("div", { text: "Senses" });
-sensesTitle.style.fontWeight = "700";
-sensesTitle.style.marginBottom = "12px";
-sensesTitle.style.fontSize = "1.1em";
+  const sensesTitle = sensesCard.createEl("div", { text: "Senses" });
+  sensesTitle.style.fontWeight = "700";
+  sensesTitle.style.marginBottom = "12px";
+  sensesTitle.style.fontSize = "1.1em";
 
-const profBonus = c.proficiency_bonus ?? 2;
+  const profBonus = c.proficiency_bonus ?? 2;
 
-const passivePerception =
-  10 + modFromScore(c.wis ?? 10) + (c.perception_prof ? profBonus : 0);
+  const passivePerception =
+    10 + modFromScore(c.wis ?? 10) + (c.perception_prof ? profBonus : 0);
 
-const passiveInvestigation =
-  10 + modFromScore(c.int ?? 10) + (c.investigation_prof ? profBonus : 0);
+  const passiveInvestigation =
+    10 + modFromScore(c.int ?? 10) + (c.investigation_prof ? profBonus : 0);
 
-const passiveInsight =
-  10 + modFromScore(c.wis ?? 10) + (c.insight_prof ? profBonus : 0);
+  const passiveInsight =
+    10 + modFromScore(c.wis ?? 10) + (c.insight_prof ? profBonus : 0);
 
-const senseStats = [
-  ["Passive Perception", passivePerception],
-  ["Passive Investigation", passiveInvestigation],
-  ["Passive Insight", passiveInsight],
-];
+  const senseStats = [
+    ["Passive Perception", passivePerception],
+    ["Passive Investigation", passiveInvestigation],
+    ["Passive Insight", passiveInsight],
+  ];
 
-for (const [label, value] of senseStats) {
-  const row = sensesCard.createEl("div");
-  row.style.display = "flex";
-  row.style.justifyContent = "space-between";
-  row.style.padding = "6px 0";
-  row.style.borderBottom = "1px solid var(--background-modifier-border-hover)";
+  for (const [label, value] of senseStats) {
+    const row = sensesCard.createEl("div");
+    row.style.display = "flex";
+    row.style.justifyContent = "space-between";
+    row.style.padding = "6px 0";
+    row.style.borderBottom = "1px solid var(--background-modifier-border-hover)";
 
-  row.createEl("div", { text: label });
+    row.createEl("div", { text: label });
 
-  const valueEl = row.createEl("div", { text: String(value) });
-  valueEl.style.fontWeight = "600";
-}
+    const valueEl = row.createEl("div", { text: String(value) });
+    valueEl.style.fontWeight = "600";
+  }
 }
 ```
 
