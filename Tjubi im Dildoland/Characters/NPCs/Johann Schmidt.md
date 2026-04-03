@@ -1,5 +1,3 @@
-## Overview
-
 ```dataviewjs  
 const CHARACTER_PATH = "Public/3 Backend/Johann Schmidt.md";
 const c = dv.page(CHARACTER_PATH);
