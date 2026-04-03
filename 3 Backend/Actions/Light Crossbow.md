@@ -1,5 +1,5 @@
 ---
-name: Leichte Armbrust
+name: Light Crossbow
 category: action
 action_type: action
 mode: attack
