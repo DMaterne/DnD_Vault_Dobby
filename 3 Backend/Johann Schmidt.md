@@ -52,6 +52,7 @@ spell_slots:
   "4": 0
   "5": 0
 inventory:
+
 features:
 hp_temp: 0
 actions:
