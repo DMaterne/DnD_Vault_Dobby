@@ -916,6 +916,77 @@ function renderInventory() {
   });
 }
 
+function normalizeText(value) {
+  return String(value ?? "")
+    .trim()
+    .toLowerCase();
+}
+
+function uniquePages(pages) {
+  const seen = new Set();
+  const result = [];
+
+  for (const p of pages) {
+    if (!p?.file?.path) continue;
+    if (seen.has(p.file.path)) continue;
+    seen.add(p.file.path);
+    result.push(p);
+  }
+
+  return result;
+}
+
+function getCharacterActionPages() {
+  const explicitActionRefs = Array.isArray(c.actions) ? c.actions : [];
+  const inventoryEntries = Array.isArray(c.inventory) ? c.inventory : [];
+
+  // 1) Direkt auf dem Charakter verlinkte Actions
+  const explicitActions = explicitActionRefs
+    .map(path => dv.page(String(path)))
+    .filter(p => p);
+
+  // 2) Alle Item-Seiten aus dem Inventar laden
+  const itemPages = inventoryEntries
+    .map(entry => {
+      const itemPath = String(entry?.item ?? "").trim();
+      return itemPath ? dv.page(itemPath) : null;
+    })
+    .filter(p => p);
+
+  // 3) Alle Action/Spell-Seiten aus dem Vault als Suchbasis
+  const allActionLikePages = dv.pages()
+    .where(p => {
+      const category = normalizeText(p.category);
+      return category === "action" || category === "spell";
+    })
+    .array();
+
+  const itemDerivedActions = [];
+
+  for (const itemPage of itemPages) {
+    // Variante A: Item hat explizite Action-Referenzen
+    const itemActionRefs = Array.isArray(itemPage.actions) ? itemPage.actions : [];
+    const linkedActions = itemActionRefs
+      .map(path => dv.page(String(path)))
+      .filter(p => p);
+
+    itemDerivedActions.push(...linkedActions);
+
+    // Variante B: Fallback über gleichen Namen
+    const itemName = normalizeText(itemPage.name ?? itemPage.file?.name);
+    if (!itemName) continue;
+
+    const sameNameActions = allActionLikePages.filter(p => {
+      const pageName = normalizeText(p.name ?? p.file?.name);
+      return pageName === itemName;
+    });
+
+    itemDerivedActions.push(...sameNameActions);
+  }
+
+  return uniquePages([...explicitActions, ...itemDerivedActions]);
+}
+
 function renderActions() {
   clearEl(tabContent);
 
@@ -980,23 +1051,19 @@ function renderActions() {
     return 0;
   }
 
-  const actionRefs = Array.isArray(c.actions) ? c.actions : [];
+  const actions = getCharacterActionPages()
+  .filter(p => {
+    const category = String(p.category ?? "").trim().toLowerCase();
+    const rawType = String(p.action_type ?? "").trim().toLowerCase();
+    const type = rawType.replace(/\s+/g, "_");
 
-  const actions = actionRefs
-    .map(path => dv.page(String(path)))
-    .filter(p => p)
-    .filter(p => {
-      const category = String(p.category ?? "").trim().toLowerCase();
-      const rawType = String(p.action_type ?? "").trim().toLowerCase();
-      const type = rawType.replace(/\s+/g, "_");
-
-      return category !== "spell" && (
-        type === "" ||
-        type === "action" ||
-        type === "bonus_action" ||
-        type === "reaction"
-      );
-    });
+    return category !== "spell" && (
+      type === "" ||
+      type === "action" ||
+      type === "bonus_action" ||
+      type === "reaction"
+    );
+  });
 
   const groupedActions = {
     action: [],
