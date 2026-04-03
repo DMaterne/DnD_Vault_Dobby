@@ -1,5 +1,5 @@
 ---
-name: Sichel
+name: Sickle
 category: action
 action_type: action
 mode: attack

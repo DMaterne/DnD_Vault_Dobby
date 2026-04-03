@@ -123,7 +123,7 @@ actions:
   - Public/3 Backend/Actions/Opportunity Attack.md
   - Public/3 Backend/Actions/Thunderclap.md
   - Public/3 Backend/Actions/Mending.md
-  - Public/3 Backend/Actions/Sichel.md
+  - Public/3 Backend/Actions/Sickle.md
   - Public/3 Backend/Actions/Hammer.md
   - Public/3 Backend/Actions/Unarmed Strike.md
   - Public/3 Backend/Actions/Cure Wounds.md
