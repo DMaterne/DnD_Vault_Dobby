@@ -5,7 +5,7 @@ Spieler: alle
 
 ###  **Zusammenfassung letzte Session: [[Session 5]]**
 
-![[Session 1#**Zusammenfassung **]]
+![[Public/Bönkis Kampagne/Session Protocol/Session 1#**Zusammenfassung **]]
 
 ###  **Session Notizen (raw):**
 castor stellt Jarvis, seinen homuncolus servant, vor
