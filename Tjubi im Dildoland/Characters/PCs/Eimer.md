@@ -690,7 +690,7 @@ if (!c) {
   tabContent.style.borderRadius = "10px";
   tabContent.style.minHeight = "220px";
 
-  let activeTab = "actions";
+  let activeTab = window.__dndActiveTab ?? "actions";
   const tabButtons = {};
 
   function clearEl(el) {
@@ -2099,8 +2099,9 @@ if (!c) {
   function makeTabButton(key, label) {
     const btn = tabBar.createEl("button", { text: label });
     btn.addEventListener("click", () => {
-      activeTab = key;
-      renderActiveTab();
+    activeTab = key;
+    window.__dndActiveTab = key;
+    renderActiveTab();
     });
     tabButtons[key] = btn;
   }

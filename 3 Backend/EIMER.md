@@ -101,9 +101,7 @@ inventory:
   - item: Public/3 Backend/Items/Backpack.md
     quantity: 1
     equipped: true
-  - item: Public/3 Backend/Items/Ring of Protection.md
-    quantity: 1
-    equipped: true
+
 features:
   - name: Magical Tinkering
     source: Artificer
@@ -122,8 +120,7 @@ spells:
   - Public/3 Backend/Spells/Feather Fall.md
 spellcasting_ability: int
 attunement_slots: 3
-attuned_items:
-  - Public/3 Backend/Items/Ring of Protection.md
+attuned_items: []
 ---
 
 # Notes 
