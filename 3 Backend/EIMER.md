@@ -120,7 +120,6 @@ spells:
 spellcasting_ability: int
 attunement_slots: 3
 attuned_items:
-  - Public/3 Backend/Items/Gauntlets of Ogre Power.md::16::0
 ---
 
 # Notes 
