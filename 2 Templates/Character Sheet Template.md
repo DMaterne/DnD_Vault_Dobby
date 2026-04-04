@@ -1,7 +1,8 @@
 ```dataviewjs  
-const CHARACTER_PATH = "Public/3 Backend/???.md";
+const CHARACTER_PATH = "Public/3 Backend/EIMER.md";
 const ACTIONS_FOLDER = "Public/3 Backend/Actions/";
 const SPELLS_FOLDER = "Public/3 Backend/Spells/";
+const FEATURES_FOLDER = "Public/3 Backend/Features/";
 
 const c = dv.page(CHARACTER_PATH);
 
@@ -15,17 +16,6 @@ function modString(n) {
 
 function profValue(isProf, base, profBonus) {
   return base + (isProf ? profBonus : 0);
-}
-
-function getAbilityModByName(name) {
-  const key = String(name ?? "").toLowerCase();
-  if (key === "str") return modFromScore(c.str ?? 10);
-  if (key === "dex") return modFromScore(c.dex ?? 10);
-  if (key === "con") return modFromScore(c.con ?? 10);
-  if (key === "int") return modFromScore(c.int ?? 10);
-  if (key === "wis") return modFromScore(c.wis ?? 10);
-  if (key === "cha") return modFromScore(c.cha ?? 10);
-  return 0;
 }
 
 function isInFolder(filePath, folderPath) {
@@ -52,10 +42,248 @@ function uniqueActionObjects(entries) {
   return result;
 }
 
+function getAttunedItemPaths() {
+  return Array.isArray(c.attuned_items) ? c.attuned_items : [];
+}
+
+function isItemEquipped(entry) {
+  return entry?.equipped === true;
+}
+
+function isItemAttuned(itemPath) {
+  return getAttunedItemPaths().includes(itemPath);
+}
+
+function getAllCharacterFeatures() {
+  const featureRefs = Array.isArray(c.features) ? c.features : [];
+
+  return featureRefs
+    .map(path => dv.page(String(path)))
+    .filter(p => p)
+    .filter(p => isInFolder(String(p.file?.path ?? ""), FEATURES_FOLDER))
+    .sort((a, b) => {
+      const nameA = String(a.name ?? a.file?.name ?? "");
+      const nameB = String(b.name ?? b.file?.name ?? "");
+      return nameA.localeCompare(nameB, "de");
+    });
+}
+
+function getActiveBonusEffects() {
+  const activeEffects = [];
+
+  // ITEM-BONI
+  const inventoryEntries = Array.isArray(c.inventory) ? c.inventory : [];
+
+  for (const entry of inventoryEntries) {
+    const itemPath = String(entry?.item ?? "").trim();
+    if (!itemPath) continue;
+
+    const itemPage = dv.page(itemPath);
+    if (!itemPage) continue;
+
+    const bonuses = Array.isArray(itemPage.bonuses) ? itemPage.bonuses : [];
+    if (bonuses.length === 0) continue;
+
+    const equipped = isItemEquipped(entry);
+    const attuned = isItemAttuned(itemPath);
+
+    for (const bonus of bonuses) {
+      if (!bonus || typeof bonus !== "object") continue;
+
+      const activeWhen = String(bonus.active_when ?? "equipped").trim().toLowerCase();
+      const type = String(bonus.type ?? "").trim().toLowerCase();
+      const value = Number(bonus.value ?? 0);
+
+      const rawSetValue = bonus.set_value;
+      const hasSetValue = rawSetValue !== undefined && rawSetValue !== null && rawSetValue !== "";
+      const setValue = hasSetValue ? Number(rawSetValue) : null;
+
+      if (!type) continue;
+      if (!Number.isFinite(value) && !(hasSetValue && Number.isFinite(setValue))) continue;
+
+      let isActive = false;
+
+      if (activeWhen === "always") isActive = true;
+      if (activeWhen === "equipped" && equipped) isActive = true;
+      if (activeWhen === "attuned" && attuned) isActive = true;
+
+      if (!isActive) continue;
+
+      activeEffects.push({
+        type,
+        value: Number.isFinite(value) ? value : 0,
+        set_value: hasSetValue && Number.isFinite(setValue) ? setValue : null,
+        active_when: activeWhen,
+        source_kind: "item",
+        source_name: itemPage.name ?? itemPage.file?.name ?? "Unknown Item",
+        source_path: itemPath
+      });
+    }
+  }
+
+  // FEATURE-BONI
+  const features = getAllCharacterFeatures();
+
+  for (const featurePage of features) {
+    const bonuses = Array.isArray(featurePage.bonuses) ? featurePage.bonuses : [];
+    if (bonuses.length === 0) continue;
+
+    const enabled = featurePage.enabled !== false;
+
+    for (const bonus of bonuses) {
+      if (!bonus || typeof bonus !== "object") continue;
+
+      const activeWhen = String(bonus.active_when ?? "enabled").trim().toLowerCase();
+      const type = String(bonus.type ?? "").trim().toLowerCase();
+      const value = Number(bonus.value ?? 0);
+
+      const rawSetValue = bonus.set_value;
+      const hasSetValue = rawSetValue !== undefined && rawSetValue !== null && rawSetValue !== "";
+      const setValue = hasSetValue ? Number(rawSetValue) : null;
+
+      if (!type) continue;
+      if (!Number.isFinite(value) && !(hasSetValue && Number.isFinite(setValue))) continue;
+
+      let isActive = false;
+
+      if (activeWhen === "always") isActive = true;
+      if (activeWhen === "enabled" && enabled) isActive = true;
+
+      if (!isActive) continue;
+
+      activeEffects.push({
+        type,
+        value: Number.isFinite(value) ? value : 0,
+        set_value: hasSetValue && Number.isFinite(setValue) ? setValue : null,
+        active_when: activeWhen,
+        source_kind: "feature",
+        source_name: featurePage.name ?? featurePage.file?.name ?? "Unnamed Feature",
+        source_path: featurePage.file?.path ?? null
+      });
+    }
+  }
+
+  return activeEffects;
+}
+
+function getBonusTotal(type) {
+  const targetType = String(type ?? "").trim().toLowerCase();
+  return getActiveBonusEffects()
+    .filter(b => b.type === targetType)
+    .reduce((sum, b) => sum + Number(b.value ?? 0), 0);
+}
+
+function getSetValue(type) {
+  const targetType = String(type ?? "").trim().toLowerCase();
+  const matching = getActiveBonusEffects()
+    .filter(b => b.type === targetType && b.set_value != null && Number.isFinite(Number(b.set_value)))
+    .map(b => Number(b.set_value));
+
+  if (matching.length === 0) return null;
+  return Math.max(...matching);
+}
+
+function applyItemEffects(baseValue, type) {
+  let result = Number(baseValue ?? 0);
+
+  const setValue = getSetValue(type);
+  if (setValue != null) {
+    result = setValue;
+  }
+
+  result += getBonusTotal(type);
+  return result;
+}
+
+function getAbilityScore(name) {
+  const key = String(name ?? "").trim().toLowerCase();
+
+  if (key === "str") return applyItemEffects(Number(c.str ?? 10), "str");
+  if (key === "dex") return applyItemEffects(Number(c.dex ?? 10), "dex");
+  if (key === "con") return applyItemEffects(Number(c.con ?? 10), "con");
+  if (key === "int") return applyItemEffects(Number(c.int ?? 10), "int");
+  if (key === "wis") return applyItemEffects(Number(c.wis ?? 10), "wis");
+  if (key === "cha") return applyItemEffects(Number(c.cha ?? 10), "cha");
+
+  return 10;
+}
+
+function getAbilityModByName(name) {
+  return modFromScore(getAbilityScore(name));
+}
+
+function getProficiencyBonus() {
+  return applyItemEffects(Number(c.proficiency_bonus ?? 2), "proficiency_bonus");
+}
+
+function getArmorClass() {
+  return applyItemEffects(Number(c.ac ?? 10), "ac");
+}
+
+function getMaxHp() {
+  return applyItemEffects(Number(c.hp_max ?? 0), "hp_max");
+}
+
+function getSpeed() {
+  return applyItemEffects(Number(c.speed ?? 30), "speed");
+}
+
+function getInitiativeBonus() {
+  const baseInit = c.initiative_bonus != null
+    ? Number(c.initiative_bonus)
+    : getAbilityModByName("dex");
+
+  return applyItemEffects(baseInit, "initiative");
+}
+
+function getSavingThrowTotal(label, isProficient) {
+  const abilityKey = String(label ?? "").trim().toLowerCase();
+  const base = getAbilityModByName(abilityKey);
+  const profBonus = getProficiencyBonus();
+
+  let total = profValue(isProficient, base, profBonus);
+  total = applyItemEffects(total, `${abilityKey}_save`);
+  total = applyItemEffects(total, "saving_throws");
+  return total;
+}
+
+const SKILL_KEY_MAP = {
+  "Acrobatics": "acrobatics",
+  "Animal Handling": "animal_handling",
+  "Arcana": "arcana",
+  "Athletics": "athletics",
+  "Deception": "deception",
+  "History": "history",
+  "Insight": "insight",
+  "Intimidation": "intimidation",
+  "Investigation": "investigation",
+  "Medicine": "medicine",
+  "Nature": "nature",
+  "Perception": "perception",
+  "Performance": "performance",
+  "Persuasion": "persuasion",
+  "Religion": "religion",
+  "Sleight of Hand": "sleight_of_hand",
+  "Stealth": "stealth",
+  "Survival": "survival"
+};
+
+function getSkillTotal(label, abilityName, isProficient) {
+  const base = getAbilityModByName(abilityName);
+  const profBonus = getProficiencyBonus();
+  const skillKey = SKILL_KEY_MAP[label] ?? "";
+
+  let total = profValue(isProficient, base, profBonus);
+  if (skillKey) {
+    total = applyItemEffects(total, skillKey);
+  }
+
+  return total;
+}
+
 function getAllCharacterActions() {
   const collectedActions = [];
 
-  // 1) Explizite Character-Actions aus Dateien
   const explicitActionRefs = Array.isArray(c.actions) ? c.actions : [];
 
   for (const actionRef of explicitActionRefs) {
@@ -76,7 +304,6 @@ function getAllCharacterActions() {
     });
   }
 
-  // 2) Actions aus Items
   const inventoryEntries = Array.isArray(c.inventory) ? c.inventory : [];
 
   for (const entry of inventoryEntries) {
@@ -115,7 +342,6 @@ function getAllCharacterActions() {
 function getAllCharacterSpells() {
   const collectedSpells = [];
 
-  // 1) Explizite Character-Spells aus Dateien
   const explicitSpellRefs = Array.isArray(c.spells) ? c.spells : [];
 
   for (const spellRef of explicitSpellRefs) {
@@ -136,7 +362,6 @@ function getAllCharacterSpells() {
     });
   }
 
-  // 2) Spells aus Items
   const inventoryEntries = Array.isArray(c.inventory) ? c.inventory : [];
 
   for (const entry of inventoryEntries) {
@@ -180,14 +405,12 @@ if (!c) {
   wrapper.style.flexDirection = "column";
   wrapper.style.gap = "18px";
 
-  // HEADER
   const headerRow = wrapper.createEl("div");
   headerRow.style.display = "grid";
   headerRow.style.gridTemplateColumns = "1fr 220px 260px";
   headerRow.style.gap = "18px";
   headerRow.style.alignItems = "stretch";
 
-  // LEFT: HEADER CARD
   const header = headerRow.createEl("div");
   header.style.padding = "16px";
   header.style.border = "1px solid var(--background-modifier-border)";
@@ -212,10 +435,8 @@ if (!c) {
 
   function addHeaderInfoRow(parent, label, value) {
     const row = parent.createEl("div");
-
     const labelEl = row.createEl("span", { text: `${label}: ` });
     labelEl.style.fontWeight = "600";
-
     row.createEl("span", { text: String(value ?? "-") });
   }
 
@@ -234,10 +455,8 @@ if (!c) {
 
   function addMetaInfoRow(parent, label, value) {
     const row = parent.createEl("div");
-
     const labelEl = row.createEl("span", { text: `${label}: ` });
     labelEl.style.fontWeight = "600";
-
     row.createEl("span", { text: String(value ?? "-") });
   }
 
@@ -287,7 +506,6 @@ if (!c) {
   portrait.style.background = "var(--background-secondary)";
   portrait.style.boxSizing = "border-box";
 
-  // MIDDLE: COMBAT VALUES CARD
   const comValCard = headerRow.createEl("div");
   comValCard.style.padding = "16px";
   comValCard.style.border = "1px solid var(--background-modifier-border)";
@@ -307,9 +525,9 @@ if (!c) {
   comValGrid.style.gap = "8px";
 
   const combatValues = [
-    ["Armor Class", c.ac ?? 10],
-    ["Initiative", modString(c.initiative_bonus ?? modFromScore(c.dex ?? 10))],
-    ["Speed", `${c.speed ?? 30} ft`],
+    ["Armor Class", getArmorClass()],
+    ["Initiative", modString(getInitiativeBonus())],
+    ["Speed", `${getSpeed()} ft`],
   ];
 
   for (const [label, value] of combatValues) {
@@ -329,7 +547,6 @@ if (!c) {
     valueEl.style.fontWeight = "700";
   }
 
-  // RIGHT: HP CARD
   const hpCard = headerRow.createEl("div");
   hpCard.style.padding = "16px";
   hpCard.style.border = "1px solid var(--background-modifier-border)";
@@ -345,7 +562,7 @@ if (!c) {
   const characterFile = app.vault.getAbstractFileByPath(CHARACTER_PATH);
 
   let currentHp = Number(c.hp_current ?? 0);
-  const maxHp = Number(c.hp_max ?? 0);
+  const maxHp = getMaxHp();
   let tempHpValue = Number(c.hp_temp ?? 0);
 
   const hpMain = hpCard.createEl("div", {
@@ -514,7 +731,6 @@ if (!c) {
   createDeathSaveRow("Fail");
   createDeathSaveRow("Success");
 
-  // ABILITY SCORES
   const abilitiesCard = wrapper.createEl("div");
   abilitiesCard.style.padding = "8px";
   abilitiesCard.style.border = "1px solid var(--background-modifier-border)";
@@ -531,12 +747,12 @@ if (!c) {
   abilityGrid.style.gap = "6px";
 
   const stats = [
-    ["STR", c.str ?? 10],
-    ["DEX", c.dex ?? 10],
-    ["CON", c.con ?? 10],
-    ["INT", c.int ?? 10],
-    ["WIS", c.wis ?? 10],
-    ["CHA", c.cha ?? 10],
+    ["STR", getAbilityScore("str")],
+    ["DEX", getAbilityScore("dex")],
+    ["CON", getAbilityScore("con")],
+    ["INT", getAbilityScore("int")],
+    ["WIS", getAbilityScore("wis")],
+    ["CHA", getAbilityScore("cha")],
   ];
 
   for (const [label, score] of stats) {
@@ -563,7 +779,6 @@ if (!c) {
     scoreEl.style.marginTop = "4px";
   }
 
-  // MAIN GRID
   const mainGrid = wrapper.createEl("div");
   mainGrid.style.display = "grid";
   mainGrid.style.gridTemplateColumns = "1fr 1fr 2fr";
@@ -584,7 +799,6 @@ if (!c) {
   rightCol.style.flexDirection = "column";
   rightCol.style.gap = "9px";
 
-  // SAVING THROWS
   const savesCard = leftCol.createEl("div");
   savesCard.style.padding = "8px";
   savesCard.style.border = "1px solid var(--background-modifier-border)";
@@ -596,15 +810,15 @@ if (!c) {
   savesTitle.style.fontSize = "1.1em";
 
   const saveData = [
-    ["STR", modFromScore(c.str ?? 10), c.str_save_prof ?? false],
-    ["DEX", modFromScore(c.dex ?? 10), c.dex_save_prof ?? false],
-    ["CON", modFromScore(c.con ?? 10), c.con_save_prof ?? false],
-    ["INT", modFromScore(c.int ?? 10), c.int_save_prof ?? false],
-    ["WIS", modFromScore(c.wis ?? 10), c.wis_save_prof ?? false],
-    ["CHA", modFromScore(c.cha ?? 10), c.cha_save_prof ?? false],
+    ["STR", c.str_save_prof ?? false],
+    ["DEX", c.dex_save_prof ?? false],
+    ["CON", c.con_save_prof ?? false],
+    ["INT", c.int_save_prof ?? false],
+    ["WIS", c.wis_save_prof ?? false],
+    ["CHA", c.cha_save_prof ?? false],
   ];
 
-  for (const [label, base, prof] of saveData) {
+  for (const [label, prof] of saveData) {
     const row = savesCard.createEl("div");
     row.style.display = "flex";
     row.style.justifyContent = "space-between";
@@ -613,13 +827,14 @@ if (!c) {
 
     row.createEl("div", { text: `${prof ? "●" : "○"} ${label}` });
 
+    const totalSaveBonus = getSavingThrowTotal(label, prof);
+
     const right = row.createEl("div", {
-      text: modString(profValue(prof, base, c.proficiency_bonus ?? 2))
+      text: modString(totalSaveBonus)
     });
     right.style.fontWeight = "600";
   }
 
-  // SKILLS
   const skillsCard = middleCol.createEl("div");
   skillsCard.style.padding = "6px";
   skillsCard.style.border = "1px solid var(--background-modifier-border)";
@@ -631,27 +846,27 @@ if (!c) {
   skillsTitle.style.fontSize = "1.1em";
 
   const skills = [
-    ["Acrobatics", modFromScore(c.dex ?? 10), c.acrobatics_prof ?? false],
-    ["Animal Handling", modFromScore(c.wis ?? 10), c.animal_handling_prof ?? false],
-    ["Arcana", modFromScore(c.int ?? 10), c.arcana_prof ?? false],
-    ["Athletics", modFromScore(c.str ?? 10), c.athletics_prof ?? false],
-    ["Deception", modFromScore(c.cha ?? 10), c.deception_prof ?? false],
-    ["History", modFromScore(c.int ?? 10), c.history_prof ?? false],
-    ["Insight", modFromScore(c.wis ?? 10), c.insight_prof ?? false],
-    ["Intimidation", modFromScore(c.cha ?? 10), c.intimidation_prof ?? false],
-    ["Investigation", modFromScore(c.int ?? 10), c.investigation_prof ?? false],
-    ["Medicine", modFromScore(c.wis ?? 10), c.medicine_prof ?? false],
-    ["Nature", modFromScore(c.int ?? 10), c.nature_prof ?? false],
-    ["Perception", modFromScore(c.wis ?? 10), c.perception_prof ?? false],
-    ["Performance", modFromScore(c.cha ?? 10), c.performance_prof ?? false],
-    ["Persuasion", modFromScore(c.cha ?? 10), c.persuasion_prof ?? false],
-    ["Religion", modFromScore(c.int ?? 10), c.religion_prof ?? false],
-    ["Sleight of Hand", modFromScore(c.dex ?? 10), c.sleight_of_hand_prof ?? false],
-    ["Stealth", modFromScore(c.dex ?? 10), c.stealth_prof ?? false],
-    ["Survival", modFromScore(c.wis ?? 10), c.survival_prof ?? false],
+    ["Acrobatics", "dex", c.acrobatics_prof ?? false],
+    ["Animal Handling", "wis", c.animal_handling_prof ?? false],
+    ["Arcana", "int", c.arcana_prof ?? false],
+    ["Athletics", "str", c.athletics_prof ?? false],
+    ["Deception", "cha", c.deception_prof ?? false],
+    ["History", "int", c.history_prof ?? false],
+    ["Insight", "wis", c.insight_prof ?? false],
+    ["Intimidation", "cha", c.intimidation_prof ?? false],
+    ["Investigation", "int", c.investigation_prof ?? false],
+    ["Medicine", "wis", c.medicine_prof ?? false],
+    ["Nature", "int", c.nature_prof ?? false],
+    ["Perception", "wis", c.perception_prof ?? false],
+    ["Performance", "cha", c.performance_prof ?? false],
+    ["Persuasion", "cha", c.persuasion_prof ?? false],
+    ["Religion", "int", c.religion_prof ?? false],
+    ["Sleight of Hand", "dex", c.sleight_of_hand_prof ?? false],
+    ["Stealth", "dex", c.stealth_prof ?? false],
+    ["Survival", "wis", c.survival_prof ?? false],
   ];
 
-  for (const [name, base, prof] of skills) {
+  for (const [name, ability, prof] of skills) {
     const row = skillsCard.createEl("div");
     row.style.display = "flex";
     row.style.justifyContent = "space-between";
@@ -660,13 +875,14 @@ if (!c) {
 
     row.createEl("div", { text: `${prof ? "●" : "○"} ${name}` });
 
+    const totalSkillValue = getSkillTotal(name, ability, prof);
+
     const value = row.createEl("div", {
-      text: modString(profValue(prof, base, c.proficiency_bonus ?? 2))
+      text: modString(totalSkillValue)
     });
     value.style.fontWeight = "600";
   }
 
-  // TAB CARD
   const tabCard = rightCol.createEl("div");
   tabCard.style.padding = "16px";
   tabCard.style.border = "1px solid var(--background-modifier-border)";
@@ -690,7 +906,7 @@ if (!c) {
   tabContent.style.borderRadius = "10px";
   tabContent.style.minHeight = "220px";
 
-  let activeTab = "actions";
+  let activeTab = window.__dndActiveTab ?? "actions";
   const tabButtons = {};
 
   function clearEl(el) {
@@ -705,7 +921,7 @@ if (!c) {
     title.style.fontSize = "1.05em";
     title.style.marginBottom = "10px";
 
-    const features = Array.isArray(c.features) ? c.features : [];
+    const features = getAllCharacterFeatures();
 
     if (features.length === 0) {
       tabContent.createEl("div", { text: "Keine Features eingetragen." });
@@ -735,7 +951,7 @@ if (!c) {
 
       const header = tableWrap.createEl("div");
       header.style.display = "grid";
-      header.style.gridTemplateColumns = "2fr 1fr 120px";
+      header.style.gridTemplateColumns = "2fr 1fr";
       header.style.gap = "12px";
       header.style.padding = "8px 10px";
       header.style.fontWeight = "700";
@@ -743,23 +959,17 @@ if (!c) {
 
       header.createEl("div", { text: "Name" });
       header.createEl("div", { text: "Source" });
-      header.createEl("div", { text: "Notes" });
 
-      const filtered = features
-        .filter(item => {
-          const name = String(item?.name ?? item ?? "").toLowerCase();
-          const source = String(item?.source ?? "").toLowerCase();
-          const notes = String(item?.notes ?? "").toLowerCase();
-          const query = String(filterText ?? "").trim().toLowerCase();
+      const query = String(filterText ?? "").trim().toLowerCase();
 
-          if (!query) return true;
-          return name.includes(query) || source.includes(query) || notes.includes(query);
-        })
-        .sort((a, b) => {
-          const nameA = typeof a === "string" ? a : String(a?.name ?? "");
-          const nameB = typeof b === "string" ? b : String(b?.name ?? "");
-          return nameA.localeCompare(nameB, "de");
-        });
+      const filtered = features.filter(featurePage => {
+        const name = String(featurePage.name ?? featurePage.file?.name ?? "").toLowerCase();
+        const source = String(featurePage.source ?? "").toLowerCase();
+        const notes = String(featurePage.notes ?? "").toLowerCase();
+
+        if (!query) return true;
+        return name.includes(query) || source.includes(query) || notes.includes(query);
+      });
 
       if (filtered.length === 0) {
         const empty = tableWrap.createEl("div", { text: "Keine passenden Features gefunden." });
@@ -768,68 +978,70 @@ if (!c) {
         return;
       }
 
-      for (const item of filtered) {
-        const featureName = typeof item === "string" ? item : String(item?.name ?? "-");
-        const featureSource = typeof item === "string" ? "-" : String(item?.source ?? "-");
-        const featureNotes = typeof item === "string" ? "" : String(item?.notes ?? "");
+      for (const featurePage of filtered) {
+        const featureName = String(featurePage.name ?? featurePage.file?.name ?? "-");
+        const featureSource = String(featurePage.source ?? "-");
+        const featureNotes = String(featurePage.notes ?? "");
+        const featureEnabled = featurePage.enabled !== false;
 
-        const row = tableWrap.createEl("div");
-        row.style.border = "1px solid var(--background-modifier-border)";
-        row.style.borderRadius = "8px";
-        row.style.overflow = "hidden";
+        const details = tableWrap.createEl("details");
+        details.style.border = "1px solid var(--background-modifier-border)";
+        details.style.borderRadius = "8px";
+        details.style.overflow = "hidden";
 
-        const summary = row.createEl("div");
+        const summary = details.createEl("summary");
         summary.style.display = "grid";
-        summary.style.gridTemplateColumns = "2fr 1fr 120px";
+        summary.style.gridTemplateColumns = "2fr 1fr";
         summary.style.gap = "12px";
         summary.style.padding = "10px";
         summary.style.alignItems = "center";
+        summary.style.cursor = "pointer";
+        summary.style.listStyle = "none";
 
-        summary.createEl("div", { text: featureName });
+        const leftWrap = summary.createEl("div");
+        leftWrap.createEl("div", { text: featureName });
+
+        const stateLine = leftWrap.createEl("div", {
+          text: featureEnabled ? "Enabled" : "Disabled"
+        });
+        stateLine.style.fontSize = "0.8em";
+        stateLine.style.opacity = "0.7";
+        stateLine.style.marginTop = "2px";
+
         summary.createEl("div", { text: featureSource });
 
-        const notesButtonWrap = summary.createEl("div");
-        const hasNotes = featureNotes.trim().length > 0;
+        const content = details.createEl("div");
+        content.style.padding = "10px";
+        content.style.borderTop = "1px solid var(--background-modifier-border)";
+        content.style.background = "var(--background-primary-alt)";
 
-        const notesButton = notesButtonWrap.createEl("button", {
-          text: hasNotes ? "Show" : "-"
-        });
-        notesButton.style.padding = "4px 8px";
-        notesButton.style.borderRadius = "6px";
-        notesButton.style.border = "1px solid var(--background-modifier-border)";
-        notesButton.style.cursor = hasNotes ? "pointer" : "default";
-        notesButton.style.background = "var(--background-secondary)";
-        notesButton.style.color = "var(--text-normal)";
+        function addInfoRow(parent, label, value) {
+          const row = parent.createEl("div");
+          row.style.display = "flex";
+          row.style.justifyContent = "space-between";
+          row.style.gap = "10px";
+          row.style.padding = "2px 0";
 
-        let notesOpen = false;
-        let notesEl = null;
+          const left = row.createEl("div", { text: label });
+          left.style.opacity = "0.7";
 
-        if (hasNotes) {
-          notesButton.addEventListener("click", () => {
-            notesOpen = !notesOpen;
-
-            if (notesOpen) {
-              notesButton.setText("Hide");
-
-              notesEl = row.createEl("div");
-              notesEl.style.padding = "0 10px 10px 10px";
-              notesEl.style.borderTop = "1px solid var(--background-modifier-border)";
-              notesEl.style.background = "var(--background-primary-alt)";
-
-              const notesTitle = notesEl.createEl("div", { text: "Notes" });
-              notesTitle.style.fontWeight = "600";
-              notesTitle.style.marginTop = "8px";
-              notesTitle.style.marginBottom = "4px";
-              notesTitle.style.opacity = "0.85";
-
-              notesEl.createEl("div", { text: featureNotes });
-            } else {
-              notesButton.setText("Show");
-              if (notesEl) notesEl.remove();
-              notesEl = null;
-            }
-          });
+          const right = row.createEl("div", { text: String(value ?? "-") });
+          right.style.fontWeight = "600";
+          right.style.textAlign = "right";
         }
+
+        addInfoRow(content, "Source", featureSource);
+        addInfoRow(content, "Enabled", featureEnabled ? "Yes" : "No");
+
+        const notesTitle = content.createEl("div", { text: "Notes" });
+        notesTitle.style.fontWeight = "600";
+        notesTitle.style.marginTop = "8px";
+        notesTitle.style.marginBottom = "6px";
+        notesTitle.style.opacity = "0.85";
+
+        content.createEl("div", {
+          text: featureNotes.trim().length > 0 ? featureNotes : "Keine Notizen eingetragen."
+        });
       }
     }
 
@@ -883,12 +1095,14 @@ if (!c) {
         return {
           entry,
           itemPage,
+          itemPath,
           name: String(itemPage.name ?? itemPage.file?.name ?? "Unknown Item"),
           notes: String(itemPage.notes ?? ""),
           weight: Number(itemPage.weight ?? 0),
           quantity: Number(entry?.quantity ?? 1),
           equipped: entry?.equipped === true,
-          equipment: itemPage?.equipment === true
+          equipment: itemPage?.equipment === true,
+          attuned: isItemAttuned(itemPath)
         };
       })
       .filter(x => x);
@@ -900,51 +1114,6 @@ if (!c) {
 
       if (!query) return true;
       return name.includes(query) || notes.includes(query);
-    }
-
-    function makeNotesButton(parent, row, item) {
-      const notesButtonWrap = parent.createEl("div");
-
-      const hasNotes = String(item?.notes ?? "").trim().length > 0;
-      const notesButton = notesButtonWrap.createEl("button", {
-        text: hasNotes ? "Show" : "-"
-      });
-      notesButton.style.padding = "4px 8px";
-      notesButton.style.borderRadius = "6px";
-      notesButton.style.border = "1px solid var(--background-modifier-border)";
-      notesButton.style.cursor = hasNotes ? "pointer" : "default";
-      notesButton.style.background = "var(--background-secondary)";
-      notesButton.style.color = "var(--text-normal)";
-
-      let notesOpen = false;
-      let notesEl = null;
-
-      if (hasNotes) {
-        notesButton.addEventListener("click", () => {
-          notesOpen = !notesOpen;
-
-          if (notesOpen) {
-            notesButton.setText("Hide");
-
-            notesEl = row.createEl("div");
-            notesEl.style.padding = "0 10px 10px 10px";
-            notesEl.style.borderTop = "1px solid var(--background-modifier-border)";
-            notesEl.style.background = "var(--background-primary-alt)";
-
-            const notesTitle = notesEl.createEl("div", { text: "Notes" });
-            notesTitle.style.fontWeight = "600";
-            notesTitle.style.marginTop = "8px";
-            notesTitle.style.marginBottom = "4px";
-            notesTitle.style.opacity = "0.85";
-
-            notesEl.createEl("div", { text: String(item?.notes ?? "") });
-          } else {
-            notesButton.setText("Show");
-            if (notesEl) notesEl.remove();
-            notesEl = null;
-          }
-        });
-      }
     }
 
     function createSectionTitle(parent, text) {
@@ -961,7 +1130,7 @@ if (!c) {
     function createTableHeader(parent) {
       const header = parent.createEl("div");
       header.style.display = "grid";
-      header.style.gridTemplateColumns = "2fr 80px 90px 120px";
+      header.style.gridTemplateColumns = "2fr 80px 90px";
       header.style.gap = "12px";
       header.style.padding = "8px 10px";
       header.style.fontWeight = "700";
@@ -970,31 +1139,78 @@ if (!c) {
       header.createEl("div", { text: "Name" });
       header.createEl("div", { text: "Qty" });
       header.createEl("div", { text: "Weight" });
-      header.createEl("div", { text: "Notes" });
     }
 
     function createInventoryRow(parent, item) {
       const rowWeight = item.weight * item.quantity;
 
-      const row = parent.createEl("div");
-      row.style.border = "1px solid var(--background-modifier-border)";
-      row.style.borderRadius = "8px";
-      row.style.overflow = "hidden";
+      const details = parent.createEl("details");
+      details.style.border = "1px solid var(--background-modifier-border)";
+      details.style.borderRadius = "8px";
+      details.style.overflow = "hidden";
 
-      const summary = row.createEl("div");
+      const summary = details.createEl("summary");
       summary.style.display = "grid";
-      summary.style.gridTemplateColumns = "2fr 80px 90px 120px";
+      summary.style.gridTemplateColumns = "2fr 80px 90px";
       summary.style.gap = "12px";
       summary.style.padding = "10px";
       summary.style.alignItems = "center";
+      summary.style.cursor = "pointer";
+      summary.style.listStyle = "none";
 
-      summary.createEl("div", { text: item.name });
+      const leftWrap = summary.createEl("div");
+      leftWrap.createEl("div", { text: item.name });
+
+      const statusBits = [];
+      if (item.equipped) statusBits.push("Equipped");
+      if (item.attuned) statusBits.push("Attuned");
+
+      if (statusBits.length > 0) {
+        const sub = leftWrap.createEl("div", { text: statusBits.join(" • ") });
+        sub.style.fontSize = "0.8em";
+        sub.style.opacity = "0.7";
+        sub.style.marginTop = "2px";
+      }
+
       summary.createEl("div", { text: String(item.quantity) });
       summary.createEl("div", { text: String(rowWeight) });
 
-      makeNotesButton(summary, row, item);
+      const content = details.createEl("div");
+      content.style.padding = "10px";
+      content.style.borderTop = "1px solid var(--background-modifier-border)";
+      content.style.background = "var(--background-primary-alt)";
 
-      return rowWeight;
+      function addInfoRow(parent, label, value) {
+        const row = parent.createEl("div");
+        row.style.display = "flex";
+        row.style.justifyContent = "space-between";
+        row.style.gap = "10px";
+        row.style.padding = "2px 0";
+
+        const left = row.createEl("div", { text: label });
+        left.style.opacity = "0.7";
+
+        const right = row.createEl("div", { text: String(value ?? "-") });
+        right.style.fontWeight = "600";
+        right.style.textAlign = "right";
+      }
+
+      addInfoRow(content, "Type", item.itemPage.type ?? "-");
+      addInfoRow(content, "Quantity", item.quantity);
+      addInfoRow(content, "Weight per Item", item.weight);
+      addInfoRow(content, "Total Weight", rowWeight);
+      addInfoRow(content, "Equipped", item.equipped ? "Yes" : "No");
+      addInfoRow(content, "Attuned", item.attuned ? "Yes" : "No");
+
+      const notesTitle = content.createEl("div", { text: "Notes" });
+      notesTitle.style.fontWeight = "600";
+      notesTitle.style.marginTop = "8px";
+      notesTitle.style.marginBottom = "6px";
+      notesTitle.style.opacity = "0.85";
+
+      content.createEl("div", {
+        text: item.notes.trim().length > 0 ? item.notes : "Keine Notizen eingetragen."
+      });
     }
 
     function renderInventoryRows(filterText = "") {
@@ -1018,7 +1234,7 @@ if (!c) {
         .filter(item => !(item.equipment === true && item.equipped === true))
         .sort((a, b) => a.name.localeCompare(b.name, "de"));
 
-      const maxCarryWeight = Number(c.str ?? 10) * 15;
+      const maxCarryWeight = getAbilityScore("str") * 15;
       let totalWeight = 0;
 
       if (equippedItems.length > 0) {
@@ -1026,7 +1242,8 @@ if (!c) {
         createTableHeader(tableWrap);
 
         for (const item of equippedItems) {
-          totalWeight += createInventoryRow(tableWrap, item);
+          totalWeight += item.weight * item.quantity;
+          createInventoryRow(tableWrap, item);
         }
       }
 
@@ -1035,13 +1252,14 @@ if (!c) {
         createTableHeader(tableWrap);
 
         for (const item of normalItems) {
-          totalWeight += createInventoryRow(tableWrap, item);
+          totalWeight += item.weight * item.quantity;
+          createInventoryRow(tableWrap, item);
         }
       }
 
       const totalRow = tableWrap.createEl("div");
       totalRow.style.display = "grid";
-      totalRow.style.gridTemplateColumns = "2fr 80px 90px 120px";
+      totalRow.style.gridTemplateColumns = "2fr 80px 90px";
       totalRow.style.gap = "12px";
       totalRow.style.padding = "10px";
       totalRow.style.marginTop = "6px";
@@ -1052,7 +1270,6 @@ if (!c) {
       totalRow.createEl("div", { text: "Total Weight" });
       totalRow.createEl("div", { text: "" });
       totalRow.createEl("div", { text: `${totalWeight} / ${maxCarryWeight}` });
-      totalRow.createEl("div", { text: "" });
     }
 
     renderInventoryRows();
@@ -1116,14 +1333,7 @@ if (!c) {
     }
 
     function getAbilityModForAction(statName) {
-      const key = String(statName ?? "").trim().toLowerCase();
-      if (key === "str") return modFromScore(c.str ?? 10);
-      if (key === "dex") return modFromScore(c.dex ?? 10);
-      if (key === "con") return modFromScore(c.con ?? 10);
-      if (key === "int") return modFromScore(c.int ?? 10);
-      if (key === "wis") return modFromScore(c.wis ?? 10);
-      if (key === "cha") return modFromScore(c.cha ?? 10);
-      return 0;
+      return getAbilityModByName(statName);
     }
 
     const actions = getAllCharacterActions()
@@ -1225,10 +1435,10 @@ if (!c) {
           leftSummary.style.fontSize = "1.05em";
 
           const sourceText =
-			  action.source_type === "item" && action.source_item_name
-			    ? `from ${action.source_item_name}`
-			    : "";
-              
+            action.source_type === "item" && action.source_item_name
+              ? `From ${action.source_item_name}`
+              : "";
+
           if (sourceText) {
             const sourceEl = leftWrap.createEl("div", { text: sourceText });
             sourceEl.style.fontSize = "0.8em";
@@ -1239,7 +1449,7 @@ if (!c) {
 
           const attackStat = action.attack_stat ?? action.damage_bonus_stat ?? "str";
           const attackMod = getAbilityModForAction(attackStat);
-          const profBonus = c.proficiency_bonus ?? 2;
+          const profBonus = getProficiencyBonus();
           const isProficient = action.proficient ?? true;
           const toHitBonus = attackMod + (isProficient ? profBonus : 0);
 
@@ -1283,11 +1493,12 @@ if (!c) {
           addInfoRow(infoBlock, "Shape", action.shape ?? "-");
 
           if (action.source_item_name) {
-            addInfoRow(infoBlock, "Item", action.source_item_name);
+            addInfoRow(infoBlock, "From", action.source_item_name);
           }
 
           if (action.range != null) addInfoRow(infoBlock, "Range", action.range);
           if (action.radius != null) addInfoRow(infoBlock, "Radius", action.radius);
+          if (action.damage_type != null) addInfoRow(infoBlock, "Damage Type", action.damage_type);
 
           let damageText = "-";
           if (action.damage) {
@@ -1300,10 +1511,9 @@ if (!c) {
             damageText = `${action.dice_count}d${action.dice_size}`;
             if (dmgBonus > 0) damageText += ` + ${dmgBonus}`;
             if (dmgBonus < 0) damageText += ` ${dmgBonus}`;
+            if (action.damage_type) damageText += ` ${action.damage_type}`;
           }
           addInfoRow(infoBlock, "Damage", damageText);
-          
-          if (action.damage_type != null) addInfoRow(infoBlock, "Damage Type", action.damage_type);
 
           if (String(action.mode ?? "").toLowerCase() === "attack") {
             addInfoRow(infoBlock, "To Hit", modString(toHitBonus));
@@ -1311,8 +1521,8 @@ if (!c) {
 
           if (action.save_ability) addInfoRow(infoBlock, "Save", String(action.save_ability).toUpperCase());
           if (action.resource_cost != null) addInfoRow(infoBlock, "Resource Cost", action.resource_cost);
-          if (action.requires_los != null) addInfoRow(infoBlock, "Requires LoS", action.requires_los ? "Yes" : "No");
-          if (action.friendly_fire != null) addInfoRow(infoBlock, "Friendly Fire", action.friendly_fire ? "Yes" : "No");
+          if (action.requires_los != null) addInfoRow(infoBlock, "Requires LoS", action.requires_los ? "Ja" : "Nein");
+          if (action.friendly_fire != null) addInfoRow(infoBlock, "Friendly Fire", action.friendly_fire ? "Ja" : "Nein");
 
           const effectBlock = card.createEl("div");
           effectBlock.style.marginTop = "8px";
@@ -1364,9 +1574,14 @@ if (!c) {
 
     const spellcastingAbility = String(c.spellcasting_ability ?? "int").toLowerCase();
     const spellMod = getAbilityModByName(spellcastingAbility);
-    const prof = c.proficiency_bonus ?? 2;
-    const spellAttackBonus = c.spell_attack_bonus ?? (spellMod + prof);
-    const spellSaveDC = c.spell_save_dc ?? (8 + spellMod + prof);
+    const prof = getProficiencyBonus();
+    const spellAttackBonus = c.spell_attack_bonus != null
+      ? applyItemEffects(Number(c.spell_attack_bonus), "spell_attack_bonus")
+      : applyItemEffects(spellMod + prof, "spell_attack_bonus");
+
+    const spellSaveDC = c.spell_save_dc != null
+      ? applyItemEffects(Number(c.spell_save_dc), "spell_save_dc")
+      : applyItemEffects(8 + spellMod + prof, "spell_save_dc");
 
     function addSummaryBox(parent, label, value) {
       const box = parent.createEl("div");
@@ -1476,32 +1691,34 @@ if (!c) {
 
       for (const level of sortedLevels) {
         const levelSpells = groupedSpells[level].filter(spell => {
-		  const name = String(spell.name ?? spell.file?.name ?? "").toLowerCase();
-		  const school = String(spell.school ?? "").toLowerCase();
-		  const notes = String(spell.notes ?? spell.effect ?? "").toLowerCase();
-		  const damageType = String(spell.damage_type ?? "").toLowerCase();
-		  const sourceItem = String(spell.source_item_name ?? "").toLowerCase();
+          const fields = [
+            String(spell.name ?? spell.file?.name ?? ""),
+            String(spell.school ?? ""),
+            String(spell.notes ?? spell.effect ?? ""),
+            String(spell.damage_type ?? ""),
+            String(spell.source_item_name ?? ""),
+            String(spell.casting_time ?? ""),
+            String(spell.action_type ?? ""),
+            String(spell.duration ?? ""),
+            String(spell.range ?? ""),
+            String(spell.save_ability ?? "")
+          ]
+            .join(" | ")
+            .toLowerCase();
 
-		  const castingTime = String(spell.casting_time ?? "").toLowerCase();
-		  const actionType = String(spell.action_type ?? "").toLowerCase();
-		  const duration = String(spell.duration ?? "").toLowerCase();
-		  const range = String(spell.range ?? "").toLowerCase();
-		  const saveAbility = String(spell.save_ability ?? "").toLowerCase();
+          const normalizedFields = fields
+            .replace(/[_-]/g, " ")
+            .replace(/\s+/g, " ");
 
-		  if (!query) return true;
-		  return (
-		    name.includes(query) ||
-		    school.includes(query) ||
-		    notes.includes(query) ||
-		    damageType.includes(query) ||
-		    sourceItem.includes(query) ||
-		    castingTime.includes(query) ||
-		    actionType.includes(query) ||
-		    duration.includes(query) ||
-		    range.includes(query) ||
-		    saveAbility.includes(query)
-		  );
-		});
+          const normalizedQuery = String(query ?? "")
+            .toLowerCase()
+            .replace(/[_-]/g, " ")
+            .replace(/\s+/g, " ")
+            .trim();
+
+          if (!normalizedQuery) return true;
+          return normalizedFields.includes(normalizedQuery);
+        });
 
         if (!levelSpells || levelSpells.length === 0) continue;
 
@@ -1544,6 +1761,8 @@ if (!c) {
 
           const sourceText =
             spell.source_type === "item" && spell.source_item_name
+              ? `From ${spell.source_item_name}`
+              : "";
 
           if (sourceText) {
             const sourceEl = leftWrap.createEl("div", { text: sourceText });
@@ -1567,13 +1786,13 @@ if (!c) {
           const infoBlock = card.createEl("div");
 
           if (spell.source_item_name) {
-            addInfoRow(infoBlock, "Item", spell.source_item_name);
+            addInfoRow(infoBlock, "From", spell.source_item_name);
           }
 
           addInfoRow(infoBlock, "Casting Time", spell.casting_time ?? spell.action_type ?? "-");
           addInfoRow(infoBlock, "Range", spell.range ?? "-");
           addInfoRow(infoBlock, "Duration", spell.duration ?? "-");
-          addInfoRow(infoBlock, "Concentration", spell.concentration ? "Yes" : "No");
+          addInfoRow(infoBlock, "Concentration", spell.concentration ? "Ja" : "Nein");
 
           if (spell.uses_attack_roll) {
             addInfoRow(infoBlock, "To Hit", modString(spellAttackBonus));
@@ -1624,6 +1843,294 @@ if (!c) {
 
     searchInput.addEventListener("input", () => {
       renderSpellRows(searchInput.value);
+    });
+  }
+
+  async function renderAttunement() {
+    clearEl(tabContent);
+
+    const title = tabContent.createEl("div", { text: "Attunement" });
+    title.style.fontWeight = "700";
+    title.style.fontSize = "1.05em";
+    title.style.marginBottom = "10px";
+
+    const characterFile = app.vault.getAbstractFileByPath(CHARACTER_PATH);
+
+    const attunementSlots = Number(c.attunement_slots ?? 3);
+    let attunedItems = Array.isArray(c.attuned_items) ? [...c.attuned_items] : [];
+
+    const inventoryEntries = Array.isArray(c.inventory) ? c.inventory : [];
+
+    const attunableItems = inventoryEntries
+      .map(entry => {
+        const itemPath = String(entry?.item ?? "").trim();
+        const itemPage = itemPath ? dv.page(itemPath) : null;
+        if (!itemPage) return null;
+
+        const requiresAttunement = itemPage.attunement === true;
+        if (!requiresAttunement) return null;
+
+        return {
+          itemPath,
+          itemPage,
+          name: String(itemPage.name ?? itemPage.file?.name ?? "Unknown Item"),
+          type: String(itemPage.type ?? "-"),
+          notes: String(itemPage.notes ?? ""),
+          quantity: Number(entry?.quantity ?? 1),
+          equipped: entry?.equipped === true,
+          isAttuned: attunedItems.includes(itemPath)
+        };
+      })
+      .filter(x => x);
+
+    const searchWrap = tabContent.createEl("div");
+    searchWrap.style.marginBottom = "10px";
+
+    const searchInput = searchWrap.createEl("input");
+    searchInput.type = "text";
+    searchInput.placeholder = "Search Attunement Items";
+    searchInput.style.width = "100%";
+    searchInput.style.padding = "8px 10px";
+    searchInput.style.border = "1px solid var(--background-modifier-border)";
+    searchInput.style.borderRadius = "8px";
+    searchInput.style.background = "var(--background-primary)";
+    searchInput.style.color = "var(--text-normal)";
+
+    const slotsWrap = tabContent.createEl("div");
+    slotsWrap.style.display = "flex";
+    slotsWrap.style.flexDirection = "column";
+    slotsWrap.style.gap = "8px";
+    slotsWrap.style.marginBottom = "8px";
+
+    const errorBox = tabContent.createEl("div");
+    errorBox.style.display = "none";
+    errorBox.style.marginBottom = "10px";
+    errorBox.style.padding = "10px";
+    errorBox.style.border = "1px solid var(--background-modifier-border)";
+    errorBox.style.borderRadius = "8px";
+    errorBox.style.background = "var(--background-secondary)";
+    errorBox.style.color = "var(--text-normal)";
+
+    const listWrap = tabContent.createEl("div");
+    listWrap.style.display = "flex";
+    listWrap.style.flexDirection = "column";
+    listWrap.style.gap = "8px";
+
+    function showError(message) {
+      errorBox.setText(message);
+      errorBox.style.display = "block";
+    }
+
+    function clearError() {
+      errorBox.style.display = "none";
+      errorBox.setText("");
+    }
+
+    async function saveAttunedItems() {
+      if (!characterFile) return;
+
+      await app.fileManager.processFrontMatter(characterFile, (fm) => {
+        fm.attuned_items = attunedItems;
+      });
+    }
+
+    function renderSlots() {
+      slotsWrap.innerHTML = "";
+
+      const slotsTitle = slotsWrap.createEl("div", {
+        text: `Attuned Items: ${attunedItems.length} / ${attunementSlots}`
+      });
+      slotsTitle.style.fontWeight = "700";
+      slotsTitle.style.fontSize = "1em";
+
+      const slotGrid = slotsWrap.createEl("div");
+      slotGrid.style.display = "grid";
+      slotGrid.style.gridTemplateColumns = "repeat(auto-fit, minmax(180px, 1fr))";
+      slotGrid.style.gap = "8px";
+
+      for (let i = 0; i < attunementSlots; i++) {
+        const card = slotGrid.createEl("div");
+        card.style.padding = "10px";
+        card.style.border = "1px solid var(--background-modifier-border)";
+        card.style.borderRadius = "10px";
+        card.style.background = "var(--background-primary-alt)";
+
+        const slotLabel = card.createEl("div", { text: `Slot ${i + 1}` });
+        slotLabel.style.fontSize = "0.8em";
+        slotLabel.style.opacity = "0.7";
+        slotLabel.style.marginBottom = "4px";
+
+        const itemPath = attunedItems[i];
+        if (itemPath) {
+          const itemPage = dv.page(itemPath);
+          card.createEl("div", {
+            text: itemPage?.name ?? itemPage?.file?.name ?? itemPath
+          });
+        } else {
+          const empty = card.createEl("div", { text: "Empty" });
+          empty.style.opacity = "0.6";
+        }
+      }
+    }
+
+    function addInfoRow(parent, label, value) {
+      const row = parent.createEl("div");
+      row.style.display = "flex";
+      row.style.justifyContent = "space-between";
+      row.style.gap = "10px";
+      row.style.padding = "2px 0";
+
+      const left = row.createEl("div", { text: label });
+      left.style.opacity = "0.7";
+
+      const right = row.createEl("div", { text: String(value ?? "-") });
+      right.style.fontWeight = "600";
+      right.style.textAlign = "right";
+    }
+
+    function createItemCard(parent, item) {
+      const details = parent.createEl("details");
+      details.style.border = "1px solid var(--background-modifier-border)";
+      details.style.borderRadius = "10px";
+      details.style.overflow = "hidden";
+
+      const summary = details.createEl("summary");
+      summary.style.display = "grid";
+      summary.style.gridTemplateColumns = "2fr 100px 120px";
+      summary.style.gap = "12px";
+      summary.style.padding = "10px";
+      summary.style.alignItems = "center";
+      summary.style.cursor = "pointer";
+      summary.style.listStyle = "none";
+
+      const leftWrap = summary.createEl("div");
+
+      const nameEl = leftWrap.createEl("div", { text: item.name });
+      nameEl.style.fontWeight = "600";
+
+      const typeEl = leftWrap.createEl("div", { text: item.type });
+      typeEl.style.fontSize = "0.8em";
+      typeEl.style.opacity = "0.7";
+      typeEl.style.marginTop = "2px";
+
+      const statusEl = summary.createEl("div", {
+        text: item.isAttuned ? "Attuned" : "Not Attuned"
+      });
+      statusEl.style.fontSize = "0.9em";
+      statusEl.style.opacity = "0.8";
+
+      const buttonWrap = summary.createEl("div");
+
+      const toggleBtn = buttonWrap.createEl("button", {
+        text: item.isAttuned ? "Unattune" : "Attune"
+      });
+      toggleBtn.style.padding = "6px 10px";
+      toggleBtn.style.borderRadius = "8px";
+      toggleBtn.style.border = "1px solid var(--background-modifier-border)";
+      toggleBtn.style.cursor = "pointer";
+      toggleBtn.style.background = "var(--background-secondary)";
+      toggleBtn.style.color = "var(--text-normal)";
+      toggleBtn.style.fontWeight = "600";
+
+      toggleBtn.addEventListener("click", async (evt) => {
+        evt.preventDefault();
+        evt.stopPropagation();
+        clearError();
+
+        const alreadyAttuned = attunedItems.includes(item.itemPath);
+
+        if (alreadyAttuned) {
+          attunedItems = attunedItems.filter(path => path !== item.itemPath);
+        } else {
+          if (attunedItems.length >= attunementSlots) {
+            showError("No free attunement slots available.");
+            return;
+          }
+          attunedItems.push(item.itemPath);
+        }
+
+        window.__dndActiveTab = "attunement";
+        activeTab = "attunement";
+        await saveAttunedItems();
+        await renderAttunement();
+      });
+
+      const content = details.createEl("div");
+      content.style.padding = "10px";
+      content.style.borderTop = "1px solid var(--background-modifier-border)";
+      content.style.background = "var(--background-primary-alt)";
+
+      addInfoRow(content, "Type", item.type);
+      addInfoRow(content, "Quantity", item.quantity);
+      addInfoRow(content, "Equipped", item.equipped ? "Yes" : "No");
+      addInfoRow(content, "Attunement", "Required");
+
+      const notesTitle = content.createEl("div", { text: "Notes" });
+      notesTitle.style.fontWeight = "600";
+      notesTitle.style.marginTop = "8px";
+      notesTitle.style.marginBottom = "4px";
+      notesTitle.style.opacity = "0.85";
+
+      content.createEl("div", {
+        text: item.notes.trim().length > 0 ? item.notes : "No notes entered."
+      });
+    }
+
+    function renderItemList(filterText = "") {
+      listWrap.innerHTML = "";
+
+      const query = String(filterText ?? "").trim().toLowerCase();
+
+      const filtered = attunableItems
+        .map(item => ({
+          ...item,
+          isAttuned: attunedItems.includes(item.itemPath)
+        }))
+        .filter(item => {
+          const haystack = [
+            item.name,
+            item.type,
+            item.notes
+          ].join(" ").toLowerCase();
+
+          return !query || haystack.includes(query);
+        })
+        .sort((a, b) => {
+          if (a.isAttuned !== b.isAttuned) return a.isAttuned ? -1 : 1;
+          return a.name.localeCompare(b.name, "de");
+        });
+
+      if (filtered.length === 0) {
+        const empty = listWrap.createEl("div", {
+          text: "No attunement-capable items found."
+        });
+        empty.style.padding = "10px";
+        empty.style.opacity = "0.7";
+        return;
+      }
+
+      const header = listWrap.createEl("div");
+      header.style.display = "grid";
+      header.style.gridTemplateColumns = "2fr 100px 120px";
+      header.style.gap = "12px";
+      header.style.padding = "8px 10px";
+      header.style.fontWeight = "700";
+      header.style.borderBottom = "1px solid var(--background-modifier-border)";
+
+      header.createEl("div", { text: "Item" });
+      header.createEl("div", { text: "Status" });
+      header.createEl("div", { text: "Action" });
+
+      for (const item of filtered) {
+        createItemCard(listWrap, item);
+      }
+    }
+
+    renderSlots();
+    renderItemList();
+
+    searchInput.addEventListener("input", () => {
+      renderItemList(searchInput.value);
     });
   }
 
@@ -1851,10 +2358,12 @@ if (!c) {
   }
 
   async function renderActiveTab() {
+    window.__dndActiveTab = activeTab;
     updateTabStyles();
 
     try {
       if (activeTab === "actions") renderActions();
+      if (activeTab === "attunement") await renderAttunement();
       if (activeTab === "features") renderFeatures();
       if (activeTab === "inventory") renderInventory();
       if (activeTab === "spells") renderSpells();
@@ -1874,12 +2383,14 @@ if (!c) {
     const btn = tabBar.createEl("button", { text: label });
     btn.addEventListener("click", () => {
       activeTab = key;
+      window.__dndActiveTab = key;
       renderActiveTab();
     });
     tabButtons[key] = btn;
   }
 
   makeTabButton("actions", "Actions");
+  makeTabButton("attunement", "Attunement");
   makeTabButton("spells", "Spells");
   makeTabButton("inventory", "Inventory");
   makeTabButton("features", "Features");
@@ -1897,16 +2408,9 @@ if (!c) {
   sensesTitle.style.marginBottom = "12px";
   sensesTitle.style.fontSize = "1.1em";
 
-  const profBonus = c.proficiency_bonus ?? 2;
-
-  const passivePerception =
-    10 + modFromScore(c.wis ?? 10) + (c.perception_prof ? profBonus : 0);
-
-  const passiveInvestigation =
-    10 + modFromScore(c.int ?? 10) + (c.investigation_prof ? profBonus : 0);
-
-  const passiveInsight =
-    10 + modFromScore(c.wis ?? 10) + (c.insight_prof ? profBonus : 0);
+  const passivePerception = 10 + getSkillTotal("Perception", "wis", c.perception_prof ?? false);
+  const passiveInvestigation = 10 + getSkillTotal("Investigation", "int", c.investigation_prof ?? false);
+  const passiveInsight = 10 + getSkillTotal("Insight", "wis", c.insight_prof ?? false);
 
   const senseStats = [
     ["Passive Perception", passivePerception],

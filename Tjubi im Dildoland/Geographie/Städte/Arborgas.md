@@ -32,6 +32,7 @@ font-family: Georgia, serif;
 line-height: 1.7;
 box-sizing: border-box;
 ">
+<p style="text-align: center;"><img src="1 Assets/Bilder/wappen.png" alt="Wappen" style="max-width: 200px; height: auto;"></p>
 <p><strong>Mitbürger von Arborgas, unserer Stadt des Friedens</strong></p>
 <p>Seit Jahrhunderten sind wir schon in unserem Käfig gefangen und unsere Platznot wird immer größer, auch Nahrungsknappheit wird ein immer dringenderes Problem, das bewältigt werden muss. Doch noch ist die Hoffnung nicht aufzugeben! Die Monstersichtungen werden immer seltener, bereits zwei Jahre sind seit dem letzten Kontakt vergangen!</p>
 <div style="text-align: center;"><p><i>Es ist an der Zeit, unsere Welt zu erkunden!</i></p>
