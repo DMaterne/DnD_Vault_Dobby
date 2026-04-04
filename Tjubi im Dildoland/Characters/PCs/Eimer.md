@@ -1225,7 +1225,9 @@ if (!c) {
           leftSummary.style.fontSize = "1.05em";
 
           const sourceText =
-            action.source_type === "item" && action.source_item_name
+			  action.source_type === "item" && action.source_item_name
+			    ? `from ${action.source_item_name}`
+			    : "";
               
           if (sourceText) {
             const sourceEl = leftWrap.createEl("div", { text: sourceText });
@@ -1286,7 +1288,6 @@ if (!c) {
 
           if (action.range != null) addInfoRow(infoBlock, "Range", action.range);
           if (action.radius != null) addInfoRow(infoBlock, "Radius", action.radius);
-          if (action.damage_type != null) addInfoRow(infoBlock, "Damage Type", action.damage_type);
 
           let damageText = "-";
           if (action.damage) {
@@ -1299,9 +1300,10 @@ if (!c) {
             damageText = `${action.dice_count}d${action.dice_size}`;
             if (dmgBonus > 0) damageText += ` + ${dmgBonus}`;
             if (dmgBonus < 0) damageText += ` ${dmgBonus}`;
-            if (action.damage_type) damageText += ` ${action.damage_type}`;
           }
           addInfoRow(infoBlock, "Damage", damageText);
+          
+          if (action.damage_type != null) addInfoRow(infoBlock, "Damage Type", action.damage_type);
 
           if (String(action.mode ?? "").toLowerCase() === "attack") {
             addInfoRow(infoBlock, "To Hit", modString(toHitBonus));
@@ -1309,8 +1311,8 @@ if (!c) {
 
           if (action.save_ability) addInfoRow(infoBlock, "Save", String(action.save_ability).toUpperCase());
           if (action.resource_cost != null) addInfoRow(infoBlock, "Resource Cost", action.resource_cost);
-          if (action.requires_los != null) addInfoRow(infoBlock, "Requires LoS", action.requires_los ? "Ja" : "Nein");
-          if (action.friendly_fire != null) addInfoRow(infoBlock, "Friendly Fire", action.friendly_fire ? "Ja" : "Nein");
+          if (action.requires_los != null) addInfoRow(infoBlock, "Requires LoS", action.requires_los ? "Yes" : "No");
+          if (action.friendly_fire != null) addInfoRow(infoBlock, "Friendly Fire", action.friendly_fire ? "Yes" : "No");
 
           const effectBlock = card.createEl("div");
           effectBlock.style.marginTop = "8px";
@@ -1474,21 +1476,32 @@ if (!c) {
 
       for (const level of sortedLevels) {
         const levelSpells = groupedSpells[level].filter(spell => {
-          const name = String(spell.name ?? spell.file?.name ?? "").toLowerCase();
-          const school = String(spell.school ?? "").toLowerCase();
-          const notes = String(spell.notes ?? spell.effect ?? "").toLowerCase();
-          const damageType = String(spell.damage_type ?? "").toLowerCase();
-          const sourceItem = String(spell.source_item_name ?? "").toLowerCase();
+		  const name = String(spell.name ?? spell.file?.name ?? "").toLowerCase();
+		  const school = String(spell.school ?? "").toLowerCase();
+		  const notes = String(spell.notes ?? spell.effect ?? "").toLowerCase();
+		  const damageType = String(spell.damage_type ?? "").toLowerCase();
+		  const sourceItem = String(spell.source_item_name ?? "").toLowerCase();
 
-          if (!query) return true;
-          return (
-            name.includes(query) ||
-            school.includes(query) ||
-            notes.includes(query) ||
-            damageType.includes(query) ||
-            sourceItem.includes(query)
-          );
-        });
+		  const castingTime = String(spell.casting_time ?? "").toLowerCase();
+		  const actionType = String(spell.action_type ?? "").toLowerCase();
+		  const duration = String(spell.duration ?? "").toLowerCase();
+		  const range = String(spell.range ?? "").toLowerCase();
+		  const saveAbility = String(spell.save_ability ?? "").toLowerCase();
+
+		  if (!query) return true;
+		  return (
+		    name.includes(query) ||
+		    school.includes(query) ||
+		    notes.includes(query) ||
+		    damageType.includes(query) ||
+		    sourceItem.includes(query) ||
+		    castingTime.includes(query) ||
+		    actionType.includes(query) ||
+		    duration.includes(query) ||
+		    range.includes(query) ||
+		    saveAbility.includes(query)
+		  );
+		});
 
         if (!levelSpells || levelSpells.length === 0) continue;
 
@@ -1560,7 +1573,7 @@ if (!c) {
           addInfoRow(infoBlock, "Casting Time", spell.casting_time ?? spell.action_type ?? "-");
           addInfoRow(infoBlock, "Range", spell.range ?? "-");
           addInfoRow(infoBlock, "Duration", spell.duration ?? "-");
-          addInfoRow(infoBlock, "Concentration", spell.concentration ? "Ja" : "Nein");
+          addInfoRow(infoBlock, "Concentration", spell.concentration ? "Yes" : "No");
 
           if (spell.uses_attack_roll) {
             addInfoRow(infoBlock, "To Hit", modString(spellAttackBonus));

@@ -75,13 +75,13 @@ inventory:
 
   - item: Public/3 Backend/Items/Thieves Tools.md
     quantity: 1
-    equipped: false
+    equipped: true
 
   - item: Public/3 Backend/Items/Crowbar.md
     quantity: 1
     equipped: false
 
-  - item: Public/3 Backend/Items/Hammer Tool.md
+  - item: Public/3 Backend/Items/Hammer.md
     quantity: 1
     equipped: false
 
@@ -113,7 +113,7 @@ inventory:
     quantity: 1
     equipped: false
   
-  - name: Backpack
+  - item: Public/3 Backend/Items/Backpack.md
     quantity: 1
     equipped: true
 
@@ -133,7 +133,7 @@ spells:
   - Public/3 Backend/Spells/Thunderclap.md
   - Public/3 Backend/Spells/Mending.md
   - Public/3 Backend/Spells/Cure Wounds.md
-  - Public/3 Backend/Actions/Feather Fall.md
+  - Public/3 Backend/Spells/Feather Fall.md
 spellcasting_ability: int
 ---
 

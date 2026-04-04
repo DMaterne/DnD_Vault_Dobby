@@ -7,7 +7,7 @@ shape: touch
 radius: 0
 level: 1
 school: Evocation
-casting_time: 1 Reaction
+casting_time: 1 Action
 range: Touch
 duration: Instantaneous
 concentration: false

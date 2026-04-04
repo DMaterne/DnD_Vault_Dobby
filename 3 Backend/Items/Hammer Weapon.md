@@ -2,8 +2,8 @@
 name: Hammer
 type: tool
 weight: 3
-equipment: false
-notes: This one-handed hammer with an iron head is useful for pounding pitons into a wall.
+equipment: true
+notes: Proficiency with a Hammer allows you to add your proficiency bonus to the attack roll for any attack you make with it.
 
 actions:
   - name: Hammer
@@ -11,7 +11,7 @@ actions:
     action_type: action
     mode: attack
     shape: melee_single
-    range: 1
+    range: 5
     targets: 1
     attacks: 2
     dice_count: 1
@@ -27,6 +27,6 @@ actions:
     utility_formula: 0
     resource_cost: 0
     resource_formula: "0"
-    notes: Hammer Attack
+    notes: Proficiency with a Hammer allows you to add your proficiency bonus to the attack roll for any attack you make with it.
 ---
 # Hammer
