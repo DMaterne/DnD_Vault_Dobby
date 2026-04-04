@@ -101,12 +101,13 @@ inventory:
   - item: Public/3 Backend/Items/Backpack.md
     quantity: 1
     equipped: true
+  - item: Ring of Protection
+    quantity: 4
+    equipped: true
 features:
   - Public/3 Backend/Features/Integrated Protection.md
   - Public/3 Backend/Features/Magical Tinkering.md
-
 hp_temp: 0
-
 actions:
   - Public/3 Backend/Actions/Opportunity Attack.md
   - Public/3 Backend/Actions/Sickle.md
@@ -120,7 +121,8 @@ spells:
   - Public/3 Backend/Spells/Feather Fall.md
 spellcasting_ability: int
 attunement_slots: 3
-attuned_items: []
+attuned_items:
+  - Public/3 Backend/Items/Ring of Protection.md
 ---
 
 # Notes 

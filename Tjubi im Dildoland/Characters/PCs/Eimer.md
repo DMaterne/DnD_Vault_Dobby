@@ -408,6 +408,36 @@ function getSkillTotal(label, abilityName, isProficient) {
   return total;
 }
 
+async function toggleInventoryEquip(itemPathOrName) {
+  const characterFile = app.vault.getAbstractFileByPath(CHARACTER_PATH);
+  if (!characterFile) return;
+
+  const resolvedItemPath =
+    resolvePathRef(itemPathOrName, ITEMS_FOLDER) ?? String(itemPathOrName ?? "").trim();
+
+  const itemPage = dv.page(resolvedItemPath);
+  if (!itemPage) return;
+
+  if (itemPage.equipment !== true) {
+    new Notice("Dieses Item ist kein Equipment.");
+    return;
+  }
+
+  await app.fileManager.processFrontMatter(characterFile, (fm) => {
+    if (!Array.isArray(fm.inventory)) return;
+
+    const entry = fm.inventory.find(invEntry => {
+      const invPath =
+        resolvePathRef(invEntry?.item, ITEMS_FOLDER) ?? String(invEntry?.item ?? "").trim();
+      return invPath === resolvedItemPath;
+    });
+
+    if (!entry) return;
+
+    entry.equipped = entry.equipped === true ? false : true;
+  });
+}
+
 function getAllCharacterActions() {
   const collectedActions = [];
 
@@ -1332,6 +1362,32 @@ if (!c) {
       content.createEl("div", {
         text: item.notes.trim().length > 0 ? item.notes : "Keine Notizen eingetragen."
       });
+
+      if (item.itemPage.equipment === true) {
+        const equipBtn = content.createEl("button", {
+          text: item.equipped ? "Unequip" : "Equip"
+        });
+
+        equipBtn.style.marginTop = "10px";
+        equipBtn.style.padding = "6px 10px";
+        equipBtn.style.borderRadius = "8px";
+        equipBtn.style.border = "1px solid var(--background-modifier-border)";
+        equipBtn.style.cursor = "pointer";
+        equipBtn.style.background = "var(--background-secondary)";
+        equipBtn.style.color = "var(--text-normal)";
+        equipBtn.style.fontWeight = "600";
+
+        equipBtn.addEventListener("click", async (evt) => {
+          evt.preventDefault();
+          evt.stopPropagation();
+
+          await toggleInventoryEquip(item.itemPath);
+
+          window.__dndActiveTab = "inventory";
+          activeTab = "inventory";
+          await renderInventory();
+        });
+      }
     }
 
     function renderInventoryRows(filterText = "") {
