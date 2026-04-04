@@ -1,7 +1,8 @@
-```dataviewjs  
+```dataviewjs
 const CHARACTER_PATH = "Public/3 Backend/EIMER.md";
-const ACTIONS_FOLDER = "Public/Actions/";
-const SPELLS_FOLDER = "Public/Spells/";
+const ACTIONS_FOLDER = "Public/3 Backend/Actions/";
+const SPELLS_FOLDER = "Public/3 Backend/Spells/";
+const FEATURES_FOLDER = "Public/3 Backend/Features/";
 
 const c = dv.page(CHARACTER_PATH);
 
@@ -50,13 +51,105 @@ function isItemEquipped(entry) {
 }
 
 function isItemAttuned(itemPath) {
-  const attunedItems = getAttunedItemPaths();
-  return attunedItems.includes(itemPath);
+  return getAttunedItemPaths().includes(itemPath);
 }
 
-function getActiveItemEffects() {
-  const inventoryEntries = Array.isArray(c.inventory) ? c.inventory : [];
+function getAbilityScoreBase(name) {
+  const key = String(name ?? "").trim().toLowerCase();
+
+  if (key === "str") return Number(c.str ?? 10);
+  if (key === "dex") return Number(c.dex ?? 10);
+  if (key === "con") return Number(c.con ?? 10);
+  if (key === "int") return Number(c.int ?? 10);
+  if (key === "wis") return Number(c.wis ?? 10);
+  if (key === "cha") return Number(c.cha ?? 10);
+
+  return 10;
+}
+
+function getFormulaContext() {
+  return {
+    str: getAbilityScoreBase("str"),
+    dex: getAbilityScoreBase("dex"),
+    con: getAbilityScoreBase("con"),
+    int: getAbilityScoreBase("int"),
+    wis: getAbilityScoreBase("wis"),
+    cha: getAbilityScoreBase("cha"),
+
+    str_mod: modFromScore(getAbilityScoreBase("str")),
+    dex_mod: modFromScore(getAbilityScoreBase("dex")),
+    con_mod: modFromScore(getAbilityScoreBase("con")),
+    int_mod: modFromScore(getAbilityScoreBase("int")),
+    wis_mod: modFromScore(getAbilityScoreBase("wis")),
+    cha_mod: modFromScore(getAbilityScoreBase("cha")),
+
+    prof: Number(c.proficiency_bonus ?? 2)
+  };
+}
+
+function evaluateBonusFormula(formula) {
+  const expr = String(formula ?? "").trim();
+  if (!expr) return null;
+
+  const ctx = getFormulaContext();
+
+  let safeExpr = expr;
+
+  const replacements = [
+    ["str_mod", ctx.str_mod],
+    ["dex_mod", ctx.dex_mod],
+    ["con_mod", ctx.con_mod],
+    ["int_mod", ctx.int_mod],
+    ["wis_mod", ctx.wis_mod],
+    ["cha_mod", ctx.cha_mod],
+    ["str", ctx.str],
+    ["dex", ctx.dex],
+    ["con", ctx.con],
+    ["int", ctx.int],
+    ["wis", ctx.wis],
+    ["cha", ctx.cha],
+    ["prof", ctx.prof]
+  ];
+
+  for (const [key, value] of replacements) {
+    safeExpr = safeExpr.replace(new RegExp(`\\b${key}\\b`, "g"), String(value));
+  }
+
+  safeExpr = safeExpr.replace(/\bmin\s*\(/g, "Math.min(");
+  safeExpr = safeExpr.replace(/\bmax\s*\(/g, "Math.max(");
+
+  const stripped = safeExpr.replace(/Math\.(min|max)/g, "");
+  if (!/^[0-9+\-*/().,\s]*$/.test(stripped)) {
+    return null;
+  }
+
+  try {
+    const result = Function(`"use strict"; return (${safeExpr});`)();
+    return Number.isFinite(result) ? Number(result) : null;
+  } catch {
+    return null;
+  }
+}
+
+function getAllCharacterFeatures() {
+  const featureRefs = Array.isArray(c.features) ? c.features : [];
+
+  return featureRefs
+    .map(path => dv.page(String(path)))
+    .filter(p => p)
+    .filter(p => isInFolder(String(p.file?.path ?? ""), FEATURES_FOLDER))
+    .sort((a, b) => {
+      const nameA = String(a.name ?? a.file?.name ?? "");
+      const nameB = String(b.name ?? b.file?.name ?? "");
+      return nameA.localeCompare(nameB, "de");
+    });
+}
+
+function getActiveBonusEffects() {
   const activeEffects = [];
+
+  // ITEM-BONI
+  const inventoryEntries = Array.isArray(c.inventory) ? c.inventory : [];
 
   for (const entry of inventoryEntries) {
     const itemPath = String(entry?.item ?? "").trim();
@@ -82,8 +175,14 @@ function getActiveItemEffects() {
       const hasSetValue = rawSetValue !== undefined && rawSetValue !== null && rawSetValue !== "";
       const setValue = hasSetValue ? Number(rawSetValue) : null;
 
+      const formula = String(bonus.formula ?? "").trim();
+
       if (!type) continue;
-      if (!Number.isFinite(value) && !(hasSetValue && Number.isFinite(setValue))) continue;
+      if (
+        !Number.isFinite(value) &&
+        !(hasSetValue && Number.isFinite(setValue)) &&
+        !formula
+      ) continue;
 
       let isActive = false;
 
@@ -97,9 +196,60 @@ function getActiveItemEffects() {
         type,
         value: Number.isFinite(value) ? value : 0,
         set_value: hasSetValue && Number.isFinite(setValue) ? setValue : null,
+        formula: formula || null,
         active_when: activeWhen,
-        item_name: itemPage.name ?? itemPage.file?.name ?? "Unknown Item",
-        item_path: itemPath
+        source_kind: "item",
+        source_name: itemPage.name ?? itemPage.file?.name ?? "Unknown Item",
+        source_path: itemPath
+      });
+    }
+  }
+
+  // FEATURE-BONI
+  const features = getAllCharacterFeatures();
+
+  for (const featurePage of features) {
+    const bonuses = Array.isArray(featurePage.bonuses) ? featurePage.bonuses : [];
+    if (bonuses.length === 0) continue;
+
+    const enabled = featurePage.enabled !== false;
+
+    for (const bonus of bonuses) {
+      if (!bonus || typeof bonus !== "object") continue;
+
+      const activeWhen = String(bonus.active_when ?? "enabled").trim().toLowerCase();
+      const type = String(bonus.type ?? "").trim().toLowerCase();
+      const value = Number(bonus.value ?? 0);
+
+      const rawSetValue = bonus.set_value;
+      const hasSetValue = rawSetValue !== undefined && rawSetValue !== null && rawSetValue !== "";
+      const setValue = hasSetValue ? Number(rawSetValue) : null;
+
+      const formula = String(bonus.formula ?? "").trim();
+
+      if (!type) continue;
+      if (
+        !Number.isFinite(value) &&
+        !(hasSetValue && Number.isFinite(setValue)) &&
+        !formula
+      ) continue;
+
+      let isActive = false;
+
+      if (activeWhen === "always") isActive = true;
+      if (activeWhen === "enabled" && enabled) isActive = true;
+
+      if (!isActive) continue;
+
+      activeEffects.push({
+        type,
+        value: Number.isFinite(value) ? value : 0,
+        set_value: hasSetValue && Number.isFinite(setValue) ? setValue : null,
+        formula: formula || null,
+        active_when: activeWhen,
+        source_kind: "feature",
+        source_name: featurePage.name ?? featurePage.file?.name ?? "Unnamed Feature",
+        source_path: featurePage.file?.path ?? null
       });
     }
   }
@@ -109,30 +259,36 @@ function getActiveItemEffects() {
 
 function getBonusTotal(type) {
   const targetType = String(type ?? "").trim().toLowerCase();
-  return getActiveItemEffects()
+  return getActiveBonusEffects()
     .filter(b => b.type === targetType)
     .reduce((sum, b) => sum + Number(b.value ?? 0), 0);
 }
 
-function getSetValue(type) {
-  const targetType = String(type ?? "").trim().toLowerCase();
-  const matching = getActiveItemEffects()
-    .filter(b => b.type === targetType && b.set_value != null && Number.isFinite(Number(b.set_value)))
-    .map(b => Number(b.set_value));
-
-  if (matching.length === 0) return null;
-  return Math.max(...matching);
-}
-
 function applyItemEffects(baseValue, type) {
   let result = Number(baseValue ?? 0);
+  const targetType = String(type ?? "").trim().toLowerCase();
 
-  const setValue = getSetValue(type);
-  if (setValue != null) {
-    result = setValue;
+  const matchingEffects = getActiveBonusEffects().filter(b => b.type === targetType);
+
+  const setValues = matchingEffects
+    .filter(b => b.set_value != null && Number.isFinite(Number(b.set_value)))
+    .map(b => Number(b.set_value));
+
+  const formulaValues = matchingEffects
+    .filter(b => b.formula)
+    .map(b => evaluateBonusFormula(b.formula))
+    .filter(v => v != null && Number.isFinite(v));
+
+  if (setValues.length > 0 || formulaValues.length > 0) {
+    const candidates = [...setValues, ...formulaValues];
+    result = Math.max(...candidates);
   }
 
-  result += getBonusTotal(type);
+  const additiveBonus = matchingEffects.reduce((sum, b) => {
+    return sum + Number(b.value ?? 0);
+  }, 0);
+
+  result += additiveBonus;
   return result;
 }
 
@@ -862,7 +1018,7 @@ if (!c) {
     title.style.fontSize = "1.05em";
     title.style.marginBottom = "10px";
 
-    const features = Array.isArray(c.features) ? c.features : [];
+    const features = getAllCharacterFeatures();
 
     if (features.length === 0) {
       tabContent.createEl("div", { text: "Keine Features eingetragen." });
@@ -901,21 +1057,16 @@ if (!c) {
       header.createEl("div", { text: "Name" });
       header.createEl("div", { text: "Source" });
 
-      const filtered = features
-        .filter(item => {
-          const name = String(item?.name ?? item ?? "").toLowerCase();
-          const source = String(item?.source ?? "").toLowerCase();
-          const notes = String(item?.notes ?? "").toLowerCase();
-          const query = String(filterText ?? "").trim().toLowerCase();
+      const query = String(filterText ?? "").trim().toLowerCase();
 
-          if (!query) return true;
-          return name.includes(query) || source.includes(query) || notes.includes(query);
-        })
-        .sort((a, b) => {
-          const nameA = typeof a === "string" ? a : String(a?.name ?? "");
-          const nameB = typeof b === "string" ? b : String(b?.name ?? "");
-          return nameA.localeCompare(nameB, "de");
-        });
+      const filtered = features.filter(featurePage => {
+        const name = String(featurePage.name ?? featurePage.file?.name ?? "").toLowerCase();
+        const source = String(featurePage.source ?? "").toLowerCase();
+        const notes = String(featurePage.notes ?? "").toLowerCase();
+
+        if (!query) return true;
+        return name.includes(query) || source.includes(query) || notes.includes(query);
+      });
 
       if (filtered.length === 0) {
         const empty = tableWrap.createEl("div", { text: "Keine passenden Features gefunden." });
@@ -924,10 +1075,11 @@ if (!c) {
         return;
       }
 
-      for (const item of filtered) {
-        const featureName = typeof item === "string" ? item : String(item?.name ?? "-");
-        const featureSource = typeof item === "string" ? "-" : String(item?.source ?? "-");
-        const featureNotes = typeof item === "string" ? "" : String(item?.notes ?? "");
+      for (const featurePage of filtered) {
+        const featureName = String(featurePage.name ?? featurePage.file?.name ?? "-");
+        const featureSource = String(featurePage.source ?? "-");
+        const featureNotes = String(featurePage.notes ?? "");
+        const featureEnabled = featurePage.enabled !== false;
 
         const details = tableWrap.createEl("details");
         details.style.border = "1px solid var(--background-modifier-border)";
@@ -943,7 +1095,16 @@ if (!c) {
         summary.style.cursor = "pointer";
         summary.style.listStyle = "none";
 
-        summary.createEl("div", { text: featureName });
+        const leftWrap = summary.createEl("div");
+        leftWrap.createEl("div", { text: featureName });
+
+        const stateLine = leftWrap.createEl("div", {
+          text: featureEnabled ? "Enabled" : "Disabled"
+        });
+        stateLine.style.fontSize = "0.8em";
+        stateLine.style.opacity = "0.7";
+        stateLine.style.marginTop = "2px";
+
         summary.createEl("div", { text: featureSource });
 
         const content = details.createEl("div");
@@ -951,8 +1112,27 @@ if (!c) {
         content.style.borderTop = "1px solid var(--background-modifier-border)";
         content.style.background = "var(--background-primary-alt)";
 
+        function addInfoRow(parent, label, value) {
+          const row = parent.createEl("div");
+          row.style.display = "flex";
+          row.style.justifyContent = "space-between";
+          row.style.gap = "10px";
+          row.style.padding = "2px 0";
+
+          const left = row.createEl("div", { text: label });
+          left.style.opacity = "0.7";
+
+          const right = row.createEl("div", { text: String(value ?? "-") });
+          right.style.fontWeight = "600";
+          right.style.textAlign = "right";
+        }
+
+        addInfoRow(content, "Source", featureSource);
+        addInfoRow(content, "Enabled", featureEnabled ? "Yes" : "No");
+
         const notesTitle = content.createEl("div", { text: "Notes" });
         notesTitle.style.fontWeight = "600";
+        notesTitle.style.marginTop = "8px";
         notesTitle.style.marginBottom = "6px";
         notesTitle.style.opacity = "0.85";
 

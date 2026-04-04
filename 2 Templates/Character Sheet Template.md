@@ -1,4 +1,4 @@
-```dataviewjs  
+```dataviewjs
 const CHARACTER_PATH = "Public/3 Backend/EIMER.md";
 const ACTIONS_FOLDER = "Public/3 Backend/Actions/";
 const SPELLS_FOLDER = "Public/3 Backend/Spells/";
@@ -54,6 +54,83 @@ function isItemAttuned(itemPath) {
   return getAttunedItemPaths().includes(itemPath);
 }
 
+function getAbilityScoreBase(name) {
+  const key = String(name ?? "").trim().toLowerCase();
+
+  if (key === "str") return Number(c.str ?? 10);
+  if (key === "dex") return Number(c.dex ?? 10);
+  if (key === "con") return Number(c.con ?? 10);
+  if (key === "int") return Number(c.int ?? 10);
+  if (key === "wis") return Number(c.wis ?? 10);
+  if (key === "cha") return Number(c.cha ?? 10);
+
+  return 10;
+}
+
+function getFormulaContext() {
+  return {
+    str: getAbilityScoreBase("str"),
+    dex: getAbilityScoreBase("dex"),
+    con: getAbilityScoreBase("con"),
+    int: getAbilityScoreBase("int"),
+    wis: getAbilityScoreBase("wis"),
+    cha: getAbilityScoreBase("cha"),
+
+    str_mod: modFromScore(getAbilityScoreBase("str")),
+    dex_mod: modFromScore(getAbilityScoreBase("dex")),
+    con_mod: modFromScore(getAbilityScoreBase("con")),
+    int_mod: modFromScore(getAbilityScoreBase("int")),
+    wis_mod: modFromScore(getAbilityScoreBase("wis")),
+    cha_mod: modFromScore(getAbilityScoreBase("cha")),
+
+    prof: Number(c.proficiency_bonus ?? 2)
+  };
+}
+
+function evaluateBonusFormula(formula) {
+  const expr = String(formula ?? "").trim();
+  if (!expr) return null;
+
+  const ctx = getFormulaContext();
+
+  let safeExpr = expr;
+
+  const replacements = [
+    ["str_mod", ctx.str_mod],
+    ["dex_mod", ctx.dex_mod],
+    ["con_mod", ctx.con_mod],
+    ["int_mod", ctx.int_mod],
+    ["wis_mod", ctx.wis_mod],
+    ["cha_mod", ctx.cha_mod],
+    ["str", ctx.str],
+    ["dex", ctx.dex],
+    ["con", ctx.con],
+    ["int", ctx.int],
+    ["wis", ctx.wis],
+    ["cha", ctx.cha],
+    ["prof", ctx.prof]
+  ];
+
+  for (const [key, value] of replacements) {
+    safeExpr = safeExpr.replace(new RegExp(`\\b${key}\\b`, "g"), String(value));
+  }
+
+  safeExpr = safeExpr.replace(/\bmin\s*\(/g, "Math.min(");
+  safeExpr = safeExpr.replace(/\bmax\s*\(/g, "Math.max(");
+
+  const stripped = safeExpr.replace(/Math\.(min|max)/g, "");
+  if (!/^[0-9+\-*/().,\s]*$/.test(stripped)) {
+    return null;
+  }
+
+  try {
+    const result = Function(`"use strict"; return (${safeExpr});`)();
+    return Number.isFinite(result) ? Number(result) : null;
+  } catch {
+    return null;
+  }
+}
+
 function getAllCharacterFeatures() {
   const featureRefs = Array.isArray(c.features) ? c.features : [];
 
@@ -98,8 +175,14 @@ function getActiveBonusEffects() {
       const hasSetValue = rawSetValue !== undefined && rawSetValue !== null && rawSetValue !== "";
       const setValue = hasSetValue ? Number(rawSetValue) : null;
 
+      const formula = String(bonus.formula ?? "").trim();
+
       if (!type) continue;
-      if (!Number.isFinite(value) && !(hasSetValue && Number.isFinite(setValue))) continue;
+      if (
+        !Number.isFinite(value) &&
+        !(hasSetValue && Number.isFinite(setValue)) &&
+        !formula
+      ) continue;
 
       let isActive = false;
 
@@ -113,6 +196,7 @@ function getActiveBonusEffects() {
         type,
         value: Number.isFinite(value) ? value : 0,
         set_value: hasSetValue && Number.isFinite(setValue) ? setValue : null,
+        formula: formula || null,
         active_when: activeWhen,
         source_kind: "item",
         source_name: itemPage.name ?? itemPage.file?.name ?? "Unknown Item",
@@ -141,8 +225,14 @@ function getActiveBonusEffects() {
       const hasSetValue = rawSetValue !== undefined && rawSetValue !== null && rawSetValue !== "";
       const setValue = hasSetValue ? Number(rawSetValue) : null;
 
+      const formula = String(bonus.formula ?? "").trim();
+
       if (!type) continue;
-      if (!Number.isFinite(value) && !(hasSetValue && Number.isFinite(setValue))) continue;
+      if (
+        !Number.isFinite(value) &&
+        !(hasSetValue && Number.isFinite(setValue)) &&
+        !formula
+      ) continue;
 
       let isActive = false;
 
@@ -155,6 +245,7 @@ function getActiveBonusEffects() {
         type,
         value: Number.isFinite(value) ? value : 0,
         set_value: hasSetValue && Number.isFinite(setValue) ? setValue : null,
+        formula: formula || null,
         active_when: activeWhen,
         source_kind: "feature",
         source_name: featurePage.name ?? featurePage.file?.name ?? "Unnamed Feature",
@@ -173,25 +264,31 @@ function getBonusTotal(type) {
     .reduce((sum, b) => sum + Number(b.value ?? 0), 0);
 }
 
-function getSetValue(type) {
-  const targetType = String(type ?? "").trim().toLowerCase();
-  const matching = getActiveBonusEffects()
-    .filter(b => b.type === targetType && b.set_value != null && Number.isFinite(Number(b.set_value)))
-    .map(b => Number(b.set_value));
-
-  if (matching.length === 0) return null;
-  return Math.max(...matching);
-}
-
 function applyItemEffects(baseValue, type) {
   let result = Number(baseValue ?? 0);
+  const targetType = String(type ?? "").trim().toLowerCase();
 
-  const setValue = getSetValue(type);
-  if (setValue != null) {
-    result = setValue;
+  const matchingEffects = getActiveBonusEffects().filter(b => b.type === targetType);
+
+  const setValues = matchingEffects
+    .filter(b => b.set_value != null && Number.isFinite(Number(b.set_value)))
+    .map(b => Number(b.set_value));
+
+  const formulaValues = matchingEffects
+    .filter(b => b.formula)
+    .map(b => evaluateBonusFormula(b.formula))
+    .filter(v => v != null && Number.isFinite(v));
+
+  if (setValues.length > 0 || formulaValues.length > 0) {
+    const candidates = [...setValues, ...formulaValues];
+    result = Math.max(...candidates);
   }
 
-  result += getBonusTotal(type);
+  const additiveBonus = matchingEffects.reduce((sum, b) => {
+    return sum + Number(b.value ?? 0);
+  }, 0);
+
+  result += additiveBonus;
   return result;
 }
 

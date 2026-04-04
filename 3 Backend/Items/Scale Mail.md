@@ -7,6 +7,6 @@ notes: This armor consists of a coat and leggings (and perhaps a separate skirt)
 
 bonuses:  
 - type: ac  
-  set_value: 15  
+  formula: "14 + min(dex_mod, 2)"  
   active_when: equipped
 ---
