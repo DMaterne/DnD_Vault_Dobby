@@ -698,369 +698,308 @@ if (!c) {
   }
 
   function renderFeatures() {
-    clearEl(tabContent);
+  clearEl(tabContent);
 
-    const title = tabContent.createEl("div", { text: "Features & Traits" });
-    title.style.fontWeight = "700";
-    title.style.fontSize = "1.05em";
-    title.style.marginBottom = "10px";
+  const title = tabContent.createEl("div", { text: "Features & Traits" });
+  title.style.fontWeight = "700";
+  title.style.fontSize = "1.05em";
+  title.style.marginBottom = "10px";
 
-    const features = Array.isArray(c.features) ? c.features : [];
+  const features = Array.isArray(c.features) ? c.features : [];
 
-    if (features.length === 0) {
-      tabContent.createEl("div", { text: "Keine Features eingetragen." });
-      return;
-    }
-
-    const searchWrap = tabContent.createEl("div");
-    searchWrap.style.marginBottom = "10px";
-
-    const searchInput = searchWrap.createEl("input");
-    searchInput.type = "text";
-    searchInput.placeholder = "Search Features";
-    searchInput.style.width = "100%";
-    searchInput.style.padding = "8px 10px";
-    searchInput.style.border = "1px solid var(--background-modifier-border)";
-    searchInput.style.borderRadius = "8px";
-    searchInput.style.background = "var(--background-primary)";
-    searchInput.style.color = "var(--text-normal)";
-
-    const tableWrap = tabContent.createEl("div");
-    tableWrap.style.display = "flex";
-    tableWrap.style.flexDirection = "column";
-    tableWrap.style.gap = "6px";
-
-    function renderFeatureRows(filterText = "") {
-      tableWrap.innerHTML = "";
-
-      const header = tableWrap.createEl("div");
-      header.style.display = "grid";
-      header.style.gridTemplateColumns = "2fr 1fr 120px";
-      header.style.gap = "12px";
-      header.style.padding = "8px 10px";
-      header.style.fontWeight = "700";
-      header.style.borderBottom = "1px solid var(--background-modifier-border)";
-
-      header.createEl("div", { text: "Name" });
-      header.createEl("div", { text: "Source" });
-      header.createEl("div", { text: "Notes" });
-
-      const filtered = features
-        .filter(item => {
-          const name = String(item?.name ?? item ?? "").toLowerCase();
-          const source = String(item?.source ?? "").toLowerCase();
-          const notes = String(item?.notes ?? "").toLowerCase();
-          const query = String(filterText ?? "").trim().toLowerCase();
-
-          if (!query) return true;
-          return name.includes(query) || source.includes(query) || notes.includes(query);
-        })
-        .sort((a, b) => {
-          const nameA = typeof a === "string" ? a : String(a?.name ?? "");
-          const nameB = typeof b === "string" ? b : String(b?.name ?? "");
-          return nameA.localeCompare(nameB, "de");
-        });
-
-      if (filtered.length === 0) {
-        const empty = tableWrap.createEl("div", { text: "Keine passenden Features gefunden." });
-        empty.style.padding = "10px";
-        empty.style.opacity = "0.7";
-        return;
-      }
-
-      for (const item of filtered) {
-        const featureName = typeof item === "string" ? item : String(item?.name ?? "-");
-        const featureSource = typeof item === "string" ? "-" : String(item?.source ?? "-");
-        const featureNotes = typeof item === "string" ? "" : String(item?.notes ?? "");
-
-        const row = tableWrap.createEl("div");
-        row.style.border = "1px solid var(--background-modifier-border)";
-        row.style.borderRadius = "8px";
-        row.style.overflow = "hidden";
-
-        const summary = row.createEl("div");
-        summary.style.display = "grid";
-        summary.style.gridTemplateColumns = "2fr 1fr 120px";
-        summary.style.gap = "12px";
-        summary.style.padding = "10px";
-        summary.style.alignItems = "center";
-
-        summary.createEl("div", { text: featureName });
-        summary.createEl("div", { text: featureSource });
-
-        const notesButtonWrap = summary.createEl("div");
-        const hasNotes = featureNotes.trim().length > 0;
-
-        const notesButton = notesButtonWrap.createEl("button", {
-          text: hasNotes ? "Show" : "-"
-        });
-        notesButton.style.padding = "4px 8px";
-        notesButton.style.borderRadius = "6px";
-        notesButton.style.border = "1px solid var(--background-modifier-border)";
-        notesButton.style.cursor = hasNotes ? "pointer" : "default";
-        notesButton.style.background = "var(--background-secondary)";
-        notesButton.style.color = "var(--text-normal)";
-
-        let notesOpen = false;
-        let notesEl = null;
-
-        if (hasNotes) {
-          notesButton.addEventListener("click", () => {
-            notesOpen = !notesOpen;
-
-            if (notesOpen) {
-              notesButton.setText("Hide");
-
-              notesEl = row.createEl("div");
-              notesEl.style.padding = "0 10px 10px 10px";
-              notesEl.style.borderTop = "1px solid var(--background-modifier-border)";
-              notesEl.style.background = "var(--background-primary-alt)";
-
-              const notesTitle = notesEl.createEl("div", { text: "Notes" });
-              notesTitle.style.fontWeight = "600";
-              notesTitle.style.marginTop = "8px";
-              notesTitle.style.marginBottom = "4px";
-              notesTitle.style.opacity = "0.85";
-
-              notesEl.createEl("div", { text: featureNotes });
-            } else {
-              notesButton.setText("Show");
-              if (notesEl) notesEl.remove();
-              notesEl = null;
-            }
-          });
-        }
-      }
-    }
-
-    renderFeatureRows();
-
-    searchInput.addEventListener("input", () => {
-      renderFeatureRows(searchInput.value);
-    });
+  if (features.length === 0) {
+    tabContent.createEl("div", { text: "Keine Features eingetragen." });
+    return;
   }
 
-  function renderInventory() {
-    clearEl(tabContent);
+  const searchWrap = tabContent.createEl("div");
+  searchWrap.style.marginBottom = "10px";
 
-    const title = tabContent.createEl("div", { text: "Inventory" });
-    title.style.fontWeight = "700";
-    title.style.fontSize = "1.05em";
-    title.style.marginBottom = "10px";
+  const searchInput = searchWrap.createEl("input");
+  searchInput.type = "text";
+  searchInput.placeholder = "Search Features";
+  searchInput.style.width = "100%";
+  searchInput.style.padding = "8px 10px";
+  searchInput.style.border = "1px solid var(--background-modifier-border)";
+  searchInput.style.borderRadius = "8px";
+  searchInput.style.background = "var(--background-primary)";
+  searchInput.style.color = "var(--text-normal)";
 
-    const inventory = Array.isArray(c.inventory) ? c.inventory : [];
+  const tableWrap = tabContent.createEl("div");
+  tableWrap.style.display = "flex";
+  tableWrap.style.flexDirection = "column";
+  tableWrap.style.gap = "6px";
 
-    if (inventory.length === 0) {
-      tabContent.createEl("div", { text: "Kein Inventar eingetragen." });
+  function renderFeatureRows(filterText = "") {
+    tableWrap.innerHTML = "";
+
+    const header = tableWrap.createEl("div");
+    header.style.display = "grid";
+    header.style.gridTemplateColumns = "2fr 1fr";
+    header.style.gap = "12px";
+    header.style.padding = "8px 10px";
+    header.style.fontWeight = "700";
+    header.style.borderBottom = "1px solid var(--background-modifier-border)";
+
+    header.createEl("div", { text: "Name" });
+    header.createEl("div", { text: "Source" });
+
+    const filtered = features
+      .filter(item => {
+        const name = String(item?.name ?? item ?? "").toLowerCase();
+        const source = String(item?.source ?? "").toLowerCase();
+        const notes = String(item?.notes ?? "").toLowerCase();
+        const query = String(filterText ?? "").trim().toLowerCase();
+
+        if (!query) return true;
+        return name.includes(query) || source.includes(query) || notes.includes(query);
+      })
+      .sort((a, b) => {
+        const nameA = typeof a === "string" ? a : String(a?.name ?? "");
+        const nameB = typeof b === "string" ? b : String(b?.name ?? "");
+        return nameA.localeCompare(nameB, "de");
+      });
+
+    if (filtered.length === 0) {
+      const empty = tableWrap.createEl("div", { text: "Keine passenden Features gefunden." });
+      empty.style.padding = "10px";
+      empty.style.opacity = "0.7";
       return;
     }
 
-    const searchWrap = tabContent.createEl("div");
-    searchWrap.style.marginBottom = "10px";
+    for (const item of filtered) {
+      const featureName = typeof item === "string" ? item : String(item?.name ?? "-");
+      const featureSource = typeof item === "string" ? "-" : String(item?.source ?? "-");
+      const featureNotes = typeof item === "string" ? "" : String(item?.notes ?? "");
 
-    const searchInput = searchWrap.createEl("input");
-    searchInput.type = "text";
-    searchInput.placeholder = "Search Inventory";
-    searchInput.style.width = "100%";
-    searchInput.style.padding = "8px 10px";
-    searchInput.style.border = "1px solid var(--background-modifier-border)";
-    searchInput.style.borderRadius = "8px";
-    searchInput.style.background = "var(--background-primary)";
-    searchInput.style.color = "var(--text-normal)";
+      const details = tableWrap.createEl("details");
+      details.style.border = "1px solid var(--background-modifier-border)";
+      details.style.borderRadius = "8px";
+      details.style.overflow = "hidden";
 
-    const tableWrap = tabContent.createEl("div");
-    tableWrap.style.display = "flex";
-    tableWrap.style.flexDirection = "column";
-    tableWrap.style.gap = "6px";
-
-    const resolvedInventory = inventory
-      .map(entry => {
-        const itemPath = String(entry?.item ?? "").trim();
-        const itemPage = itemPath ? dv.page(itemPath) : null;
-
-        if (!itemPage) return null;
-
-        return {
-          entry,
-          itemPage,
-          name: String(itemPage.name ?? itemPage.file?.name ?? "Unknown Item"),
-          notes: String(itemPage.notes ?? ""),
-          weight: Number(itemPage.weight ?? 0),
-          quantity: Number(entry?.quantity ?? 1),
-          equipped: entry?.equipped === true,
-          equipment: itemPage?.equipment === true
-        };
-      })
-      .filter(x => x);
-
-    function matchesFilter(item, filterText = "") {
-      const name = String(item?.name ?? "").toLowerCase();
-      const notes = String(item?.notes ?? "").toLowerCase();
-      const query = String(filterText ?? "").trim().toLowerCase();
-
-      if (!query) return true;
-      return name.includes(query) || notes.includes(query);
-    }
-
-    function makeNotesButton(parent, row, item) {
-      const notesButtonWrap = parent.createEl("div");
-
-      const hasNotes = String(item?.notes ?? "").trim().length > 0;
-      const notesButton = notesButtonWrap.createEl("button", {
-        text: hasNotes ? "Show" : "-"
-      });
-      notesButton.style.padding = "4px 8px";
-      notesButton.style.borderRadius = "6px";
-      notesButton.style.border = "1px solid var(--background-modifier-border)";
-      notesButton.style.cursor = hasNotes ? "pointer" : "default";
-      notesButton.style.background = "var(--background-secondary)";
-      notesButton.style.color = "var(--text-normal)";
-
-      let notesOpen = false;
-      let notesEl = null;
-
-      if (hasNotes) {
-        notesButton.addEventListener("click", () => {
-          notesOpen = !notesOpen;
-
-          if (notesOpen) {
-            notesButton.setText("Hide");
-
-            notesEl = row.createEl("div");
-            notesEl.style.padding = "0 10px 10px 10px";
-            notesEl.style.borderTop = "1px solid var(--background-modifier-border)";
-            notesEl.style.background = "var(--background-primary-alt)";
-
-            const notesTitle = notesEl.createEl("div", { text: "Notes" });
-            notesTitle.style.fontWeight = "600";
-            notesTitle.style.marginTop = "8px";
-            notesTitle.style.marginBottom = "4px";
-            notesTitle.style.opacity = "0.85";
-
-            notesEl.createEl("div", { text: String(item?.notes ?? "") });
-          } else {
-            notesButton.setText("Show");
-            if (notesEl) notesEl.remove();
-            notesEl = null;
-          }
-        });
-      }
-    }
-
-    function createSectionTitle(parent, text) {
-      const sectionTitle = parent.createEl("div", { text });
-      sectionTitle.style.fontWeight = "700";
-      sectionTitle.style.fontSize = "1em";
-      sectionTitle.style.marginTop = "8px";
-      sectionTitle.style.marginBottom = "4px";
-      sectionTitle.style.paddingBottom = "4px";
-      sectionTitle.style.borderBottom = "1px solid var(--background-modifier-border)";
-      return sectionTitle;
-    }
-
-    function createTableHeader(parent) {
-      const header = parent.createEl("div");
-      header.style.display = "grid";
-      header.style.gridTemplateColumns = "2fr 80px 90px 120px";
-      header.style.gap = "12px";
-      header.style.padding = "8px 10px";
-      header.style.fontWeight = "700";
-      header.style.borderBottom = "1px solid var(--background-modifier-border)";
-
-      header.createEl("div", { text: "Name" });
-      header.createEl("div", { text: "Qty" });
-      header.createEl("div", { text: "Weight" });
-      header.createEl("div", { text: "Notes" });
-    }
-
-    function createInventoryRow(parent, item) {
-      const rowWeight = item.weight * item.quantity;
-
-      const row = parent.createEl("div");
-      row.style.border = "1px solid var(--background-modifier-border)";
-      row.style.borderRadius = "8px";
-      row.style.overflow = "hidden";
-
-      const summary = row.createEl("div");
+      const summary = details.createEl("summary");
       summary.style.display = "grid";
-      summary.style.gridTemplateColumns = "2fr 80px 90px 120px";
+      summary.style.gridTemplateColumns = "2fr 1fr";
       summary.style.gap = "12px";
       summary.style.padding = "10px";
       summary.style.alignItems = "center";
+      summary.style.cursor = "pointer";
+      summary.style.listStyle = "none";
 
-      summary.createEl("div", { text: item.name });
-      summary.createEl("div", { text: String(item.quantity) });
-      summary.createEl("div", { text: String(rowWeight) });
+      summary.createEl("div", { text: featureName });
+      summary.createEl("div", { text: featureSource });
 
-      makeNotesButton(summary, row, item);
+      const content = details.createEl("div");
+      content.style.padding = "10px";
+      content.style.borderTop = "1px solid var(--background-modifier-border)";
+      content.style.background = "var(--background-primary-alt)";
 
-      return rowWeight;
+      const notesTitle = content.createEl("div", { text: "Notes" });
+      notesTitle.style.fontWeight = "600";
+      notesTitle.style.marginBottom = "6px";
+      notesTitle.style.opacity = "0.85";
+
+      content.createEl("div", {
+        text: featureNotes.trim().length > 0 ? featureNotes : "Keine Notizen eingetragen."
+      });
     }
-
-    function renderInventoryRows(filterText = "") {
-      tableWrap.innerHTML = "";
-
-      const filtered = resolvedInventory
-        .filter(item => matchesFilter(item, filterText));
-
-      if (filtered.length === 0) {
-        const empty = tableWrap.createEl("div", { text: "Keine passenden Einträge gefunden." });
-        empty.style.padding = "10px";
-        empty.style.opacity = "0.7";
-        return;
-      }
-
-      const equippedItems = filtered
-        .filter(item => item.equipment === true && item.equipped === true)
-        .sort((a, b) => a.name.localeCompare(b.name, "de"));
-
-      const normalItems = filtered
-        .filter(item => !(item.equipment === true && item.equipped === true))
-        .sort((a, b) => a.name.localeCompare(b.name, "de"));
-
-      const maxCarryWeight = Number(c.str ?? 10) * 15;
-      let totalWeight = 0;
-
-      if (equippedItems.length > 0) {
-        createSectionTitle(tableWrap, "Equipped Equipment");
-        createTableHeader(tableWrap);
-
-        for (const item of equippedItems) {
-          totalWeight += createInventoryRow(tableWrap, item);
-        }
-      }
-
-      if (normalItems.length > 0) {
-        createSectionTitle(tableWrap, equippedItems.length > 0 ? "Inventory" : "Items");
-        createTableHeader(tableWrap);
-
-        for (const item of normalItems) {
-          totalWeight += createInventoryRow(tableWrap, item);
-        }
-      }
-
-      const totalRow = tableWrap.createEl("div");
-      totalRow.style.display = "grid";
-      totalRow.style.gridTemplateColumns = "2fr 80px 90px 120px";
-      totalRow.style.gap = "12px";
-      totalRow.style.padding = "10px";
-      totalRow.style.marginTop = "6px";
-      totalRow.style.borderTop = "2px solid var(--background-modifier-border)";
-      totalRow.style.fontWeight = "700";
-      totalRow.style.alignItems = "center";
-
-      totalRow.createEl("div", { text: "Total Weight" });
-      totalRow.createEl("div", { text: "" });
-      totalRow.createEl("div", { text: `${totalWeight} / ${maxCarryWeight}` });
-      totalRow.createEl("div", { text: "" });
-    }
-
-    renderInventoryRows();
-
-    searchInput.addEventListener("input", () => {
-      renderInventoryRows(searchInput.value);
-    });
   }
+
+  renderFeatureRows();
+
+  searchInput.addEventListener("input", () => {
+    renderFeatureRows(searchInput.value);
+  });
+}
+
+  function renderInventory() {
+  clearEl(tabContent);
+
+  const title = tabContent.createEl("div", { text: "Inventory" });
+  title.style.fontWeight = "700";
+  title.style.fontSize = "1.05em";
+  title.style.marginBottom = "10px";
+
+  const inventory = Array.isArray(c.inventory) ? c.inventory : [];
+
+  if (inventory.length === 0) {
+    tabContent.createEl("div", { text: "Kein Inventar eingetragen." });
+    return;
+  }
+
+  const searchWrap = tabContent.createEl("div");
+  searchWrap.style.marginBottom = "10px";
+
+  const searchInput = searchWrap.createEl("input");
+  searchInput.type = "text";
+  searchInput.placeholder = "Search Inventory";
+  searchInput.style.width = "100%";
+  searchInput.style.padding = "8px 10px";
+  searchInput.style.border = "1px solid var(--background-modifier-border)";
+  searchInput.style.borderRadius = "8px";
+  searchInput.style.background = "var(--background-primary)";
+  searchInput.style.color = "var(--text-normal)";
+
+  const tableWrap = tabContent.createEl("div");
+  tableWrap.style.display = "flex";
+  tableWrap.style.flexDirection = "column";
+  tableWrap.style.gap = "6px";
+
+  const resolvedInventory = inventory
+    .map(entry => {
+      const itemPath = String(entry?.item ?? "").trim();
+      const itemPage = itemPath ? dv.page(itemPath) : null;
+
+      if (!itemPage) return null;
+
+      return {
+        entry,
+        itemPage,
+        name: String(itemPage.name ?? itemPage.file?.name ?? "Unknown Item"),
+        notes: String(itemPage.notes ?? ""),
+        weight: Number(itemPage.weight ?? 0),
+        quantity: Number(entry?.quantity ?? 1),
+        equipped: entry?.equipped === true,
+        equipment: itemPage?.equipment === true
+      };
+    })
+    .filter(x => x);
+
+  function matchesFilter(item, filterText = "") {
+    const name = String(item?.name ?? "").toLowerCase();
+    const notes = String(item?.notes ?? "").toLowerCase();
+    const query = String(filterText ?? "").trim().toLowerCase();
+
+    if (!query) return true;
+    return name.includes(query) || notes.includes(query);
+  }
+
+  function createSectionTitle(parent, text) {
+    const sectionTitle = parent.createEl("div", { text });
+    sectionTitle.style.fontWeight = "700";
+    sectionTitle.style.fontSize = "1em";
+    sectionTitle.style.marginTop = "8px";
+    sectionTitle.style.marginBottom = "4px";
+    sectionTitle.style.paddingBottom = "4px";
+    sectionTitle.style.borderBottom = "1px solid var(--background-modifier-border)";
+    return sectionTitle;
+  }
+
+  function createTableHeader(parent) {
+    const header = parent.createEl("div");
+    header.style.display = "grid";
+    header.style.gridTemplateColumns = "2fr 80px 90px";
+    header.style.gap = "12px";
+    header.style.padding = "8px 10px";
+    header.style.fontWeight = "700";
+    header.style.borderBottom = "1px solid var(--background-modifier-border)";
+
+    header.createEl("div", { text: "Name" });
+    header.createEl("div", { text: "Qty" });
+    header.createEl("div", { text: "Weight" });
+  }
+
+  function createInventoryRow(parent, item) {
+    const rowWeight = item.weight * item.quantity;
+
+    const details = parent.createEl("details");
+    details.style.border = "1px solid var(--background-modifier-border)";
+    details.style.borderRadius = "8px";
+    details.style.overflow = "hidden";
+
+    const summary = details.createEl("summary");
+    summary.style.display = "grid";
+    summary.style.gridTemplateColumns = "2fr 80px 90px";
+    summary.style.gap = "12px";
+    summary.style.padding = "10px";
+    summary.style.alignItems = "center";
+    summary.style.cursor = "pointer";
+    summary.style.listStyle = "none";
+
+    summary.createEl("div", { text: item.name });
+    summary.createEl("div", { text: String(item.quantity) });
+    summary.createEl("div", { text: String(rowWeight) });
+
+    const content = details.createEl("div");
+    content.style.padding = "10px";
+    content.style.borderTop = "1px solid var(--background-modifier-border)";
+    content.style.background = "var(--background-primary-alt)";
+
+    const notesTitle = content.createEl("div", { text: "Notes" });
+    notesTitle.style.fontWeight = "600";
+    notesTitle.style.marginBottom = "6px";
+    notesTitle.style.opacity = "0.85";
+
+    content.createEl("div", {
+      text: item.notes.trim().length > 0 ? item.notes : "Keine Notizen eingetragen."
+    });
+
+    return rowWeight;
+  }
+
+  function renderInventoryRows(filterText = "") {
+    tableWrap.innerHTML = "";
+
+    const filtered = resolvedInventory
+      .filter(item => matchesFilter(item, filterText));
+
+    if (filtered.length === 0) {
+      const empty = tableWrap.createEl("div", { text: "Keine passenden Einträge gefunden." });
+      empty.style.padding = "10px";
+      empty.style.opacity = "0.7";
+      return;
+    }
+
+    const equippedItems = filtered
+      .filter(item => item.equipment === true && item.equipped === true)
+      .sort((a, b) => a.name.localeCompare(b.name, "de"));
+
+    const normalItems = filtered
+      .filter(item => !(item.equipment === true && item.equipped === true))
+      .sort((a, b) => a.name.localeCompare(b.name, "de"));
+
+    const maxCarryWeight = Number(c.str ?? 10) * 15;
+    let totalWeight = 0;
+
+    if (equippedItems.length > 0) {
+      createSectionTitle(tableWrap, "Equipped Equipment");
+      createTableHeader(tableWrap);
+
+      for (const item of equippedItems) {
+        totalWeight += createInventoryRow(tableWrap, item);
+      }
+    }
+
+    if (normalItems.length > 0) {
+      createSectionTitle(tableWrap, equippedItems.length > 0 ? "Inventory" : "Items");
+      createTableHeader(tableWrap);
+
+      for (const item of normalItems) {
+        totalWeight += createInventoryRow(tableWrap, item);
+      }
+    }
+
+    const totalRow = tableWrap.createEl("div");
+    totalRow.style.display = "grid";
+    totalRow.style.gridTemplateColumns = "2fr 80px 90px";
+    totalRow.style.gap = "12px";
+    totalRow.style.padding = "10px";
+    totalRow.style.marginTop = "6px";
+    totalRow.style.borderTop = "2px solid var(--background-modifier-border)";
+    totalRow.style.fontWeight = "700";
+    totalRow.style.alignItems = "center";
+
+    totalRow.createEl("div", { text: "Total Weight" });
+    totalRow.createEl("div", { text: "" });
+    totalRow.createEl("div", { text: `${totalWeight} / ${maxCarryWeight}` });
+  }
+
+  renderInventoryRows();
+
+  searchInput.addEventListener("input", () => {
+    renderInventoryRows(searchInput.value);
+  });
+}
 
   function renderActions() {
     clearEl(tabContent);
