@@ -244,7 +244,7 @@ actionRow.style.alignItems = "center";
 
 const hpValueInput = actionRow.createEl("input");
 hpValueInput.type = "number";
-hpValueInput.placeholder = "Wert eingeben";
+hpValueInput.placeholder = "Enter value";
 hpValueInput.style.width = "100%";
 hpValueInput.style.padding = "8px 10px";
 hpValueInput.style.border = "1px solid var(--background-modifier-border)";
