@@ -1,5 +1,5 @@
 ```dataviewjs  
-const CHARACTER_PATH = "Public/3 Backend/Meister Andi.md";
+const CHARACTER_PATH = "Public/3 Backend/Johann Schmidt.md";
 const c = dv.page(CHARACTER_PATH);
 
 function modFromScore(score) {
