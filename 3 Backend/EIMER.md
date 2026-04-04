@@ -56,67 +56,54 @@ inventory:
   - item: Public/3 Backend/Items/Crossbow Bolts.md
     quantity: 20
     equipped: true
-
   - item: Public/3 Backend/Items/Light Crossbow.md
     quantity: 1
     equipped: true
-
   - item: Public/3 Backend/Items/Hammer Weapon.md
     quantity: 1
     equipped: true
-
   - item: Public/3 Backend/Items/Sickle.md
     quantity: 1
     equipped: true
-
   - item: Public/3 Backend/Items/Scale Mail.md
     quantity: 1
     equipped: true
-
   - item: Public/3 Backend/Items/Thieves Tools.md
     quantity: 1
     equipped: true
-
   - item: Public/3 Backend/Items/Crowbar.md
     quantity: 1
     equipped: false
-
   - item: Public/3 Backend/Items/Hammer.md
     quantity: 1
     equipped: false
-
   - item: Public/3 Backend/Items/Piton.md
     quantity: 10
     equipped: false
-
   - item: Public/3 Backend/Items/Rations (1 day).md
     quantity: 1
     equipped: false
-
   - item: Public/3 Backend/Items/Tinderbox.md
     quantity: 1
     equipped: false
-
   - item: Public/3 Backend/Items/Torch.md
     quantity: 10
     equipped: false
-
   - item: Public/3 Backend/Items/Waterskin.md
     quantity: 1
     equipped: false
-
   - item: Public/3 Backend/Items/Rope (50ft, Hempen).md
     quantity: 1
     equipped: false
-
   - item: Public/3 Backend/Items/Eimer's Control Unit.md
     quantity: 1
     equipped: false
-  
   - item: Public/3 Backend/Items/Backpack.md
     quantity: 1
     equipped: true
-
+  - item: Public/3 Backend/Items/Ring of Protection.md
+    quantity: 1
+    equipped: true
 features:
   - name: Magical Tinkering
     source: Artificer
@@ -127,7 +114,6 @@ actions:
   - Public/3 Backend/Actions/Sickle.md
   - Public/3 Backend/Actions/Unarmed Strike.md
   - Public/3 Backend/Actions/Light Crossbow.md
-
 spells:
   - Public/3 Backend/Spells/Absorb Elements.md
   - Public/3 Backend/Spells/Thunderclap.md
@@ -135,6 +121,9 @@ spells:
   - Public/3 Backend/Spells/Cure Wounds.md
   - Public/3 Backend/Spells/Feather Fall.md
 spellcasting_ability: int
+attunement_slots: 3
+attuned_items:
+  - Public/3 Backend/Items/Ring of Protection.md
 ---
 
 # Notes 

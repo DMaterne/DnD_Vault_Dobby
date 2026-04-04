@@ -1769,6 +1769,292 @@ if (!c) {
       });
     });
   }
+  
+  async function renderAttunement() {
+  clearEl(tabContent);
+
+  const title = tabContent.createEl("div", { text: "Attunement" });
+  title.style.fontWeight = "700";
+  title.style.fontSize = "1.05em";
+  title.style.marginBottom = "10px";
+
+  const characterFile = app.vault.getAbstractFileByPath(CHARACTER_PATH);
+
+  const attunementSlots = Number(c.attunement_slots ?? 3);
+  let attunedItems = Array.isArray(c.attuned_items) ? [...c.attuned_items] : [];
+
+  const inventoryEntries = Array.isArray(c.inventory) ? c.inventory : [];
+
+  const attunableItems = inventoryEntries
+    .map(entry => {
+      const itemPath = String(entry?.item ?? "").trim();
+      const itemPage = itemPath ? dv.page(itemPath) : null;
+      if (!itemPage) return null;
+
+      const requiresAttunement = itemPage.attunement === true;
+      if (!requiresAttunement) return null;
+
+      return {
+        itemPath,
+        itemPage,
+        name: String(itemPage.name ?? itemPage.file?.name ?? "Unknown Item"),
+        type: String(itemPage.type ?? "-"),
+        notes: String(itemPage.notes ?? ""),
+        quantity: Number(entry?.quantity ?? 1),
+        equipped: entry?.equipped === true,
+        isAttuned: attunedItems.includes(itemPath)
+      };
+    })
+    .filter(x => x);
+
+  const searchWrap = tabContent.createEl("div");
+  searchWrap.style.marginBottom = "10px";
+
+  const searchInput = searchWrap.createEl("input");
+  searchInput.type = "text";
+  searchInput.placeholder = "Search Attunement Items";
+  searchInput.style.width = "100%";
+  searchInput.style.padding = "8px 10px";
+  searchInput.style.border = "1px solid var(--background-modifier-border)";
+  searchInput.style.borderRadius = "8px";
+  searchInput.style.background = "var(--background-primary)";
+  searchInput.style.color = "var(--text-normal)";
+
+  const slotsWrap = tabContent.createEl("div");
+  slotsWrap.style.display = "flex";
+  slotsWrap.style.flexDirection = "column";
+  slotsWrap.style.gap = "8px";
+  slotsWrap.style.marginBottom = "8px";
+
+  const errorBox = tabContent.createEl("div");
+  errorBox.style.display = "none";
+  errorBox.style.marginBottom = "10px";
+  errorBox.style.padding = "10px";
+  errorBox.style.border = "1px solid var(--background-modifier-border)";
+  errorBox.style.borderRadius = "8px";
+  errorBox.style.background = "var(--background-secondary)";
+  errorBox.style.color = "var(--text-normal)";
+
+  const listWrap = tabContent.createEl("div");
+  listWrap.style.display = "flex";
+  listWrap.style.flexDirection = "column";
+  listWrap.style.gap = "8px";
+
+  function showError(message) {
+    errorBox.setText(message);
+    errorBox.style.display = "block";
+  }
+
+  function clearError() {
+    errorBox.style.display = "none";
+    errorBox.setText("");
+  }
+
+  async function saveAttunedItems() {
+    if (!characterFile) return;
+
+    await app.fileManager.processFrontMatter(characterFile, (fm) => {
+      fm.attuned_items = attunedItems;
+    });
+  }
+
+  function renderSlots() {
+    slotsWrap.innerHTML = "";
+
+    const slotsTitle = slotsWrap.createEl("div", {
+      text: `Attuned Items: ${attunedItems.length} / ${attunementSlots}`
+    });
+    slotsTitle.style.fontWeight = "700";
+    slotsTitle.style.fontSize = "1em";
+
+    const slotGrid = slotsWrap.createEl("div");
+    slotGrid.style.display = "grid";
+    slotGrid.style.gridTemplateColumns = "repeat(auto-fit, minmax(180px, 1fr))";
+    slotGrid.style.gap = "8px";
+
+    for (let i = 0; i < attunementSlots; i++) {
+      const card = slotGrid.createEl("div");
+      card.style.padding = "10px";
+      card.style.border = "1px solid var(--background-modifier-border)";
+      card.style.borderRadius = "10px";
+      card.style.background = "var(--background-primary-alt)";
+
+      const slotLabel = card.createEl("div", { text: `Slot ${i + 1}` });
+      slotLabel.style.fontSize = "0.8em";
+      slotLabel.style.opacity = "0.7";
+      slotLabel.style.marginBottom = "4px";
+
+      const itemPath = attunedItems[i];
+      if (itemPath) {
+        const itemPage = dv.page(itemPath);
+        card.createEl("div", {
+          text: itemPage?.name ?? itemPage?.file?.name ?? itemPath
+        });
+      } else {
+        const empty = card.createEl("div", { text: "Empty" });
+        empty.style.opacity = "0.6";
+      }
+    }
+  }
+
+  function addInfoRow(parent, label, value) {
+    const row = parent.createEl("div");
+    row.style.display = "flex";
+    row.style.justifyContent = "space-between";
+    row.style.gap = "10px";
+    row.style.padding = "2px 0";
+
+    const left = row.createEl("div", { text: label });
+    left.style.opacity = "0.7";
+
+    const right = row.createEl("div", { text: String(value ?? "-") });
+    right.style.fontWeight = "600";
+    right.style.textAlign = "right";
+  }
+
+  function createItemCard(parent, item) {
+    const details = parent.createEl("details");
+    details.style.border = "1px solid var(--background-modifier-border)";
+    details.style.borderRadius = "10px";
+    details.style.overflow = "hidden";
+
+    const summary = details.createEl("summary");
+    summary.style.display = "grid";
+    summary.style.gridTemplateColumns = "2fr 100px 120px";
+    summary.style.gap = "12px";
+    summary.style.padding = "10px";
+    summary.style.alignItems = "center";
+    summary.style.cursor = "pointer";
+    summary.style.listStyle = "none";
+
+    const leftWrap = summary.createEl("div");
+
+    const nameEl = leftWrap.createEl("div", { text: item.name });
+    nameEl.style.fontWeight = "600";
+
+    const typeEl = leftWrap.createEl("div", { text: item.type });
+    typeEl.style.fontSize = "0.8em";
+    typeEl.style.opacity = "0.7";
+    typeEl.style.marginTop = "2px";
+
+    const statusEl = summary.createEl("div", {
+      text: item.isAttuned ? "Attuned" : "Not Attuned"
+    });
+    statusEl.style.fontSize = "0.9em";
+    statusEl.style.opacity = "0.8";
+
+    const buttonWrap = summary.createEl("div");
+
+    const toggleBtn = buttonWrap.createEl("button", {
+      text: item.isAttuned ? "Unattune" : "Attune"
+    });
+    toggleBtn.style.padding = "6px 10px";
+    toggleBtn.style.borderRadius = "8px";
+    toggleBtn.style.border = "1px solid var(--background-modifier-border)";
+    toggleBtn.style.cursor = "pointer";
+    toggleBtn.style.background = "var(--background-secondary)";
+    toggleBtn.style.color = "var(--text-normal)";
+    toggleBtn.style.fontWeight = "600";
+
+    toggleBtn.addEventListener("click", async (evt) => {
+      evt.preventDefault();
+      evt.stopPropagation();
+      clearError();
+
+      const alreadyAttuned = attunedItems.includes(item.itemPath);
+
+      if (alreadyAttuned) {
+        attunedItems = attunedItems.filter(path => path !== item.itemPath);
+      } else {
+        if (attunedItems.length >= attunementSlots) {
+          showError("No free attunement slots available.");
+          return;
+        }
+        attunedItems.push(item.itemPath);
+      }
+
+      await saveAttunedItems();
+      await renderAttunement();
+    });
+
+    const content = details.createEl("div");
+    content.style.padding = "10px";
+    content.style.borderTop = "1px solid var(--background-modifier-border)";
+    content.style.background = "var(--background-primary-alt)";
+
+    addInfoRow(content, "Type", item.type);
+    addInfoRow(content, "Quantity", item.quantity);
+    addInfoRow(content, "Equipped", item.equipped ? "Yes" : "No");
+    addInfoRow(content, "Attunement", "Required");
+
+    const notesTitle = content.createEl("div", { text: "Notes" });
+    notesTitle.style.fontWeight = "600";
+    notesTitle.style.marginTop = "8px";
+    notesTitle.style.marginBottom = "4px";
+    notesTitle.style.opacity = "0.85";
+
+    content.createEl("div", {
+      text: item.notes.trim().length > 0 ? item.notes : "No notes entered."
+    });
+  }
+
+  function renderItemList(filterText = "") {
+    listWrap.innerHTML = "";
+
+    const query = String(filterText ?? "").trim().toLowerCase();
+
+    const filtered = attunableItems
+      .map(item => ({
+        ...item,
+        isAttuned: attunedItems.includes(item.itemPath)
+      }))
+      .filter(item => {
+        const haystack = [
+          item.name,
+          item.type,
+          item.notes
+        ].join(" ").toLowerCase();
+
+        return !query || haystack.includes(query);
+      })
+      .sort((a, b) => {
+        if (a.isAttuned !== b.isAttuned) return a.isAttuned ? -1 : 1;
+        return a.name.localeCompare(b.name, "de");
+      });
+
+    if (filtered.length === 0) {
+      const empty = listWrap.createEl("div", {
+        text: "No attunement-capable items found."
+      });
+      empty.style.padding = "10px";
+      empty.style.opacity = "0.7";
+      return;
+    }
+
+    const header = listWrap.createEl("div");
+    header.style.display = "grid";
+    header.style.gridTemplateColumns = "2fr 100px 120px";
+    header.style.gap = "12px";
+    header.style.padding = "8px 10px";
+    header.style.fontWeight = "700";
+    header.style.borderBottom = "1px solid var(--background-modifier-border)";
+
+    header.createEl("div", { text: "Item" });
+    header.createEl("div", { text: "Status" });
+    header.createEl("div", { text: "Action" });
+
+    for (const item of filtered) {
+      createItemCard(listWrap, item);
+    }
+  }
+
+  renderSlots();
+  renderItemList();
+
+  searchInput.addEventListener("input", () => {
+    renderItemList(searchInput.value);
+  });
+}
 
   function updateTabStyles() {
     for (const key in tabButtons) {
@@ -1794,10 +2080,11 @@ if (!c) {
 
     try {
       if (activeTab === "actions") renderActions();
-      if (activeTab === "features") renderFeatures();
-      if (activeTab === "inventory") renderInventory();
-      if (activeTab === "spells") renderSpells();
-      if (activeTab === "notes") await renderNotes();
+	  if (activeTab === "attunement") await renderAttunement();
+	  if (activeTab === "features") renderFeatures();
+	  if (activeTab === "inventory") renderInventory();
+	  if (activeTab === "spells") renderSpells();
+	  if (activeTab === "notes") await renderNotes();
     } catch (err) {
       clearEl(tabContent);
       tabContent.createEl("div", {
@@ -1821,6 +2108,7 @@ if (!c) {
   makeTabButton("actions", "Actions");
   makeTabButton("spells", "Spells");
   makeTabButton("inventory", "Inventory");
+  makeTabButton("attunement", "Attunement");
   makeTabButton("features", "Features");
   makeTabButton("notes", "Notes");
 
