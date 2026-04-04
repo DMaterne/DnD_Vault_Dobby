@@ -1,5 +1,7 @@
 ```dataviewjs
 const CHARACTER_PATH = "Public/3 Backend/EIMER.md";
+
+const ITEMS_FOLDER = "Public/3 Backend/Items/";
 const ACTIONS_FOLDER = "Public/3 Backend/Actions/";
 const SPELLS_FOLDER = "Public/3 Backend/Spells/";
 const FEATURES_FOLDER = "Public/3 Backend/Features/";
@@ -18,8 +20,36 @@ function profValue(isProf, base, profBonus) {
   return base + (isProf ? profBonus : 0);
 }
 
-function isInFolder(filePath, folderPath) {
-  return String(filePath ?? "").startsWith(folderPath);
+function normalizeRef(ref) {
+  return String(ref ?? "").trim();
+}
+
+function resolvePathRef(ref, folderPath) {
+  const raw = normalizeRef(ref);
+  if (!raw) return null;
+
+  const candidates = [];
+
+  if (raw.includes("/")) {
+    candidates.push(raw);
+    if (!raw.endsWith(".md")) candidates.push(`${raw}.md`);
+  } else {
+    candidates.push(`${folderPath}${raw}`);
+    candidates.push(`${folderPath}${raw}.md`);
+  }
+
+  for (const candidate of candidates) {
+    const file = app.vault.getAbstractFileByPath(candidate);
+    if (file) return candidate;
+  }
+
+  return null;
+}
+
+function resolvePageRef(ref, folderPath) {
+  const resolvedPath = resolvePathRef(ref, folderPath);
+  if (!resolvedPath) return null;
+  return dv.page(resolvedPath);
 }
 
 function uniqueActionObjects(entries) {
@@ -42,8 +72,41 @@ function uniqueActionObjects(entries) {
   return result;
 }
 
+function makeInventoryInstanceId(itemPath, inventoryIndex, quantityIndex = 0) {
+  return `${itemPath}::${inventoryIndex}::${quantityIndex}`;
+}
+
+function getAttunedInstanceIds() {
+  return Array.isArray(c.attuned_items)
+    ? c.attuned_items.map(x => String(x))
+    : [];
+}
+
+function isInventoryInstanceAttuned(instanceId) {
+  return getAttunedInstanceIds().includes(String(instanceId));
+}
+
 function getAttunedItemPaths() {
-  return Array.isArray(c.attuned_items) ? c.attuned_items : [];
+  const inventoryEntries = Array.isArray(c.inventory) ? c.inventory : [];
+  const attunedInstanceIds = getAttunedInstanceIds();
+  const paths = [];
+
+  for (let inventoryIndex = 0; inventoryIndex < inventoryEntries.length; inventoryIndex++) {
+    const entry = inventoryEntries[inventoryIndex];
+    const itemPath = resolvePathRef(entry?.item, ITEMS_FOLDER);
+    if (!itemPath) continue;
+
+    const quantity = Math.max(1, Number(entry?.quantity ?? 1));
+
+    for (let quantityIndex = 0; quantityIndex < quantity; quantityIndex++) {
+      const instanceId = makeInventoryInstanceId(itemPath, inventoryIndex, quantityIndex);
+      if (attunedInstanceIds.includes(instanceId)) {
+        paths.push(itemPath);
+      }
+    }
+  }
+
+  return paths;
 }
 
 function isItemEquipped(entry) {
@@ -92,7 +155,6 @@ function evaluateBonusFormula(formula) {
   if (!expr) return null;
 
   const ctx = getFormulaContext();
-
   let safeExpr = expr;
 
   const replacements = [
@@ -135,9 +197,8 @@ function getAllCharacterFeatures() {
   const featureRefs = Array.isArray(c.features) ? c.features : [];
 
   return featureRefs
-    .map(path => dv.page(String(path)))
+    .map(ref => resolvePageRef(ref, FEATURES_FOLDER))
     .filter(p => p)
-    .filter(p => isInFolder(String(p.file?.path ?? ""), FEATURES_FOLDER))
     .sort((a, b) => {
       const nameA = String(a.name ?? a.file?.name ?? "");
       const nameB = String(b.name ?? b.file?.name ?? "");
@@ -151,8 +212,9 @@ function getActiveBonusEffects() {
   // ITEM-BONI
   const inventoryEntries = Array.isArray(c.inventory) ? c.inventory : [];
 
-  for (const entry of inventoryEntries) {
-    const itemPath = String(entry?.item ?? "").trim();
+  for (let inventoryIndex = 0; inventoryIndex < inventoryEntries.length; inventoryIndex++) {
+    const entry = inventoryEntries[inventoryIndex];
+    const itemPath = resolvePathRef(entry?.item, ITEMS_FOLDER);
     if (!itemPath) continue;
 
     const itemPage = dv.page(itemPath);
@@ -162,46 +224,52 @@ function getActiveBonusEffects() {
     if (bonuses.length === 0) continue;
 
     const equipped = isItemEquipped(entry);
-    const attuned = isItemAttuned(itemPath);
+    const quantity = Math.max(1, Number(entry?.quantity ?? 1));
 
-    for (const bonus of bonuses) {
-      if (!bonus || typeof bonus !== "object") continue;
+    for (let quantityIndex = 0; quantityIndex < quantity; quantityIndex++) {
+      const instanceId = makeInventoryInstanceId(itemPath, inventoryIndex, quantityIndex);
+      const attuned = isInventoryInstanceAttuned(instanceId);
 
-      const activeWhen = String(bonus.active_when ?? "equipped").trim().toLowerCase();
-      const type = String(bonus.type ?? "").trim().toLowerCase();
-      const value = Number(bonus.value ?? 0);
+      for (const bonus of bonuses) {
+        if (!bonus || typeof bonus !== "object") continue;
 
-      const rawSetValue = bonus.set_value;
-      const hasSetValue = rawSetValue !== undefined && rawSetValue !== null && rawSetValue !== "";
-      const setValue = hasSetValue ? Number(rawSetValue) : null;
+        const activeWhen = String(bonus.active_when ?? "equipped").trim().toLowerCase();
+        const type = String(bonus.type ?? "").trim().toLowerCase();
+        const value = Number(bonus.value ?? 0);
 
-      const formula = String(bonus.formula ?? "").trim();
+        const rawSetValue = bonus.set_value;
+        const hasSetValue = rawSetValue !== undefined && rawSetValue !== null && rawSetValue !== "";
+        const setValue = hasSetValue ? Number(rawSetValue) : null;
 
-      if (!type) continue;
-      if (
-        !Number.isFinite(value) &&
-        !(hasSetValue && Number.isFinite(setValue)) &&
-        !formula
-      ) continue;
+        const formula = String(bonus.formula ?? "").trim();
 
-      let isActive = false;
+        if (!type) continue;
+        if (
+          !Number.isFinite(value) &&
+          !(hasSetValue && Number.isFinite(setValue)) &&
+          !formula
+        ) continue;
 
-      if (activeWhen === "always") isActive = true;
-      if (activeWhen === "equipped" && equipped) isActive = true;
-      if (activeWhen === "attuned" && attuned) isActive = true;
+        let isActive = false;
 
-      if (!isActive) continue;
+        if (activeWhen === "always") isActive = true;
+        if (activeWhen === "equipped" && equipped) isActive = true;
+        if (activeWhen === "attuned" && attuned) isActive = true;
 
-      activeEffects.push({
-        type,
-        value: Number.isFinite(value) ? value : 0,
-        set_value: hasSetValue && Number.isFinite(setValue) ? setValue : null,
-        formula: formula || null,
-        active_when: activeWhen,
-        source_kind: "item",
-        source_name: itemPage.name ?? itemPage.file?.name ?? "Unknown Item",
-        source_path: itemPath
-      });
+        if (!isActive) continue;
+
+        activeEffects.push({
+          type,
+          value: Number.isFinite(value) ? value : 0,
+          set_value: hasSetValue && Number.isFinite(setValue) ? setValue : null,
+          formula: formula || null,
+          active_when: activeWhen,
+          source_kind: "item",
+          source_name: itemPage.name ?? itemPage.file?.name ?? "Unknown Item",
+          source_path: itemPath,
+          source_instance_id: instanceId
+        });
+      }
     }
   }
 
@@ -378,17 +446,44 @@ function getSkillTotal(label, abilityName, isProficient) {
   return total;
 }
 
+async function toggleInventoryEquip(itemPathOrName) {
+  const characterFile = app.vault.getAbstractFileByPath(CHARACTER_PATH);
+  if (!characterFile) return;
+
+  const resolvedItemPath =
+    resolvePathRef(itemPathOrName, ITEMS_FOLDER) ?? String(itemPathOrName ?? "").trim();
+
+  const itemPage = dv.page(resolvedItemPath);
+  if (!itemPage) return;
+
+  if (itemPage.equipment !== true) {
+    new Notice("Dieses Item ist kein Equipment.");
+    return;
+  }
+
+  await app.fileManager.processFrontMatter(characterFile, (fm) => {
+    if (!Array.isArray(fm.inventory)) return;
+
+    const entry = fm.inventory.find(invEntry => {
+      const invPath =
+        resolvePathRef(invEntry?.item, ITEMS_FOLDER) ?? String(invEntry?.item ?? "").trim();
+      return invPath === resolvedItemPath;
+    });
+
+    if (!entry) return;
+
+    entry.equipped = entry.equipped === true ? false : true;
+  });
+}
+
 function getAllCharacterActions() {
   const collectedActions = [];
 
   const explicitActionRefs = Array.isArray(c.actions) ? c.actions : [];
 
   for (const actionRef of explicitActionRefs) {
-    const actionPage = dv.page(String(actionRef));
+    const actionPage = resolvePageRef(actionRef, ACTIONS_FOLDER);
     if (!actionPage) continue;
-
-    const path = String(actionPage.file?.path ?? "");
-    if (!isInFolder(path, ACTIONS_FOLDER)) continue;
 
     const category = String(actionPage.category ?? "").trim().toLowerCase();
     if (category === "spell") continue;
@@ -404,7 +499,7 @@ function getAllCharacterActions() {
   const inventoryEntries = Array.isArray(c.inventory) ? c.inventory : [];
 
   for (const entry of inventoryEntries) {
-    const itemPath = String(entry?.item ?? "").trim();
+    const itemPath = resolvePathRef(entry?.item, ITEMS_FOLDER);
     if (!itemPath) continue;
 
     const itemPage = dv.page(itemPath);
@@ -442,11 +537,8 @@ function getAllCharacterSpells() {
   const explicitSpellRefs = Array.isArray(c.spells) ? c.spells : [];
 
   for (const spellRef of explicitSpellRefs) {
-    const spellPage = dv.page(String(spellRef));
+    const spellPage = resolvePageRef(spellRef, SPELLS_FOLDER);
     if (!spellPage) continue;
-
-    const path = String(spellPage.file?.path ?? "");
-    if (!isInFolder(path, SPELLS_FOLDER)) continue;
 
     const category = String(spellPage.category ?? "").trim().toLowerCase();
     if (category && category !== "spell") continue;
@@ -462,7 +554,7 @@ function getAllCharacterSpells() {
   const inventoryEntries = Array.isArray(c.inventory) ? c.inventory : [];
 
   for (const entry of inventoryEntries) {
-    const itemPath = String(entry?.item ?? "").trim();
+    const itemPath = resolvePathRef(entry?.item, ITEMS_FOLDER);
     if (!itemPath) continue;
 
     const itemPage = dv.page(itemPath);
@@ -539,7 +631,11 @@ if (!c) {
 
   addHeaderInfoRow(subtitle, "Race", c.race ?? "Unknown Race");
   addHeaderInfoRow(subtitle, "Class", c.class ?? "Unknown Class");
-  addHeaderInfoRow(subtitle, "Subclass", c.subclass ?? "-");
+  addHeaderInfoRow(
+    subtitle,
+    "Subclass",
+    Array.isArray(c.subclass) ? c.subclass.filter(Boolean).join(", ") || "-" : (c.subclass ?? "-")
+  );
   addHeaderInfoRow(subtitle, "Level", c.level ?? 1);
 
   const meta = headerText.createEl("div");
@@ -1183,23 +1279,33 @@ if (!c) {
     tableWrap.style.gap = "6px";
 
     const resolvedInventory = inventory
-      .map(entry => {
-        const itemPath = String(entry?.item ?? "").trim();
+      .map((entry, inventoryIndex) => {
+        const itemPath = resolvePathRef(entry?.item, ITEMS_FOLDER);
         const itemPage = itemPath ? dv.page(itemPath) : null;
 
         if (!itemPage) return null;
 
+        const quantity = Math.max(1, Number(entry?.quantity ?? 1));
+        let attunedCount = 0;
+
+        for (let quantityIndex = 0; quantityIndex < quantity; quantityIndex++) {
+          const instanceId = makeInventoryInstanceId(itemPath, inventoryIndex, quantityIndex);
+          if (isInventoryInstanceAttuned(instanceId)) attunedCount++;
+        }
+
         return {
           entry,
+          inventoryIndex,
           itemPage,
           itemPath,
           name: String(itemPage.name ?? itemPage.file?.name ?? "Unknown Item"),
           notes: String(itemPage.notes ?? ""),
           weight: Number(itemPage.weight ?? 0),
-          quantity: Number(entry?.quantity ?? 1),
+          quantity,
           equipped: entry?.equipped === true,
           equipment: itemPage?.equipment === true,
-          attuned: isItemAttuned(itemPath)
+          attuned: attunedCount > 0,
+          attunedCount
         };
       })
       .filter(x => x);
@@ -1260,7 +1366,7 @@ if (!c) {
 
       const statusBits = [];
       if (item.equipped) statusBits.push("Equipped");
-      if (item.attuned) statusBits.push("Attuned");
+      if (item.attunedCount > 0) statusBits.push(`Attuned ${item.attunedCount}/${item.quantity}`);
 
       if (statusBits.length > 0) {
         const sub = leftWrap.createEl("div", { text: statusBits.join(" • ") });
@@ -1297,7 +1403,7 @@ if (!c) {
       addInfoRow(content, "Weight per Item", item.weight);
       addInfoRow(content, "Total Weight", rowWeight);
       addInfoRow(content, "Equipped", item.equipped ? "Yes" : "No");
-      addInfoRow(content, "Attuned", item.attuned ? "Yes" : "No");
+      addInfoRow(content, "Attuned", `${item.attunedCount} / ${item.quantity}`);
 
       const notesTitle = content.createEl("div", { text: "Notes" });
       notesTitle.style.fontWeight = "600";
@@ -1308,13 +1414,38 @@ if (!c) {
       content.createEl("div", {
         text: item.notes.trim().length > 0 ? item.notes : "Keine Notizen eingetragen."
       });
+
+      if (item.itemPage.equipment === true) {
+        const equipBtn = content.createEl("button", {
+          text: item.equipped ? "Unequip" : "Equip"
+        });
+
+        equipBtn.style.marginTop = "10px";
+        equipBtn.style.padding = "6px 10px";
+        equipBtn.style.borderRadius = "8px";
+        equipBtn.style.border = "1px solid var(--background-modifier-border)";
+        equipBtn.style.cursor = "pointer";
+        equipBtn.style.background = "var(--background-secondary)";
+        equipBtn.style.color = "var(--text-normal)";
+        equipBtn.style.fontWeight = "600";
+
+        equipBtn.addEventListener("click", async (evt) => {
+          evt.preventDefault();
+          evt.stopPropagation();
+
+          await toggleInventoryEquip(item.itemPath);
+
+          window.__dndActiveTab = "inventory";
+          activeTab = "inventory";
+          await renderInventory();
+        });
+      }
     }
 
     function renderInventoryRows(filterText = "") {
       tableWrap.innerHTML = "";
 
-      const filtered = resolvedInventory
-        .filter(item => matchesFilter(item, filterText));
+      const filtered = resolvedInventory.filter(item => matchesFilter(item, filterText));
 
       if (filtered.length === 0) {
         const empty = tableWrap.createEl("div", { text: "Keine passenden Einträge gefunden." });
@@ -1433,18 +1564,17 @@ if (!c) {
       return getAbilityModByName(statName);
     }
 
-    const actions = getAllCharacterActions()
-      .filter(action => {
-        const rawType = String(action.action_type ?? "").trim().toLowerCase();
-        const type = rawType.replace(/\s+/g, "_");
+    const actions = getAllCharacterActions().filter(action => {
+      const rawType = String(action.action_type ?? "").trim().toLowerCase();
+      const type = rawType.replace(/\s+/g, "_");
 
-        return (
-          type === "" ||
-          type === "action" ||
-          type === "bonus_action" ||
-          type === "reaction"
-        );
-      });
+      return (
+        type === "" ||
+        type === "action" ||
+        type === "bonus_action" ||
+        type === "reaction"
+      );
+    });
 
     const groupedActions = {
       action: [],
@@ -1954,31 +2084,47 @@ if (!c) {
     const characterFile = app.vault.getAbstractFileByPath(CHARACTER_PATH);
 
     const attunementSlots = Number(c.attunement_slots ?? 3);
-    let attunedItems = Array.isArray(c.attuned_items) ? [...c.attuned_items] : [];
+    let attunedItems = Array.isArray(c.attuned_items)
+      ? c.attuned_items.map(x => String(x))
+      : [];
 
     const inventoryEntries = Array.isArray(c.inventory) ? c.inventory : [];
 
-    const attunableItems = inventoryEntries
-      .map(entry => {
-        const itemPath = String(entry?.item ?? "").trim();
-        const itemPage = itemPath ? dv.page(itemPath) : null;
-        if (!itemPage) return null;
+    const attunableItems = [];
 
-        const requiresAttunement = itemPage.attunement === true;
-        if (!requiresAttunement) return null;
+    for (let inventoryIndex = 0; inventoryIndex < inventoryEntries.length; inventoryIndex++) {
+      const entry = inventoryEntries[inventoryIndex];
+      const itemPath = resolvePathRef(entry?.item, ITEMS_FOLDER);
+      const itemPage = itemPath ? dv.page(itemPath) : null;
+      if (!itemPage) continue;
 
-        return {
+      const requiresAttunement = itemPage.attunement === true;
+      if (!requiresAttunement) continue;
+
+      const quantity = Math.max(1, Number(entry?.quantity ?? 1));
+
+      for (let quantityIndex = 0; quantityIndex < quantity; quantityIndex++) {
+        const instanceId = makeInventoryInstanceId(itemPath, inventoryIndex, quantityIndex);
+
+        attunableItems.push({
+          instanceId,
+          inventoryIndex,
+          quantityIndex,
           itemPath,
           itemPage,
           name: String(itemPage.name ?? itemPage.file?.name ?? "Unknown Item"),
+          displayName:
+            quantity > 1
+              ? `${String(itemPage.name ?? itemPage.file?.name ?? "Unknown Item")}`
+              : String(itemPage.name ?? itemPage.file?.name ?? "Unknown Item"),
           type: String(itemPage.type ?? "-"),
           notes: String(itemPage.notes ?? ""),
-          quantity: Number(entry?.quantity ?? 1),
+          quantity: 1,
           equipped: entry?.equipped === true,
-          isAttuned: attunedItems.includes(itemPath)
-        };
-      })
-      .filter(x => x);
+          isAttuned: attunedItems.includes(instanceId)
+        });
+      }
+    }
 
     const searchWrap = tabContent.createEl("div");
     searchWrap.style.marginBottom = "10px";
@@ -2057,11 +2203,11 @@ if (!c) {
         slotLabel.style.opacity = "0.7";
         slotLabel.style.marginBottom = "4px";
 
-        const itemPath = attunedItems[i];
-        if (itemPath) {
-          const itemPage = dv.page(itemPath);
+        const instanceId = attunedItems[i];
+        if (instanceId) {
+          const found = attunableItems.find(x => x.instanceId === instanceId);
           card.createEl("div", {
-            text: itemPage?.name ?? itemPage?.file?.name ?? itemPath
+            text: found?.displayName ?? found?.name ?? instanceId
           });
         } else {
           const empty = card.createEl("div", { text: "Empty" });
@@ -2102,7 +2248,7 @@ if (!c) {
 
       const leftWrap = summary.createEl("div");
 
-      const nameEl = leftWrap.createEl("div", { text: item.name });
+      const nameEl = leftWrap.createEl("div", { text: item.displayName ?? item.name });
       nameEl.style.fontWeight = "600";
 
       const typeEl = leftWrap.createEl("div", { text: item.type });
@@ -2134,16 +2280,16 @@ if (!c) {
         evt.stopPropagation();
         clearError();
 
-        const alreadyAttuned = attunedItems.includes(item.itemPath);
+        const alreadyAttuned = attunedItems.includes(item.instanceId);
 
         if (alreadyAttuned) {
-          attunedItems = attunedItems.filter(path => path !== item.itemPath);
+          attunedItems = attunedItems.filter(id => id !== item.instanceId);
         } else {
           if (attunedItems.length >= attunementSlots) {
             showError("No free attunement slots available.");
             return;
           }
-          attunedItems.push(item.itemPath);
+          attunedItems.push(item.instanceId);
         }
 
         window.__dndActiveTab = "attunement";
@@ -2158,7 +2304,8 @@ if (!c) {
       content.style.background = "var(--background-primary-alt)";
 
       addInfoRow(content, "Type", item.type);
-      addInfoRow(content, "Quantity", item.quantity);
+      addInfoRow(content, "Inventory Slot", item.inventoryIndex + 1);
+      addInfoRow(content, "Copy", item.quantityIndex + 1);
       addInfoRow(content, "Equipped", item.equipped ? "Yes" : "No");
       addInfoRow(content, "Attunement", "Required");
 
@@ -2181,11 +2328,12 @@ if (!c) {
       const filtered = attunableItems
         .map(item => ({
           ...item,
-          isAttuned: attunedItems.includes(item.itemPath)
+          isAttuned: attunedItems.includes(item.instanceId)
         }))
         .filter(item => {
           const haystack = [
             item.name,
+            item.displayName,
             item.type,
             item.notes
           ].join(" ").toLowerCase();
@@ -2194,7 +2342,7 @@ if (!c) {
         })
         .sort((a, b) => {
           if (a.isAttuned !== b.isAttuned) return a.isAttuned ? -1 : 1;
-          return a.name.localeCompare(b.name, "de");
+          return a.displayName.localeCompare(b.displayName, "de");
         });
 
       if (filtered.length === 0) {
@@ -2529,8 +2677,3 @@ if (!c) {
   }
 }
 ```
-
-
-
-
-
