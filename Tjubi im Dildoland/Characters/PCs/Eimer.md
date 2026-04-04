@@ -1,5 +1,7 @@
 ```dataviewjs
 const CHARACTER_PATH = "Public/3 Backend/EIMER.md";
+
+const ITEMS_FOLDER = "Public/3 Backend/Items/";
 const ACTIONS_FOLDER = "Public/3 Backend/Actions/";
 const SPELLS_FOLDER = "Public/3 Backend/Spells/";
 const FEATURES_FOLDER = "Public/3 Backend/Features/";
@@ -20,6 +22,38 @@ function profValue(isProf, base, profBonus) {
 
 function isInFolder(filePath, folderPath) {
   return String(filePath ?? "").startsWith(folderPath);
+}
+
+function normalizeRef(ref) {
+  return String(ref ?? "").trim();
+}
+
+function resolvePathRef(ref, folderPath) {
+  const raw = normalizeRef(ref);
+  if (!raw) return null;
+
+  const candidates = [];
+
+  if (raw.includes("/")) {
+    candidates.push(raw);
+    if (!raw.endsWith(".md")) candidates.push(`${raw}.md`);
+  } else {
+    candidates.push(`${folderPath}${raw}`);
+    candidates.push(`${folderPath}${raw}.md`);
+  }
+
+  for (const candidate of candidates) {
+    const file = app.vault.getAbstractFileByPath(candidate);
+    if (file) return candidate;
+  }
+
+  return null;
+}
+
+function resolvePageRef(ref, folderPath) {
+  const resolvedPath = resolvePathRef(ref, folderPath);
+  if (!resolvedPath) return null;
+  return dv.page(resolvedPath);
 }
 
 function uniqueActionObjects(entries) {
@@ -43,7 +77,7 @@ function uniqueActionObjects(entries) {
 }
 
 function getAttunedItemPaths() {
-  return Array.isArray(c.attuned_items) ? c.attuned_items : [];
+  return Array.isArray(c.attuned_items) ? c.attuned_items.map(x => resolvePathRef(x, ITEMS_FOLDER) ?? String(x)) : [];
 }
 
 function isItemEquipped(entry) {
@@ -92,7 +126,6 @@ function evaluateBonusFormula(formula) {
   if (!expr) return null;
 
   const ctx = getFormulaContext();
-
   let safeExpr = expr;
 
   const replacements = [
@@ -135,9 +168,8 @@ function getAllCharacterFeatures() {
   const featureRefs = Array.isArray(c.features) ? c.features : [];
 
   return featureRefs
-    .map(path => dv.page(String(path)))
+    .map(ref => resolvePageRef(ref, FEATURES_FOLDER))
     .filter(p => p)
-    .filter(p => isInFolder(String(p.file?.path ?? ""), FEATURES_FOLDER))
     .sort((a, b) => {
       const nameA = String(a.name ?? a.file?.name ?? "");
       const nameB = String(b.name ?? b.file?.name ?? "");
@@ -148,11 +180,10 @@ function getAllCharacterFeatures() {
 function getActiveBonusEffects() {
   const activeEffects = [];
 
-  // ITEM-BONI
   const inventoryEntries = Array.isArray(c.inventory) ? c.inventory : [];
 
   for (const entry of inventoryEntries) {
-    const itemPath = String(entry?.item ?? "").trim();
+    const itemPath = resolvePathRef(entry?.item, ITEMS_FOLDER);
     if (!itemPath) continue;
 
     const itemPage = dv.page(itemPath);
@@ -205,7 +236,6 @@ function getActiveBonusEffects() {
     }
   }
 
-  // FEATURE-BONI
   const features = getAllCharacterFeatures();
 
   for (const featurePage of features) {
@@ -384,11 +414,8 @@ function getAllCharacterActions() {
   const explicitActionRefs = Array.isArray(c.actions) ? c.actions : [];
 
   for (const actionRef of explicitActionRefs) {
-    const actionPage = dv.page(String(actionRef));
+    const actionPage = resolvePageRef(actionRef, ACTIONS_FOLDER);
     if (!actionPage) continue;
-
-    const path = String(actionPage.file?.path ?? "");
-    if (!isInFolder(path, ACTIONS_FOLDER)) continue;
 
     const category = String(actionPage.category ?? "").trim().toLowerCase();
     if (category === "spell") continue;
@@ -404,7 +431,7 @@ function getAllCharacterActions() {
   const inventoryEntries = Array.isArray(c.inventory) ? c.inventory : [];
 
   for (const entry of inventoryEntries) {
-    const itemPath = String(entry?.item ?? "").trim();
+    const itemPath = resolvePathRef(entry?.item, ITEMS_FOLDER);
     if (!itemPath) continue;
 
     const itemPage = dv.page(itemPath);
@@ -442,11 +469,8 @@ function getAllCharacterSpells() {
   const explicitSpellRefs = Array.isArray(c.spells) ? c.spells : [];
 
   for (const spellRef of explicitSpellRefs) {
-    const spellPage = dv.page(String(spellRef));
+    const spellPage = resolvePageRef(spellRef, SPELLS_FOLDER);
     if (!spellPage) continue;
-
-    const path = String(spellPage.file?.path ?? "");
-    if (!isInFolder(path, SPELLS_FOLDER)) continue;
 
     const category = String(spellPage.category ?? "").trim().toLowerCase();
     if (category && category !== "spell") continue;
@@ -462,7 +486,7 @@ function getAllCharacterSpells() {
   const inventoryEntries = Array.isArray(c.inventory) ? c.inventory : [];
 
   for (const entry of inventoryEntries) {
-    const itemPath = String(entry?.item ?? "").trim();
+    const itemPath = resolvePathRef(entry?.item, ITEMS_FOLDER);
     if (!itemPath) continue;
 
     const itemPage = dv.page(itemPath);
@@ -539,7 +563,7 @@ if (!c) {
 
   addHeaderInfoRow(subtitle, "Race", c.race ?? "Unknown Race");
   addHeaderInfoRow(subtitle, "Class", c.class ?? "Unknown Class");
-  addHeaderInfoRow(subtitle, "Subclass", c.subclass ?? "-");
+  addHeaderInfoRow(subtitle, "Subclass", Array.isArray(c.subclass) ? c.subclass.filter(Boolean).join(", ") || "-" : (c.subclass ?? "-"));
   addHeaderInfoRow(subtitle, "Level", c.level ?? 1);
 
   const meta = headerText.createEl("div");
@@ -1184,7 +1208,7 @@ if (!c) {
 
     const resolvedInventory = inventory
       .map(entry => {
-        const itemPath = String(entry?.item ?? "").trim();
+        const itemPath = resolvePathRef(entry?.item, ITEMS_FOLDER);
         const itemPage = itemPath ? dv.page(itemPath) : null;
 
         if (!itemPage) return null;
@@ -1954,13 +1978,15 @@ if (!c) {
     const characterFile = app.vault.getAbstractFileByPath(CHARACTER_PATH);
 
     const attunementSlots = Number(c.attunement_slots ?? 3);
-    let attunedItems = Array.isArray(c.attuned_items) ? [...c.attuned_items] : [];
+    let attunedItems = Array.isArray(c.attuned_items)
+      ? c.attuned_items.map(x => resolvePathRef(x, ITEMS_FOLDER) ?? String(x))
+      : [];
 
     const inventoryEntries = Array.isArray(c.inventory) ? c.inventory : [];
 
     const attunableItems = inventoryEntries
       .map(entry => {
-        const itemPath = String(entry?.item ?? "").trim();
+        const itemPath = resolvePathRef(entry?.item, ITEMS_FOLDER);
         const itemPage = itemPath ? dv.page(itemPath) : null;
         if (!itemPage) return null;
 
@@ -2529,8 +2555,3 @@ if (!c) {
   }
 }
 ```
-
-
-
-
-
