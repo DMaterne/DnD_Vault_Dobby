@@ -48,7 +48,11 @@ lager: aethuse und makkus unterhalten sich. aethusa will abenteuer, die welt seh
 tag drei: 
 gehen weiter. rascheln. eimer schaut nach. tier. tier weg. 
 vegetation nimmt zu. fruchtbarer. wieder rascheln.
-aethusa merkt dass uns büsche verfolgen
+aethusa merkt dass uns büsche verfolgen durch detect magic
+kämpfen gegen büsche: runde 1 nur misses. makkus hämmert einen in den boden. kaz erschießt einen. 
+magische schwebende elastische kugel bleibt zurück. ist sphäre die durch detect magic gespürt wurde.
+eimer packt magie in seinen eimer (backpack). eimer versucht den kern zu zerstören. kern weicht aus. eimer frisst kern. warmes gefühl, kern verschwindet, fühlt sich fitter. isst noch ne kugel. gleicher effekt. eimer heilt aethusa. aethusa nimmt busch-proben. kennt viecher: blight, haben mehrere unterarten
+gehen weiter. 
 
 
 
