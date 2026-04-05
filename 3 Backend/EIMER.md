@@ -124,7 +124,10 @@ spellcasting_ability: int
 attunement_slots: 3
 attuned_items:
 ---
+# Bilder
 
+![[Eimer Full.png]]
+![[EIMER.png]]
 # Notes 
 
 ### Backstory:
@@ -170,3 +173,4 @@ Sollte Arborgas den Schritt in das Unbekannte wagen, werde ich meinen Teil dazu 
 
 **Hochachtungsvoll**  
 **Eimer**
+

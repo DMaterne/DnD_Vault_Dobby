@@ -7,7 +7,7 @@
 > ###### Stats
 > | Typ |  Stat |
 > | ---- | ---- |
-> | Kontinent | [[???]] |
+> | Kontinent | ??? |
 > | Bevölkerung | ??? |
 > | Oberhaupt | ??? |
 
