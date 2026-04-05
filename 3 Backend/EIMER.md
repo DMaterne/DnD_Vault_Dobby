@@ -104,7 +104,6 @@ inventory:
   - item: Ankerstein
     quantity: 1
     equipped: false
-
 features:
   - Public/3 Backend/Features/Integrated Protection.md
   - Public/3 Backend/Features/Magical Tinkering.md

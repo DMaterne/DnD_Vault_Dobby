@@ -36,11 +36,19 @@ bernd auch da
 gehen auf wachtürme um umgebung zu erblicken
 fluss und plains in der ferne. kein wald. büsche. 
 gehen los. 
+
 gefühl als hätten wir etwas vergessen. fühlen uns belebter. 
 typlisches minecraft plains biom
-tag zwei: rascheln, kein stress
+
+tag zwei: 
+rascheln, kein stress
 schleifspuren und hufabdrücke
 lager: aethuse und makkus unterhalten sich. aethusa will abenteuer, die welt sehen. makkus will rohstoffe und rebelliert indem er phallussymbole in der stadt verteilt. 
+
+tag drei: 
+gehen weiter. rascheln. eimer schaut nach. tier. tier weg. 
+vegetation nimmt zu. fruchtbarer. wieder rascheln.
+aethusa merkt dass uns büsche verfolgen
 
 
 
