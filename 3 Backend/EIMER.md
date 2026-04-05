@@ -131,7 +131,7 @@ attuned_items:
 
 # Rede
 Hallo,
-ich bin Eimer. Ich bin Lehrling bei Meister Andi. Auch arbeite ich auf dem Hof von Georgius Obermüller. Ich bin belastbar, effizient und an körperliche Aufgaben gewöhnt. Mit hoher Wahrscheinlichkeit wird die Mission erfolgreich sein. Sie müssen sich keine Sorgen machen.
+ich bin Eimer. Ich bin Lehrling bei Meister Andi und arbeite ich auf dem Hof von Georgius Obermüller. Ich bin belastbar, effizient und an körperliche Aufgaben gewöhnt. Mit hoher Wahrscheinlichkeit wird die Mission erfolgreich sein. Sie müssen sich keine Sorgen machen.
 Vielen Dank für Ihre Aufmerksamkeit. 
 
 # Notes 

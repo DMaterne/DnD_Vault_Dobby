@@ -24,8 +24,23 @@ gehen mit kaz ins restaurant von kumpel. felsmahl. goliath fels betreibt das res
 chillen bei nicolas. schreiben rede.
 Eimer merkt sich: Ciau Cacao ist eine gute Verabschiedung.
 jahrmarktspiele, band fieberbaum (heavy wood musik, frech und fetzig). 
-makkus bekommt seinen humpen von kumpel. stellt uns vor. makkus versucht brauer und aethusa (noch abwesend) zu verkuppeln. essen bei fels. 
-
+makkus bekommt seinen humpen von kumpel. stellt uns vor. makkus versucht brauer und aethusa (noch abwesend) zu verkuppeln. essen bei fels. eimer schenkt fels einen stein.
+rede der gruppenmitglieder und bernd. volk ist begeistert.
+disco disco, partisane
+planen die stadt im norden zu verlassen
+treffen uns am nordtor
+eimers familie wird mit ciao kakao verabschiedet, übernehmen sie
+familie von aethusa auch teilweise da.
+barbara knuddelt makkus zum abschied (mutti)
+bernd auch da
+gehen auf wachtürme um umgebung zu erblicken
+fluss und plains in der ferne. kein wald. büsche. 
+gehen los. 
+gefühl als hätten wir etwas vergessen. fühlen uns belebter. 
+typlisches minecraft plains biom
+tag zwei: rascheln, kein stress
+schleifspuren und hufabdrücke
+lager: aethuse und makkus unterhalten sich. aethusa will abenteuer, die welt sehen. makkus will rohstoffe und rebelliert indem er phallussymbole in der stadt verteilt. 
 
 
 
