@@ -87,7 +87,7 @@ inventory:
     quantity: 1
     equipped: false
   - item: Public/3 Backend/Items/Torch.md
-    quantity: 10
+    quantity: 9
     equipped: false
   - item: Public/3 Backend/Items/Waterskin.md
     quantity: 1
@@ -101,6 +101,9 @@ inventory:
   - item: Public/3 Backend/Items/Backpack.md
     quantity: 1
     equipped: true
+  - item: Public/3 Backend/Items/Eimer's Wissenssammlung.md
+    quantity: 1
+    equipped: false
 
 features:
   - Public/3 Backend/Features/Integrated Protection.md
