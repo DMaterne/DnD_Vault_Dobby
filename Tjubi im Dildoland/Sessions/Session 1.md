@@ -53,6 +53,7 @@ kämpfen gegen büsche: runde 1 nur misses. makkus hämmert einen in den boden. 
 magische schwebende elastische kugel bleibt zurück. ist sphäre die durch detect magic gespürt wurde.
 eimer packt magie in seinen eimer (backpack). eimer versucht den kern zu zerstören. kern weicht aus. eimer frisst kern. warmes gefühl, kern verschwindet, fühlt sich fitter. isst noch ne kugel. gleicher effekt. eimer heilt aethusa. aethusa nimmt busch-proben. kennt viecher: blight, haben mehrere unterarten
 gehen weiter. machen lager. eimer bekommt von aethusa eine ethik-stunde, sobald sie wieder in der stadt sind. glauben an zauberer, keine richtige religion. 
+wache aethusa. komisches paranoia gefühl. körperloses wesen in der nähe. weckt eimer. schatten verbinden sich. hand greift nach aethusa
 
 
 
