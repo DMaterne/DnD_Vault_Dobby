@@ -57,7 +57,13 @@ wache aethusa. komisches paranoia gefühl. körperloses wesen in der nähe. weck
 kampf: aethusa und schatten missen. anderen wachen auf. eimer hittet mit thunderclap. schatten knocked eimer. aethusa misst schatten. makkus joint und boxt schatten. kampf. teleportiert sich hin und her und boxt leute. besiegt in aethusas schatten. ihr schatten verschwindet. machen noch 6h rest. makkus wache.
 
 tag 4:
-weiter richtung fluss. schatten kommt langsam zurück. rinderherde in der ferne. zwei büsche langsam richtung herde. catchen 1 und attackieren es. bereiten uns auf kampf vor.
+weiter richtung fluss. schatten kommt langsam zurück. rinderherde in der ferne. zwei büsche langsam richtung herde. catchen 1 und attackieren es. bereiten uns auf kampf vor. erledigen die viecher. machen lager bei den besiegten gegner. eimer beobachtet orbs, kaz und aethusa halten nachtwache. büsche komment und hauen wieder ab sobald sie in sichtweite sind. die orbs chillen. es raschelt. liane schnappt sich orb. wird konsumiert. ranke holt kugel. verschlingt kugel. restliche nacht ruhig. 
+
+tag 5: 
+nach einiger zeit hören wir den fluss. paar wildtiere. kommen kurz vor nachteinbruch an. noch ein extra geräusch, nass. eimer macht leuchtesteine und makkus wirft sie richtung geräusch. aethusa sneakt. nachtwache ohne probleme
+
+tag 6:
+kreatur zieht kreise am flussufer. aus wasser bestehend. ist ein elementar, vorraussichtlich wasser. eimer und aethusa wissen, dass diese sehr terretorial sind. sollte möglich sein etwas näher ran zu gehen. sneaken richtung elementar. in der mitte 12 magische essenzen. auch eine starke und große dabei. elementar wesentlich stärker als die essenz in der mitte.
 
 
 
