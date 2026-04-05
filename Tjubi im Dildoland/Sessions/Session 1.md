@@ -8,7 +8,23 @@ Spieler: alle
 arborgas, groß, alles. was wir wissen. etwa 1000 jahre unter mag kuppel. von magier o. ganzer kontinent invasion, alle zivilisationen weg. monster tauchen auf aber geschützt. baum von dem kuppel aus geht. groß. marktplatz darum, rathaus, tavenren, gilden und co. innen nice, außen simpler. keine große armut. diplom. hautstadt damals. viele rassen, diversität. rassismus wenig. wachen, rechtssystem. platz wird eng, monster weniger, lass expedition in die außenwelt starten. ausschreibung.
 bürgermeister bernd: dünn, mittelalt, schnauzer groß.
 staten bei ihm. eimer 
-
+bönki: 1,58m faun, stoffkleidung beige/braun. fell. rote haare/bronze. spellbook an hüfte. kleidung krabbelt was am hals rum. grüne augen. name Aethusa (Silie). 
+Schoas: 1,51m Zwerg, verflochtener bart bis hals, kleiner hammer. simple kleidung. Name: Makkus
+Iggy: Kaz, drow, dunkle haare, augenklappe
+wollen gebiet erweitern. wir sollen erkunden. damit wir expandieren können. gefahren auschecken. wie und warum ergründen. andere zivilisationen anfreunden. 
+privilegien: ausrüstung wird gestellt, bei händlern holen. rabatte: andi 20%, reparaturen auswendig. silides supermarkt: 50% auf alles außer tiernahrung. helga behandelt und kostenlos, 10% auf heilgegenstände. akademie: maniat stellt 4 ankersteine (fixiert zu baum, teleportiert ganze gruppe). 10gp pro stein statt 50gp in zukunft. gehalt: montlich aber höhe noch unbekannt. 
+familiar taya, schlange (bönki).
+vorbereitungen für abschiedsfest, wir kommen auf bühne. sollen uns vorstellen. Kaz wird bestochen damit er sich benimmt. kas hat komische freunde, objektiv betrachtet. 4 tore, jede himmelsrichtung. bönki wohnt im norden. bönki bekommt schein der sagt dass wir der erkundungstrupp sind. um 10 gehts los
+gehen zu andi. explosion. andi kommt aus ellbach vom akzent. bekommen ausrüstung.
+makkus geht zu linn, seinem crush. holt da seinen hammer. cringe. 
+siglinde: fester, klein, beschäftigt. sieht aus wie ne nettomitarbeitein mit roten kurzhaarschnitt. kaufen ein. sie bescheißt die stadt.
+gehen zu helga. hedliden und helga heißt der name, aber hedlinde hat an tochter helga abgegeben und ist jetzt in rente. warten 30min. bekommen gegengift gegen pflanzen.
+gehen zur akademie. werden begrüßt. gehen zu meniat. lange wendeltreppe. sehr lang. meniat: schulleiter, rollstuhl, murmelt vor sich hin, wie ne rosine alt. absolut dement. plötzlich wieder fit. rollstuhl fährt per magie. holt ankersteine. sehen aus als wären sie abgebaut worden. wenn man an die stadt denkt und sie schüttelt, wird man zurück teleportiert. jeder bekommt einen. meniat ist uralt keiner weiß wie alt. war schon immer da. geist verfällt, körper ist eh schon am limit.
+gehen mit kaz ins restaurant von kumpel. felsmahl. goliath fels betreibt das restaurant. stellen uns vor. eintopf mit unbearbeiteten zutaten. außnahmsweise rattenlos.da eimer undicht ist, isst er auf der toilette. trinken noch bier, eimer läuft aus. 
+chillen bei nicolas. schreiben rede.
+Eimer merkt sich: Ciau Cacao ist eine gute Verabschiedung.
+jahrmarktspiele, band fieberbaum (heavy wood musik, frech und fetzig). 
+makkus bekommt seinen humpen von kumpel. stellt uns vor. makkus versucht brauer und aethusa (noch abwesend) zu verkuppeln. essen bei fels. 
 
 
 

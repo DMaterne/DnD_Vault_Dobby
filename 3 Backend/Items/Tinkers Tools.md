@@ -1,5 +1,5 @@
 ---
-name: Thieves Tools
+name: Tinkers Tools
 type: tool
 weight: 1
 equipment: true

@@ -68,7 +68,7 @@ inventory:
   - item: Public/3 Backend/Items/Scale Mail.md
     quantity: 1
     equipped: true
-  - item: Public/3 Backend/Items/Thieves Tools.md
+  - item: Public/3 Backend/Items/Tinkers Tools.md
     quantity: 1
     equipped: true
   - item: Public/3 Backend/Items/Crowbar.md
@@ -80,17 +80,11 @@ inventory:
   - item: Public/3 Backend/Items/Piton.md
     quantity: 10
     equipped: false
-  - item: Public/3 Backend/Items/Rations (1 day).md
-    quantity: 1
-    equipped: false
   - item: Public/3 Backend/Items/Tinderbox.md
     quantity: 1
     equipped: false
   - item: Public/3 Backend/Items/Torch.md
-    quantity: 9
-    equipped: false
-  - item: Public/3 Backend/Items/Waterskin.md
-    quantity: 1
+    quantity: 5
     equipped: false
   - item: Public/3 Backend/Items/Rope (50ft, Hempen).md
     quantity: 1
@@ -102,6 +96,12 @@ inventory:
     quantity: 1
     equipped: true
   - item: Public/3 Backend/Items/Eimer's Wissenssammlung.md
+    quantity: 1
+    equipped: false
+  - item: Gegengift
+    quantity: 1
+    equipped: false
+  - item: Ankerstein
     quantity: 1
     equipped: false
 
@@ -128,6 +128,12 @@ attuned_items:
 
 ![[Eimer Full.png]]
 ![[EIMER.png]]
+
+# Rede
+Hallo,
+ich bin Eimer. Ich bin Lehrling bei Meister Andi. Auch arbeite ich auf dem Hof von Georgius Obermüller. Ich bin belastbar, effizient und an körperliche Aufgaben gewöhnt. Mit hoher Wahrscheinlichkeit wird die Mission erfolgreich sein. Sie müssen sich keine Sorgen machen.
+Vielen Dank für Ihre Aufmerksamkeit. 
+
 # Notes 
 
 ### Backstory:

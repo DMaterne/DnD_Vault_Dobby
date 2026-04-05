@@ -67,4 +67,4 @@ spellcasting_ability: int
 ## Notes 
 
 Familie:
-Familienoberhaupt der Familie Obermüller
+Familienoberhaupt der Familie Obermüller. Wohnt im Süden
