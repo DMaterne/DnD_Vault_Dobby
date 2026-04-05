@@ -54,7 +54,10 @@ magische schwebende elastische kugel bleibt zurück. ist sphäre die durch detec
 eimer packt magie in seinen eimer (backpack). eimer versucht den kern zu zerstören. kern weicht aus. eimer frisst kern. warmes gefühl, kern verschwindet, fühlt sich fitter. isst noch ne kugel. gleicher effekt. eimer heilt aethusa. aethusa nimmt busch-proben. kennt viecher: blight, haben mehrere unterarten
 gehen weiter. machen lager. eimer bekommt von aethusa eine ethik-stunde, sobald sie wieder in der stadt sind. glauben an zauberer, keine richtige religion. 
 wache aethusa. komisches paranoia gefühl. körperloses wesen in der nähe. weckt eimer. schatten verbinden sich. hand greift nach aethusa. rennt weg.
-kampf: aethusa und schatten missen. anderen wachen auf. eimer hittet mit thunderclap. schatten knocked eimer. aethusa misst schatten. makkus joint und boxt schatten. 
+kampf: aethusa und schatten missen. anderen wachen auf. eimer hittet mit thunderclap. schatten knocked eimer. aethusa misst schatten. makkus joint und boxt schatten. kampf. teleportiert sich hin und her und boxt leute. besiegt in aethusas schatten. ihr schatten verschwindet. machen noch 6h rest. makkus wache.
+
+tag 4:
+weiter richtung fluss. schatten kommt langsam zurück. rinderherde in der ferne. zwei büsche langsam richtung herde. catchen 1 und attackieren es. bereiten uns auf kampf vor.
 
 
 

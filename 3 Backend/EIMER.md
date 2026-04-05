@@ -15,7 +15,7 @@ int: 16
 wis: 10
 cha: 8
 proficiency_bonus: 2
-hp_current: 0
+hp_current: 11
 hp_max: 11
 ac: 12
 speed: 30
@@ -107,7 +107,6 @@ inventory:
 features:
   - Public/3 Backend/Features/Integrated Protection.md
   - Public/3 Backend/Features/Magical Tinkering.md
-  - Debuff
 hp_temp: 0
 actions:
   - Public/3 Backend/Actions/Opportunity Attack.md
