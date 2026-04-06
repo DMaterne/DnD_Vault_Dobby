@@ -584,6 +584,27 @@ function getAllCharacterSpells() {
   return uniqueActionObjects(collectedSpells);  
 }  
   
+async function renderMarkdownInto(container, markdownText, filePathForLinks = CHARACTER_PATH) {  
+  container.innerHTML = "";  
+  
+  const md = String(markdownText ?? "").trim();  
+  if (!md) {  
+    container.createEl("div", { text: "Keine Notizen eingetragen." });  
+    return;  
+  }  
+  
+  const sourcePath = String(filePathForLinks ?? CHARACTER_PATH);  
+  const sourceFile = app.vault.getAbstractFileByPath(sourcePath);  
+  
+  await MarkdownRenderer.render(  
+    app,  
+    md,  
+    container,  
+    sourcePath,  
+    sourceFile instanceof TFile ? sourceFile : null  
+  );  
+}  
+  
 if (!c) {  
   dv.paragraph("Character-Datei nicht gefunden.");  
 } else {  
@@ -591,162 +612,6 @@ if (!c) {
   wrapper.style.display = "flex";  
   wrapper.style.flexDirection = "column";  
   wrapper.style.gap = "18px";  
-  
-  function escapeHtml(str) {  
-    return String(str)  
-      .replace(/&/g, "&amp;")  
-      .replace(/</g, "&lt;")  
-      .replace(/>/g, "&gt;")  
-      .replace(/"/g, "&quot;");  
-  }  
-  
-  function renderInlineMarkdown(line) {  
-    let html = escapeHtml(line);  
-  
-    html = html.replace(/\[\[([^\]|]+)(\|([^\]]+))?\]\]/g, (match, target, _aliasPart, alias) => {  
-      const rawTarget = String(target ?? "").trim();  
-      const linkText = String(alias ?? rawTarget).trim();  
-  
-      return `<a href="#" class="custom-obsidian-link" data-href="${escapeHtml(rawTarget)}">${escapeHtml(linkText)}</a>`;  
-    });  
-  
-    html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_match, text, url) => {  
-      const safeText = escapeHtml(text);  
-      const safeUrl = escapeHtml(url);  
-      return `<a href="${safeUrl}" target="_blank" rel="noopener">${safeText}</a>`;  
-    });  
-  
-    html = html.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");  
-    html = html.replace(/\*(.+?)\*/g, "<em>$1</em>");  
-    html = html.replace(/`([^`]+)`/g, "<code>$1</code>");  
-  
-    return html;  
-  }  
-  
-  function renderSimpleMarkdown(md) {  
-    const lines = String(md ?? "").split(/\r?\n/);  
-    const htmlParts = [];  
-  
-    let inList = false;  
-    let inCodeBlock = false;  
-    let codeBuffer = [];  
-  
-    function closeList() {  
-      if (inList) {  
-        htmlParts.push("</ul>");  
-        inList = false;  
-      }  
-    }  
-  
-    function closeCodeBlock() {  
-      if (inCodeBlock) {  
-        htmlParts.push(`<pre><code>${escapeHtml(codeBuffer.join("\n"))}</code></pre>`);  
-        inCodeBlock = false;  
-        codeBuffer = [];  
-      }  
-    }  
-  
-    for (const rawLine of lines) {  
-      const line = rawLine ?? "";  
-  
-      if (line.trim().startsWith("```")) {  
-        closeList();  
-  
-        if (!inCodeBlock) {  
-          inCodeBlock = true;  
-          codeBuffer = [];  
-        } else {  
-          closeCodeBlock();  
-        }  
-        continue;  
-      }  
-  
-      if (inCodeBlock) {  
-        codeBuffer.push(line);  
-        continue;  
-      }  
-  
-      if (/^\s*[-*]\s+/.test(line)) {  
-        if (!inList) {  
-          htmlParts.push("<ul>");  
-          inList = true;  
-        }  
-        const itemText = line.replace(/^\s*[-*]\s+/, "");  
-        htmlParts.push(`<li>${renderInlineMarkdown(itemText)}</li>`);  
-        continue;  
-      } else {  
-        closeList();  
-      }  
-  
-      if (/^###\s+/.test(line)) {  
-        htmlParts.push(`<h3>${renderInlineMarkdown(line.replace(/^###\s+/, ""))}</h3>`);  
-        continue;  
-      }  
-  
-      if (/^##\s+/.test(line)) {  
-        htmlParts.push(`<h2>${renderInlineMarkdown(line.replace(/^##\s+/, ""))}</h2>`);  
-        continue;  
-      }  
-  
-      if (/^#\s+/.test(line)) {  
-        htmlParts.push(`<h1>${renderInlineMarkdown(line.replace(/^#\s+/, ""))}</h1>`);  
-        continue;  
-      }  
-  
-      if (line.trim() === "") {  
-        htmlParts.push("<div style='height: 0.6em;'></div>");  
-        continue;  
-      }  
-  
-      htmlParts.push(`<p style="margin: 0 0 0.6em 0;">${renderInlineMarkdown(line)}</p>`);  
-    }  
-  
-    closeList();  
-    closeCodeBlock();  
-  
-    return htmlParts.join("\n");  
-  }  
-  
-  function renderMarkdownInto(container, markdown, sourcePath = CHARACTER_PATH) {  
-    container.innerHTML = renderSimpleMarkdown(markdown ?? "");  
-  
-    container.querySelectorAll("a.custom-obsidian-link").forEach((linkEl) => {  
-      linkEl.style.color = "var(--link-color)";  
-      linkEl.style.textDecoration = "underline";  
-      linkEl.style.cursor = "pointer";  
-  
-      linkEl.addEventListener("click", async (evt) => {  
-        evt.preventDefault();  
-        evt.stopPropagation();  
-  
-        const target = linkEl.getAttribute("data-href");  
-        if (!target) return;  
-  
-        await app.workspace.openLinkText(target, sourcePath, true);  
-      });  
-    });  
-  }  
-  
-  function createMarkdownSection(parent, titleText, markdown, sourcePath = CHARACTER_PATH, emptyText = "Keine Notizen eingetragen.") {  
-    const block = parent.createEl("div");  
-    block.style.marginTop = "8px";  
-  
-    const blockTitle = block.createEl("div", { text: titleText });  
-    blockTitle.style.fontWeight = "600";  
-    blockTitle.style.marginBottom = "6px";  
-    blockTitle.style.opacity = "0.85";  
-  
-    const box = block.createEl("div");  
-    box.style.padding = "10px";  
-    box.style.border = "1px solid var(--background-modifier-border)";  
-    box.style.borderRadius = "8px";  
-    box.style.lineHeight = "1.6";  
-  
-    const content = String(markdown ?? "").trim();  
-    renderMarkdownInto(box, content.length > 0 ? content : emptyText, sourcePath);  
-  
-    return box;  
-  }  
   
   const headerRow = wrapper.createEl("div");  
   headerRow.style.display = "grid";  
@@ -1260,7 +1125,7 @@ if (!c) {
     el.innerHTML = "";  
   }  
   
-  function renderFeatures() {  
+  async function renderFeatures() {  
     clearEl(tabContent);  
   
     const title = tabContent.createEl("div", { text: "Features & Traits" });  
@@ -1293,7 +1158,7 @@ if (!c) {
     tableWrap.style.flexDirection = "column";  
     tableWrap.style.gap = "6px";  
   
-    function renderFeatureRows(filterText = "") {  
+    async function renderFeatureRows(filterText = "") {  
       tableWrap.innerHTML = "";  
   
       const header = tableWrap.createEl("div");  
@@ -1380,24 +1245,26 @@ if (!c) {
         addInfoRow(content, "Source", featureSource);  
         addInfoRow(content, "Enabled", featureEnabled ? "Yes" : "No");  
   
-        createMarkdownSection(  
-          content,  
-          "Notes",  
-          featureNotes,  
-          featurePage.file?.path ?? CHARACTER_PATH,  
-          "Keine Notizen eingetragen."  
-        );  
+        const notesTitle = content.createEl("div", { text: "Notes" });  
+        notesTitle.style.fontWeight = "600";  
+        notesTitle.style.marginTop = "8px";  
+        notesTitle.style.marginBottom = "6px";  
+        notesTitle.style.opacity = "0.85";  
+  
+        const notesBox = content.createEl("div");  
+        notesBox.style.lineHeight = "1.6";  
+        await renderMarkdownInto(notesBox, featureNotes, featurePage.file?.path ?? CHARACTER_PATH);  
       }  
     }  
   
-    renderFeatureRows();  
+    await renderFeatureRows();  
   
-    searchInput.addEventListener("input", () => {  
-      renderFeatureRows(searchInput.value);  
+    searchInput.addEventListener("input", async () => {  
+      await renderFeatureRows(searchInput.value);  
     });  
   }  
   
-  function renderInventory() {  
+  async function renderInventory() {  
     clearEl(tabContent);  
   
     const title = tabContent.createEl("div", { text: "Inventory" });  
@@ -1496,7 +1363,7 @@ if (!c) {
       header.createEl("div", { text: "Weight" });  
     }  
   
-    function createInventoryRow(parent, item) {  
+    async function createInventoryRow(parent, item) {  
       const rowWeight = item.weight * item.quantity;  
   
       const details = parent.createEl("details");  
@@ -1557,13 +1424,15 @@ if (!c) {
       addInfoRow(content, "Equipped", item.equipped ? "Yes" : "No");  
       addInfoRow(content, "Attuned", `${item.attunedCount} / ${item.quantity}`);  
   
-      createMarkdownSection(  
-        content,  
-        "Notes",  
-        item.notes,  
-        item.itemPage.file?.path ?? item.itemPath ?? CHARACTER_PATH,  
-        "Keine Notizen eingetragen."  
-      );  
+      const notesTitle = content.createEl("div", { text: "Notes" });  
+      notesTitle.style.fontWeight = "600";  
+      notesTitle.style.marginTop = "8px";  
+      notesTitle.style.marginBottom = "6px";  
+      notesTitle.style.opacity = "0.85";  
+  
+      const notesBox = content.createEl("div");  
+      notesBox.style.lineHeight = "1.6";  
+      await renderMarkdownInto(notesBox, item.notes, item.itemPage.file?.path ?? CHARACTER_PATH);  
   
       if (item.itemPage.equipment === true) {  
         const equipBtn = content.createEl("button", {  
@@ -1592,7 +1461,7 @@ if (!c) {
       }  
     }  
   
-    function renderInventoryRows(filterText = "") {  
+    async function renderInventoryRows(filterText = "") {  
       tableWrap.innerHTML = "";  
   
       const filtered = resolvedInventory.filter(item => matchesFilter(item, filterText));  
@@ -1621,7 +1490,7 @@ if (!c) {
   
         for (const item of equippedItems) {  
           totalWeight += item.weight * item.quantity;  
-          createInventoryRow(tableWrap, item);  
+          await createInventoryRow(tableWrap, item);  
         }  
       }  
   
@@ -1631,7 +1500,7 @@ if (!c) {
   
         for (const item of normalItems) {  
           totalWeight += item.weight * item.quantity;  
-          createInventoryRow(tableWrap, item);  
+          await createInventoryRow(tableWrap, item);  
         }  
       }  
   
@@ -1650,14 +1519,14 @@ if (!c) {
       totalRow.createEl("div", { text: `${totalWeight} / ${maxCarryWeight}` });  
     }  
   
-    renderInventoryRows();  
+    await renderInventoryRows();  
   
-    searchInput.addEventListener("input", () => {  
-      renderInventoryRows(searchInput.value);  
+    searchInput.addEventListener("input", async () => {  
+      await renderInventoryRows(searchInput.value);  
     });  
   }  
   
-  function renderActions() {  
+  async function renderActions() {  
     clearEl(tabContent);  
   
     const title = tabContent.createEl("div");  
@@ -1752,7 +1621,7 @@ if (!c) {
       });  
     }  
   
-    function renderActionRows(filterText = "") {  
+    async function renderActionRows(filterText = "") {  
       actionContainer.innerHTML = "";  
       const query = String(filterText ?? "").trim().toLowerCase();  
   
@@ -1901,12 +1770,20 @@ if (!c) {
           if (action.requires_los != null) addInfoRow(infoBlock, "Requires LoS", action.requires_los ? "Ja" : "Nein");  
           if (action.friendly_fire != null) addInfoRow(infoBlock, "Friendly Fire", action.friendly_fire ? "Ja" : "Nein");  
   
-          createMarkdownSection(  
-            card,  
-            "Notes / Effect",  
+          const effectBlock = card.createEl("div");  
+          effectBlock.style.marginTop = "8px";  
+  
+          const effectTitle = effectBlock.createEl("div", { text: "Notes / Effect" });  
+          effectTitle.style.fontWeight = "600";  
+          effectTitle.style.marginBottom = "4px";  
+          effectTitle.style.opacity = "0.85";  
+  
+          const effectBox = effectBlock.createEl("div");  
+          effectBox.style.lineHeight = "1.6";  
+          await renderMarkdownInto(  
+            effectBox,  
             action.effect ?? action.notes ?? "",  
-            action.source_item_path ?? action.file?.path ?? CHARACTER_PATH,  
-            "Kein Effekttext eingetragen."  
+            action.file?.path ?? action.source_item_path ?? CHARACTER_PATH  
           );  
         }  
       }  
@@ -1918,14 +1795,14 @@ if (!c) {
       }  
     }  
   
-    renderActionRows();  
+    await renderActionRows();  
   
-    searchInput.addEventListener("input", () => {  
-      renderActionRows(searchInput.value);  
+    searchInput.addEventListener("input", async () => {  
+      await renderActionRows(searchInput.value);  
     });  
   }  
   
-  function renderSpells() {  
+  async function renderSpells() {  
     clearEl(tabContent);  
   
     const title = tabContent.createEl("div", { text: "Spells" });  
@@ -2054,7 +1931,7 @@ if (!c) {
       });  
     }  
   
-    function renderSpellRows(filterText = "") {  
+    async function renderSpellRows(filterText = "") {  
       spellContainer.innerHTML = "";  
       const query = String(filterText ?? "").trim().toLowerCase();  
   
@@ -2191,12 +2068,20 @@ if (!c) {
           }  
           addInfoRow(infoBlock, "Damage", damageText);  
   
-          createMarkdownSection(  
-            card,  
-            "Effect",  
+          const effectBlock = card.createEl("div");  
+          effectBlock.style.marginTop = "8px";  
+  
+          const effectTitle = effectBlock.createEl("div", { text: "Effect" });  
+          effectTitle.style.fontWeight = "600";  
+          effectTitle.style.marginBottom = "4px";  
+          effectTitle.style.opacity = "0.85";  
+  
+          const effectBox = effectBlock.createEl("div");  
+          effectBox.style.lineHeight = "1.6";  
+          await renderMarkdownInto(  
+            effectBox,  
             spell.effect ?? spell.notes ?? "",  
-            spell.source_item_path ?? spell.file?.path ?? CHARACTER_PATH,  
-            "Kein Effekttext eingetragen."  
+            spell.file?.path ?? spell.source_item_path ?? CHARACTER_PATH  
           );  
         }  
       }  
@@ -2208,10 +2093,10 @@ if (!c) {
       }  
     }  
   
-    renderSpellRows();  
+    await renderSpellRows();  
   
-    searchInput.addEventListener("input", () => {  
-      renderSpellRows(searchInput.value);  
+    searchInput.addEventListener("input", async () => {  
+      await renderSpellRows(searchInput.value);  
     });  
   }  
   
@@ -2257,7 +2142,7 @@ if (!c) {
           name: String(itemPage.name ?? itemPage.file?.name ?? "Unknown Item"),  
           displayName:  
             quantity > 1  
-              ? `${String(itemPage.name ?? itemPage.file?.name ?? "Unknown Item")}`  
+              ? `${String(itemPage.name ?? itemPage.file?.name ?? "Unknown Item")} #${quantityIndex + 1}`  
               : String(itemPage.name ?? itemPage.file?.name ?? "Unknown Item"),  
           type: String(itemPage.type ?? "-"),  
           notes: String(itemPage.notes ?? ""),  
@@ -2373,7 +2258,7 @@ if (!c) {
       right.style.textAlign = "right";  
     }  
   
-    function createItemCard(parent, item) {  
+    async function createItemCard(parent, item) {  
       const details = parent.createEl("details");  
       details.style.border = "1px solid var(--background-modifier-border)";  
       details.style.borderRadius = "10px";  
@@ -2451,16 +2336,18 @@ if (!c) {
       addInfoRow(content, "Equipped", item.equipped ? "Yes" : "No");  
       addInfoRow(content, "Attunement", "Required");  
   
-      createMarkdownSection(  
-        content,  
-        "Notes",  
-        item.notes,  
-        item.itemPage.file?.path ?? item.itemPath ?? CHARACTER_PATH,  
-        "No notes entered."  
-      );  
+      const notesTitle = content.createEl("div", { text: "Notes" });  
+      notesTitle.style.fontWeight = "600";  
+      notesTitle.style.marginTop = "8px";  
+      notesTitle.style.marginBottom = "4px";  
+      notesTitle.style.opacity = "0.85";  
+  
+      const notesBox = content.createEl("div");  
+      notesBox.style.lineHeight = "1.6";  
+      await renderMarkdownInto(notesBox, item.notes, item.itemPage.file?.path ?? CHARACTER_PATH);  
     }  
   
-    function renderItemList(filterText = "") {  
+    async function renderItemList(filterText = "") {  
       listWrap.innerHTML = "";  
   
       const query = String(filterText ?? "").trim().toLowerCase();  
@@ -2507,15 +2394,15 @@ if (!c) {
       header.createEl("div", { text: "Action" });  
   
       for (const item of filtered) {  
-        createItemCard(listWrap, item);  
+        await createItemCard(listWrap, item);  
       }  
     }  
   
     renderSlots();  
-    renderItemList();  
+    await renderItemList();  
   
-    searchInput.addEventListener("input", () => {  
-      renderItemList(searchInput.value);  
+    searchInput.addEventListener("input", async () => {  
+      await renderItemList(searchInput.value);  
     });  
   }  
   
@@ -2589,7 +2476,7 @@ if (!c) {
     notesBox.style.borderRadius = "10px";  
     notesBox.style.lineHeight = "1.6";  
   
-    renderMarkdownInto(notesBox, notesSection, file.path);  
+    await renderMarkdownInto(notesBox, notesSection, file.path);  
   }  
   
   function updateTabStyles() {  
@@ -2616,11 +2503,11 @@ if (!c) {
     updateTabStyles();  
   
     try {  
-      if (activeTab === "actions") renderActions();  
+      if (activeTab === "actions") await renderActions();  
       if (activeTab === "attunement") await renderAttunement();  
-      if (activeTab === "features") renderFeatures();  
-      if (activeTab === "inventory") renderInventory();  
-      if (activeTab === "spells") renderSpells();  
+      if (activeTab === "features") await renderFeatures();  
+      if (activeTab === "inventory") await renderInventory();  
+      if (activeTab === "spells") await renderSpells();  
       if (activeTab === "notes") await renderNotes();  
     } catch (err) {  
       clearEl(tabContent);  
@@ -2685,4 +2572,3 @@ if (!c) {
     valueEl.style.fontWeight = "600";  
   }  
 }
-```
