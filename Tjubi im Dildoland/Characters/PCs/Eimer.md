@@ -209,7 +209,6 @@ function getAllCharacterFeatures() {
 function getActiveBonusEffects() {
   const activeEffects = [];
 
-  // ITEM-BONI
   const inventoryEntries = Array.isArray(c.inventory) ? c.inventory : [];
 
   for (let inventoryIndex = 0; inventoryIndex < inventoryEntries.length; inventoryIndex++) {
@@ -273,7 +272,6 @@ function getActiveBonusEffects() {
     }
   }
 
-  // FEATURE-BONI
   const features = getAllCharacterFeatures();
 
   for (const featurePage of features) {
@@ -323,13 +321,6 @@ function getActiveBonusEffects() {
   }
 
   return activeEffects;
-}
-
-function getBonusTotal(type) {
-  const targetType = String(type ?? "").trim().toLowerCase();
-  return getActiveBonusEffects()
-    .filter(b => b.type === targetType)
-    .reduce((sum, b) => sum + Number(b.value ?? 0), 0);
 }
 
 function applyItemEffects(baseValue, type) {
@@ -584,6 +575,31 @@ function getAllCharacterSpells() {
   }
 
   return uniqueActionObjects(collectedSpells);
+}
+
+async function renderMarkdownInto(container, markdownText, filePathForLinks = CHARACTER_PATH) {
+  container.innerHTML = "";
+
+  const md = String(markdownText ?? "");
+  if (!md.trim()) {
+    container.createEl("div", { text: "Keine Notizen eingetragen." });
+    return;
+  }
+
+  const sourcePath = String(filePathForLinks ?? CHARACTER_PATH);
+
+  const MDRenderer =
+    (typeof MarkdownRenderer !== "undefined" && MarkdownRenderer) ||
+    (typeof obsidian !== "undefined" && obsidian?.MarkdownRenderer) ||
+    (typeof window !== "undefined" && window?.MarkdownRenderer) ||
+    (typeof window !== "undefined" && window?.obsidian?.MarkdownRenderer);
+
+  if (MDRenderer && typeof MDRenderer.renderMarkdown === "function") {
+    await MDRenderer.renderMarkdown(md, container, sourcePath, null);
+    return;
+  }
+
+  container.createEl("pre", { text: md });
 }
 
 if (!c) {
@@ -1106,7 +1122,7 @@ if (!c) {
     el.innerHTML = "";
   }
 
-  function renderFeatures() {
+  async function renderFeatures() {
     clearEl(tabContent);
 
     const title = tabContent.createEl("div", { text: "Features & Traits" });
@@ -1139,7 +1155,7 @@ if (!c) {
     tableWrap.style.flexDirection = "column";
     tableWrap.style.gap = "6px";
 
-    function renderFeatureRows(filterText = "") {
+    async function renderFeatureRows(filterText = "") {
       tableWrap.innerHTML = "";
 
       const header = tableWrap.createEl("div");
@@ -1232,20 +1248,20 @@ if (!c) {
         notesTitle.style.marginBottom = "6px";
         notesTitle.style.opacity = "0.85";
 
-        content.createEl("div", {
-          text: featureNotes.trim().length > 0 ? featureNotes : "Keine Notizen eingetragen."
-        });
+        const notesBox = content.createEl("div");
+        notesBox.style.lineHeight = "1.6";
+        await renderMarkdownInto(notesBox, featureNotes, featurePage.file?.path ?? CHARACTER_PATH);
       }
     }
 
-    renderFeatureRows();
+    await renderFeatureRows();
 
-    searchInput.addEventListener("input", () => {
-      renderFeatureRows(searchInput.value);
+    searchInput.addEventListener("input", async () => {
+      await renderFeatureRows(searchInput.value);
     });
   }
 
-  function renderInventory() {
+  async function renderInventory() {
     clearEl(tabContent);
 
     const title = tabContent.createEl("div", { text: "Inventory" });
@@ -1344,7 +1360,7 @@ if (!c) {
       header.createEl("div", { text: "Weight" });
     }
 
-    function createInventoryRow(parent, item) {
+    async function createInventoryRow(parent, item) {
       const rowWeight = item.weight * item.quantity;
 
       const details = parent.createEl("details");
@@ -1411,9 +1427,9 @@ if (!c) {
       notesTitle.style.marginBottom = "6px";
       notesTitle.style.opacity = "0.85";
 
-      content.createEl("div", {
-        text: item.notes.trim().length > 0 ? item.notes : "Keine Notizen eingetragen."
-      });
+      const notesBox = content.createEl("div");
+      notesBox.style.lineHeight = "1.6";
+      await renderMarkdownInto(notesBox, item.notes, item.itemPage.file?.path ?? CHARACTER_PATH);
 
       if (item.itemPage.equipment === true) {
         const equipBtn = content.createEl("button", {
@@ -1442,7 +1458,7 @@ if (!c) {
       }
     }
 
-    function renderInventoryRows(filterText = "") {
+    async function renderInventoryRows(filterText = "") {
       tableWrap.innerHTML = "";
 
       const filtered = resolvedInventory.filter(item => matchesFilter(item, filterText));
@@ -1471,7 +1487,7 @@ if (!c) {
 
         for (const item of equippedItems) {
           totalWeight += item.weight * item.quantity;
-          createInventoryRow(tableWrap, item);
+          await createInventoryRow(tableWrap, item);
         }
       }
 
@@ -1481,7 +1497,7 @@ if (!c) {
 
         for (const item of normalItems) {
           totalWeight += item.weight * item.quantity;
-          createInventoryRow(tableWrap, item);
+          await createInventoryRow(tableWrap, item);
         }
       }
 
@@ -1500,14 +1516,14 @@ if (!c) {
       totalRow.createEl("div", { text: `${totalWeight} / ${maxCarryWeight}` });
     }
 
-    renderInventoryRows();
+    await renderInventoryRows();
 
-    searchInput.addEventListener("input", () => {
-      renderInventoryRows(searchInput.value);
+    searchInput.addEventListener("input", async () => {
+      await renderInventoryRows(searchInput.value);
     });
   }
 
-  function renderActions() {
+  async function renderActions() {
     clearEl(tabContent);
 
     const title = tabContent.createEl("div");
@@ -1602,7 +1618,7 @@ if (!c) {
       });
     }
 
-    function renderActionRows(filterText = "") {
+    async function renderActionRows(filterText = "") {
       actionContainer.innerHTML = "";
       const query = String(filterText ?? "").trim().toLowerCase();
 
@@ -1759,9 +1775,13 @@ if (!c) {
           effectTitle.style.marginBottom = "4px";
           effectTitle.style.opacity = "0.85";
 
-          effectBlock.createEl("div", {
-            text: action.effect ?? action.notes ?? "Kein Effekttext eingetragen."
-          });
+          const effectBox = effectBlock.createEl("div");
+          effectBox.style.lineHeight = "1.6";
+          await renderMarkdownInto(
+            effectBox,
+            action.effect ?? action.notes ?? "",
+            action.file?.path ?? action.source_item_path ?? CHARACTER_PATH
+          );
         }
       }
 
@@ -1772,14 +1792,14 @@ if (!c) {
       }
     }
 
-    renderActionRows();
+    await renderActionRows();
 
-    searchInput.addEventListener("input", () => {
-      renderActionRows(searchInput.value);
+    searchInput.addEventListener("input", async () => {
+      await renderActionRows(searchInput.value);
     });
   }
 
-  function renderSpells() {
+  async function renderSpells() {
     clearEl(tabContent);
 
     const title = tabContent.createEl("div", { text: "Spells" });
@@ -1809,6 +1829,21 @@ if (!c) {
     const spellSaveDC = c.spell_save_dc != null
       ? applyItemEffects(Number(c.spell_save_dc), "spell_save_dc")
       : applyItemEffects(8 + spellMod + prof, "spell_save_dc");
+
+    const spellCharacterFile = app.vault.getAbstractFileByPath(CHARACTER_PATH);
+
+    async function saveSpellSlotsUsed(level, usedCount, maxCount) {
+      if (!spellCharacterFile) return;
+
+      const safeUsed = Math.max(0, Math.min(maxCount, Number(usedCount ?? 0)));
+
+      await app.fileManager.processFrontMatter(spellCharacterFile, (fm) => {
+        if (!fm.spell_slots_used || typeof fm.spell_slots_used !== "object") {
+          fm.spell_slots_used = {};
+        }
+        fm.spell_slots_used[String(level)] = safeUsed;
+      });
+    }
 
     function addSummaryBox(parent, label, value) {
       const box = parent.createEl("div");
@@ -1846,8 +1881,16 @@ if (!c) {
       return level === 0 ? "Cantrips" : `Level ${level}`;
     }
 
-    function addSpellSlotCheckboxes(parent, level, slotCount) {
+    function getUsedSpellSlots(level, slotCount) {
+      const raw = Number(c.spell_slots_used?.[String(level)] ?? 0);
+      if (!Number.isFinite(raw)) return 0;
+      return Math.max(0, Math.min(slotCount, raw));
+    }
+
+    async function addSpellSlotCheckboxes(parent, level, slotCount) {
       if (level === 0 || slotCount <= 0) return;
+
+      let usedSlots = getUsedSpellSlots(level, slotCount);
 
       const slotWrapper = parent.createEl("div");
       slotWrapper.style.display = "flex";
@@ -1857,9 +1900,20 @@ if (!c) {
       slotWrapper.style.marginTop = "6px";
       slotWrapper.style.marginBottom = "8px";
 
-      const label = slotWrapper.createEl("div", { text: "Slots:" });
+      const label = slotWrapper.createEl("div", {
+        text: `Slots (${usedSlots}/${slotCount} used):`
+      });
       label.style.fontSize = "0.9em";
       label.style.opacity = "0.75";
+
+      const boxes = [];
+
+      function refreshSlotVisuals() {
+        label.setText(`Slots (${usedSlots}/${slotCount} used):`);
+        for (let i = 0; i < boxes.length; i++) {
+          boxes[i].checked = i < usedSlots;
+        }
+      }
 
       for (let i = 0; i < slotCount; i++) {
         const boxLabel = slotWrapper.createEl("label");
@@ -1870,7 +1924,23 @@ if (!c) {
 
         const checkbox = boxLabel.createEl("input");
         checkbox.type = "checkbox";
+        checkbox.checked = i < usedSlots;
+        boxes.push(checkbox);
+
+        checkbox.addEventListener("change", async () => {
+          if (checkbox.checked) {
+            usedSlots = Math.max(usedSlots, i + 1);
+          } else {
+            usedSlots = i;
+          }
+
+          usedSlots = Math.max(0, Math.min(slotCount, usedSlots));
+          refreshSlotVisuals();
+          await saveSpellSlotsUsed(level, usedSlots, slotCount);
+        });
       }
+
+      refreshSlotVisuals();
     }
 
     const summaryGrid = tabContent.createEl("div");
@@ -1908,7 +1978,7 @@ if (!c) {
       });
     }
 
-    function renderSpellRows(filterText = "") {
+    async function renderSpellRows(filterText = "") {
       spellContainer.innerHTML = "";
       const query = String(filterText ?? "").trim().toLowerCase();
 
@@ -1959,8 +2029,8 @@ if (!c) {
         sectionTitle.style.paddingBottom = "4px";
         sectionTitle.style.borderBottom = "1px solid var(--background-modifier-border)";
 
-        const slotCount = Number(c.spell_slots?.[level] ?? 0);
-        addSpellSlotCheckboxes(section, level, slotCount);
+        const slotCount = Number(c.spell_slots?.[String(level)] ?? c.spell_slots?.[level] ?? 0);
+        await addSpellSlotCheckboxes(section, level, slotCount);
 
         for (const spell of levelSpells) {
           const details = section.createEl("details");
@@ -2053,9 +2123,13 @@ if (!c) {
           effectTitle.style.marginBottom = "4px";
           effectTitle.style.opacity = "0.85";
 
-          effectBlock.createEl("div", {
-            text: spell.effect ?? spell.notes ?? "Kein Effekttext eingetragen."
-          });
+          const effectBox = effectBlock.createEl("div");
+          effectBox.style.lineHeight = "1.6";
+          await renderMarkdownInto(
+            effectBox,
+            spell.effect ?? spell.notes ?? "",
+            spell.file?.path ?? spell.source_item_path ?? CHARACTER_PATH
+          );
         }
       }
 
@@ -2066,10 +2140,10 @@ if (!c) {
       }
     }
 
-    renderSpellRows();
+    await renderSpellRows();
 
-    searchInput.addEventListener("input", () => {
-      renderSpellRows(searchInput.value);
+    searchInput.addEventListener("input", async () => {
+      await renderSpellRows(searchInput.value);
     });
   }
 
@@ -2115,7 +2189,7 @@ if (!c) {
           name: String(itemPage.name ?? itemPage.file?.name ?? "Unknown Item"),
           displayName:
             quantity > 1
-              ? `${String(itemPage.name ?? itemPage.file?.name ?? "Unknown Item")}`
+              ? `${String(itemPage.name ?? itemPage.file?.name ?? "Unknown Item")} #${quantityIndex + 1}`
               : String(itemPage.name ?? itemPage.file?.name ?? "Unknown Item"),
           type: String(itemPage.type ?? "-"),
           notes: String(itemPage.notes ?? ""),
@@ -2231,7 +2305,7 @@ if (!c) {
       right.style.textAlign = "right";
     }
 
-    function createItemCard(parent, item) {
+    async function createItemCard(parent, item) {
       const details = parent.createEl("details");
       details.style.border = "1px solid var(--background-modifier-border)";
       details.style.borderRadius = "10px";
@@ -2315,12 +2389,12 @@ if (!c) {
       notesTitle.style.marginBottom = "4px";
       notesTitle.style.opacity = "0.85";
 
-      content.createEl("div", {
-        text: item.notes.trim().length > 0 ? item.notes : "No notes entered."
-      });
+      const notesBox = content.createEl("div");
+      notesBox.style.lineHeight = "1.6";
+      await renderMarkdownInto(notesBox, item.notes, item.itemPage.file?.path ?? CHARACTER_PATH);
     }
 
-    function renderItemList(filterText = "") {
+    async function renderItemList(filterText = "") {
       listWrap.innerHTML = "";
 
       const query = String(filterText ?? "").trim().toLowerCase();
@@ -2367,15 +2441,15 @@ if (!c) {
       header.createEl("div", { text: "Action" });
 
       for (const item of filtered) {
-        createItemCard(listWrap, item);
+        await createItemCard(listWrap, item);
       }
     }
 
     renderSlots();
-    renderItemList();
+    await renderItemList();
 
-    searchInput.addEventListener("input", () => {
-      renderItemList(searchInput.value);
+    searchInput.addEventListener("input", async () => {
+      await renderItemList(searchInput.value);
     });
   }
 
@@ -2449,138 +2523,7 @@ if (!c) {
     notesBox.style.borderRadius = "10px";
     notesBox.style.lineHeight = "1.6";
 
-    function escapeHtml(str) {
-      return String(str)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;");
-    }
-
-    function renderInlineMarkdown(line) {
-      let html = escapeHtml(line);
-
-      html = html.replace(/\[\[([^\]|]+)(\|([^\]]+))?\]\]/g, (match, target, _aliasPart, alias) => {
-        const rawTarget = String(target ?? "").trim();
-        const linkText = String(alias ?? rawTarget).trim();
-
-        return `<a href="#" class="custom-obsidian-link" data-href="${escapeHtml(rawTarget)}">${escapeHtml(linkText)}</a>`;
-      });
-
-      html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_match, text, url) => {
-        const safeText = escapeHtml(text);
-        const safeUrl = escapeHtml(url);
-        return `<a href="${safeUrl}" target="_blank" rel="noopener">${safeText}</a>`;
-      });
-
-      html = html.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
-      html = html.replace(/\*(.+?)\*/g, "<em>$1</em>");
-      html = html.replace(/`([^`]+)`/g, "<code>$1</code>");
-
-      return html;
-    }
-
-    function renderSimpleMarkdown(md) {
-      const lines = md.split(/\r?\n/);
-      const htmlParts = [];
-
-      let inList = false;
-      let inCodeBlock = false;
-      let codeBuffer = [];
-
-      function closeList() {
-        if (inList) {
-          htmlParts.push("</ul>");
-          inList = false;
-        }
-      }
-
-      function closeCodeBlock() {
-        if (inCodeBlock) {
-          htmlParts.push(`<pre><code>${escapeHtml(codeBuffer.join("\n"))}</code></pre>`);
-          inCodeBlock = false;
-          codeBuffer = [];
-        }
-      }
-
-      for (const rawLine of lines) {
-        const line = rawLine ?? "";
-
-        if (line.trim().startsWith("```")) {
-          closeList();
-
-          if (!inCodeBlock) {
-            inCodeBlock = true;
-            codeBuffer = [];
-          } else {
-            closeCodeBlock();
-          }
-          continue;
-        }
-
-        if (inCodeBlock) {
-          codeBuffer.push(line);
-          continue;
-        }
-
-        if (/^\s*[-*]\s+/.test(line)) {
-          if (!inList) {
-            htmlParts.push("<ul>");
-            inList = true;
-          }
-          const itemText = line.replace(/^\s*[-*]\s+/, "");
-          htmlParts.push(`<li>${renderInlineMarkdown(itemText)}</li>`);
-          continue;
-        } else {
-          closeList();
-        }
-
-        if (/^###\s+/.test(line)) {
-          htmlParts.push(`<h3>${renderInlineMarkdown(line.replace(/^###\s+/, ""))}</h3>`);
-          continue;
-        }
-
-        if (/^##\s+/.test(line)) {
-          htmlParts.push(`<h2>${renderInlineMarkdown(line.replace(/^##\s+/, ""))}</h2>`);
-          continue;
-        }
-
-        if (/^#\s+/.test(line)) {
-          htmlParts.push(`<h1>${renderInlineMarkdown(line.replace(/^#\s+/, ""))}</h1>`);
-          continue;
-        }
-
-        if (line.trim() === "") {
-          htmlParts.push("<div style='height: 0.6em;'></div>");
-          continue;
-        }
-
-        htmlParts.push(`<p style="margin: 0 0 0.6em 0;">${renderInlineMarkdown(line)}</p>`);
-      }
-
-      closeList();
-      closeCodeBlock();
-
-      return htmlParts.join("\n");
-    }
-
-    notesBox.innerHTML = renderSimpleMarkdown(notesSection);
-
-    notesBox.querySelectorAll("a.custom-obsidian-link").forEach((linkEl) => {
-      linkEl.style.color = "var(--link-color)";
-      linkEl.style.textDecoration = "underline";
-      linkEl.style.cursor = "pointer";
-
-      linkEl.addEventListener("click", async (evt) => {
-        evt.preventDefault();
-        evt.stopPropagation();
-
-        const target = linkEl.getAttribute("data-href");
-        if (!target) return;
-
-        await app.workspace.openLinkText(target, file.path, true);
-      });
-    });
+    await renderMarkdownInto(notesBox, notesSection, file.path);
   }
 
   function updateTabStyles() {
@@ -2607,11 +2550,11 @@ if (!c) {
     updateTabStyles();
 
     try {
-      if (activeTab === "actions") renderActions();
+      if (activeTab === "actions") await renderActions();
       if (activeTab === "attunement") await renderAttunement();
-      if (activeTab === "features") renderFeatures();
-      if (activeTab === "inventory") renderInventory();
-      if (activeTab === "spells") renderSpells();
+      if (activeTab === "features") await renderFeatures();
+      if (activeTab === "inventory") await renderInventory();
+      if (activeTab === "spells") await renderSpells();
       if (activeTab === "notes") await renderNotes();
     } catch (err) {
       clearEl(tabContent);

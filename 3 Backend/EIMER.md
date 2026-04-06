@@ -52,6 +52,13 @@ spell_slots:
   "3": 0
   "4": 0
   "5": 0
+spell_slots_used:
+  "1": 0
+  "1": 0
+  "2": 0
+  "3": 0
+  "4": 0
+  "5": 0
 inventory:
   - item: Public/3 Backend/Items/Crossbow Bolts.md
     quantity: 20
@@ -104,6 +111,9 @@ inventory:
   - item: Ankerstein
     quantity: 1
     equipped: false
+  - item: Armor of magical Strenght
+    quantity: 1
+    equipped: true
 features:
   - Public/3 Backend/Features/Integrated Protection.md
   - Public/3 Backend/Features/Magical Tinkering.md
@@ -122,6 +132,7 @@ spells:
 spellcasting_ability: int
 attunement_slots: 3
 attuned_items:
+  - Public/3 Backend/Items/Armor of magical Strenght.md::17::0
 ---
 # Bilder
 
