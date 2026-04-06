@@ -63,7 +63,9 @@ tag 5:
 nach einiger zeit hören wir den fluss. paar wildtiere. kommen kurz vor nachteinbruch an. noch ein extra geräusch, nass. eimer macht leuchtesteine und makkus wirft sie richtung geräusch. aethusa sneakt. nachtwache ohne probleme
 
 tag 6:
-kreatur zieht kreise am flussufer. aus wasser bestehend. ist ein elementar, vorraussichtlich wasser. eimer und aethusa wissen, dass diese sehr terretorial sind. sollte möglich sein etwas näher ran zu gehen. sneaken richtung elementar. in der mitte 12 magische essenzen. auch eine starke und große dabei. elementar wesentlich stärker als die essenz in der mitte.
+kreatur zieht kreise am flussufer. aus wasser bestehend. ist ein elementar, vorraussichtlich wasser. eimer und aethusa wissen, dass diese sehr terretorial sind. sollte möglich sein etwas näher ran zu gehen. sneaken richtung elementar. in der mitte 12 magische essenzen. auch eine starke und große dabei. elementar wesentlich stärker als die essenz in der mitte. kaz schleicht in die mitte und klaut die große essenz. 
+nehmen ankerstein.
+level 2!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
 
