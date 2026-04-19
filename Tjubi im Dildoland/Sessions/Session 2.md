@@ -18,9 +18,9 @@ gehen zur akademie. wollen essenzen analysieren lassen. und wissen aneignen. kas
 
 kas kauft dudelsack für 2gp. dann sucht nico für tächtelmächtel
 
-aethusa geht in bibleothek um elementare und blights zu untersuchen.
+aethusa geht in bibleothek um elementare und blights zu untersuchen. twig blight brennen gut, sind passiv. needle blight kann nadeln schießen. alle blights passiv. vine blight hat ranken.
 
-eimer und makkus gehen zu andi.
+eimer und makkus gehen zu andi. eimer macht infusions. makkus bietet uns am mit essenzen zu experimentieren wenn wir ihm welche bringen
 
 ###  **Protokoll:**
 
