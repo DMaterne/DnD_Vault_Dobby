@@ -129,6 +129,7 @@ spells:
   - Public/3 Backend/Spells/Mending.md
   - Public/3 Backend/Spells/Cure Wounds.md
   - Public/3 Backend/Spells/Feather Fall.md
+  - Alarm
 spellcasting_ability: int
 attunement_slots: 3
 attuned_items:
