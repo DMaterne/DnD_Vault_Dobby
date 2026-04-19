@@ -3,7 +3,7 @@ name: Eimer
 class: Artificer
 subclass:
   - 
-level: 1
+level: 2
 race: Warforged
 background: Soldier
 alignment: Lawful Neutral
@@ -16,7 +16,7 @@ wis: 10
 cha: 8
 proficiency_bonus: 2
 hp_current: 11
-hp_max: 11
+hp_max: 19
 ac: 12
 speed: 30
 initiative_bonus: 1
