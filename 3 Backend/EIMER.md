@@ -15,7 +15,7 @@ int: 16
 wis: 10
 cha: 8
 proficiency_bonus: 2
-hp_current: 11
+hp_current: 19
 hp_max: 19
 ac: 12
 speed: 30
@@ -112,6 +112,9 @@ inventory:
     quantity: 1
     equipped: false
   - item: Armor of magical Strenght
+    quantity: 1
+    equipped: true
+  - item: Bag of Holding
     quantity: 1
     equipped: true
 features:
