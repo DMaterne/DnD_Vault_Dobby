@@ -25,7 +25,7 @@ eimer und makkus gehen zu andi. eimer macht infusions. makkus bietet uns am mit 
 nächter morgen:
 kaufen rationen. dann westtor. gehen aus kuppel raus. fühlt sich wieder so an als hätten. wir etwas vergessen, aber körperlich fühlen wir uns fitter. sehen in der ferne etwas gebäude-mäßiges und etwas flussartiges. gehen los. 
 nicht viel los. je weiter weg desto mehr blights in der umgebung, aber nicht aggressiv. tiere wie rinder und pferde laufen in der gegend rum. blights haben angst vor uns. hier auch größere büsche. vlt blights vlt fruchtbares land. 2 tage nicht viel los. tag 3 wird der fluss erkenntlich. das gebäude ist ne stadt. wahrscheinlich ruinen. noch paar tage bis zu dieser. 
-tag 4. nur noch große büsche. ungutes gefühl. laufen in ranken und verheddern uns. sind stuck stepbro. 
+tag 4. nur noch große büsche. ungutes gefühl. laufen in ranken und verheddern uns. sind stuck stepbro. kampf
 
 ###  **Protokoll:**
 

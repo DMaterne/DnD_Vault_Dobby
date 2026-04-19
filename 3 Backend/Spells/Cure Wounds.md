@@ -13,8 +13,8 @@ duration: Instantaneous
 concentration: false
 spellcasting_modifier: int
 dice_count: 1
-dice_size: 6
-damage: 1d6
+dice_size: 8
+damage: 1d8
 damage_bonus_stat: none
 damage_bonus: 3
 damage_type: variable
