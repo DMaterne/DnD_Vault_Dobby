@@ -53,7 +53,7 @@ spell_slots:
   "4": 0
   "5": 0
 spell_slots_used:
-  "1": 0
+  "1": 2
   "1": 0
   "2": 0
   "3": 0
@@ -61,7 +61,7 @@ spell_slots_used:
   "5": 0
 inventory:
   - item: Public/3 Backend/Items/Crossbow Bolts.md
-    quantity: 20
+    quantity: 16
     equipped: true
   - item: Public/3 Backend/Items/Light Crossbow.md
     quantity: 1
