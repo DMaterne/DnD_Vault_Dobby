@@ -9,11 +9,11 @@ background: Soldier
 alignment: Lawful Neutral
 player: Dobby
 str: 8
-dex: 12
+dex: 14
 con: 16
 int: 16
 wis: 10
-cha: 8
+cha: 10
 proficiency_bonus: 2
 hp_current: 19
 hp_max: 19
