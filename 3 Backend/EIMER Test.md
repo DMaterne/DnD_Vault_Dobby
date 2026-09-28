@@ -1,8 +1,8 @@
 ---
 name: Eimer
 class: Artificer
-subclass: Armorer
-level: 15
+subclass: 
+level: 3
 race: Warforged
 background: Soldier
 alignment: Lawful Neutral
