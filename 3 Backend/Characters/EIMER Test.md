@@ -1,8 +1,8 @@
 ---
 name: Eimer
 class: Artificer
-subclass: 
-level: 3
+subclass:
+level: 8
 race: Warforged
 background: Soldier
 alignment: Lawful Neutral
@@ -85,7 +85,7 @@ inventory:
     equipped: false
   - item: Public/3 Backend/Items/Tinderbox.md
     quantity: 1
-    equipped: false
+    equipped: true
   - item: Public/3 Backend/Items/Torch.md
     quantity: 5
     equipped: false
@@ -139,6 +139,18 @@ item_resources:
   Public/3 Backend/Items/Armor of magical Strenght.md::17::0:
     armor_of_magical_strength:
       used: 0
+asi_choices:
+  "4":
+    type: feat
+    ability_1: ""
+    ability_2: ""
+    feat: Public/3 Backend/Feats/Shield Master.md
+    feat_choices: {}
+  "8":
+    type: asi
+    ability_1: int
+    ability_2: int
+    feat: ""
 ---
 # Bilder
 

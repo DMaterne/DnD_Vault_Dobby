@@ -1,608 +1,1562 @@
 # Character Builder
 
+  
+
 ```dataviewjs
-const CHARACTER_FOLDER = "Public/3 Backend/";
+
+const CHARACTER_FOLDER = "Public/3 Backend/Characters/";
+
 const CLASSES_FOLDER = "Public/3 Backend/Classes/";
 
-// Optional: Files that should never appear as selectable characters.
-const EXCLUDED_CHARACTER_FILES = new Set([
-  "Character Builder.md"
-]);
+const SUBCLASSES_FOLDER = "Public/3 Backend/Subclasses/";
 
-function clampInt(value, min, max, fallback) {
-  const n = Math.floor(Number(value));
-  if (!Number.isFinite(n)) return fallback;
-  return Math.max(min, Math.min(max, n));
+const ITEMS_FOLDER = "Public/3 Backend/Items/";
+
+const FEATS_FOLDER = "Public/3 Backend/Feats/";
+
+  
+
+const ABILITIES = [
+
+  ["str", "STR"], ["dex", "DEX"], ["con", "CON"],
+
+  ["int", "INT"], ["wis", "WIS"], ["cha", "CHA"]
+
+];
+
+  
+
+function clampInt(v, min, max, fallback) {
+
+  const n = Math.floor(Number(v));
+
+  return Number.isFinite(n) ? Math.max(min, Math.min(max, n)) : fallback;
+
 }
 
-function modFromScore(score) {
-  return Math.floor((Number(score) - 10) / 2);
+function modFromScore(v) { return Math.floor((Number(v) - 10) / 2); }
+
+function modString(v) { return Number(v) >= 0 ? `+${v}` : `${v}`; }
+
+function directMarkdownFiles(folder) {
+
+  const prefix = folder.endsWith("/") ? folder : folder + "/";
+
+  return app.vault.getMarkdownFiles()
+
+    .filter(f => f.path.startsWith(prefix) && !f.path.slice(prefix.length).includes("/"))
+
+    .sort((a,b) => a.basename.localeCompare(b.basename, "de"));
+
 }
 
-function modString(n) {
-  return n >= 0 ? `+${n}` : `${n}`;
-}
-
-function getMarkdownFilesInFolder(folderPath) {
-  const normalized = folderPath.endsWith("/") ? folderPath : `${folderPath}/`;
-
-  return app.vault.getMarkdownFiles()
-    .filter(file => {
-      if (!file.path.startsWith(normalized)) return false;
-
-      // Only direct children of the folder, not Items/, Classes/, etc.
-      const relative = file.path.slice(normalized.length);
-      if (relative.includes("/")) return false;
-
-      return !EXCLUDED_CHARACTER_FILES.has(file.name);
-    })
-    .sort((a, b) => a.basename.localeCompare(b.basename, "de"));
-}
-
-function getClassFiles() {
-  const normalized = CLASSES_FOLDER.endsWith("/") ? CLASSES_FOLDER : `${CLASSES_FOLDER}/`;
-
-  return app.vault.getMarkdownFiles()
-    .filter(file => {
-      if (!file.path.startsWith(normalized)) return false;
-      const relative = file.path.slice(normalized.length);
-      return !relative.includes("/");
-    })
-    .sort((a, b) => a.basename.localeCompare(b.basename, "de"));
-}
-
-function getPage(file) {
-  return file ? dv.page(file.path) : null;
-}
+function pageFor(file) { return file ? dv.page(file.path) : null; }
 
 function styleCard(el) {
-  el.style.padding = "16px";
-  el.style.border = "1px solid var(--background-modifier-border)";
-  el.style.borderRadius = "14px";
-  el.style.background = "var(--background-primary)";
+
+  el.style.padding = "16px";
+
+  el.style.border = "1px solid var(--background-modifier-border)";
+
+  el.style.borderRadius = "14px";
+
+  el.style.background = "var(--background-primary)";
+
 }
 
 function styleInput(el) {
-  el.style.width = "100%";
-  el.style.boxSizing = "border-box";
-  el.style.padding = "8px 10px";
-  el.style.border = "1px solid var(--background-modifier-border)";
-  el.style.borderRadius = "8px";
-  el.style.background = "var(--background-primary)";
-  el.style.color = "var(--text-normal)";
+
+  el.style.width = "100%";
+
+  el.style.boxSizing = "border-box";
+
+  el.style.padding = "8px 10px";
+
+  el.style.border = "1px solid var(--background-modifier-border)";
+
+  el.style.borderRadius = "8px";
+
+  el.style.background = "var(--background-primary)";
+
+  el.style.color = "var(--text-normal)";
+
 }
 
-function createField(parent, labelText) {
-  const wrap = parent.createEl("div");
-  wrap.style.display = "flex";
-  wrap.style.flexDirection = "column";
-  wrap.style.gap = "6px";
+function makeButton(parent, text) {
 
-  const label = wrap.createEl("div", { text: labelText });
-  label.style.fontSize = "0.85em";
-  label.style.fontWeight = "600";
-  label.style.opacity = "0.8";
+  const b = parent.createEl("button", {text});
 
-  return wrap;
+  b.style.padding = "8px 12px";
+
+  b.style.borderRadius = "8px";
+
+  b.style.border = "1px solid var(--background-modifier-border)";
+
+  b.style.cursor = "pointer";
+
+  return b;
+
 }
 
-const characterFiles = getMarkdownFilesInFolder(CHARACTER_FOLDER);
-const classFiles = getClassFiles();
+function resolveItem(ref) {
+
+  const raw = String(ref ?? "").trim();
+
+  if (!raw) return null;
+
+  const candidates = raw.includes("/")
+
+    ? [raw, raw.endsWith(".md") ? raw : raw + ".md"]
+
+    : [`${ITEMS_FOLDER}${raw}`, `${ITEMS_FOLDER}${raw}.md`];
+
+  for (const path of candidates) {
+
+    const file = app.vault.getAbstractFileByPath(path);
+
+    if (file) return {file, page: dv.page(path), path};
+
+  }
+
+  return null;
+
+}
+
+  
+
+const characterFiles = directMarkdownFiles(CHARACTER_FOLDER);
+
+const classFiles = directMarkdownFiles(CLASSES_FOLDER);
+
+const itemFiles = directMarkdownFiles(ITEMS_FOLDER);
+
+const featFiles = directMarkdownFiles(FEATS_FOLDER);
+
+  
 
 const root = dv.el("div", "");
-root.style.display = "flex";
-root.style.flexDirection = "column";
-root.style.gap = "18px";
-root.style.maxWidth = "1050px";
+
+root.style.maxWidth = "1100px";
+
 root.style.margin = "0 auto";
 
-// -----------------------------------------------------------------------------
-// Header
-// -----------------------------------------------------------------------------
+root.style.display = "flex";
+
+root.style.flexDirection = "column";
+
+root.style.gap = "14px";
+
+  
 
 const header = root.createEl("div");
+
 styleCard(header);
 
-const title = header.createEl("div", { text: "Character Builder" });
-title.style.fontSize = "1.8em";
-title.style.fontWeight = "700";
+header.createEl("div", {text:"Character Builder"}).style.cssText =
 
-const subtitle = header.createEl("div", {
-  text: "Edit the persistent character backend. Class progression remains defined by the class files."
-});
-subtitle.style.marginTop = "5px";
-subtitle.style.opacity = "0.7";
+  "font-size:1.8em;font-weight:700";
 
-// -----------------------------------------------------------------------------
-// Character selection
-// -----------------------------------------------------------------------------
+header.createEl("div", {
 
-const selectionCard = root.createEl("div");
-styleCard(selectionCard);
+  text:"Character creation and persistent character configuration"
 
-const selectionTitle = selectionCard.createEl("div", { text: "Character" });
-selectionTitle.style.fontWeight = "700";
-selectionTitle.style.fontSize = "1.1em";
-selectionTitle.style.marginBottom = "10px";
+}).style.cssText = "opacity:.7;margin-top:4px";
 
-if (characterFiles.length === 0) {
-  selectionCard.createEl("div", {
-    text: `No character files found directly in ${CHARACTER_FOLDER}`
-  });
-  return;
+  
+
+if (!characterFiles.length) {
+
+  root.createEl("div", {text:`No characters found directly in ${CHARACTER_FOLDER}`});
+
+  return;
+
 }
 
-const characterSelect = selectionCard.createEl("select");
+  
+
+const top = root.createEl("div");
+
+styleCard(top);
+
+top.style.display = "grid";
+
+top.style.gridTemplateColumns = "1fr auto";
+
+top.style.gap = "12px";
+
+top.style.alignItems = "end";
+
+  
+
+const selectorWrap = top.createEl("div");
+
+selectorWrap.createEl("div", {text:"Character"}).style.cssText =
+
+  "font-weight:600;font-size:.85em;margin-bottom:6px";
+
+const characterSelect = selectorWrap.createEl("select");
+
 styleInput(characterSelect);
 
+  
+
 for (const file of characterFiles) {
-  const page = getPage(file);
-  const displayName = String(page?.name ?? file.basename);
 
-  const option = characterSelect.createEl("option", {
-    text: `${displayName} — ${file.basename}`
-  });
-  option.value = file.path;
+  const pg = pageFor(file);
+
+  const opt = characterSelect.createEl("option", {
+
+    text:`${pg?.name ?? file.basename} — ${file.path}`
+
+  });
+
+  opt.value = file.path;
+
 }
 
-// Remember selection while Obsidian keeps the view alive.
-const rememberedPath = window.__dndBuilderCharacterPath;
-if (rememberedPath && characterFiles.some(file => file.path === rememberedPath)) {
-  characterSelect.value = rememberedPath;
-}
+  
 
-// -----------------------------------------------------------------------------
-// Editor
-// -----------------------------------------------------------------------------
+if (
 
-const editorCard = root.createEl("div");
-styleCard(editorCard);
+  window.__dndBuilderCharacterPath &&
+
+  characterFiles.some(f => f.path === window.__dndBuilderCharacterPath)
+
+) characterSelect.value = window.__dndBuilderCharacterPath;
+
+  
+
+const saveBtn = makeButton(top, "Save Changes");
+
+saveBtn.style.background = "var(--interactive-accent)";
+
+saveBtn.style.color = "var(--text-on-accent)";
+
+saveBtn.style.fontWeight = "700";
+
+  
+
+const tabCard = root.createEl("div");
+
+styleCard(tabCard);
+
+tabCard.style.padding = "10px";
+
+  
+
+const tabBar = tabCard.createEl("div");
+
+tabBar.style.display = "flex";
+
+tabBar.style.flexWrap = "wrap";
+
+tabBar.style.gap = "8px";
+
+  
+
+const content = root.createEl("div");
+
+styleCard(content);
+
+content.style.minHeight = "420px";
+
+  
+
+const status = root.createEl("div");
+
+status.style.fontSize = ".85em";
+
+status.style.opacity = ".7";
+
+  
 
 let currentFile = null;
+
 let currentPage = null;
+
 let draft = null;
+
 let dirty = false;
 
-function setDirty(value) {
-  dirty = value;
-  saveButton.textContent = dirty ? "Save Changes *" : "Save Changes";
-  unsavedText.style.display = dirty ? "block" : "none";
+let activeTab = window.__dndBuilderTab ?? "class";
+
+const tabButtons = {};
+
+  
+
+function markDirty() {
+
+  dirty = true;
+
+  saveBtn.setText("Save Changes *");
+
+  status.setText("Unsaved changes");
+
 }
 
-const editorHeader = editorCard.createEl("div");
-editorHeader.style.display = "flex";
-editorHeader.style.justifyContent = "space-between";
-editorHeader.style.alignItems = "center";
-editorHeader.style.gap = "12px";
-editorHeader.style.marginBottom = "14px";
+function clearDirty() {
 
-const editorTitle = editorHeader.createEl("div", { text: "Core Character Data" });
-editorTitle.style.fontWeight = "700";
-editorTitle.style.fontSize = "1.1em";
+  dirty = false;
 
-const fileInfo = editorHeader.createEl("div");
-fileInfo.style.fontSize = "0.85em";
-fileInfo.style.opacity = "0.65";
+  saveBtn.setText("Save Changes");
 
-const generalGrid = editorCard.createEl("div");
-generalGrid.style.display = "grid";
-generalGrid.style.gridTemplateColumns = "minmax(220px, 1fr) minmax(140px, 180px)";
-generalGrid.style.gap = "12px";
+  status.setText("Saved state loaded");
 
-const classField = createField(generalGrid, "Class");
-const classSelect = classField.createEl("select");
-styleInput(classSelect);
-
-const levelField = createField(generalGrid, "Level");
-
-const levelRow = levelField.createEl("div");
-levelRow.style.display = "grid";
-levelRow.style.gridTemplateColumns = "40px 1fr 40px";
-levelRow.style.gap = "6px";
-
-const levelMinus = levelRow.createEl("button", { text: "−" });
-const levelInput = levelRow.createEl("input");
-levelInput.type = "number";
-levelInput.min = "1";
-levelInput.max = "20";
-levelInput.step = "1";
-styleInput(levelInput);
-levelInput.style.textAlign = "center";
-
-const levelPlus = levelRow.createEl("button", { text: "+" });
-
-for (const btn of [levelMinus, levelPlus]) {
-  btn.style.borderRadius = "8px";
-  btn.style.border = "1px solid var(--background-modifier-border)";
-  btn.style.background = "var(--background-secondary)";
-  btn.style.color = "var(--text-normal)";
-  btn.style.cursor = "pointer";
-  btn.style.fontWeight = "700";
 }
 
-const statsTitle = editorCard.createEl("div", { text: "Ability Scores" });
-statsTitle.style.fontWeight = "700";
-statsTitle.style.marginTop = "20px";
-statsTitle.style.marginBottom = "10px";
+function selectedClassFile(name) {
 
-const statsGrid = editorCard.createEl("div");
-statsGrid.style.display = "grid";
-statsGrid.style.gridTemplateColumns = "repeat(6, minmax(90px, 1fr))";
-statsGrid.style.gap = "8px";
+  return classFiles.find(f => {
 
-const ABILITIES = [
-  ["str", "STR"],
-  ["dex", "DEX"],
-  ["con", "CON"],
-  ["int", "INT"],
-  ["wis", "WIS"],
-  ["cha", "CHA"]
-];
+    const p = pageFor(f);
 
-const statControls = {};
+    return String(p?.name ?? f.basename) === String(name ?? "");
 
-for (const [key, labelText] of ABILITIES) {
-  const card = statsGrid.createEl("div");
-  card.style.padding = "10px";
-  card.style.border = "1px solid var(--background-modifier-border)";
-  card.style.borderRadius = "10px";
-  card.style.textAlign = "center";
+  }) ?? null;
 
-  const label = card.createEl("div", { text: labelText });
-  label.style.fontWeight = "700";
-  label.style.marginBottom = "7px";
-
-  const input = card.createEl("input");
-  input.type = "number";
-  input.min = "1";
-  input.max = "30";
-  input.step = "1";
-  styleInput(input);
-  input.style.textAlign = "center";
-
-  const modifier = card.createEl("div", { text: "+0" });
-  modifier.style.marginTop = "6px";
-  modifier.style.fontSize = "0.85em";
-  modifier.style.opacity = "0.7";
-
-  statControls[key] = { input, modifier };
 }
 
-// -----------------------------------------------------------------------------
-// Preview
-// -----------------------------------------------------------------------------
+function selectedClassPage() {
 
-const previewCard = root.createEl("div");
-styleCard(previewCard);
+  return pageFor(selectedClassFile(draft?.class));
 
-const previewTitle = previewCard.createEl("div", { text: "Preview" });
-previewTitle.style.fontWeight = "700";
-previewTitle.style.fontSize = "1.1em";
-previewTitle.style.marginBottom = "10px";
-
-const previewGrid = previewCard.createEl("div");
-previewGrid.style.display = "grid";
-previewGrid.style.gridTemplateColumns = "repeat(4, 1fr)";
-previewGrid.style.gap = "8px";
-
-function createPreviewBox(label) {
-  const box = previewGrid.createEl("div");
-  box.style.padding = "10px";
-  box.style.border = "1px solid var(--background-modifier-border)";
-  box.style.borderRadius = "10px";
-  box.style.textAlign = "center";
-
-  const labelEl = box.createEl("div", { text: label });
-  labelEl.style.fontSize = "0.8em";
-  labelEl.style.opacity = "0.65";
-
-  const valueEl = box.createEl("div", { text: "-" });
-  valueEl.style.fontWeight = "700";
-  valueEl.style.fontSize = "1.05em";
-  valueEl.style.marginTop = "4px";
-
-  return valueEl;
 }
 
-const previewName = createPreviewBox("Character");
-const previewClass = createPreviewBox("Class");
-const previewLevel = createPreviewBox("Level");
-const previewProf = createPreviewBox("Proficiency");
+function classLevelData() {
 
-const previewNote = previewCard.createEl("div");
-previewNote.style.marginTop = "10px";
-previewNote.style.fontSize = "0.85em";
-previewNote.style.opacity = "0.7";
+  const cp = selectedClassPage();
 
-// -----------------------------------------------------------------------------
-// Save bar
-// -----------------------------------------------------------------------------
+  const level = String(draft?.level ?? 1);
 
-const saveBar = root.createEl("div");
-styleCard(saveBar);
-saveBar.style.display = "flex";
-saveBar.style.justifyContent = "space-between";
-saveBar.style.alignItems = "center";
-saveBar.style.gap = "12px";
+  return cp?.levels?.[level] ?? cp?.levels?.[Number(level)] ?? null;
 
-const statusWrap = saveBar.createEl("div");
-
-const statusText = statusWrap.createEl("div", { text: "Ready." });
-statusText.style.fontWeight = "600";
-
-const unsavedText = statusWrap.createEl("div", { text: "Unsaved changes" });
-unsavedText.style.fontSize = "0.8em";
-unsavedText.style.opacity = "0.65";
-unsavedText.style.display = "none";
-
-const buttonWrap = saveBar.createEl("div");
-buttonWrap.style.display = "flex";
-buttonWrap.style.gap = "8px";
-
-const reloadButton = buttonWrap.createEl("button", { text: "Discard / Reload" });
-const saveButton = buttonWrap.createEl("button", { text: "Save Changes" });
-
-for (const btn of [reloadButton, saveButton]) {
-  btn.style.padding = "8px 12px";
-  btn.style.borderRadius = "8px";
-  btn.style.border = "1px solid var(--background-modifier-border)";
-  btn.style.cursor = "pointer";
-  btn.style.fontWeight = "600";
 }
 
-saveButton.style.background = "var(--interactive-accent)";
-saveButton.style.color = "var(--text-on-accent)";
-reloadButton.style.background = "var(--background-secondary)";
-reloadButton.style.color = "var(--text-normal)";
+function getSubclassConfig() {
 
-// -----------------------------------------------------------------------------
-// Data handling
-// -----------------------------------------------------------------------------
+  const cfg = selectedClassPage()?.subclass;
 
-function getClassNameFromFile(file) {
-  const page = getPage(file);
-  return String(page?.name ?? file.basename);
+  return cfg && typeof cfg === "object" ? cfg : null;
+
 }
 
-function populateClassSelect(selectedClass) {
-  classSelect.innerHTML = "";
+function availableSubclassOptions() {
 
-  const empty = classSelect.createEl("option", { text: "— Select Class —" });
-  empty.value = "";
+  const cfg = getSubclassConfig();
 
-  for (const file of classFiles) {
-    const className = getClassNameFromFile(file);
-    const option = classSelect.createEl("option", { text: className });
-    option.value = className;
-  }
+  return Array.isArray(cfg?.options) ? cfg.options : [];
 
-  const wanted = String(selectedClass ?? "").trim();
-
-  if (wanted && !classFiles.some(file => getClassNameFromFile(file) === wanted)) {
-    const legacy = classSelect.createEl("option", {
-      text: `${wanted} (class file not found)`
-    });
-    legacy.value = wanted;
-  }
-
-  classSelect.value = wanted;
 }
 
-function getSelectedClassPage() {
-  const className = String(draft?.class ?? "").trim();
-  if (!className) return null;
+function getSubclassName() {
 
-  const file = classFiles.find(file => getClassNameFromFile(file) === className);
-  return file ? getPage(file) : null;
+  return Array.isArray(draft?.subclass)
+
+    ? String(draft.subclass.find(Boolean) ?? "")
+
+    : String(draft?.subclass ?? "");
+
 }
 
-function getClassLevelData() {
-  const classPage = getSelectedClassPage();
-  if (!classPage?.levels) return null;
+  
 
-  const level = String(clampInt(draft?.level, 1, 20, 1));
-  return classPage.levels?.[level] ?? classPage.levels?.[Number(level)] ?? null;
+/* Builder-side bonuses.
+
+   For now these mirror the character sheet's existing active item bonuses.
+
+   Later ASI/species/background choices can be added as additional sources. */
+
+function evaluateSimpleFormula(formula, ctx) {
+
+  let expr = String(formula ?? "").trim();
+
+  if (!expr) return null;
+
+  const keys = ["str_mod","dex_mod","con_mod","int_mod","wis_mod","cha_mod",
+
+                "str","dex","con","int","wis","cha","prof"];
+
+  for (const key of keys) {
+
+    expr = expr.replace(new RegExp(`\\b${key}\\b`, "g"), String(ctx[key] ?? 0));
+
+  }
+
+  expr = expr.replace(/\bmin\s*\(/g,"Math.min(").replace(/\bmax\s*\(/g,"Math.max(");
+
+  if (!/^[0-9+\-*/().,\sMathminax]*$/.test(expr)) return null;
+
+  try {
+
+    const x = Function(`"use strict";return (${expr})`)();
+
+    return Number.isFinite(x) ? Number(x) : null;
+
+  } catch { return null; }
+
 }
 
-function refreshPreview() {
-  if (!draft) return;
+function baseContext() {
 
-  previewName.setText(String(currentPage?.name ?? currentFile?.basename ?? "-"));
-  previewClass.setText(String(draft.class || "-"));
-  previewLevel.setText(String(draft.level ?? 1));
+  const ctx = {};
 
-  const levelData = getClassLevelData();
-  const prof = levelData?.proficiency_bonus;
+  for (const [k] of ABILITIES) {
 
-  previewProf.setText(prof != null ? modString(Number(prof)) : "-");
+    ctx[k] = Number(draft?.[k] ?? 10);
 
-  if (levelData) {
-    previewNote.setText("Class progression data found for this level.");
-  } else if (draft.class) {
-    previewNote.setText("No level progression data found for this class/level.");
-  } else {
-    previewNote.setText("Select a class to preview its progression.");
-  }
+    ctx[`${k}_mod`] = modFromScore(ctx[k]);
+
+  }
+
+  ctx.prof = Number(classLevelData()?.proficiency_bonus ?? currentPage?.proficiency_bonus ?? 2);
+
+  return ctx;
+
 }
 
-function refreshStatModifiers() {
-  for (const [key] of ABILITIES) {
-    const control = statControls[key];
-    const score = clampInt(control.input.value, 1, 30, 10);
-    control.modifier.setText(modString(modFromScore(score)));
-  }
+function abilityItemEffects(key) {
+
+  let additive = 0;
+
+  const setters = [];
+
+  const inventory = Array.isArray(draft?.inventory) ? draft.inventory : [];
+
+  const ctx = baseContext();
+
+  
+
+  for (let i=0; i<inventory.length; i++) {
+
+    const entry = inventory[i];
+
+    const resolved = resolveItem(entry?.item);
+
+    if (!resolved?.page) continue;
+
+    const item = resolved.page;
+
+    const bonuses = Array.isArray(item.bonuses) ? item.bonuses : [];
+
+    for (const b of bonuses) {
+
+      if (String(b?.type ?? "").toLowerCase() !== key) continue;
+
+      const when = String(b.active_when ?? "equipped").toLowerCase();
+
+      const active = when === "always" || (when === "equipped" && entry?.equipped === true);
+
+      if (!active) continue;
+
+      const add = Number(b.value ?? 0);
+
+      if (Number.isFinite(add)) additive += add;
+
+      if (b.set_value != null && Number.isFinite(Number(b.set_value)))
+
+        setters.push(Number(b.set_value));
+
+      if (b.formula) {
+
+        const val = evaluateSimpleFormula(b.formula, ctx);
+
+        if (val != null) setters.push(val);
+
+      }
+
+    }
+
+  }
+
+  return {additive, setters};
+
 }
 
-function syncDraftFromInputs() {
-  if (!draft) return;
+function getAsiBonus(key) {
 
-  draft.class = classSelect.value;
-  draft.level = clampInt(levelInput.value, 1, 20, 1);
+  const choices = draft?.asi_choices && typeof draft.asi_choices === "object" ? draft.asi_choices : {};
 
-  for (const [key] of ABILITIES) {
-    draft[key] = clampInt(statControls[key].input.value, 1, 30, 10);
-  }
+  let total = 0;
 
-  refreshStatModifiers();
-  refreshPreview();
-  setDirty(true);
+  for (const choice of Object.values(choices)) {
+
+    if (!choice) continue;
+
+    if (String(choice.type ?? "asi") === "asi") {
+
+      if (String(choice.ability_1 ?? "").toLowerCase() === key) total++;
+
+      if (String(choice.ability_2 ?? "").toLowerCase() === key) total++;
+
+      continue;
+
+    }
+
+  
+
+    if (String(choice.type ?? "") === "feat") {
+
+      const featPage=selectedFeatPage(choice.feat);
+
+      const defs=featPage?.choices;
+
+      const state=choice.feat_choices ?? {};
+
+  
+
+      if (defs?.ability_increase && String(state.ability_increase ?? "").toLowerCase()===key)
+
+        total += Number(defs.ability_increase.amount ?? 1);
+
+  
+
+      if (defs?.resilient_ability && String(state.resilient_ability ?? "").toLowerCase()===key)
+
+        total += Number(defs.resilient_ability.amount ?? 1);
+
+    }
+
+  }
+
+  return total;
+
 }
+
+function calculatedAbility(key) {
+
+  const base = Number(draft?.[key] ?? 10);
+
+  const fx = abilityItemEffects(key);
+
+  const asiBonus = getAsiBonus(key);
+
+  const beforeAdd = fx.setters.length ? Math.max(base, ...fx.setters) : base;
+
+  return {base, bonus:beforeAdd-base+fx.additive+asiBonus, final:beforeAdd+fx.additive+asiBonus};
+
+}
+
+function getAllAsiLevels() {
+
+  const cp=selectedClassPage();
+
+  const className=String(cp?.name ?? draft?.class ?? "").trim().toLowerCase();
+
+  
+
+  // Preferred explicit backend form:
+
+  // asi_levels: [4, 8, 12, 16, 19]
+
+  if(Array.isArray(cp?.asi_levels)){
+
+    return cp.asi_levels.map(Number).filter(Number.isFinite).sort((a,b)=>a-b);
+
+  }
+
+  
+
+  // Also recognize ASI entries in the class feature progression.
+
+  const features=Array.isArray(cp?.features)?cp.features:[];
+
+  const fromFeatures=features.filter(f=>{
+
+    const ref=String(f?.feature ?? f?.name ?? "").trim();
+
+    const normalized=ref.toLowerCase();
+
+    if(normalized==="ability score improvement" || normalized==="asi") return true;
+
+  
+
+    // If the class entry points to a Feature file, allow that file to identify itself.
+
+    const fp=ref ? (
+
+      dv.page(`Public/3 Backend/Features/${ref}`) ??
+
+      dv.page(`Public/3 Backend/Features/${ref}.md`) ??
+
+      (ref.includes("/") ? dv.page(ref) : null)
+
+    ) : null;
+
+    const kind=String(fp?.type ?? fp?.choice_type ?? "").trim().toLowerCase();
+
+    return kind==="asi" || kind==="ability_score_improvement" || kind==="asi_or_feat";
+
+  }).map(f=>Number(f?.level)).filter(Number.isFinite);
+
+  
+
+  if(fromFeatures.length) return [...new Set(fromFeatures)].sort((a,b)=>a-b);
+
+  
+
+  // 2014 fallback schedules, so the builder remains usable even before
+
+  // every class backend has explicit asi_levels.
+
+  const schedules={
+
+    artificer:[4,8,12,16,19],
+
+    barbarian:[4,8,12,16,19],
+
+    bard:[4,8,12,16,19],
+
+    cleric:[4,8,12,16,19],
+
+    druid:[4,8,12,16,19],
+
+    fighter:[4,6,8,12,14,16,19],
+
+    monk:[4,8,12,16,19],
+
+    paladin:[4,8,12,16,19],
+
+    ranger:[4,8,12,16,19],
+
+    rogue:[4,8,10,12,16,19],
+
+    sorcerer:[4,8,12,16,19],
+
+    warlock:[4,8,12,16,19],
+
+    wizard:[4,8,12,16,19]
+
+  };
+
+  return schedules[className] ?? [];
+
+}
+
+function getAsiLevels() {
+
+  return getAllAsiLevels().filter(level=>level<=Number(draft?.level ?? 1));
+
+}
+
+function featDisplayName(file) {
+
+  const p=pageFor(file);
+
+  return String(p?.name ?? file.basename);
+
+}
+
+function selectedFeatPage(ref) {
+
+  const raw=String(ref ?? "").trim();
+
+  if(!raw) return null;
+
+  if(raw.includes("/")) return dv.page(raw) ?? dv.page(raw.endsWith(".md")?raw:raw+".md");
+
+  return dv.page(`${FEATS_FOLDER}${raw}`) ?? dv.page(`${FEATS_FOLDER}${raw}.md`);
+
+}
+
+function featChoiceState(choice) {
+
+  if(!choice.feat_choices || typeof choice.feat_choices!=="object") choice.feat_choices={};
+
+  return choice.feat_choices;
+
+}
+
+  
+  
+
+function sectionTitle(text, subtext="") {
+
+  const h = content.createEl("div");
+
+  h.createEl("div", {text}).style.cssText = "font-size:1.35em;font-weight:700";
+
+  if (subtext) h.createEl("div", {text:subtext}).style.cssText =
+
+    "opacity:.65;margin-top:3px;margin-bottom:16px";
+
+  else h.style.marginBottom = "16px";
+
+}
+
+function field(parent, label) {
+
+  const w = parent.createEl("div");
+
+  w.createEl("div", {text:label}).style.cssText =
+
+    "font-size:.85em;font-weight:600;opacity:.8;margin-bottom:6px";
+
+  return w;
+
+}
+
+  
+
+function renderClass() {
+
+  content.innerHTML = "";
+
+  sectionTitle("Class", "Class, level, subclass and level-based choices.");
+
+  
+
+  const grid = content.createEl("div");
+
+  grid.style.display = "grid";
+
+  grid.style.gridTemplateColumns = "2fr 1fr";
+
+  grid.style.gap = "12px";
+
+  
+
+  const cw = field(grid, "Class");
+
+  const sel = cw.createEl("select"); styleInput(sel);
+
+  sel.createEl("option",{text:"— Select Class —"}).value = "";
+
+  for (const f of classFiles) {
+
+    const p = pageFor(f), name = String(p?.name ?? f.basename);
+
+    const o = sel.createEl("option",{text:name}); o.value=name;
+
+  }
+
+  if (draft.class && !classFiles.some(f => String(pageFor(f)?.name ?? f.basename) === draft.class)) {
+
+    const o=sel.createEl("option",{text:`${draft.class} (missing file)`}); o.value=draft.class;
+
+  }
+
+  sel.value=draft.class ?? "";
+
+  sel.onchange=()=>{draft.class=sel.value; draft.subclass=""; markDirty(); renderClass();};
+
+  
+
+  const lw = field(grid,"Level");
+
+  const lr = lw.createEl("div");
+
+  lr.style.display="grid"; lr.style.gridTemplateColumns="40px 1fr 40px"; lr.style.gap="6px";
+
+  const minus=makeButton(lr,"−");
+
+  const li=lr.createEl("input"); li.type="number"; li.min="1"; li.max="20"; li.value=String(draft.level); styleInput(li); li.style.textAlign="center";
+
+  const plus=makeButton(lr,"+");
+
+  const changeLevel=n=>{draft.level=clampInt(n,1,20,1); markDirty(); renderClass();};
+
+  minus.onclick=()=>changeLevel(draft.level-1);
+
+  plus.onclick=()=>changeLevel(draft.level+1);
+
+  li.onchange=()=>changeLevel(li.value);
+
+  
+
+  const cfg=getSubclassConfig();
+
+  const unlock=Number(cfg?.unlock_level ?? 1);
+
+  if (cfg && Number(draft.level)>=unlock) {
+
+    const sw=field(content, cfg.label ?? "Subclass");
+
+    sw.style.marginTop="14px";
+
+    const ss=sw.createEl("select"); styleInput(ss);
+
+    ss.createEl("option",{text:"— Select —"}).value="";
+
+    for (const option of availableSubclassOptions()) {
+
+      if (!option) continue;
+
+      const name=String(option.name ?? option.file ?? "");
+
+      const o=ss.createEl("option",{text:name}); o.value=name;
+
+    }
+
+    ss.value=getSubclassName();
+
+    ss.onchange=()=>{draft.subclass=ss.value;markDirty();};
+
+  }
+
+  
+
+  const prog=content.createEl("div");
+
+  prog.style.marginTop="22px";
+
+  prog.createEl("div",{text:"Class Progression"}).style.cssText="font-weight:700;font-size:1.05em;margin-bottom:8px";
+
+  
+
+  const cp=selectedClassPage();
+
+  const features=Array.isArray(cp?.features) ? cp.features : [];
+
+  const unlocked=features.filter(x=>Number(x?.level ?? 1)<=Number(draft.level));
+
+  
+
+  if (!cp) {
+
+    prog.createEl("div",{text:"No class backend loaded."}).style.opacity=".65";
+
+  } else {
+
+    const levelData=classLevelData();
+
+    const summary=prog.createEl("div");
+
+    summary.style.display="flex"; summary.style.gap="8px"; summary.style.flexWrap="wrap"; summary.style.marginBottom="10px";
+
+    const chips=[
+
+      `Level ${draft.level}`,
+
+      `Proficiency ${levelData?.proficiency_bonus != null ? modString(levelData.proficiency_bonus) : "-"}`,
+
+      `Attunement ${levelData?.attunement_slots ?? "-"}`
+
+    ];
+
+    for (const text of chips) {
+
+      const chip=summary.createEl("span",{text});
+
+      chip.style.cssText="padding:5px 9px;border:1px solid var(--background-modifier-border);border-radius:999px;font-size:.85em";
+
+    }
+
+    if (!unlocked.length) prog.createEl("div",{text:"No unlocked class features found."});
+
+    for (const f of unlocked) {
+
+      const row=prog.createEl("div");
+
+      row.style.cssText="display:grid;grid-template-columns:80px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid var(--background-modifier-border-hover)";
+
+      row.createEl("div",{text:`Level ${f.level ?? 1}`}).style.opacity=".65";
+
+      row.createEl("div",{text:String(f.feature ?? "-")});
+
+    }
+
+  }
+
+  
+
+  const choices=content.createEl("div");
+
+  choices.style.marginTop="22px";
+
+  choices.createEl("div",{text:"Level Choices"}).style.cssText="font-weight:700;font-size:1.05em;margin-bottom:10px";
+
+  const asiLevels=getAsiLevels();
+
+  draft.asi_choices=draft.asi_choices&&typeof draft.asi_choices==="object"?draft.asi_choices:{};
+
+  
+
+  if(!asiLevels.length) {
+
+    const allAsi=getAllAsiLevels();
+
+    const msg=allAsi.length
+
+      ? `No ASI unlocked yet. Next Ability Score Improvement: Level ${allAsi.find(x=>x>Number(draft.level)) ?? allAsi[allAsi.length-1]}.`
+
+      : "No ASI progression found for this class. Add asi_levels to the class backend.";
+
+    choices.createEl("div",{text:msg}).style.opacity=".65";
+
+  }
+
+  
+
+  for(const asiLevel of asiLevels){
+
+    const key=String(asiLevel);
+
+    const choice=draft.asi_choices[key]??{type:"asi",ability_1:"",ability_2:"",feat:""};
+
+    draft.asi_choices[key]=choice;
+
+  
+
+    const card=choices.createEl("div");
+
+    card.style.cssText="padding:14px;border:1px solid var(--background-modifier-border);border-radius:12px;margin-bottom:10px";
+
+    const top=card.createEl("div");
+
+    top.style.cssText="display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:10px";
+
+    top.createEl("div",{text:`Level ${asiLevel} — Ability Score Improvement`}).style.fontWeight="700";
+
+  
+
+    const type=top.createEl("select");styleInput(type);type.style.width="150px";
+
+    for(const [v,l] of [["asi","ASI"],["feat","Feat"]]){const o=type.createEl("option",{text:l});o.value=v;}
+
+    type.value=String(choice.type??"asi");
+
+    const body=card.createEl("div");
+
+  
+
+    function draw(){
+
+      body.innerHTML="";
+
+      if(String(choice.type??"asi")==="asi"){
+
+        body.createEl("div",{text:"Choose two +1 increases. The same ability twice gives +2."})
+
+          .style.cssText="font-size:.85em;opacity:.65;margin-bottom:10px";
+
+        const grid=body.createEl("div");grid.style.cssText="display:grid;grid-template-columns:1fr 1fr;gap:10px";
+
+        function score(label,prop){
+
+          const w=field(grid,label),sel=w.createEl("select");styleInput(sel);
+
+          sel.createEl("option",{text:"— Select Ability —"}).value="";
+
+          for(const [ak,al] of ABILITIES){const o=sel.createEl("option",{text:al});o.value=ak;}
+
+          sel.value=String(choice[prop]??"");
+
+          sel.onchange=()=>{choice[prop]=sel.value;choice.feat="";markDirty();};
+
+        }
+
+        score("Increase 1 (+1)","ability_1");score("Increase 2 (+1)","ability_2");
+
+      }else{
+
+        const w=field(body,"Feat"),sel=w.createEl("select");styleInput(sel);
+
+        sel.createEl("option",{text:"— Select Feat —"}).value="";
+
+        for(const file of featFiles){const o=sel.createEl("option",{text:featDisplayName(file)});o.value=file.path;}
+
+        if(choice.feat&&!featFiles.some(f=>f.path===choice.feat)){const o=sel.createEl("option",{text:`${choice.feat} (missing file)`});o.value=choice.feat;}
+
+        sel.value=String(choice.feat??"");
+
+        sel.onchange=()=>{
+
+          choice.feat=sel.value;
+
+          choice.ability_1="";
+
+          choice.ability_2="";
+
+          choice.feat_choices={};
+
+          markDirty();
+
+          draw();
+
+        };
+
+        if(!featFiles.length) body.createEl("div",{text:`No feat files found in ${FEATS_FOLDER}`})
+
+          .style.cssText="font-size:.85em;opacity:.65;margin-top:8px";
+
+  
+
+        const featPage=selectedFeatPage(choice.feat);
+
+        const definitions=featPage?.choices;
+
+        if(featPage && definitions && typeof definitions==="object"){
+
+          const state=featChoiceState(choice);
+
+          const choiceWrap=body.createEl("div");
+
+          choiceWrap.style.cssText="margin-top:12px;padding-top:12px;border-top:1px solid var(--background-modifier-border-hover)";
+
+          choiceWrap.createEl("div",{text:"Feat Choices"}).style.cssText="font-weight:700;margin-bottom:10px";
+
+  
+
+          function singleSelect(title,key,options){
+
+            const w=field(choiceWrap,title), cs=w.createEl("select");styleInput(cs);
+
+            cs.createEl("option",{text:"— Select —"}).value="";
+
+            for(const option of options??[]){
+
+              const o=cs.createEl("option",{text:String(option).toUpperCase()});o.value=String(option);
+
+            }
+
+            cs.value=String(state[key]??"");
+
+            cs.onchange=()=>{state[key]=cs.value;markDirty();};
+
+          }
+
+  
+
+          if(definitions.ability_increase){
+
+            const d=definitions.ability_increase;
+
+            singleSelect(`Ability Increase (+${Number(d.amount??1)})`,"ability_increase",Array.isArray(d.options)?d.options:[]);
+
+          }
+
+  
+
+          if(definitions.resilient_ability){
+
+            const d=definitions.resilient_ability;
+
+            singleSelect("Resilient Ability (+1 & Save Proficiency)","resilient_ability",Array.isArray(d.options)?d.options:[]);
+
+          }
+
+  
+
+          if(definitions.weapon_proficiencies){
+
+            const d=definitions.weapon_proficiencies;
+
+            const count=Math.max(1,Number(d.count??1));
+
+            const note=choiceWrap.createEl("div",{text:`Choose ${count} weapon proficiencies.`});
+
+            note.style.cssText="font-size:.85em;opacity:.65;margin-bottom:8px";
+
+            if(!Array.isArray(state.weapon_proficiencies)) state.weapon_proficiencies=[];
+
+            for(let wi=0;wi<count;wi++){
+
+              const w=field(choiceWrap,`Weapon ${wi+1}`);
+
+              const inp=w.createEl("input");inp.type="text";inp.placeholder="e.g. longsword";styleInput(inp);
+
+              inp.value=String(state.weapon_proficiencies[wi]??"");
+
+              inp.onchange=()=>{state.weapon_proficiencies[wi]=inp.value.trim().toLowerCase();markDirty();};
+
+            }
+
+          }
+
+  
+
+          if(definitions.skill_or_tool_proficiencies){
+
+            const d=definitions.skill_or_tool_proficiencies;
+
+            const count=Math.max(1,Number(d.count??1));
+
+            if(!Array.isArray(state.skill_or_tool_proficiencies)) state.skill_or_tool_proficiencies=[];
+
+            const note=choiceWrap.createEl("div",{text:`Choose ${count} skill or tool proficiencies.`});
+
+            note.style.cssText="font-size:.85em;opacity:.65;margin-bottom:8px";
+
+            for(let pi=0;pi<count;pi++){
+
+              const row=choiceWrap.createEl("div");
+
+              row.style.cssText="display:grid;grid-template-columns:130px 1fr;gap:8px;margin-bottom:8px";
+
+              const typeSel=row.createEl("select");styleInput(typeSel);
+
+              for(const t of ["skill","tool"]){const o=typeSel.createEl("option",{text:t==="skill"?"Skill":"Tool"});o.value=t;}
+
+              const existing=state.skill_or_tool_proficiencies[pi]??{type:"skill",value:""};
+
+              typeSel.value=existing.type??"skill";
+
+              const inp=row.createEl("input");inp.type="text";inp.placeholder="e.g. perception / thieves_tools";styleInput(inp);
+
+              inp.value=existing.value??"";
+
+              const save=()=>{state.skill_or_tool_proficiencies[pi]={type:typeSel.value,value:inp.value.trim().toLowerCase()};markDirty();};
+
+              typeSel.onchange=save;inp.onchange=save;
+
+            }
+
+          }
+
+        }
+
+      }
+
+    }
+
+    type.onchange=()=>{choice.type=type.value;if(choice.type==="asi")choice.feat="";else{choice.ability_1="";choice.ability_2="";}markDirty();draw();};
+
+    draw();
+
+  }
+
+}
+
+  
+
+function renderAbilities() {
+
+  content.innerHTML="";
+
+  sectionTitle("Abilities","Base values and calculated values used by the character sheet.");
+
+  
+
+  const head=content.createEl("div");
+
+  head.style.cssText="display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr 1fr;gap:8px;padding:8px;font-weight:700;border-bottom:1px solid var(--background-modifier-border)";
+
+  for (const t of ["Ability","Base / Raw","Bonuses","Final","Modifier"]) head.createEl("div",{text:t});
+
+  
+
+  for (const [key,label] of ABILITIES) {
+
+    const calc=calculatedAbility(key);
+
+    const row=content.createEl("div");
+
+    row.style.cssText="display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr 1fr;gap:8px;align-items:center;padding:10px 8px;border-bottom:1px solid var(--background-modifier-border-hover)";
+
+    row.createEl("div",{text:label}).style.fontWeight="700";
+
+  
+
+    const input=row.createEl("input"); input.type="number"; input.min="1"; input.max="30"; input.value=String(calc.base); styleInput(input);
+
+    input.onchange=()=>{
+
+      draft[key]=clampInt(input.value,1,30,10);
+
+      markDirty(); renderAbilities();
+
+    };
+
+    row.createEl("div",{text:calc.bonus===0 ? "—" : modString(calc.bonus)});
+
+    const final=row.createEl("div",{text:String(calc.final)}); final.style.fontWeight="700";
+
+    const mod=row.createEl("div",{text:modString(modFromScore(calc.final))}); mod.style.fontWeight="700";
+
+  }
+
+  
+
+  const note=content.createEl("div");
+
+  note.style.cssText="margin-top:16px;padding:12px;border:1px solid var(--background-modifier-border);border-radius:10px;opacity:.75";
+
+  note.setText("Base / Raw is stored in the character backend. The current Bonuses column already reflects active item ability bonuses. ASI, Species and Background sources can be added here without overwriting the raw score.");
+
+}
+
+  
+
+function renderEquipment() {
+
+  content.innerHTML="";
+
+  sectionTitle("Equipment","Manage the existing character inventory. Equipped state remains compatible with the character sheet.");
+
+  
+
+  const add=content.createEl("div");
+
+  add.style.cssText="display:grid;grid-template-columns:1fr auto;gap:8px;margin-bottom:16px";
+
+  const itemSelect=add.createEl("select"); styleInput(itemSelect);
+
+  itemSelect.createEl("option",{text:"— Add Item —"}).value="";
+
+  for (const f of itemFiles) {
+
+    const p=pageFor(f), name=String(p?.name ?? f.basename);
+
+    const o=itemSelect.createEl("option",{text:name}); o.value=f.path;
+
+  }
+
+  const addBtn=makeButton(add,"Add");
+
+  addBtn.onclick=()=>{
+
+    if (!itemSelect.value) return;
+
+    draft.inventory = Array.isArray(draft.inventory) ? draft.inventory : [];
+
+    const existing=draft.inventory.find(e=>{
+
+      const r=resolveItem(e?.item); return r?.path===itemSelect.value;
+
+    });
+
+    if (existing) existing.quantity=Math.max(1,Number(existing.quantity ?? 1))+1;
+
+    else draft.inventory.push({item:itemSelect.value,quantity:1,equipped:false});
+
+    markDirty(); renderEquipment();
+
+  };
+
+  
+
+  const inv=Array.isArray(draft.inventory)?draft.inventory:[];
+
+  if (!inv.length) {
+
+    content.createEl("div",{text:"Inventory is empty."}).style.opacity=".65";
+
+    return;
+
+  }
+
+  
+
+  for (let i=0;i<inv.length;i++) {
+
+    const entry=inv[i], resolved=resolveItem(entry?.item), item=resolved?.page;
+
+    const row=content.createEl("div");
+
+    row.style.cssText="display:grid;grid-template-columns:minmax(220px,2fr) 90px 110px 90px;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--background-modifier-border-hover)";
+
+    const nameWrap=row.createEl("div");
+
+    nameWrap.createEl("div",{text:String(item?.name ?? resolved?.file?.basename ?? entry?.item ?? "Unknown Item")}).style.fontWeight="600";
+
+    nameWrap.createEl("div",{text:String(item?.type ?? "")}).style.cssText="font-size:.8em;opacity:.6";
+
+  
+
+    const qty=row.createEl("input"); qty.type="number"; qty.min="1"; qty.value=String(Math.max(1,Number(entry.quantity ?? 1))); styleInput(qty);
+
+    qty.onchange=()=>{entry.quantity=Math.max(1,clampInt(qty.value,1,999,1));markDirty();};
+
+  
+
+    const equipLabel=row.createEl("label");
+
+    equipLabel.style.cssText="display:flex;align-items:center;gap:6px";
+
+    const equip=equipLabel.createEl("input"); equip.type="checkbox"; equip.checked=entry.equipped===true;
+
+    equipLabel.createEl("span",{text:"Equipped"});
+
+    equip.onchange=()=>{entry.equipped=equip.checked;markDirty();};
+
+  
+
+    const remove=makeButton(row,"Remove");
+
+    remove.onclick=()=>{draft.inventory.splice(i,1);markDirty();renderEquipment();};
+
+  }
+
+}
+
+  
+
+function renderPlaceholder(type) {
+
+  content.innerHTML="";
+
+  sectionTitle(type, `${type} configuration will use its own backend definitions.`);
+
+  const box=content.createEl("div");
+
+  box.style.cssText="padding:18px;border:1px dashed var(--background-modifier-border);border-radius:12px";
+
+  box.createEl("div",{text:`${type} system prepared`}).style.fontWeight="700";
+
+  box.createEl("div",{
+
+    text:`Next, ${type.toLowerCase()} files can define features, bonuses and choices just like the class backend.`
+
+  }).style.cssText="opacity:.65;margin-top:6px";
+
+}
+
+  
+
+function updateTabs() {
+
+  for (const [key,b] of Object.entries(tabButtons)) {
+
+    const on=key===activeTab;
+
+    b.style.background=on?"var(--interactive-accent)":"var(--background-secondary)";
+
+    b.style.color=on?"var(--text-on-accent)":"var(--text-normal)";
+
+  }
+
+}
+
+function renderTab() {
+
+  window.__dndBuilderTab=activeTab;
+
+  updateTabs();
+
+  if (activeTab==="class") renderClass();
+
+  else if (activeTab==="background") renderPlaceholder("Background");
+
+  else if (activeTab==="species") renderPlaceholder("Species");
+
+  else if (activeTab==="abilities") renderAbilities();
+
+  else if (activeTab==="equipment") renderEquipment();
+
+}
+
+for (const [key,label] of [
+
+  ["class","Class"],["background","Background"],["species","Species"],
+
+  ["abilities","Abilities"],["equipment","Equipment"]
+
+]) {
+
+  const b=makeButton(tabBar,label);
+
+  b.onclick=()=>{activeTab=key;renderTab();};
+
+  tabButtons[key]=b;
+
+}
+
+  
 
 function loadCharacter(path) {
-  const file = app.vault.getAbstractFileByPath(path);
 
-  if (!file) {
-    new Notice("Character file not found.");
-    return;
-  }
+  const file=app.vault.getAbstractFileByPath(path);
 
-  const page = dv.page(path);
+  const pg=file?dv.page(path):null;
 
-  if (!page) {
-    new Notice("Character data could not be loaded.");
-    return;
-  }
+  if (!file || !pg) { new Notice("Character could not be loaded."); return; }
 
-  currentFile = file;
-  currentPage = page;
-  window.__dndBuilderCharacterPath = path;
+  currentFile=file; currentPage=pg; window.__dndBuilderCharacterPath=path;
 
-  draft = {
-    class: String(page.class ?? ""),
-    level: clampInt(page.level, 1, 20, 1),
-    str: clampInt(page.str, 1, 30, 10),
-    dex: clampInt(page.dex, 1, 30, 10),
-    con: clampInt(page.con, 1, 30, 10),
-    int: clampInt(page.int, 1, 30, 10),
-    wis: clampInt(page.wis, 1, 30, 10),
-    cha: clampInt(page.cha, 1, 30, 10)
-  };
+  draft={
 
-  fileInfo.setText(file.path);
-  populateClassSelect(draft.class);
+    class:String(pg.class ?? ""),
 
-  levelInput.value = String(draft.level);
+    subclass:Array.isArray(pg.subclass)?[...pg.subclass]:String(pg.subclass ?? ""),
 
-  for (const [key] of ABILITIES) {
-    statControls[key].input.value = String(draft[key]);
-  }
+    level:clampInt(pg.level,1,20,1),
 
-  refreshStatModifiers();
-  refreshPreview();
-  setDirty(false);
-  statusText.setText("Character loaded.");
+    str:clampInt(pg.str,1,30,10), dex:clampInt(pg.dex,1,30,10),
+
+    con:clampInt(pg.con,1,30,10), int:clampInt(pg.int,1,30,10),
+
+    wis:clampInt(pg.wis,1,30,10), cha:clampInt(pg.cha,1,30,10),
+
+    inventory:Array.isArray(pg.inventory) ? pg.inventory.map(e=>({...e})) : [],
+
+    asi_choices:pg.asi_choices&&typeof pg.asi_choices==="object"?JSON.parse(JSON.stringify(pg.asi_choices)):{}
+
+  };
+
+  clearDirty(); renderTab();
+
 }
+
+  
 
 async function saveCharacter() {
-  if (!currentFile || !draft) return;
 
-  syncDraftFromInputs();
+  if (!currentFile || !draft) {
 
-  const savedDraft = {
-    class: String(draft.class ?? "").trim(),
-    level: clampInt(draft.level, 1, 20, 1),
-    str: clampInt(draft.str, 1, 30, 10),
-    dex: clampInt(draft.dex, 1, 30, 10),
-    con: clampInt(draft.con, 1, 30, 10),
-    int: clampInt(draft.int, 1, 30, 10),
-    wis: clampInt(draft.wis, 1, 30, 10),
-    cha: clampInt(draft.cha, 1, 30, 10)
-  };
+    new Notice("No character selected.");
 
-  saveButton.disabled = true;
-  reloadButton.disabled = true;
-  statusText.setText("Saving…");
+    return;
 
-  try {
-    await app.fileManager.processFrontMatter(currentFile, (fm) => {
-      fm.class = savedDraft.class;
-      fm.level = savedDraft.level;
+  }
 
-      fm.str = savedDraft.str;
-      fm.dex = savedDraft.dex;
-      fm.con = savedDraft.con;
-      fm.int = savedDraft.int;
-      fm.wis = savedDraft.wis;
-      fm.cha = savedDraft.cha;
-    });
+  
 
-    // Keep local state consistent without waiting for Dataview indexing.
-    draft = { ...savedDraft };
-    currentPage = {
-      ...currentPage,
-      class: savedDraft.class,
-      level: savedDraft.level,
-      str: savedDraft.str,
-      dex: savedDraft.dex,
-      con: savedDraft.con,
-      int: savedDraft.int,
-      wis: savedDraft.wis,
-      cha: savedDraft.cha
-    };
+  // Resolve the selected file again from the vault instead of relying on a stale object.
 
-    setDirty(false);
-    refreshPreview();
-    statusText.setText("Saved.");
-    new Notice("Character saved.");
-  } catch (err) {
-    console.error(err);
-    statusText.setText("Save failed.");
-    new Notice(`Save failed: ${err.message ?? err}`);
-  } finally {
-    saveButton.disabled = false;
-    reloadButton.disabled = false;
-  }
+  const selectedPath=String(characterSelect.value ?? currentFile.path ?? "").trim();
+
+  const targetFile=app.vault.getAbstractFileByPath(selectedPath);
+
+  
+
+  if(!targetFile || targetFile.extension!=="md"){
+
+    status.setText("Save failed: character file not found");
+
+    new Notice(`Character file not found: ${selectedPath}`);
+
+    return;
+
+  }
+
+  
+
+  saveBtn.disabled=true;
+
+  status.setText(`Saving ${selectedPath}…`);
+
+  
+
+  try {
+
+    const expectedLevel=clampInt(draft.level,1,20,1);
+
+    const expectedClass=String(draft.class ?? "");
+
+  
+
+    await app.fileManager.processFrontMatter(targetFile, fm => {
+
+      fm.class=expectedClass;
+
+  
+
+      const subclass=String(
+
+        Array.isArray(draft.subclass) ? (draft.subclass[0] ?? "") : (draft.subclass ?? "")
+
+      ).trim();
+
+      fm.subclass=subclass || null;
+
+  
+
+      fm.level=expectedLevel;
+
+  
+
+      for(const [key] of ABILITIES){
+
+        fm[key]=clampInt(draft[key],1,30,10);
+
+      }
+
+  
+
+      fm.inventory=JSON.parse(JSON.stringify(draft.inventory ?? []));
+
+      fm.asi_choices=JSON.parse(JSON.stringify(draft.asi_choices ?? {}));
+
+    });
+
+  
+
+    // Wait until Obsidian metadata cache sees the newly written frontmatter.
+
+    let verified=null;
+
+    for(let attempt=0;attempt<20;attempt++){
+
+      await new Promise(resolve=>setTimeout(resolve,100));
+
+      const fm=app.metadataCache.getFileCache(targetFile)?.frontmatter;
+
+      if(fm && Number(fm.level)===expectedLevel && String(fm.class ?? "")===expectedClass){
+
+        verified=fm;
+
+        break;
+
+      }
+
+    }
+
+  
+
+    if(!verified){
+
+      // processFrontMatter already completed; verify directly from the file text as fallback.
+
+      const raw=await app.vault.read(targetFile);
+
+      if(!raw.includes(`level: ${expectedLevel}`)){
+
+        throw new Error("The file was written, but the saved frontmatter could not be verified.");
+
+      }
+
+    }
+
+  
+
+    currentFile=targetFile;
+
+    currentPage=dv.page(targetFile.path) ?? currentPage;
+
+    dirty=false;
+
+    saveBtn.setText("Save Changes");
+
+    status.setText(`Saved: ${targetFile.path}`);
+
+    new Notice(`Saved ${targetFile.basename}`);
+
+  
+
+    try { app.workspace.trigger("dataview:refresh-views"); } catch(e) {}
+
+  } catch(err) {
+
+    console.error("Character Builder save error:",err);
+
+    status.setText(`Save failed: ${err?.message ?? err}`);
+
+    new Notice(`Save failed: ${err?.message ?? err}`);
+
+  } finally {
+
+    saveBtn.disabled=false;
+
+  }
+
 }
 
-// -----------------------------------------------------------------------------
-// Events
-// -----------------------------------------------------------------------------
+  
 
-characterSelect.addEventListener("change", () => {
-  if (dirty) {
-    const proceed = confirm("Discard unsaved changes and switch character?");
-    if (!proceed) {
-      characterSelect.value = currentFile?.path ?? characterSelect.value;
-      return;
-    }
-  }
+characterSelect.onchange=()=>{
 
-  loadCharacter(characterSelect.value);
-});
+  if (dirty && !confirm("Discard unsaved changes and switch character?")) {
 
-classSelect.addEventListener("change", syncDraftFromInputs);
-levelInput.addEventListener("input", syncDraftFromInputs);
+    characterSelect.value=currentFile?.path ?? characterSelect.value; return;
 
-levelMinus.addEventListener("click", () => {
-  levelInput.value = String(clampInt(Number(levelInput.value) - 1, 1, 20, 1));
-  syncDraftFromInputs();
-});
+  }
 
-levelPlus.addEventListener("click", () => {
-  levelInput.value = String(clampInt(Number(levelInput.value) + 1, 1, 20, 1));
-  syncDraftFromInputs();
-});
+  loadCharacter(characterSelect.value);
 
-for (const [key] of ABILITIES) {
-  statControls[key].input.addEventListener("input", syncDraftFromInputs);
-}
+};
 
-reloadButton.addEventListener("click", () => {
-  if (!currentFile) return;
-
-  if (dirty) {
-    const proceed = confirm("Discard all unsaved changes?");
-    if (!proceed) return;
-  }
-
-  loadCharacter(currentFile.path);
-});
-
-saveButton.addEventListener("click", saveCharacter);
-
-// -----------------------------------------------------------------------------
-// Initial load
-// -----------------------------------------------------------------------------
+saveBtn.onclick=saveCharacter;
 
 loadCharacter(characterSelect.value);
+
 ```

@@ -1,10 +1,40 @@
+---
+class: Artificer
+subclass: Armorer
+level: 10
+str: 10
+dex: 10
+con: 10
+int: 10
+wis: 10
+cha: 10
+inventory: []
+asi_choices:
+  "4":
+    type: feat
+    ability_1: ""
+    ability_2: ""
+    feat: Public/3 Backend/Feats/Shield Master.md
+    feat_choices: {}
+  "8":
+    type: asi
+    ability_1: int
+    ability_2: int
+    feat: ""
+  "12":
+    type: asi
+    ability_1: ""
+    ability_2: ""
+    feat: ""
+---
 ```dataviewjs
-const CHARACTER_PATH = "Public/3 Backend/EIMER Test.md";
+const CHARACTER_PATH = "Public/3 Backend/Characters/EIMER Test.md";
 
 const ITEMS_FOLDER = "Public/3 Backend/Items/";
 const ACTIONS_FOLDER = "Public/3 Backend/Actions/";
 const SPELLS_FOLDER = "Public/3 Backend/Spells/";
 const FEATURES_FOLDER = "Public/3 Backend/Features/";
+const FEATS_FOLDER = "Public/3 Backend/Feats/";
 const CLASSES_FOLDER = "Public/3 Backend/Classes/";
 const SUBCLASSES_FOLDER = "Public/3 Backend/Subclasses/";
 
@@ -331,6 +361,74 @@ function getAllCharacterFeatures() {
   });
 }
 
+
+function getSelectedFeatPages() {
+  const choices = c.asi_choices && typeof c.asi_choices === "object"
+    ? c.asi_choices
+    : {};
+  const result = [];
+
+  for (const choice of Object.values(choices)) {
+    if (!choice || String(choice.type ?? "").toLowerCase() !== "feat") continue;
+    const ref = String(choice.feat ?? "").trim();
+    if (!ref) continue;
+    const page = resolvePageRef(ref, FEATS_FOLDER);
+    if (page) result.push(page);
+  }
+
+  return result;
+}
+
+function getFeatProficiencies(category) {
+  const key = String(category ?? "").trim().toLowerCase();
+  const values = [];
+
+  for (const feat of getSelectedFeatPages()) {
+    const profs = feat.proficiencies;
+    if (!profs || typeof profs !== "object") continue;
+    const entries = Array.isArray(profs[key]) ? profs[key] : [];
+    for (const entry of entries) {
+      const value = String(entry ?? "").trim().toLowerCase();
+      if (value && !values.includes(value)) values.push(value);
+    }
+  }
+
+  const choices = c.asi_choices && typeof c.asi_choices === "object" ? c.asi_choices : {};
+  for (const choice of Object.values(choices)) {
+    if (!choice || String(choice.type ?? "").toLowerCase() !== "feat") continue;
+    const state = choice.feat_choices && typeof choice.feat_choices === "object"
+      ? choice.feat_choices : {};
+    const feat = resolvePageRef(choice.feat, FEATS_FOLDER);
+
+    if (key === "saves" && feat?.choices?.resilient_ability?.grants_matching_save_proficiency === true) {
+      const ability = String(state.resilient_ability ?? "").trim().toLowerCase();
+      if (ability && !values.includes(ability)) values.push(ability);
+    }
+
+    if (key === "weapons" && Array.isArray(state.weapon_proficiencies)) {
+      for (const entry of state.weapon_proficiencies) {
+        const value=String(entry ?? "").trim().toLowerCase();
+        if(value && !values.includes(value)) values.push(value);
+      }
+    }
+
+    if ((key === "skills" || key === "tools") && Array.isArray(state.skill_or_tool_proficiencies)) {
+      const expectedType = key === "skills" ? "skill" : "tool";
+      for (const entry of state.skill_or_tool_proficiencies) {
+        if (String(entry?.type ?? "").toLowerCase() !== expectedType) continue;
+        const value=String(entry?.value ?? "").trim().toLowerCase();
+        if(value && !values.includes(value)) values.push(value);
+      }
+    }
+  }
+  return values;
+}
+
+function hasFeatProficiency(category, value) {
+  return getFeatProficiencies(category)
+    .includes(String(value ?? "").trim().toLowerCase());
+}
+
 function getActiveBonusEffects() {
   const activeEffects = [];
 
@@ -445,6 +543,63 @@ function getActiveBonusEffects() {
     }
   }
 
+
+  const feats = getSelectedFeatPages();
+
+  for (const featPage of feats) {
+    const bonuses = Array.isArray(featPage.bonuses) ? featPage.bonuses : [];
+    for (const bonus of bonuses) {
+      if (!bonus || typeof bonus !== "object") continue;
+
+      const type = String(bonus.type ?? "").trim().toLowerCase();
+      const value = Number(bonus.value ?? 0);
+      const rawSetValue = bonus.set_value;
+      const hasSetValue = rawSetValue !== undefined && rawSetValue !== null && rawSetValue !== "";
+      const setValue = hasSetValue ? Number(rawSetValue) : null;
+      const formula = String(bonus.formula ?? "").trim();
+
+      if (!type) continue;
+      if (!Number.isFinite(value) && !(hasSetValue && Number.isFinite(setValue)) && !formula) continue;
+
+      activeEffects.push({
+        type,
+        value: Number.isFinite(value) ? value : 0,
+        set_value: hasSetValue && Number.isFinite(setValue) ? setValue : null,
+        formula: formula || null,
+        active_when: "selected",
+        source_kind: "feat",
+        source_name: featPage.name ?? featPage.file?.name ?? "Unnamed Feat",
+        source_path: featPage.file?.path ?? null
+      });
+    }
+  }
+
+  const asiChoices = c.asi_choices && typeof c.asi_choices === "object" ? c.asi_choices : {};
+  for (const choice of Object.values(asiChoices)) {
+    if (!choice || String(choice.type ?? "").toLowerCase() !== "feat") continue;
+    const feat = resolvePageRef(choice.feat, FEATS_FOLDER);
+    const defs = feat?.choices;
+    const state = choice.feat_choices && typeof choice.feat_choices === "object" ? choice.feat_choices : {};
+
+    if (defs?.ability_increase) {
+      const ability=String(state.ability_increase ?? "").trim().toLowerCase();
+      const amount=Number(defs.ability_increase.amount ?? 1);
+      if (ability && Number.isFinite(amount)) activeEffects.push({
+        type:ability,value:amount,set_value:null,formula:null,active_when:"selected",
+        source_kind:"feat_choice",source_name:feat?.name ?? "Feat Choice",source_path:feat?.file?.path ?? null
+      });
+    }
+
+    if (defs?.resilient_ability) {
+      const ability=String(state.resilient_ability ?? "").trim().toLowerCase();
+      const amount=Number(defs.resilient_ability.amount ?? 1);
+      if (ability && Number.isFinite(amount)) activeEffects.push({
+        type:ability,value:amount,set_value:null,formula:null,active_when:"selected",
+        source_kind:"feat_choice",source_name:feat?.name ?? "Feat Choice",source_path:feat?.file?.path ?? null
+      });
+    }
+  }
+
   return activeEffects;
 }
 
@@ -522,8 +677,9 @@ function getSavingThrowTotal(label, isProficient) {
   const abilityKey = String(label ?? "").trim().toLowerCase();
   const base = getAbilityModByName(abilityKey);
   const profBonus = getProficiencyBonus();
+  const proficient = Boolean(isProficient) || hasFeatProficiency("saves", abilityKey);
 
-  let total = profValue(isProficient, base, profBonus);
+  let total = profValue(proficient, base, profBonus);
   total = applyItemEffects(total, `${abilityKey}_save`);
   total = applyItemEffects(total, "saving_throws");
   return total;
