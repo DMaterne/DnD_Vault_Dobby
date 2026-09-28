@@ -594,6 +594,71 @@ function getFeatureResourceDefinition(featurePage) {
   };
 }
 
+
+
+function getItemResourceDefinition(itemPage) {
+  const resource = itemPage?.resource;
+  if (!resource || typeof resource !== "object") return null;
+
+  const id = String(resource.id ?? "").trim();
+  if (!id) return null;
+
+  let maxUses = null;
+  if (resource.max_formula != null) maxUses = evaluateBonusFormula(resource.max_formula);
+  else if (resource.max != null) maxUses = Number(resource.max);
+  else if (resource.max_uses != null) maxUses = Number(resource.max_uses);
+  if (!Number.isFinite(Number(maxUses))) return null;
+
+  const minimum = Number(resource.minimum ?? 0);
+  maxUses = Math.max(Number.isFinite(minimum) ? minimum : 0, Math.floor(Number(maxUses)));
+
+  return {
+    id,
+    label: String(resource.label ?? "Uses"),
+    max: maxUses,
+    recharge: String(resource.recharge ?? "").trim().toLowerCase(),
+    rechargeAmount: String(resource.recharge_amount ?? "").trim().toLowerCase(),
+    display: String(resource.display ?? "checkboxes").trim().toLowerCase()
+  };
+}
+
+function getItemResourceUsed(instanceId, resourceId) {
+  const all = c.item_resources;
+  if (!all || typeof all !== "object") return 0;
+  const instance = all[instanceId];
+  if (!instance || typeof instance !== "object") return 0;
+  const state = instance[resourceId];
+  if (!state || typeof state !== "object") return 0;
+  return Math.max(0, Number(state.used ?? 0));
+}
+
+async function setItemResourceUsed(instanceId, resourceId, used, maxUses = null) {
+  const characterFile = app.vault.getAbstractFileByPath(CHARACTER_PATH);
+  if (!characterFile) {
+    new Notice("Character-Datei nicht gefunden.");
+    return;
+  }
+  const nextUsed = Math.max(0, maxUses == null ? Number(used ?? 0) : Math.min(Number(maxUses), Number(used ?? 0)));
+  await app.fileManager.processFrontMatter(characterFile, (fm) => {
+    if (!fm.item_resources || typeof fm.item_resources !== "object" || Array.isArray(fm.item_resources)) fm.item_resources = {};
+    if (!fm.item_resources[instanceId] || typeof fm.item_resources[instanceId] !== "object") fm.item_resources[instanceId] = {};
+    if (!fm.item_resources[instanceId][resourceId] || typeof fm.item_resources[instanceId][resourceId] !== "object") fm.item_resources[instanceId][resourceId] = {};
+    fm.item_resources[instanceId][resourceId].used = nextUsed;
+  });
+}
+
+function rollSimpleDiceFormula(formula) {
+  const match = String(formula ?? "").trim().toLowerCase().match(/^(\d+)d(\d+)([+-]\d+)?$/);
+  if (!match) return null;
+  const count = Number(match[1]);
+  const sides = Number(match[2]);
+  const bonus = Number(match[3] ?? 0);
+  if (count < 1 || sides < 1 || count > 100) return null;
+  let total = bonus;
+  for (let i = 0; i < count; i++) total += 1 + Math.floor(Math.random() * sides);
+  return total;
+}
+
 function getFeatureResourceUsed(resourceId) {
   const resources = c.resources;
   if (!resources || typeof resources !== "object") return 0;
@@ -1827,6 +1892,87 @@ if (!c) {
       const notesBox = content.createEl("div");
       notesBox.style.lineHeight = "1.6";
       await renderMarkdownInto(notesBox, item.notes, item.itemPage.file?.path ?? CHARACTER_PATH);
+
+      const itemResourceDef = getItemResourceDefinition(item.itemPage);
+      if (itemResourceDef && itemResourceDef.display === "checkboxes") {
+        for (let quantityIndex = 0; quantityIndex < item.quantity; quantityIndex++) {
+          const instanceId = makeInventoryInstanceId(item.itemPath, item.inventoryIndex, quantityIndex);
+          const resourceWrap = content.createEl("div");
+          resourceWrap.style.marginTop = "12px";
+          resourceWrap.style.padding = "10px";
+          resourceWrap.style.border = "1px solid var(--background-modifier-border)";
+          resourceWrap.style.borderRadius = "8px";
+
+          const resourceHeader = resourceWrap.createEl("div");
+          resourceHeader.style.display = "flex";
+          resourceHeader.style.justifyContent = "space-between";
+          resourceHeader.style.alignItems = "center";
+          resourceHeader.style.gap = "10px";
+
+          const instanceLabel = item.quantity > 1 ? `${itemResourceDef.label} #${quantityIndex + 1}` : itemResourceDef.label;
+          const resourceLabel = resourceHeader.createEl("div", { text: instanceLabel });
+          resourceLabel.style.fontWeight = "600";
+
+          let used = Math.min(itemResourceDef.max, getItemResourceUsed(instanceId, itemResourceDef.id));
+          const counter = resourceHeader.createEl("div", { text: `${used} / ${itemResourceDef.max} used` });
+          counter.style.fontSize = "0.85em";
+          counter.style.opacity = "0.75";
+
+          const checks = resourceWrap.createEl("div");
+          checks.style.display = "flex";
+          checks.style.flexWrap = "wrap";
+          checks.style.gap = "8px";
+          checks.style.marginTop = "8px";
+
+          const checkboxes = [];
+          for (let i = 0; i < itemResourceDef.max; i++) {
+            const checkbox = checks.createEl("input");
+            checkbox.type = "checkbox";
+            checkbox.checked = i < used;
+            checkbox.title = `Use ${i + 1}`;
+            checkbox.style.cursor = "pointer";
+            checkboxes.push(checkbox);
+
+            checkbox.addEventListener("change", async () => {
+              used = checkbox.checked ? i + 1 : i;
+              checkboxes.forEach((box, index) => box.checked = index < used);
+              counter.textContent = `${used} / ${itemResourceDef.max} used`;
+              await setItemResourceUsed(instanceId, itemResourceDef.id, used, itemResourceDef.max);
+            });
+          }
+
+          if (itemResourceDef.recharge) {
+            const rechargeText = itemResourceDef.recharge === "long_rest" ? "Long Rest"
+              : itemResourceDef.recharge === "short_rest" ? "Short Rest"
+              : itemResourceDef.recharge === "dawn" ? "Dawn"
+              : itemResourceDef.recharge;
+            const suffix = itemResourceDef.rechargeAmount ? ` (${itemResourceDef.rechargeAmount})` : "";
+            const rechargeLine = resourceWrap.createEl("div", { text: `Recharges: ${rechargeText}${suffix}` });
+            rechargeLine.style.fontSize = "0.8em";
+            rechargeLine.style.opacity = "0.7";
+            rechargeLine.style.marginTop = "8px";
+          }
+
+          if (itemResourceDef.recharge === "dawn" && itemResourceDef.rechargeAmount) {
+            const rechargeBtn = resourceWrap.createEl("button", { text: `Recharge ${itemResourceDef.rechargeAmount}` });
+            rechargeBtn.style.marginTop = "8px";
+            rechargeBtn.addEventListener("click", async (evt) => {
+              evt.preventDefault();
+              evt.stopPropagation();
+              const recovered = rollSimpleDiceFormula(itemResourceDef.rechargeAmount);
+              if (recovered == null) {
+                new Notice(`Recharge-Formel nicht unterstützt: ${itemResourceDef.rechargeAmount}`);
+                return;
+              }
+              used = Math.max(0, used - recovered);
+              checkboxes.forEach((box, index) => box.checked = index < used);
+              counter.textContent = `${used} / ${itemResourceDef.max} used`;
+              await setItemResourceUsed(instanceId, itemResourceDef.id, used, itemResourceDef.max);
+              new Notice(`${item.name}: ${recovered} Charge(s) recovered.`);
+            });
+          }
+        }
+      }
 
       if (item.itemPage.equipment === true) {
         const equipBtn = content.createEl("button", {

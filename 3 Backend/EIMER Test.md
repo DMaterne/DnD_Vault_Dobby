@@ -136,6 +136,10 @@ attuned_items:
 resources:
   flash_of_genius:
     used: 0
+item_resources:
+  Public/3 Backend/Items/Armor of magical Strenght.md::17::0:
+    armor_of_magical_strength:
+      used: 0
 ---
 # Bilder
 
