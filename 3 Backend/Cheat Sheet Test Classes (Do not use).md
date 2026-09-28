@@ -6,6 +6,7 @@ const ACTIONS_FOLDER = "Public/3 Backend/Actions/";
 const SPELLS_FOLDER = "Public/3 Backend/Spells/";
 const FEATURES_FOLDER = "Public/3 Backend/Features/";
 const CLASSES_FOLDER = "Public/3 Backend/Classes/";
+const SUBCLASSES_FOLDER = "Public/3 Backend/Subclasses/";
 
 const c = dv.page(CHARACTER_PATH);
 
@@ -221,6 +222,10 @@ function getMaxSpellSlots() {
   return c.spell_slots ?? {};
 }
 
+function getAttunementSlots() {
+  return Number(getClassProgressionValue("attunement_slots", c.attunement_slots ?? 3));
+}
+
 function getClassFeatureRefs() {
   const classPage = getClassPage();
   if (!classPage) return [];
@@ -237,11 +242,74 @@ function getClassFeatureRefs() {
     .filter(ref => ref);
 }
 
+function getSubclassConfig() {
+  const classPage = getClassPage();
+  const config = classPage?.subclass;
+  return config && typeof config === "object" ? config : null;
+}
+
+function getSubclassOptions() {
+  const config = getSubclassConfig();
+  return Array.isArray(config?.options) ? config.options : [];
+}
+
+function getSelectedSubclassName() {
+  if (Array.isArray(c.subclass)) {
+    return String(c.subclass.find(Boolean) ?? "").trim();
+  }
+  return String(c.subclass ?? "").trim();
+}
+
+function getSubclassPage() {
+  const subclassName = getSelectedSubclassName();
+  if (!subclassName) return null;
+
+  const options = getSubclassOptions();
+  const matchingOption = options.find(option => {
+    if (!option || typeof option !== "object") return false;
+    return String(option.name ?? "").trim().toLowerCase() === subclassName.toLowerCase();
+  });
+
+  // Prefer the path declared by the class. This prevents accidentally loading
+  // a subclass that does not belong to the selected class.
+  if (matchingOption?.file) {
+    return resolvePageRef(matchingOption.file, SUBCLASSES_FOLDER);
+  }
+
+  // Backward-compatible fallback for classes that do not yet declare options.
+  if (options.length === 0) {
+    return resolvePageRef(subclassName, SUBCLASSES_FOLDER);
+  }
+
+  return null;
+}
+
+function getSubclassFeatureRefs() {
+  const config = getSubclassConfig();
+  const subclassPage = getSubclassPage();
+  if (!subclassPage) return [];
+
+  const characterLevel = Number(c.level ?? 1);
+  const unlockLevel = Number(config?.unlock_level ?? 1);
+  if (characterLevel < unlockLevel) return [];
+
+  const subclassFeatures = Array.isArray(subclassPage.features) ? subclassPage.features : [];
+
+  return subclassFeatures
+    .filter(entry => {
+      if (!entry || typeof entry !== "object") return false;
+      return Number(entry.level ?? unlockLevel) <= characterLevel;
+    })
+    .map(entry => entry.feature)
+    .filter(ref => ref);
+}
+
 function getAllCharacterFeatures() {
   const manualFeatureRefs = Array.isArray(c.features) ? c.features : [];
   const classFeatureRefs = getClassFeatureRefs();
+  const subclassFeatureRefs = getSubclassFeatureRefs();
 
-  const allFeatureRefs = [...manualFeatureRefs, ...classFeatureRefs];
+  const allFeatureRefs = [...manualFeatureRefs, ...classFeatureRefs, ...subclassFeatureRefs];
   const seenPaths = new Set();
   const features = [];
 
@@ -495,6 +563,175 @@ function getSkillTotal(label, abilityName, isProficient) {
   return total;
 }
 
+function getFeatureResourceDefinition(featurePage) {
+  const resource = featurePage?.resource;
+  if (!resource || typeof resource !== "object") return null;
+
+  const id = String(resource.id ?? "").trim();
+  if (!id) return null;
+
+  let maxUses = null;
+
+  if (resource.max_formula != null) {
+    maxUses = evaluateBonusFormula(resource.max_formula);
+  } else if (resource.max != null) {
+    maxUses = Number(resource.max);
+  } else if (resource.max_uses != null) {
+    maxUses = Number(resource.max_uses);
+  }
+
+  if (!Number.isFinite(Number(maxUses))) return null;
+
+  const minimum = Number(resource.minimum ?? 0);
+  maxUses = Math.max(Number.isFinite(minimum) ? minimum : 0, Math.floor(Number(maxUses)));
+
+  return {
+    id,
+    label: String(resource.label ?? "Uses"),
+    max: maxUses,
+    recharge: String(resource.recharge ?? "").trim().toLowerCase(),
+    display: String(resource.display ?? "checkboxes").trim().toLowerCase()
+  };
+}
+
+function getFeatureResourceUsed(resourceId) {
+  const resources = c.resources;
+  if (!resources || typeof resources !== "object") return 0;
+  const state = resources[resourceId];
+  if (!state || typeof state !== "object") return 0;
+  return Math.max(0, Number(state.used ?? 0));
+}
+
+async function setFeatureResourceUsed(resourceId, used, maxUses = null) {
+  const characterFile = app.vault.getAbstractFileByPath(CHARACTER_PATH);
+  if (!characterFile) {
+    new Notice("Character-Datei nicht gefunden.");
+    return;
+  }
+
+  const nextUsed = Math.max(
+    0,
+    maxUses == null ? Number(used ?? 0) : Math.min(Number(maxUses), Number(used ?? 0))
+  );
+
+  await app.fileManager.processFrontMatter(characterFile, (fm) => {
+    if (!fm.resources || typeof fm.resources !== "object" || Array.isArray(fm.resources)) {
+      fm.resources = {};
+    }
+    if (!fm.resources[resourceId] || typeof fm.resources[resourceId] !== "object") {
+      fm.resources[resourceId] = {};
+    }
+    fm.resources[resourceId].used = nextUsed;
+  });
+}
+
+function getResourceIdsForRest(restType) {
+  const ids = new Set();
+
+  for (const featurePage of getAllCharacterFeatures()) {
+    const def = getFeatureResourceDefinition(featurePage);
+    if (!def) continue;
+
+    const shouldReset =
+      def.recharge === restType ||
+      (restType === "long_rest" && def.recharge === "short_rest");
+
+    if (shouldReset) ids.add(def.id);
+  }
+
+  return ids;
+}
+
+function resetRechargeResourcesInPlace(value, restType) {
+  if (!value) return;
+
+  if (Array.isArray(value)) {
+    for (const entry of value) resetRechargeResourcesInPlace(entry, restType);
+    return;
+  }
+
+  if (typeof value !== "object") return;
+
+  const recharge = String(value.recharge ?? "").trim().toLowerCase();
+  const shouldReset =
+    recharge === restType ||
+    (restType === "long_rest" && recharge === "short_rest");
+
+  if (shouldReset) {
+    const max = Number(value.max ?? value.max_uses ?? NaN);
+    if (Number.isFinite(max)) {
+      if ("current" in value) value.current = max;
+      if ("uses_remaining" in value) value.uses_remaining = max;
+      if ("used" in value) value.used = 0;
+      if ("uses_used" in value) value.uses_used = 0;
+    }
+  }
+
+  for (const child of Object.values(value)) {
+    if (child && typeof child === "object") {
+      resetRechargeResourcesInPlace(child, restType);
+    }
+  }
+}
+
+async function performRest(restType) {
+  const characterFile = app.vault.getAbstractFileByPath(CHARACTER_PATH);
+  if (!characterFile) {
+    new Notice("Character-Datei nicht gefunden.");
+    return;
+  }
+
+  const isLongRest = restType === "long_rest";
+  const maxHp = getMaxHp();
+  const characterLevel = Math.max(1, Number(c.level ?? 1));
+  const featureResourceIdsToReset = getResourceIdsForRest(restType);
+
+  await app.fileManager.processFrontMatter(characterFile, (fm) => {
+    // Legacy/generic resources that carry their recharge rule in character state.
+    resetRechargeResourcesInPlace(fm.resources, restType);
+    resetRechargeResourcesInPlace(fm.feature_resources, restType);
+
+    // Preferred model: feature defines recharge, character stores only used state.
+    if (!fm.resources || typeof fm.resources !== "object" || Array.isArray(fm.resources)) {
+      fm.resources = {};
+    }
+    for (const resourceId of featureResourceIdsToReset) {
+      if (!fm.resources[resourceId] || typeof fm.resources[resourceId] !== "object") {
+        fm.resources[resourceId] = {};
+      }
+      fm.resources[resourceId].used = 0;
+    }
+
+    if (!isLongRest) return;
+
+    // Long Rest: restore HP and clear temporary HP.
+    fm.hp_current = maxHp;
+    fm.hp_temp = 0;
+
+    // All spell slots become available again.
+    const maxSlots = getMaxSpellSlots();
+    if (!fm.spell_slots_used || typeof fm.spell_slots_used !== "object") {
+      fm.spell_slots_used = {};
+    }
+    for (const level of Object.keys(maxSlots ?? {})) {
+      fm.spell_slots_used[String(level)] = 0;
+    }
+
+    // Reset death saves if these fields are used later.
+    if ("death_save_successes" in fm) fm.death_save_successes = 0;
+    if ("death_save_failures" in fm) fm.death_save_failures = 0;
+
+    // 2014-style Hit Dice recovery: at least one, up to half the total dice.
+    if ("hit_dice_used" in fm) {
+      const used = Math.max(0, Number(fm.hit_dice_used ?? 0));
+      const recovered = Math.max(1, Math.floor(characterLevel / 2));
+      fm.hit_dice_used = Math.max(0, used - recovered);
+    }
+  });
+
+  new Notice(isLongRest ? "Long Rest abgeschlossen." : "Short Rest abgeschlossen.");
+}
+
 async function toggleInventoryEquip(itemPathOrName) {
   const characterFile = app.vault.getAbstractFileByPath(CHARACTER_PATH);
   if (!characterFile) return;
@@ -667,6 +904,39 @@ if (!c) {
   wrapper.style.display = "flex";
   wrapper.style.flexDirection = "column";
   wrapper.style.gap = "18px";
+
+  const restBar = wrapper.createEl("div");
+  restBar.style.display = "flex";
+  restBar.style.justifyContent = "flex-end";
+  restBar.style.alignItems = "center";
+  restBar.style.gap = "8px";
+  restBar.style.padding = "8px 10px";
+  restBar.style.border = "1px solid var(--background-modifier-border)";
+  restBar.style.borderRadius = "12px";
+
+  const restLabel = restBar.createEl("span", { text: "Rest" });
+  restLabel.style.fontWeight = "700";
+  restLabel.style.marginRight = "4px";
+
+  const shortRestButton = restBar.createEl("button", { text: "Short Rest" });
+  shortRestButton.addEventListener("click", async () => {
+    shortRestButton.disabled = true;
+    try {
+      await performRest("short_rest");
+    } finally {
+      shortRestButton.disabled = false;
+    }
+  });
+
+  const longRestButton = restBar.createEl("button", { text: "Long Rest" });
+  longRestButton.addEventListener("click", async () => {
+    longRestButton.disabled = true;
+    try {
+      await performRest("long_rest");
+    } finally {
+      longRestButton.disabled = false;
+    }
+  });
 
   const headerRow = wrapper.createEl("div");
   headerRow.style.display = "grid";
@@ -1299,6 +1569,75 @@ if (!c) {
 
         addInfoRow(content, "Source", featureSource);
         addInfoRow(content, "Enabled", featureEnabled ? "Yes" : "No");
+
+        const resourceDef = getFeatureResourceDefinition(featurePage);
+        if (resourceDef && resourceDef.display === "checkboxes") {
+          const resourceWrap = content.createEl("div");
+          resourceWrap.style.marginTop = "12px";
+          resourceWrap.style.padding = "10px";
+          resourceWrap.style.border = "1px solid var(--background-modifier-border)";
+          resourceWrap.style.borderRadius = "8px";
+
+          const resourceHeader = resourceWrap.createEl("div");
+          resourceHeader.style.display = "flex";
+          resourceHeader.style.justifyContent = "space-between";
+          resourceHeader.style.alignItems = "center";
+          resourceHeader.style.gap = "10px";
+
+          const resourceLabel = resourceHeader.createEl("div", { text: resourceDef.label });
+          resourceLabel.style.fontWeight = "600";
+
+          let used = Math.min(resourceDef.max, getFeatureResourceUsed(resourceDef.id));
+          const counter = resourceHeader.createEl("div", {
+            text: `${used} / ${resourceDef.max} used`
+          });
+          counter.style.opacity = "0.75";
+          counter.style.fontSize = "0.9em";
+
+          const checks = resourceWrap.createEl("div");
+          checks.style.display = "flex";
+          checks.style.flexWrap = "wrap";
+          checks.style.gap = "8px";
+          checks.style.marginTop = "8px";
+
+          for (let i = 0; i < resourceDef.max; i++) {
+            const label = checks.createEl("label");
+            label.style.display = "inline-flex";
+            label.style.alignItems = "center";
+            label.style.cursor = "pointer";
+
+            const checkbox = label.createEl("input");
+            checkbox.type = "checkbox";
+            checkbox.checked = i < used;
+            checkbox.title = `Use ${i + 1}`;
+
+            checkbox.addEventListener("change", async () => {
+              const allChecks = Array.from(checks.querySelectorAll('input[type="checkbox"]'));
+              const clickedIndex = allChecks.indexOf(checkbox);
+              const nextUsed = checkbox.checked ? clickedIndex + 1 : clickedIndex;
+
+              allChecks.forEach((cb, index) => {
+                cb.checked = index < nextUsed;
+              });
+
+              used = nextUsed;
+              counter.textContent = `${used} / ${resourceDef.max} used`;
+              await setFeatureResourceUsed(resourceDef.id, used, resourceDef.max);
+            });
+          }
+
+          if (resourceDef.recharge) {
+            const rechargeText = resourceDef.recharge === "long_rest"
+              ? "Long Rest"
+              : resourceDef.recharge === "short_rest"
+                ? "Short Rest"
+                : resourceDef.recharge;
+            const rechargeLine = resourceWrap.createEl("div", { text: `Recharges: ${rechargeText}` });
+            rechargeLine.style.marginTop = "8px";
+            rechargeLine.style.fontSize = "0.85em";
+            rechargeLine.style.opacity = "0.7";
+          }
+        }
 
         const notesTitle = content.createEl("div", { text: "Notes" });
         notesTitle.style.fontWeight = "600";
@@ -2216,7 +2555,7 @@ if (!c) {
 
     const characterFile = app.vault.getAbstractFileByPath(CHARACTER_PATH);
 
-    const attunementSlots = Number(c.attunement_slots ?? 3);
+    const attunementSlots = getAttunementSlots();
     let attunedItems = Array.isArray(c.attuned_items)
       ? c.attuned_items.map(x => String(x))
       : [];

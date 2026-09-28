@@ -3,7 +3,7 @@ name: Eimer
 class: Artificer
 subclass:
   - 
-level: 5
+level: 15
 race: Warforged
 background: Soldier
 alignment: Lawful Neutral
@@ -46,7 +46,7 @@ sleight_of_hand_prof: false
 stealth_prof: false
 survival_prof: false
 spell_slots_used:
-  "1": 2
+  "1": 0
   "2": 0
   "3": 0
   "4": 0
@@ -131,9 +131,11 @@ spells:
   - Public/3 Backend/Spells/Feather Fall.md
   - Alarm
 spellcasting_ability: int
-attunement_slots: 3
 attuned_items:
   - Public/3 Backend/Items/Armor of magical Strenght.md::17::0
+resources:
+  flash_of_genius:
+    used: 0
 ---
 # Bilder
 
