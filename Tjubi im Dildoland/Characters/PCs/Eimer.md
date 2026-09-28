@@ -602,6 +602,163 @@ async function renderMarkdownInto(container, markdownText, filePathForLinks = CH
   container.createEl("pre", { text: md });
 }
 
+async function showConfirmDialog(title, message, confirmText = "Confirm") {
+  return new Promise((resolve) => {
+    const overlay = document.body.createEl("div");
+
+    Object.assign(overlay.style, {
+      position: "fixed",
+      inset: "0",
+      background: "rgba(0, 0, 0, 0.55)",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      zIndex: "9999"
+    });
+
+    const modal = overlay.createEl("div");
+
+    Object.assign(modal.style, {
+      width: "min(420px, calc(100vw - 40px))",
+      padding: "20px",
+      borderRadius: "14px",
+      border: "1px solid var(--background-modifier-border)",
+      background: "var(--background-primary)",
+      color: "var(--text-normal)",
+      boxShadow: "0 12px 40px rgba(0,0,0,0.35)"
+    });
+
+    const titleEl = modal.createEl("div", { text: title });
+
+    Object.assign(titleEl.style, {
+      fontSize: "1.25em",
+      fontWeight: "700",
+      marginBottom: "10px"
+    });
+
+    const messageEl = modal.createEl("div", { text: message });
+
+    Object.assign(messageEl.style, {
+      opacity: "0.85",
+      lineHeight: "1.5",
+      marginBottom: "18px"
+    });
+
+    const buttons = modal.createEl("div");
+
+    Object.assign(buttons.style, {
+      display: "flex",
+      justifyContent: "flex-end",
+      gap: "8px"
+    });
+
+    const cancelBtn = buttons.createEl("button", {
+      text: "Cancel"
+    });
+
+    const confirmBtn = buttons.createEl("button", {
+      text: confirmText
+    });
+
+    for (const btn of [cancelBtn, confirmBtn]) {
+      Object.assign(btn.style, {
+        padding: "8px 14px",
+        borderRadius: "8px",
+        border: "1px solid var(--background-modifier-border)",
+        cursor: "pointer",
+        fontWeight: "600"
+      });
+    }
+
+    cancelBtn.style.background = "var(--background-secondary)";
+    cancelBtn.style.color = "var(--text-normal)";
+
+    confirmBtn.style.background = "var(--interactive-accent)";
+    confirmBtn.style.color = "var(--text-on-accent)";
+
+    function close(result) {
+      overlay.remove();
+      resolve(result);
+    }
+
+    cancelBtn.addEventListener("click", () => close(false));
+    confirmBtn.addEventListener("click", () => close(true));
+
+    overlay.addEventListener("click", (evt) => {
+      if (evt.target === overlay) close(false);
+    });
+  });
+}
+
+
+async function performRest(type) {
+  const characterFile = app.vault.getAbstractFileByPath(CHARACTER_PATH);
+
+  if (!characterFile) {
+    new Notice("Character-Datei nicht gefunden.");
+    return;
+  }
+
+  if (type === "short") {
+    const confirmed = await showConfirmDialog(
+      "Short Rest",
+      "Do you want to take a Short Rest?",
+      "Take Short Rest"
+    );
+
+    if (!confirmed) return;
+
+    // Später:
+    // - Hit Dice ausgeben / HP heilen
+    // - Short-Rest Features regenerieren
+    // - Short-Rest Ressourcen zurücksetzen
+
+    new Notice("Short Rest completed.");
+    return;
+  }
+
+  if (type === "long") {
+    const confirmed = await showConfirmDialog(
+      "Long Rest",
+      "Do you want to take a Long Rest? HP and spell slots will be restored.",
+      "Take Long Rest"
+    );
+
+    if (!confirmed) return;
+
+    await app.fileManager.processFrontMatter(characterFile, (fm) => {
+
+      // HP vollständig regenerieren
+      fm.hp_current = getMaxHp();
+
+      // Temporary HP entfernen
+      // fm.hp_temp = 0;
+
+      // Spell Slots regenerieren
+      if (!fm.spell_slots_used || typeof fm.spell_slots_used !== "object") {
+        fm.spell_slots_used = {};
+      }
+
+      const spellSlots = fm.spell_slots ?? {};
+
+      for (const level of Object.keys(spellSlots)) {
+        fm.spell_slots_used[String(level)] = 0;
+      }
+
+      // Später:
+      // - Hit Dice teilweise regenerieren
+      // - Death Saves zurücksetzen
+      // - Long-Rest Features regenerieren
+      // - Exhaustion behandeln
+    });
+
+    new Notice("Long Rest completed.");
+
+    // Dataview neu laden, damit alle Anzeigen sofort stimmen
+    app.commands.executeCommandById("dataview:dataview-force-refresh-views");
+  }
+}
+
 if (!c) {
   dv.paragraph("Character-Datei nicht gefunden.");
 } else {
@@ -609,6 +766,71 @@ if (!c) {
   wrapper.style.display = "flex";
   wrapper.style.flexDirection = "column";
   wrapper.style.gap = "18px";
+  
+  // ============================================================
+  // CHARACTER CONTROL BAR
+  // ============================================================
+
+  const controlBar = wrapper.createEl("div");
+
+  Object.assign(controlBar.style, {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: "10px",
+    padding: "10px 14px",
+    border: "1px solid var(--background-modifier-border)",
+    borderRadius: "12px",
+    background: "var(--background-secondary)"
+  });
+
+const controlLeft = controlBar.createEl("div");
+
+Object.assign(controlLeft.style, {
+  display: "flex",
+  alignItems: "center",
+  gap: "8px",
+  flexWrap: "wrap"
+});
+
+const controlTitle = controlLeft.createEl("div", {
+  text: "Character Controls"
+});
+
+Object.assign(controlTitle.style, {
+  fontWeight: "700",
+  marginRight: "8px"
+});
+
+
+function createControlButton(label, onClick) {
+  const btn = controlLeft.createEl("button", {
+    text: label
+  });
+
+  Object.assign(btn.style, {
+    padding: "7px 12px",
+    borderRadius: "8px",
+    border: "1px solid var(--background-modifier-border)",
+    background: "var(--background-primary)",
+    color: "var(--text-normal)",
+    cursor: "pointer",
+    fontWeight: "600"
+  });
+
+  btn.addEventListener("click", onClick);
+
+  return btn;
+}
+
+
+createControlButton("Short Rest", async () => {
+  await performRest("short");
+});
+
+createControlButton("Long Rest", async () => {
+  await performRest("long");
+});
 
   const headerRow = wrapper.createEl("div");
   headerRow.style.display = "grid";

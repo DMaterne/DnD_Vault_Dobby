@@ -19,7 +19,7 @@ hp_current: 19
 hp_max: 19
 ac: 12
 speed: 30
-initiative_bonus: 1
+initiative_bonus: 2
 passive_perception: 10
 hit_dice: 1d8
 str_save_prof: false
@@ -54,6 +54,10 @@ spell_slots:
   "5": 0
 spell_slots_used:
   "1": 2
+  "2": 0
+  "3": 0
+  "4": 0
+  "5": 0
   "1": 0
   "2": 0
   "3": 0
