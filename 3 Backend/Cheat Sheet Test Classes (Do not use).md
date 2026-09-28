@@ -1,5 +1,5 @@
 ```dataviewjs
-const CHARACTER_PATH = "Public/3 Backend/EIMER.md";
+const CHARACTER_PATH = "Public/3 Backend/EIMER Test.md";
 
 const ITEMS_FOLDER = "Public/3 Backend/Items/";
 const ACTIONS_FOLDER = "Public/3 Backend/Actions/";
@@ -147,7 +147,7 @@ function getFormulaContext() {
     wis_mod: modFromScore(getAbilityScoreBase("wis")),
     cha_mod: modFromScore(getAbilityScoreBase("cha")),
 
-    prof: Number(c.proficiency_bonus ?? 2)
+    prof: Number(getClassProgressionValue("proficiency_bonus", c.proficiency_bonus ?? 2))
   };
 }
 
@@ -199,6 +199,26 @@ function getClassPage() {
   if (!className) return null;
 
   return resolvePageRef(className, CLASSES_FOLDER);
+}
+
+function getClassLevelData() {
+  const classPage = getClassPage();
+  if (!classPage || !classPage.levels) return null;
+
+  const characterLevel = String(Number(c.level ?? 1));
+  return classPage.levels?.[characterLevel] ?? classPage.levels?.[Number(characterLevel)] ?? null;
+}
+
+function getClassProgressionValue(key, fallback = null) {
+  const levelData = getClassLevelData();
+  if (!levelData || levelData[key] == null) return fallback;
+  return levelData[key];
+}
+
+function getMaxSpellSlots() {
+  const classSlots = getClassProgressionValue("spell_slots", null);
+  if (classSlots && typeof classSlots === "object") return classSlots;
+  return c.spell_slots ?? {};
 }
 
 function getClassFeatureRefs() {
@@ -406,7 +426,8 @@ function getAbilityModByName(name) {
 }
 
 function getProficiencyBonus() {
-  return applyItemEffects(Number(c.proficiency_bonus ?? 2), "proficiency_bonus");
+  const baseProf = Number(getClassProgressionValue("proficiency_bonus", c.proficiency_bonus ?? 2));
+  return applyItemEffects(baseProf, "proficiency_bonus");
 }
 
 function getArmorClass() {
@@ -2066,7 +2087,8 @@ if (!c) {
         sectionTitle.style.paddingBottom = "4px";
         sectionTitle.style.borderBottom = "1px solid var(--background-modifier-border)";
 
-        const slotCount = Number(c.spell_slots?.[String(level)] ?? c.spell_slots?.[level] ?? 0);
+        const maxSpellSlots = getMaxSpellSlots();
+        const slotCount = Number(maxSpellSlots?.[String(level)] ?? maxSpellSlots?.[level] ?? 0);
         await addSpellSlotCheckboxes(section, level, slotCount);
 
         for (const spell of levelSpells) {
