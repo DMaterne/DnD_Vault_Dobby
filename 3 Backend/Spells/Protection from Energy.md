@@ -9,7 +9,8 @@ casting_time: 1 Action
 range: Touch
 duration: up to 1 hour
 concentration: true
-effect: Grant resistance to one chosen elemental damage type for the duration.
+effect: |-
+  For the duration, the willing creature you touch has resistance to one damage type of your choice: acid, cold, fire, lightning, or thunder.
 notes: V, S
 ---
 # Protection from Energy

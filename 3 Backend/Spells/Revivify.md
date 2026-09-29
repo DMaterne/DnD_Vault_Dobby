@@ -9,7 +9,10 @@ casting_time: 1 Action
 range: Touch
 duration: Instantaneous
 concentration: false
-effect: Return a creature that died very recently to life with a small amount of hit points, subject to the spell's restrictions.
+effect: |-
+  You touch a creature that has died within the last minute. That creature returns to life with 1 hit point. This spell can't return to life a creature that has died of old age, nor can it restore any missing body parts.
+
+  **Material Components:** Diamonds worth 300 gp, which the spell consumes
 notes: V, S, M
 ---
 # Revivify

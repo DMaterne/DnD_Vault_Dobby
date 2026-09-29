@@ -9,7 +9,10 @@ casting_time: 1 Action
 range: Touch
 duration: 1 minute
 concentration: false
-effect: Increase a touched creature's jumping distance for the duration.
+effect: |-
+  You touch a creature. The creature's jump distance is tripled until the spell ends.
+
+  **Material Components:** A grasshopper's hind leg
 notes: V, S, M
 ---
 # Jump

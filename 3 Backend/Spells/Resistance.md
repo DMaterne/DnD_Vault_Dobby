@@ -9,7 +9,10 @@ casting_time: 1 Action
 range: Touch
 duration: up to 1 minute
 concentration: true
-effect: A willing creature can add 1d4 to one saving throw made before the spell ends.
+effect: |-
+  You touch one willing creature. Once before the spell ends, the target can roll a d4 and add the number rolled to one saving throw of its choice. It can roll the die before or after making the saving throw. The spell then ends.
+
+  **Material Components:** A miniature cloak
 notes: V, S, M
 ---
 # Resistance
