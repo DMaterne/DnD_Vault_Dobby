@@ -1,10 +1,11 @@
 ---
-name: Artificer
+name: Ranger
 type: class
-source: 'Eberron: Rising from the Last War (2019)'
-hit_die: d8
+source: PHB 2014
+hit_die: d10
 primary_ability:
-- int
+- dex
+- wis
 proficiencies:
   armor:
   - light
@@ -12,43 +13,23 @@ proficiencies:
   - shields
   weapons:
   - simple
-  tools:
-  - thieves_tools
-  - tinkers_tools
+  - martial
+  tools: []
   saving_throws:
-  - con
-  - int
+  - str
+  - dex
 proficiency_choices:
   skills:
-    count: 2
+    count: 3
     options:
-    - arcana
-    - history
+    - animal_handling
+    - athletics
+    - insight
     - investigation
-    - medicine
     - nature
     - perception
-    - sleight_of_hand
-  tools:
-    count: 1
-    options:
-    - alchemists_supplies
-    - brewers_supplies
-    - calligraphers_supplies
-    - carpenters_tools
-    - cartographers_tools
-    - cobblers_tools
-    - cooks_utensils
-    - glassblowers_tools
-    - jewelers_tools
-    - leatherworkers_tools
-    - masons_tools
-    - painters_supplies
-    - potters_tools
-    - smiths_tools
-    - tinkers_tools
-    - weavers_tools
-    - woodcarvers_tools
+    - stealth
+    - survival
 asi_levels:
 - 4
 - 8
@@ -56,34 +37,34 @@ asi_levels:
 - 16
 - 19
 subclass:
-  label: Artificer Specialist
+  label: Ranger Archetype
   unlock_level: 3
   options: []
 features:
 - level: 1
-  feature: Magical Tinkering
+  feature: Favored Enemy
 - level: 1
-  feature: Spellcasting
+  feature: Natural Explorer
 - level: 2
-  feature: Infuse Item
+  feature: Fighting Style
+- level: 2
+  feature: Spellcasting
 - level: 3
-  feature: Artificer Specialist
+  feature: Ranger Archetype
 - level: 3
-  feature: The Right Tool for the Job
-- level: 6
-  feature: Tool Expertise
-- level: 7
-  feature: Flash of Genius
+  feature: Primeval Awareness
+- level: 5
+  feature: Extra Attack
+- level: 8
+  feature: Land's Stride
 - level: 10
-  feature: Magic Item Adept
-- level: 11
-  feature: Spell-Storing Item
+  feature: Hide in Plain Sight
 - level: 14
-  feature: Magic Item Savant
+  feature: Vanish
 - level: 18
-  feature: Magic Item Master
+  feature: Feral Senses
 - level: 20
-  feature: Soul of Artifice
+  feature: Foe Slayer
 progression:
   '1':
     proficiency_bonus: 2

@@ -16,6 +16,8 @@ const FEATS_FOLDER = "Public/3 Backend/Feats/";
 
 const SPECIES_FOLDER = "Public/3 Backend/Species/";
 
+const BACKGROUNDS_FOLDER = "Public/3 Backend/Backgrounds/";
+
   
 
 const ABILITIES = [
@@ -126,11 +128,15 @@ const characterFiles = directMarkdownFiles(CHARACTER_FOLDER);
 
 const classFiles = directMarkdownFiles(CLASSES_FOLDER);
 
+const subclassFiles = directMarkdownFiles(SUBCLASSES_FOLDER);
+
 const itemFiles = directMarkdownFiles(ITEMS_FOLDER);
 
 const featFiles = directMarkdownFiles(FEATS_FOLDER);
 
 const speciesFiles = directMarkdownFiles(SPECIES_FOLDER);
+
+const backgroundFiles = directMarkdownFiles(BACKGROUNDS_FOLDER);
 
   
 
@@ -352,9 +358,85 @@ function getSubclassConfig() {
 
 function availableSubclassOptions() {
 
+  const className = String(draft?.class ?? "").trim().toLowerCase();
+
+  if (!className) return [];
+
+  
+
+  const found = [];
+
+  const seen = new Set();
+
+  
+
+  // Preferred method: discover every subclass file whose frontmatter says
+
+  // `class: <selected class>`.
+
+  for (const file of subclassFiles) {
+
+    const page = pageFor(file);
+
+    if (!page) continue;
+
+  
+
+    const ownerRaw = page.class ?? page.parent_class ?? page.base_class ?? "";
+
+    const owners = Array.isArray(ownerRaw) ? ownerRaw : [ownerRaw];
+
+    const belongs = owners.some(x => String(x ?? "").trim().toLowerCase() === className);
+
+    if (!belongs) continue;
+
+  
+
+    const name = String(page.name ?? file.basename).trim();
+
+    if (!name) continue;
+
+    const key = file.path.toLowerCase();
+
+    if (seen.has(key)) continue;
+
+    seen.add(key);
+
+    found.push({name, file:file.path});
+
+  }
+
+  
+
+  // Backward compatibility: also accept explicitly declared class options.
+
   const cfg = getSubclassConfig();
 
-  return Array.isArray(cfg?.options) ? cfg.options : [];
+  const declared = Array.isArray(cfg?.options) ? cfg.options : [];
+
+  for (const option of declared) {
+
+    if (!option) continue;
+
+    const name = String(option.name ?? option.file ?? "").trim();
+
+    if (!name) continue;
+
+    const path = String(option.file ?? "").trim();
+
+    const key = (path || name).toLowerCase();
+
+    if (seen.has(key)) continue;
+
+    seen.add(key);
+
+    found.push({name, file:path || null});
+
+  }
+
+  
+
+  return found.sort((a,b)=>a.name.localeCompare(b.name,"en"));
 
 }
 
@@ -488,9 +570,13 @@ function getAsiBonus(key) {
 
   let total = 0;
 
-  for (const choice of Object.values(choices)) {
+  for (const [levelKey, choice] of Object.entries(choices)) {
 
     if (!choice) continue;
+
+    const unlockLevel = Number(levelKey);
+
+    if (Number.isFinite(unlockLevel) && unlockLevel > Number(draft?.level ?? 1)) continue;
 
     if (String(choice.type ?? "asi") === "asi") {
 
@@ -532,17 +618,69 @@ function getAsiBonus(key) {
 
 }
 
+function getSpeciesAbilityBonus(key) {
+
+  const speciesPage = draft?.species ? dv.page(String(draft.species)) : null;
+
+  if (!speciesPage) return 0;
+
+  
+
+  let total = 0;
+
+  
+
+  // Fixed species bonuses, e.g. Warforged CON +2.
+
+  const bonuses = Array.isArray(speciesPage.bonuses) ? speciesPage.bonuses : [];
+
+  for (const bonus of bonuses) {
+
+    if (String(bonus?.type ?? "").trim().toLowerCase() !== key) continue;
+
+    const value = Number(bonus?.value ?? 0);
+
+    if (Number.isFinite(value)) total += value;
+
+  }
+
+  
+
+  // Chosen species bonus, e.g. Warforged +1 INT.
+
+  const def = speciesPage.choices?.ability_increase;
+
+  const chosen = String(draft?.species_choices?.ability_increase ?? "").trim().toLowerCase();
+
+  if (def && chosen === key) {
+
+    const amount = Number(def.amount ?? 1);
+
+    if (Number.isFinite(amount)) total += amount;
+
+  }
+
+  
+
+  return total;
+
+}
+
 function calculatedAbility(key) {
 
   const base = Number(draft?.[key] ?? 10);
 
   const fx = abilityItemEffects(key);
 
+  const speciesBonus = getSpeciesAbilityBonus(key);
+
   const asiBonus = getAsiBonus(key);
 
   const beforeAdd = fx.setters.length ? Math.max(base, ...fx.setters) : base;
 
-  return {base, bonus:beforeAdd-base+fx.additive+asiBonus, final:beforeAdd+fx.additive+asiBonus};
+  const additive = fx.additive + speciesBonus + asiBonus;
+
+  return {base, bonus:beforeAdd-base+additive, final:beforeAdd+additive};
 
 }
 
@@ -747,7 +885,7 @@ function renderClass() {
 
   sel.value=draft.class ?? "";
 
-  sel.onchange=()=>{draft.class=sel.value; draft.subclass=""; markDirty(); renderClass();};
+  sel.onchange=()=>{draft.class=sel.value; draft.subclass=""; draft.class_choices={}; markDirty(); renderClass();};
 
   
 
@@ -785,9 +923,11 @@ function renderClass() {
 
     const ss=sw.createEl("select"); styleInput(ss);
 
-    ss.createEl("option",{text:"— Select —"}).value="";
+    const subclassOptions=availableSubclassOptions();
 
-    for (const option of availableSubclassOptions()) {
+    ss.createEl("option",{text:subclassOptions.length ? "— Select —" : "— No matching subclass files —"}).value="";
+
+    for (const option of subclassOptions) {
 
       if (!option) continue;
 
@@ -797,7 +937,15 @@ function renderClass() {
 
     }
 
-    ss.value=getSubclassName();
+    const selectedSubclass=getSubclassName();
+
+    if(selectedSubclass && !subclassOptions.some(x=>String(x.name??"")===selectedSubclass)){
+
+      const o=ss.createEl("option",{text:`${selectedSubclass} (not matched)`});o.value=selectedSubclass;
+
+    }
+
+    ss.value=selectedSubclass;
 
     ss.onchange=()=>{draft.subclass=ss.value;markDirty();};
 
@@ -818,6 +966,142 @@ function renderClass() {
   const features=Array.isArray(cp?.features) ? cp.features : [];
 
   const unlocked=features.filter(x=>Number(x?.level ?? 1)<=Number(draft.level));
+
+  
+
+  if (cp) {
+
+    draft.class_choices=draft.class_choices&&typeof draft.class_choices==="object"
+
+      ? draft.class_choices : {};
+
+  
+
+    const profBox=content.createEl("div");
+
+    profBox.style.cssText="margin-top:18px;padding:14px;border:1px solid var(--background-modifier-border);border-radius:12px";
+
+    profBox.createEl("div",{text:"Class Proficiencies"}).style.cssText="font-weight:700;font-size:1.05em;margin-bottom:10px";
+
+  
+
+    const profDefs =
+
+      (cp.proficiency_choices && typeof cp.proficiency_choices==="object" ? cp.proficiency_choices : null) ??
+
+      (cp.proficiencies?.choices && typeof cp.proficiencies.choices==="object" ? cp.proficiencies.choices : null) ??
+
+      {};
+
+  
+
+    const fixed=cp.proficiencies && typeof cp.proficiencies==="object" ? cp.proficiencies : {};
+
+    const fixedParts=[];
+
+    for(const key of ["armor","weapons","tools","saving_throws","skills"]){
+
+      const vals=Array.isArray(fixed[key]) ? fixed[key] : [];
+
+      if(vals.length) fixedParts.push(`${key.replaceAll("_"," ")}: ${vals.join(", ").replaceAll("_"," ")}`);
+
+    }
+
+    if(fixedParts.length){
+
+      profBox.createEl("div",{text:`Granted: ${fixedParts.join(" • ")}`})
+
+        .style.cssText="font-size:.85em;opacity:.7;margin-bottom:12px";
+
+    }
+
+  
+
+    function classChoiceSelect(label,key,index,options,placeholder){
+
+      if(!Array.isArray(draft.class_choices[key])) draft.class_choices[key]=[];
+
+      const current=String(draft.class_choices[key][index]??"");
+
+      const w=field(profBox,label), select=w.createEl("select"); styleInput(select);
+
+      select.createEl("option",{text:placeholder}).value="";
+
+      const opts=[...new Set((options??[]).map(String))];
+
+      if(current && !opts.includes(current)) opts.unshift(current);
+
+      for(const value of opts){
+
+        const o=select.createEl("option",{text:value.replaceAll("_"," ")}); o.value=value;
+
+      }
+
+      select.value=current;
+
+      select.onchange=()=>{
+
+        draft.class_choices[key][index]=select.value;
+
+        markDirty();
+
+        renderClass();
+
+      };
+
+    }
+
+  
+
+    function renderClassChoiceGroup(key,def,defaults,label,placeholder){
+
+      if(!def || typeof def!=="object") return false;
+
+      const count=Math.max(1,Number(def.count??def.choose??1));
+
+      const options=Array.isArray(def.options) ? def.options : defaults;
+
+      if(!Array.isArray(options) || !options.length) return false;
+
+      for(let i=0;i<count;i++) classChoiceSelect(`${label} ${i+1}`,key,i,options,placeholder);
+
+      return true;
+
+    }
+
+  
+
+    let rendered=false;
+
+    rendered = renderClassChoiceGroup("skills",profDefs.skills,SKILL_OPTIONS,"Skill","— Select Skill —") || rendered;
+
+    rendered = renderClassChoiceGroup("tools",profDefs.tools,TOOL_OPTIONS,"Tool","— Select Tool —") || rendered;
+
+    rendered = renderClassChoiceGroup("languages",profDefs.languages,LANGUAGE_OPTIONS,"Language","— Select Language —") || rendered;
+
+  
+
+    // Compatibility with class files that store choice objects directly in proficiencies.
+
+    if(!rendered){
+
+      rendered = renderClassChoiceGroup("skills",fixed.skills,SKILL_OPTIONS,"Skill","— Select Skill —") || rendered;
+
+      rendered = renderClassChoiceGroup("tools",fixed.tools,TOOL_OPTIONS,"Tool","— Select Tool —") || rendered;
+
+      rendered = renderClassChoiceGroup("languages",fixed.languages,LANGUAGE_OPTIONS,"Language","— Select Language —") || rendered;
+
+    }
+
+  
+
+    if(!rendered && !fixedParts.length){
+
+      profBox.createEl("div",{text:"No class proficiency choices found in this class backend."}).style.opacity=".65";
+
+    }
+
+  }
 
   
 
@@ -1129,6 +1413,227 @@ function renderClass() {
 
   
   
+  
+
+const SKILL_OPTIONS = [
+
+  "acrobatics","animal_handling","arcana","athletics","deception","history",
+
+  "insight","intimidation","investigation","medicine","nature","perception",
+
+  "performance","persuasion","religion","sleight_of_hand","stealth","survival"
+
+];
+
+  
+
+const TOOL_OPTIONS = [
+
+  "alchemists_supplies","brewers_supplies","calligraphers_supplies",
+
+  "carpenters_tools","cartographers_tools","cobblers_tools","cooks_utensils",
+
+  "glassblowers_tools","jewelers_tools","leatherworkers_tools","masons_tools",
+
+  "painters_supplies","potters_tools","smiths_tools","tinkers_tools",
+
+  "weavers_tools","woodcarvers_tools","disguise_kit","forgery_kit",
+
+  "herbalism_kit","navigators_tools","poisoners_kit","thieves_tools",
+
+  "gaming_set","musical_instrument","vehicles_land","vehicles_water"
+
+];
+
+  
+
+const LANGUAGE_OPTIONS = [
+
+  "Common","Dwarvish","Elvish","Giant","Gnomish","Goblin","Halfling","Orc",
+
+  "Abyssal","Celestial","Draconic","Deep Speech","Infernal","Primordial",
+
+  "Sylvan","Undercommon"
+
+];
+
+  
+
+function renderBackground() {
+
+  content.innerHTML="";
+
+  sectionTitle("Background", "Choose a PHB 2014 background and configure its proficiency choices.");
+
+  
+
+  const w=field(content,"Background");
+
+  const sel=w.createEl("select"); styleInput(sel);
+
+  sel.createEl("option",{text:"— Select Background —"}).value="";
+
+  
+
+  for(const file of backgroundFiles){
+
+    const pg=pageFor(file);
+
+    const opt=sel.createEl("option",{text:String(pg?.name ?? file.basename)});
+
+    opt.value=file.path;
+
+  }
+
+  
+
+  // Accept both legacy names ("Soldier") and the new file path.
+
+  let selected=String(draft.background ?? "");
+
+  if(selected && !selected.includes("/")){
+
+    const match=backgroundFiles.find(f=>{
+
+      const pg=pageFor(f);
+
+      return String(pg?.name ?? f.basename).toLowerCase()===selected.toLowerCase();
+
+    });
+
+    if(match) selected=match.path;
+
+  }
+
+  sel.value=selected;
+
+  
+
+  sel.onchange=()=>{
+
+    draft.background=sel.value;
+
+    draft.background_choices={};
+
+    markDirty();
+
+    renderBackground();
+
+  };
+
+  
+
+  if(!backgroundFiles.length){
+
+    content.createEl("div",{text:`No background files found in ${BACKGROUNDS_FOLDER}`}).style.opacity=".65";
+
+    return;
+
+  }
+
+  if(!sel.value) return;
+
+  
+
+  const bg=dv.page(sel.value);
+
+  if(!bg) return;
+
+  draft.background=sel.value;
+
+  draft.background_choices=draft.background_choices&&typeof draft.background_choices==="object"
+
+    ? draft.background_choices : {};
+
+  
+
+  const info=content.createEl("div");
+
+  info.style.cssText="margin-top:14px;padding:14px;border:1px solid var(--background-modifier-border);border-radius:12px";
+
+  info.createEl("div",{text:String(bg.name ?? "Background")}).style.cssText="font-weight:700;font-size:1.05em";
+
+  if(bg.source) info.createEl("div",{text:String(bg.source)}).style.cssText="font-size:.85em;opacity:.65;margin-top:3px";
+
+  
+
+  const prof=bg.proficiencies&&typeof bg.proficiencies==="object"?bg.proficiencies:{};
+
+  const parts=[];
+
+  for(const key of ["skills","tools","languages"]){
+
+    const vals=Array.isArray(prof[key])?prof[key]:[];
+
+    if(vals.length) parts.push(`${key}: ${vals.join(", ").replaceAll("_"," ")}`);
+
+  }
+
+  if(parts.length) info.createEl("div",{text:`Granted: ${parts.join(" • ")}`}).style.cssText="margin-top:10px;font-size:.9em";
+
+  
+
+  const features=Array.isArray(bg.features)?bg.features:[];
+
+  if(features.length) info.createEl("div",{text:`Feature: ${features.join(", ")}`}).style.cssText="margin-top:6px;font-size:.9em";
+
+  
+
+  const defs=bg.proficiency_choices&&typeof bg.proficiency_choices==="object"?bg.proficiency_choices:{};
+
+  
+
+  function bgChoiceSelect(label,key,index,options,placeholder){
+
+    if(!Array.isArray(draft.background_choices[key])) draft.background_choices[key]=[];
+
+    const current=String(draft.background_choices[key][index]??"");
+
+    const fw=field(content,label), cs=fw.createEl("select"); styleInput(cs);
+
+    cs.createEl("option",{text:placeholder}).value="";
+
+    const opts=[...new Set((options??[]).map(String))];
+
+    if(current&&!opts.includes(current)) opts.unshift(current);
+
+    for(const value of opts){
+
+      const o=cs.createEl("option",{text:value.replaceAll("_"," ")});o.value=value;
+
+    }
+
+    cs.value=current;
+
+    cs.onchange=()=>{draft.background_choices[key][index]=cs.value;markDirty();};
+
+  }
+
+  
+
+  for(const [key,def] of Object.entries(defs)){
+
+    if(!def||typeof def!=="object") continue;
+
+    const count=Math.max(1,Number(def.count??def.choose??1));
+
+    const defaults=key==="skills"?SKILL_OPTIONS:key==="tools"?TOOL_OPTIONS:key==="languages"?LANGUAGE_OPTIONS:[];
+
+    const options=Array.isArray(def.options)?def.options:defaults;
+
+    for(let i=0;i<count;i++){
+
+      const singular=key==="languages"?"Language":key==="tools"?"Tool":key==="skills"?"Skill":key;
+
+      bgChoiceSelect(`${singular} ${i+1}`,key,i,options,`— Select ${singular} —`);
+
+    }
+
+  }
+
+}
+
+  
 
 function renderSpecies() {
 
@@ -1254,6 +1759,64 @@ function renderSpecies() {
 
   }
 
+  
+
+  function proficiencySelect(label,key,index,options,placeholder="— Select —"){
+
+    const isMulti = index !== null;
+
+    if(isMulti && !Array.isArray(state[key])) state[key]=[];
+
+  
+
+    const current = isMulti ? String(state[key][index] ?? "") : String(state[key] ?? "");
+
+    const w=field(box,label);
+
+    const sel=w.createEl("select"); styleInput(sel);
+
+    sel.createEl("option",{text:placeholder}).value="";
+
+  
+
+    const normalizedOptions=[...options];
+
+    // Preserve older/custom values already stored on the character.
+
+    if(current && !normalizedOptions.some(v=>String(v).toLowerCase()===current.toLowerCase())){
+
+      normalizedOptions.unshift(current);
+
+    }
+
+  
+
+    for(const value of normalizedOptions){
+
+      const o=sel.createEl("option",{text:String(value).replaceAll("_"," ")});
+
+      o.value=String(value);
+
+    }
+
+    sel.value=current;
+
+  
+
+    sel.onchange=()=>{
+
+      if(isMulti) state[key][index]=sel.value;
+
+      else state[key]=sel.value;
+
+      markDirty();
+
+    };
+
+  }
+
+  
+
   function textChoices(label,key,count,placeholder){
 
     if(!Array.isArray(state[key])) state[key]=[];
@@ -1348,45 +1911,27 @@ function renderSpecies() {
 
     } else if(key.includes("skill") && count>1){
 
-      textChoices("Skill",key,count,"e.g. perception");
+      for(let i=0;i<count;i++) proficiencySelect(`Skill Proficiency ${i+1}`,key,i,SKILL_OPTIONS,"— Select Skill —");
 
     } else if(key.includes("skill")){
 
-      const w=field(box,"Skill Proficiency");
-
-      const inp=w.createEl("input"); inp.type="text"; inp.placeholder="e.g. perception"; styleInput(inp);
-
-      inp.value=String(state[key]??"");
-
-      inp.onchange=()=>{state[key]=inp.value.trim().toLowerCase();markDirty();};
+      proficiencySelect("Skill Proficiency",key,null,SKILL_OPTIONS,"— Select Skill —");
 
     } else if(key.includes("tool") && count>1){
 
-      textChoices("Tool",key,count,"e.g. thieves_tools");
+      for(let i=0;i<count;i++) proficiencySelect(`Tool Proficiency ${i+1}`,key,i,TOOL_OPTIONS,"— Select Tool —");
 
     } else if(key.includes("tool")){
 
-      const w=field(box,"Tool Proficiency");
-
-      const inp=w.createEl("input"); inp.type="text"; inp.placeholder="e.g. thieves_tools"; styleInput(inp);
-
-      inp.value=String(state[key]??"");
-
-      inp.onchange=()=>{state[key]=inp.value.trim().toLowerCase();markDirty();};
+      proficiencySelect("Tool Proficiency",key,null,TOOL_OPTIONS,"— Select Tool —");
 
     } else if(key.includes("language") && count>1){
 
-      textChoices("Language",key,count,"e.g. Draconic");
+      for(let i=0;i<count;i++) proficiencySelect(`Language ${i+1}`,key,i,LANGUAGE_OPTIONS,"— Select Language —");
 
     } else if(key.includes("language")){
 
-      const w=field(box,"Language");
-
-      const inp=w.createEl("input"); inp.type="text"; inp.placeholder="e.g. Draconic"; styleInput(inp);
-
-      inp.value=String(state[key]??"");
-
-      inp.onchange=()=>{state[key]=inp.value.trim();markDirty();};
+      proficiencySelect("Language",key,null,LANGUAGE_OPTIONS,"— Select Language —");
 
     } else {
 
@@ -1612,7 +2157,7 @@ function renderTab() {
 
   if (activeTab==="class") renderClass();
 
-  else if (activeTab==="background") renderPlaceholder("Background");
+  else if (activeTab==="background") renderBackground();
 
   else if (activeTab==="species") renderSpecies();
 
@@ -1667,6 +2212,12 @@ function loadCharacter(path) {
     inventory:Array.isArray(pg.inventory) ? pg.inventory.map(e=>({...e})) : [],
 
     asi_choices:pg.asi_choices&&typeof pg.asi_choices==="object"?JSON.parse(JSON.stringify(pg.asi_choices)):{},
+
+    class_choices:pg.class_choices&&typeof pg.class_choices==="object"?JSON.parse(JSON.stringify(pg.class_choices)):{},
+
+    background:String(pg.background ?? ""),
+
+    background_choices:pg.background_choices&&typeof pg.background_choices==="object"?JSON.parse(JSON.stringify(pg.background_choices)):{},
 
     species:String(pg.species ?? ""),
 
@@ -1757,6 +2308,12 @@ async function saveCharacter() {
       fm.inventory=JSON.parse(JSON.stringify(draft.inventory ?? []));
 
       fm.asi_choices=JSON.parse(JSON.stringify(draft.asi_choices ?? {}));
+
+      fm.class_choices=JSON.parse(JSON.stringify(draft.class_choices ?? {}));
+
+      fm.background=String(draft.background ?? "").trim() || null;
+
+      fm.background_choices=JSON.parse(JSON.stringify(draft.background_choices ?? {}));
 
       fm.species=String(draft.species ?? "").trim() || null;
 

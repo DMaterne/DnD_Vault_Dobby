@@ -1,5 +1,27 @@
 ```dataviewjs
-const CHARACTER_PATH = "Public/3 Backend/Characters/EIMER Test.md";
+const CHARACTERS_FOLDER = "Public/3 Backend/Characters/";
+const BUILDER_PATH = "Public/3 Backend/Character Builder.md";
+const DEFAULT_CHARACTER_PATH = "Public/3 Backend/Characters/EIMER Test.md";
+
+function directCharacterFiles() {
+  const prefix = CHARACTERS_FOLDER.endsWith("/") ? CHARACTERS_FOLDER : CHARACTERS_FOLDER + "/";
+  return app.vault.getMarkdownFiles()
+    .filter(file =>
+      file.path.startsWith(prefix) &&
+      !file.path.slice(prefix.length).includes("/")
+    )
+    .sort((a,b) => a.basename.localeCompare(b.basename, "de"));
+}
+
+const characterFiles = directCharacterFiles();
+const savedCharacterPath = String(window.__dndSheetCharacterPath ?? "").trim();
+let CHARACTER_PATH = characterFiles.some(file => file.path === savedCharacterPath)
+  ? savedCharacterPath
+  : (characterFiles.some(file => file.path === DEFAULT_CHARACTER_PATH)
+      ? DEFAULT_CHARACTER_PATH
+      : (characterFiles[0]?.path ?? DEFAULT_CHARACTER_PATH));
+
+window.__dndSheetCharacterPath = CHARACTER_PATH;
 
 const ITEMS_FOLDER = "Public/3 Backend/Items/";
 const ACTIONS_FOLDER = "Public/3 Backend/Actions/";
@@ -9,6 +31,7 @@ const FEATS_FOLDER = "Public/3 Backend/Feats/";
 const SPECIES_FOLDER = "Public/3 Backend/Species/";
 const CLASSES_FOLDER = "Public/3 Backend/Classes/";
 const SUBCLASSES_FOLDER = "Public/3 Backend/Subclasses/";
+const BACKGROUNDS_FOLDER = "Public/3 Backend/Backgrounds/";
 
 const c = dv.page(CHARACTER_PATH);
 
@@ -315,6 +338,22 @@ function getCharacterSpeciesPage() {
   return resolvePageRef(ref, SPECIES_FOLDER);
 }
 
+
+function getSpeciesFeatureRefs() {
+  const speciesPage = getCharacterSpeciesPage();
+  if (!speciesPage) return [];
+
+  const entries = Array.isArray(speciesPage.features) ? speciesPage.features : [];
+
+  return entries
+    .map(entry => {
+      if (typeof entry === "string") return entry;
+      if (entry && typeof entry === "object") return entry.feature ?? entry.file ?? entry.path ?? null;
+      return null;
+    })
+    .filter(Boolean);
+}
+
 function getSpeciesChoiceBonusEffects() {
   const speciesPage = getCharacterSpeciesPage();
   if (!speciesPage) return [];
@@ -359,16 +398,45 @@ function getSpeciesSpeed() {
   return Number.isFinite(speed) ? speed : null;
 }
 
+function getActiveAsiChoiceEntries() {
+  // IMPORTANT: read the raw stored choices here. Calling getActiveAsiChoices()
+  // from this function would recurse indefinitely.
+  const choices = c.asi_choices && typeof c.asi_choices === "object"
+    ? c.asi_choices
+    : {};
+  const level = Number(c.level ?? 1);
+
+  return Object.entries(choices).filter(([levelKey, choice]) => {
+    if (!choice) return false;
+    const unlockLevel = Number(levelKey);
+
+    // Numeric keys are ASI unlock levels ("4", "8", ...).
+    // Non-numeric legacy keys remain active for backward compatibility.
+    return !Number.isFinite(unlockLevel) || unlockLevel <= level;
+  });
+}
+
+function getActiveAsiChoices() {
+  return getActiveAsiChoiceEntries().map(([, choice]) => choice);
+}
+
 function getAllCharacterFeatures() {
   const manualFeatureRefs = Array.isArray(c.features) ? c.features : [];
   const classFeatureRefs = getClassFeatureRefs();
   const subclassFeatureRefs = getSubclassFeatureRefs();
+  const speciesFeatureRefs = getSpeciesFeatureRefs();
 
   const seenPaths = new Set();
   const features = [];
 
-  // Normal character/class/subclass Features
-  const allFeatureRefs = [...manualFeatureRefs, ...classFeatureRefs, ...subclassFeatureRefs];
+  // Every source only grants references. The actual mechanics live in
+  // Public/3 Backend/Features/. Missing files are ignored safely.
+  const allFeatureRefs = [
+    ...manualFeatureRefs,
+    ...classFeatureRefs,
+    ...subclassFeatureRefs,
+    ...speciesFeatureRefs
+  ];
 
   for (const ref of allFeatureRefs) {
     const resolvedPath = resolvePathRef(ref, FEATURES_FOLDER);
@@ -384,11 +452,9 @@ function getAllCharacterFeatures() {
   // Feats selected through ASI choices are also Features for display,
   // bonuses and resources. They stay in the Feats folder; no duplication
   // in c.features is required.
-  const asiChoices = c.asi_choices && typeof c.asi_choices === "object"
-    ? c.asi_choices
-    : {};
+  const asiChoices = getActiveAsiChoices();
 
-  for (const choice of Object.values(asiChoices)) {
+  for (const choice of asiChoices) {
     if (!choice || String(choice.type ?? "").trim().toLowerCase() !== "feat") continue;
 
     const featRef = String(choice.feat ?? "").trim();
@@ -413,12 +479,10 @@ function getAllCharacterFeatures() {
 
 
 function getSelectedFeatPages() {
-  const choices = c.asi_choices && typeof c.asi_choices === "object"
-    ? c.asi_choices
-    : {};
+  const choices = getActiveAsiChoices();
   const result = [];
 
-  for (const choice of Object.values(choices)) {
+  for (const choice of choices) {
     if (!choice || String(choice.type ?? "").toLowerCase() !== "feat") continue;
     const ref = String(choice.feat ?? "").trim();
     if (!ref) continue;
@@ -443,8 +507,8 @@ function getFeatProficiencies(category) {
     }
   }
 
-  const choices = c.asi_choices && typeof c.asi_choices === "object" ? c.asi_choices : {};
-  for (const choice of Object.values(choices)) {
+  const choices = getActiveAsiChoices();
+  for (const choice of choices) {
     if (!choice || String(choice.type ?? "").toLowerCase() !== "feat") continue;
     const state = choice.feat_choices && typeof choice.feat_choices === "object"
       ? choice.feat_choices : {};
@@ -637,8 +701,8 @@ function getActiveBonusEffects() {
     }
   }
 
-  const asiChoices = c.asi_choices && typeof c.asi_choices === "object" ? c.asi_choices : {};
-  for (const choice of Object.values(asiChoices)) {
+  const asiChoices = getActiveAsiChoices();
+  for (const choice of asiChoices) {
     if (!choice || String(choice.type ?? "").toLowerCase() !== "feat") continue;
     const feat = resolvePageRef(choice.feat, FEATS_FOLDER);
     const defs = feat?.choices;
@@ -694,17 +758,31 @@ function applyItemEffects(baseValue, type) {
   return result;
 }
 
+function getAsiAbilityBonus(key) {
+  const choices = getActiveAsiChoices();
+  let total = 0;
+
+  // Only ordinary ASI selections belong here.
+  // Feat ability bonuses are already collected by getActiveBonusEffects().
+  for (const choice of choices) {
+    if (!choice || String(choice.type ?? "asi").trim().toLowerCase() !== "asi") continue;
+    if (String(choice.ability_1 ?? "").trim().toLowerCase() === key) total += 1;
+    if (String(choice.ability_2 ?? "").trim().toLowerCase() === key) total += 1;
+  }
+  return total;
+}
+
 function getAbilityScore(name) {
   const key = String(name ?? "").trim().toLowerCase();
+  if (!["str","dex","con","int","wis","cha"].includes(key)) return 10;
 
-  if (key === "str") return applyItemEffects(Number(c.str ?? 10), "str");
-  if (key === "dex") return applyItemEffects(Number(c.dex ?? 10), "dex");
-  if (key === "con") return applyItemEffects(Number(c.con ?? 10), "con");
-  if (key === "int") return applyItemEffects(Number(c.int ?? 10), "int");
-  if (key === "wis") return applyItemEffects(Number(c.wis ?? 10), "wis");
-  if (key === "cha") return applyItemEffects(Number(c.cha ?? 10), "cha");
+  const raw = Number(c[key] ?? 10);
 
-  return 10;
+  // Species bonuses, species choices and feat ability bonuses are already
+  // supplied by getActiveBonusEffects() inside applyItemEffects().
+  // Only ordinary ASI selections have to be added to the raw score here.
+  const withAsi = raw + getAsiAbilityBonus(key);
+  return applyItemEffects(withAsi, key);
 }
 
 function getAbilityModByName(name) {
@@ -734,6 +812,84 @@ function getInitiativeBonus() {
     : getAbilityModByName("dex");
 
   return applyItemEffects(baseInit, "initiative");
+}
+
+
+function normalizedProfKey(value) {
+  return String(value ?? "").trim().toLowerCase().replace(/\s+/g, "_");
+}
+
+function getBackgroundPage() {
+  const raw = String(c.background ?? "").trim();
+  if (!raw) return null;
+
+  // New builder stores a full backend path; legacy characters may only store
+  // a background name such as "Soldier".
+  return resolvePageRef(raw, BACKGROUNDS_FOLDER);
+}
+
+function getEffectiveSkillProficiencies() {
+  const result = new Set();
+
+  // Legacy character booleans remain supported.
+  const legacySkills = [
+    "acrobatics","animal_handling","arcana","athletics","deception","history",
+    "insight","intimidation","investigation","medicine","nature","perception",
+    "performance","persuasion","religion","sleight_of_hand","stealth","survival"
+  ];
+  for (const key of legacySkills) {
+    if (c[`${key}_prof`] === true) result.add(key);
+  }
+
+  // Choices made in the class builder.
+  const classSkills = Array.isArray(c.class_choices?.skills) ? c.class_choices.skills : [];
+  for (const skill of classSkills) if (skill) result.add(normalizedProfKey(skill));
+
+  // Fixed proficiencies granted by the selected background backend.
+  const backgroundPage = getBackgroundPage();
+  const backgroundSkills = Array.isArray(backgroundPage?.proficiencies?.skills)
+    ? backgroundPage.proficiencies.skills : [];
+  for (const skill of backgroundSkills) if (skill) result.add(normalizedProfKey(skill));
+
+  // Choices made in the background builder.
+  const backgroundSkillsChosen = Array.isArray(c.background_choices?.skills)
+    ? c.background_choices.skills : [];
+  for (const skill of backgroundSkillsChosen) if (skill) result.add(normalizedProfKey(skill));
+
+  // Choices made in the species builder. Species backends may use either one
+  // skill field or several differently named skill choice fields.
+  const speciesChoices = c.species_choices && typeof c.species_choices === "object"
+    ? c.species_choices : {};
+  for (const [key, raw] of Object.entries(speciesChoices)) {
+    if (!String(key).toLowerCase().includes("skill")) continue;
+    const values = Array.isArray(raw) ? raw : [raw];
+    for (const skill of values) if (skill) result.add(normalizedProfKey(skill));
+  }
+
+  return result;
+}
+
+function isSkillProficient(skillKey) {
+  return getEffectiveSkillProficiencies().has(normalizedProfKey(skillKey));
+}
+
+function getEffectiveSaveProficiencies() {
+  const result = new Set();
+  for (const ability of ["str","dex","con","int","wis","cha"]) {
+    if (c[`${ability}_save_prof`] === true) result.add(ability);
+  }
+
+  // Class backend is authoritative for class saving-throw proficiencies.
+  const classPage = getClassPage();
+  const saves = Array.isArray(classPage?.proficiencies?.saving_throws)
+    ? classPage.proficiencies.saving_throws : [];
+  for (const save of saves) if (save) result.add(normalizedProfKey(save));
+
+  return result;
+}
+
+function isSaveProficient(abilityKey) {
+  return getEffectiveSaveProficiencies().has(normalizedProfKey(abilityKey));
 }
 
 function getSavingThrowTotal(label, isProficient) {
@@ -1261,11 +1417,68 @@ if (!c) {
   const restBar = wrapper.createEl("div");
   restBar.style.display = "flex";
   restBar.style.justifyContent = "flex-end";
+  restBar.style.flexWrap = "wrap";
   restBar.style.alignItems = "center";
   restBar.style.gap = "8px";
   restBar.style.padding = "8px 10px";
   restBar.style.border = "1px solid var(--background-modifier-border)";
   restBar.style.borderRadius = "12px";
+
+  const characterLabel = restBar.createEl("span", { text: "Character" });
+  characterLabel.style.fontWeight = "700";
+
+  const characterSelect = restBar.createEl("select");
+  characterSelect.style.minWidth = "220px";
+  characterSelect.style.maxWidth = "360px";
+  characterSelect.style.padding = "6px 8px";
+  characterSelect.style.borderRadius = "8px";
+
+  for (const file of characterFiles) {
+    const page = dv.page(file.path);
+    const option = characterSelect.createEl("option", {
+      text: String(page?.name ?? file.basename)
+    });
+    option.value = file.path;
+  }
+  characterSelect.value = CHARACTER_PATH;
+
+  characterSelect.addEventListener("change", async () => {
+    const selectedPath = String(characterSelect.value ?? "").trim();
+    if (!selectedPath || selectedPath === CHARACTER_PATH) return;
+
+    CHARACTER_PATH = selectedPath;
+    window.__dndSheetCharacterPath = selectedPath;
+
+    // Dataview keeps `c` from the current evaluation. Merely triggering a
+    // Dataview refresh is not reliable enough here, so force the active
+    // Markdown view to reload its file. The script then starts again at the
+    // top and reads window.__dndSheetCharacterPath before creating `c`.
+    const activeFile = app.workspace.getActiveFile();
+    const activeLeaf = app.workspace.activeLeaf;
+
+    if (activeFile && activeLeaf) {
+      await activeLeaf.openFile(activeFile, { active: true });
+    } else {
+      app.workspace.trigger("dataview:refresh-views");
+    }
+  });
+
+  const editCharacterButton = restBar.createEl("button", { text: "Edit Character" });
+  editCharacterButton.addEventListener("click", async () => {
+    const selectedPath = String(characterSelect.value ?? CHARACTER_PATH).trim();
+    if (!selectedPath) return;
+
+    // The builder already reads this shared state on startup.
+    window.__dndBuilderCharacterPath = selectedPath;
+
+    const builderFile = app.vault.getAbstractFileByPath(BUILDER_PATH);
+    if (!builderFile) {
+      new Notice(`Builder nicht gefunden: ${BUILDER_PATH}`);
+      return;
+    }
+
+    await app.workspace.getLeaf(false).openFile(builderFile);
+  });
 
   const restLabel = restBar.createEl("span", { text: "Rest" });
   restLabel.style.fontWeight = "700";
@@ -1700,12 +1913,12 @@ if (!c) {
   savesTitle.style.fontSize = "1.1em";
 
   const saveData = [
-    ["STR", c.str_save_prof ?? false],
-    ["DEX", c.dex_save_prof ?? false],
-    ["CON", c.con_save_prof ?? false],
-    ["INT", c.int_save_prof ?? false],
-    ["WIS", c.wis_save_prof ?? false],
-    ["CHA", c.cha_save_prof ?? false],
+    ["STR", isSaveProficient("str")],
+    ["DEX", isSaveProficient("dex")],
+    ["CON", isSaveProficient("con")],
+    ["INT", isSaveProficient("int")],
+    ["WIS", isSaveProficient("wis")],
+    ["CHA", isSaveProficient("cha")],
   ];
 
   for (const [label, prof] of saveData) {
@@ -1736,24 +1949,24 @@ if (!c) {
   skillsTitle.style.fontSize = "1.1em";
 
   const skills = [
-    ["Acrobatics", "dex", c.acrobatics_prof ?? false],
-    ["Animal Handling", "wis", c.animal_handling_prof ?? false],
-    ["Arcana", "int", c.arcana_prof ?? false],
-    ["Athletics", "str", c.athletics_prof ?? false],
-    ["Deception", "cha", c.deception_prof ?? false],
-    ["History", "int", c.history_prof ?? false],
-    ["Insight", "wis", c.insight_prof ?? false],
-    ["Intimidation", "cha", c.intimidation_prof ?? false],
-    ["Investigation", "int", c.investigation_prof ?? false],
-    ["Medicine", "wis", c.medicine_prof ?? false],
-    ["Nature", "int", c.nature_prof ?? false],
-    ["Perception", "wis", c.perception_prof ?? false],
-    ["Performance", "cha", c.performance_prof ?? false],
-    ["Persuasion", "cha", c.persuasion_prof ?? false],
-    ["Religion", "int", c.religion_prof ?? false],
-    ["Sleight of Hand", "dex", c.sleight_of_hand_prof ?? false],
-    ["Stealth", "dex", c.stealth_prof ?? false],
-    ["Survival", "wis", c.survival_prof ?? false],
+    ["Acrobatics", "dex", isSkillProficient("acrobatics")],
+    ["Animal Handling", "wis", isSkillProficient("animal_handling")],
+    ["Arcana", "int", isSkillProficient("arcana")],
+    ["Athletics", "str", isSkillProficient("athletics")],
+    ["Deception", "cha", isSkillProficient("deception")],
+    ["History", "int", isSkillProficient("history")],
+    ["Insight", "wis", isSkillProficient("insight")],
+    ["Intimidation", "cha", isSkillProficient("intimidation")],
+    ["Investigation", "int", isSkillProficient("investigation")],
+    ["Medicine", "wis", isSkillProficient("medicine")],
+    ["Nature", "int", isSkillProficient("nature")],
+    ["Perception", "wis", isSkillProficient("perception")],
+    ["Performance", "cha", isSkillProficient("performance")],
+    ["Persuasion", "cha", isSkillProficient("persuasion")],
+    ["Religion", "int", isSkillProficient("religion")],
+    ["Sleight of Hand", "dex", isSkillProficient("sleight_of_hand")],
+    ["Stealth", "dex", isSkillProficient("stealth")],
+    ["Survival", "wis", isSkillProficient("survival")],
   ];
 
   for (const [name, ability, prof] of skills) {
@@ -3470,9 +3683,9 @@ if (!c) {
   sensesTitle.style.marginBottom = "12px";
   sensesTitle.style.fontSize = "1.1em";
 
-  const passivePerception = 10 + getSkillTotal("Perception", "wis", c.perception_prof ?? false);
-  const passiveInvestigation = 10 + getSkillTotal("Investigation", "int", c.investigation_prof ?? false);
-  const passiveInsight = 10 + getSkillTotal("Insight", "wis", c.insight_prof ?? false);
+  const passivePerception = 10 + getSkillTotal("Perception", "wis", isSkillProficient("perception"));
+  const passiveInvestigation = 10 + getSkillTotal("Investigation", "int", isSkillProficient("investigation"));
+  const passiveInsight = 10 + getSkillTotal("Insight", "wis", isSkillProficient("insight"));
 
   const senseStats = [
     ["Passive Perception", passivePerception],

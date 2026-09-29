@@ -1,54 +1,34 @@
 ---
-name: Artificer
+name: Paladin
 type: class
-source: 'Eberron: Rising from the Last War (2019)'
-hit_die: d8
+source: PHB 2014
+hit_die: d10
 primary_ability:
-- int
+- str
+- cha
 proficiencies:
   armor:
   - light
   - medium
+  - heavy
   - shields
   weapons:
   - simple
-  tools:
-  - thieves_tools
-  - tinkers_tools
+  - martial
+  tools: []
   saving_throws:
-  - con
-  - int
+  - wis
+  - cha
 proficiency_choices:
   skills:
     count: 2
     options:
-    - arcana
-    - history
-    - investigation
+    - athletics
+    - insight
+    - intimidation
     - medicine
-    - nature
-    - perception
-    - sleight_of_hand
-  tools:
-    count: 1
-    options:
-    - alchemists_supplies
-    - brewers_supplies
-    - calligraphers_supplies
-    - carpenters_tools
-    - cartographers_tools
-    - cobblers_tools
-    - cooks_utensils
-    - glassblowers_tools
-    - jewelers_tools
-    - leatherworkers_tools
-    - masons_tools
-    - painters_supplies
-    - potters_tools
-    - smiths_tools
-    - tinkers_tools
-    - weavers_tools
-    - woodcarvers_tools
+    - persuasion
+    - religion
 asi_levels:
 - 4
 - 8
@@ -56,34 +36,34 @@ asi_levels:
 - 16
 - 19
 subclass:
-  label: Artificer Specialist
+  label: Sacred Oath
   unlock_level: 3
   options: []
 features:
 - level: 1
-  feature: Magical Tinkering
+  feature: Divine Sense
 - level: 1
+  feature: Lay on Hands
+- level: 2
+  feature: Fighting Style
+- level: 2
   feature: Spellcasting
 - level: 2
-  feature: Infuse Item
+  feature: Divine Smite
 - level: 3
-  feature: Artificer Specialist
+  feature: Divine Health
 - level: 3
-  feature: The Right Tool for the Job
+  feature: Sacred Oath
+- level: 5
+  feature: Extra Attack
 - level: 6
-  feature: Tool Expertise
-- level: 7
-  feature: Flash of Genius
+  feature: Aura of Protection
 - level: 10
-  feature: Magic Item Adept
+  feature: Aura of Courage
 - level: 11
-  feature: Spell-Storing Item
+  feature: Improved Divine Smite
 - level: 14
-  feature: Magic Item Savant
-- level: 18
-  feature: Magic Item Master
-- level: 20
-  feature: Soul of Artifice
+  feature: Cleansing Touch
 progression:
   '1':
     proficiency_bonus: 2

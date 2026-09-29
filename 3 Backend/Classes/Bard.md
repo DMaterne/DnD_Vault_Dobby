@@ -1,54 +1,58 @@
 ---
-name: Artificer
+name: Bard
 type: class
-source: 'Eberron: Rising from the Last War (2019)'
+source: PHB 2014
 hit_die: d8
 primary_ability:
-- int
+- cha
 proficiencies:
   armor:
   - light
-  - medium
-  - shields
   weapons:
   - simple
-  tools:
-  - thieves_tools
-  - tinkers_tools
+  - hand_crossbow
+  - longsword
+  - rapier
+  - shortsword
+  tools: []
   saving_throws:
-  - con
-  - int
+  - dex
+  - cha
 proficiency_choices:
   skills:
-    count: 2
+    count: 3
     options:
+    - acrobatics
+    - animal_handling
     - arcana
+    - athletics
+    - deception
     - history
+    - insight
+    - intimidation
     - investigation
     - medicine
     - nature
     - perception
+    - performance
+    - persuasion
+    - religion
     - sleight_of_hand
+    - stealth
+    - survival
   tools:
-    count: 1
+    count: 3
     options:
-    - alchemists_supplies
-    - brewers_supplies
-    - calligraphers_supplies
-    - carpenters_tools
-    - cartographers_tools
-    - cobblers_tools
-    - cooks_utensils
-    - glassblowers_tools
-    - jewelers_tools
-    - leatherworkers_tools
-    - masons_tools
-    - painters_supplies
-    - potters_tools
-    - smiths_tools
-    - tinkers_tools
-    - weavers_tools
-    - woodcarvers_tools
+    - bagpipes
+    - drum
+    - dulcimer
+    - flute
+    - lute
+    - lyre
+    - horn
+    - pan_flute
+    - shawm
+    - viol
 asi_levels:
 - 4
 - 8
@@ -56,34 +60,30 @@ asi_levels:
 - 16
 - 19
 subclass:
-  label: Artificer Specialist
+  label: Bard College
   unlock_level: 3
   options: []
 features:
 - level: 1
-  feature: Magical Tinkering
-- level: 1
   feature: Spellcasting
+- level: 1
+  feature: Bardic Inspiration
 - level: 2
-  feature: Infuse Item
+  feature: Jack of All Trades
+- level: 2
+  feature: Song of Rest
 - level: 3
-  feature: Artificer Specialist
+  feature: Bard College
 - level: 3
-  feature: The Right Tool for the Job
+  feature: Expertise
+- level: 5
+  feature: Font of Inspiration
 - level: 6
-  feature: Tool Expertise
-- level: 7
-  feature: Flash of Genius
+  feature: Countercharm
 - level: 10
-  feature: Magic Item Adept
-- level: 11
-  feature: Spell-Storing Item
-- level: 14
-  feature: Magic Item Savant
-- level: 18
-  feature: Magic Item Master
+  feature: Magical Secrets
 - level: 20
-  feature: Soul of Artifice
+  feature: Superior Inspiration
 progression:
   '1':
     proficiency_bonus: 2

@@ -1,54 +1,43 @@
 ---
-name: Artificer
+name: Druid
 type: class
-source: 'Eberron: Rising from the Last War (2019)'
+source: PHB 2014
 hit_die: d8
 primary_ability:
-- int
+- wis
 proficiencies:
   armor:
   - light
   - medium
   - shields
   weapons:
-  - simple
+  - club
+  - dagger
+  - dart
+  - javelin
+  - mace
+  - quarterstaff
+  - scimitar
+  - sickle
+  - sling
+  - spear
   tools:
-  - thieves_tools
-  - tinkers_tools
+  - herbalism_kit
   saving_throws:
-  - con
   - int
+  - wis
 proficiency_choices:
   skills:
     count: 2
     options:
     - arcana
-    - history
-    - investigation
+    - animal_handling
+    - insight
     - medicine
     - nature
     - perception
-    - sleight_of_hand
-  tools:
-    count: 1
-    options:
-    - alchemists_supplies
-    - brewers_supplies
-    - calligraphers_supplies
-    - carpenters_tools
-    - cartographers_tools
-    - cobblers_tools
-    - cooks_utensils
-    - glassblowers_tools
-    - jewelers_tools
-    - leatherworkers_tools
-    - masons_tools
-    - painters_supplies
-    - potters_tools
-    - smiths_tools
-    - tinkers_tools
-    - weavers_tools
-    - woodcarvers_tools
+    - religion
+    - survival
 asi_levels:
 - 4
 - 8
@@ -56,34 +45,24 @@ asi_levels:
 - 16
 - 19
 subclass:
-  label: Artificer Specialist
-  unlock_level: 3
+  label: Druid Circle
+  unlock_level: 2
   options: []
 features:
 - level: 1
-  feature: Magical Tinkering
+  feature: Druidic
 - level: 1
   feature: Spellcasting
 - level: 2
-  feature: Infuse Item
-- level: 3
-  feature: Artificer Specialist
-- level: 3
-  feature: The Right Tool for the Job
-- level: 6
-  feature: Tool Expertise
-- level: 7
-  feature: Flash of Genius
-- level: 10
-  feature: Magic Item Adept
-- level: 11
-  feature: Spell-Storing Item
-- level: 14
-  feature: Magic Item Savant
+  feature: Wild Shape
+- level: 2
+  feature: Druid Circle
 - level: 18
-  feature: Magic Item Master
+  feature: Timeless Body
+- level: 18
+  feature: Beast Spells
 - level: 20
-  feature: Soul of Artifice
+  feature: Archdruid
 progression:
   '1':
     proficiency_bonus: 2

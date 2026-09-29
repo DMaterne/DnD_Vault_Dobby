@@ -1,34 +1,30 @@
 ---
-name: Artificer
+name: Monk
 type: class
-source: 'Eberron: Rising from the Last War (2019)'
+source: PHB 2014
 hit_die: d8
 primary_ability:
-- int
+- dex
+- wis
 proficiencies:
-  armor:
-  - light
-  - medium
-  - shields
+  armor: []
   weapons:
   - simple
-  tools:
-  - thieves_tools
-  - tinkers_tools
+  - shortsword
+  tools: []
   saving_throws:
-  - con
-  - int
+  - str
+  - dex
 proficiency_choices:
   skills:
     count: 2
     options:
-    - arcana
+    - acrobatics
+    - athletics
     - history
-    - investigation
-    - medicine
-    - nature
-    - perception
-    - sleight_of_hand
+    - insight
+    - religion
+    - stealth
   tools:
     count: 1
     options:
@@ -49,6 +45,16 @@ proficiency_choices:
     - tinkers_tools
     - weavers_tools
     - woodcarvers_tools
+    - bagpipes
+    - drum
+    - dulcimer
+    - flute
+    - lute
+    - lyre
+    - horn
+    - pan_flute
+    - shawm
+    - viol
 asi_levels:
 - 4
 - 8
@@ -56,34 +62,46 @@ asi_levels:
 - 16
 - 19
 subclass:
-  label: Artificer Specialist
+  label: Monastic Tradition
   unlock_level: 3
   options: []
 features:
 - level: 1
-  feature: Magical Tinkering
+  feature: Unarmored Defense
 - level: 1
-  feature: Spellcasting
+  feature: Martial Arts
 - level: 2
-  feature: Infuse Item
+  feature: Ki
+- level: 2
+  feature: Unarmored Movement
 - level: 3
-  feature: Artificer Specialist
+  feature: Monastic Tradition
 - level: 3
-  feature: The Right Tool for the Job
+  feature: Deflect Missiles
+- level: 4
+  feature: Slow Fall
+- level: 5
+  feature: Extra Attack
+- level: 5
+  feature: Stunning Strike
 - level: 6
-  feature: Tool Expertise
+  feature: Ki-Empowered Strikes
 - level: 7
-  feature: Flash of Genius
+  feature: Evasion
+- level: 7
+  feature: Stillness of Mind
 - level: 10
-  feature: Magic Item Adept
-- level: 11
-  feature: Spell-Storing Item
+  feature: Purity of Body
+- level: 13
+  feature: Tongue of the Sun and Moon
 - level: 14
-  feature: Magic Item Savant
+  feature: Diamond Soul
+- level: 15
+  feature: Timeless Body
 - level: 18
-  feature: Magic Item Master
+  feature: Empty Body
 - level: 20
-  feature: Soul of Artifice
+  feature: Perfect Self
 progression:
   '1':
     proficiency_bonus: 2

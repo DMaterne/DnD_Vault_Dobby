@@ -2,9 +2,9 @@
 name: Eimer
 class: Artificer
 subclass: Armorer
-level: 8
+level: 6
 race: Warforged
-background: Soldier
+background: Public/3 Backend/Backgrounds/Soldier.md
 alignment: Lawful Neutral
 player: Dobby
 str: 8
@@ -28,13 +28,13 @@ wis_save_prof: false
 cha_save_prof: false
 acrobatics_prof: true
 animal_handling_prof: false
-arcana_prof: true
-athletics_prof: true
+arcana_prof: false
+athletics_prof: false
 deception_prof: false
 history_prof: false
 insight_prof: false
-intimidation_prof: true
-investigation_prof: true
+intimidation_prof: false
+investigation_prof: false
 medicine_prof: false
 nature_prof: false
 perception_prof: false
@@ -155,8 +155,17 @@ species: Public/3 Backend/Species/Warforged.md
 species_choices:
   ability_increase: int
   extra_language: Celestial
-  tool_proficiency: cartographer's tools
+  tool_proficiency: cartographers_tools
   skill_proficiency: acrobatics
+class_choices:
+  skills:
+    - arcana
+    - investigation
+  tools:
+    - cartographers_tools
+background_choices:
+  tools:
+    - dice_set
 ---
 # Bilder
 

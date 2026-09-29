@@ -1,10 +1,10 @@
 ---
-name: Artificer
+name: Barbarian
 type: class
-source: 'Eberron: Rising from the Last War (2019)'
-hit_die: d8
+source: PHB 2014
+hit_die: d12
 primary_ability:
-- int
+- str
 proficiencies:
   armor:
   - light
@@ -12,43 +12,21 @@ proficiencies:
   - shields
   weapons:
   - simple
-  tools:
-  - thieves_tools
-  - tinkers_tools
+  - martial
+  tools: []
   saving_throws:
+  - str
   - con
-  - int
 proficiency_choices:
   skills:
     count: 2
     options:
-    - arcana
-    - history
-    - investigation
-    - medicine
+    - animal_handling
+    - athletics
+    - intimidation
     - nature
     - perception
-    - sleight_of_hand
-  tools:
-    count: 1
-    options:
-    - alchemists_supplies
-    - brewers_supplies
-    - calligraphers_supplies
-    - carpenters_tools
-    - cartographers_tools
-    - cobblers_tools
-    - cooks_utensils
-    - glassblowers_tools
-    - jewelers_tools
-    - leatherworkers_tools
-    - masons_tools
-    - painters_supplies
-    - potters_tools
-    - smiths_tools
-    - tinkers_tools
-    - weavers_tools
-    - woodcarvers_tools
+    - survival
 asi_levels:
 - 4
 - 8
@@ -56,34 +34,36 @@ asi_levels:
 - 16
 - 19
 subclass:
-  label: Artificer Specialist
+  label: Primal Path
   unlock_level: 3
   options: []
 features:
 - level: 1
-  feature: Magical Tinkering
+  feature: Rage
 - level: 1
-  feature: Spellcasting
+  feature: Unarmored Defense
 - level: 2
-  feature: Infuse Item
+  feature: Reckless Attack
+- level: 2
+  feature: Danger Sense
 - level: 3
-  feature: Artificer Specialist
-- level: 3
-  feature: The Right Tool for the Job
-- level: 6
-  feature: Tool Expertise
+  feature: Primal Path
+- level: 5
+  feature: Extra Attack
+- level: 5
+  feature: Fast Movement
 - level: 7
-  feature: Flash of Genius
-- level: 10
-  feature: Magic Item Adept
+  feature: Feral Instinct
+- level: 9
+  feature: Brutal Critical
 - level: 11
-  feature: Spell-Storing Item
-- level: 14
-  feature: Magic Item Savant
+  feature: Relentless Rage
+- level: 15
+  feature: Persistent Rage
 - level: 18
-  feature: Magic Item Master
+  feature: Indomitable Might
 - level: 20
-  feature: Soul of Artifice
+  feature: Primal Champion
 progression:
   '1':
     proficiency_bonus: 2

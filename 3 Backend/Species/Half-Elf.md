@@ -29,16 +29,9 @@ choices:
   extra_language:
     count: 1
     source: languages
-effects:
-- id: darkvision
-  type: sense
-  target: darkvision
-  value: 60
-- id: fey_ancestry
-  type: advantage
-  target: saving_throws_vs_charmed
-- id: fey_sleep
-  type: immunity
-  target: magical_sleep
 notes: Two chosen +1 abilities and two chosen skills.
+features:
+- Darkvision
+- Fey Ancestry
+- Skill Versatility
 ---

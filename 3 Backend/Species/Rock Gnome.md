@@ -16,19 +16,10 @@ languages:
 proficiencies:
   tools:
   - tinkers_tools
-effects:
-- id: darkvision
-  type: sense
-  target: darkvision
-  value: 60
-- id: gnome_cunning
-  type: advantage
-  target: int_wis_cha_saves_vs_magic
-- id: artificers_lore
-  type: expertise_rule
-  target: history_magic_alchemy_technology
-- id: tinker
-  type: crafting_rule
-  value: clockwork_device
 notes: Gnome traits plus Artificer's Lore and Tinker.
+features:
+- Darkvision
+- Gnome Cunning
+- Artificer's Lore
+- Tinker
 ---

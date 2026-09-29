@@ -29,19 +29,12 @@ choices:
     - smiths_tools
     - brewers_supplies
     - masons_tools
-effects:
-- id: darkvision
-  type: sense
-  target: darkvision
-  value: 60
-- id: dwarven_resilience
-  type: advantage
-  target: saving_throws_vs_poison
-- id: dwarven_poison
-  type: resistance
-  target: poison
-- id: stonecunning
-  type: expertise_rule
-  target: history_stonework
 notes: Dwarf traits plus Strength and armor training.
+features:
+- Darkvision
+- Dwarven Resilience
+- Dwarven Combat Training
+- Tool Proficiency
+- Stonecunning
+- Dwarven Armor Training
 ---

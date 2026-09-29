@@ -1,89 +1,75 @@
 ---
-name: Artificer
+name: Rogue
 type: class
-source: 'Eberron: Rising from the Last War (2019)'
+source: PHB 2014
 hit_die: d8
 primary_ability:
-- int
+- dex
 proficiencies:
   armor:
   - light
-  - medium
-  - shields
   weapons:
   - simple
+  - hand_crossbow
+  - longsword
+  - rapier
+  - shortsword
   tools:
   - thieves_tools
-  - tinkers_tools
   saving_throws:
-  - con
+  - dex
   - int
 proficiency_choices:
   skills:
-    count: 2
+    count: 4
     options:
-    - arcana
-    - history
+    - acrobatics
+    - athletics
+    - deception
+    - insight
+    - intimidation
     - investigation
-    - medicine
-    - nature
     - perception
+    - performance
+    - persuasion
     - sleight_of_hand
-  tools:
-    count: 1
-    options:
-    - alchemists_supplies
-    - brewers_supplies
-    - calligraphers_supplies
-    - carpenters_tools
-    - cartographers_tools
-    - cobblers_tools
-    - cooks_utensils
-    - glassblowers_tools
-    - jewelers_tools
-    - leatherworkers_tools
-    - masons_tools
-    - painters_supplies
-    - potters_tools
-    - smiths_tools
-    - tinkers_tools
-    - weavers_tools
-    - woodcarvers_tools
+    - stealth
 asi_levels:
 - 4
 - 8
+- 10
 - 12
 - 16
 - 19
 subclass:
-  label: Artificer Specialist
+  label: Roguish Archetype
   unlock_level: 3
   options: []
 features:
 - level: 1
-  feature: Magical Tinkering
+  feature: Expertise
 - level: 1
-  feature: Spellcasting
+  feature: Sneak Attack
+- level: 1
+  feature: Thieves' Cant
 - level: 2
-  feature: Infuse Item
+  feature: Cunning Action
 - level: 3
-  feature: Artificer Specialist
-- level: 3
-  feature: The Right Tool for the Job
-- level: 6
-  feature: Tool Expertise
+  feature: Roguish Archetype
+- level: 5
+  feature: Uncanny Dodge
 - level: 7
-  feature: Flash of Genius
-- level: 10
-  feature: Magic Item Adept
+  feature: Evasion
 - level: 11
-  feature: Spell-Storing Item
+  feature: Reliable Talent
 - level: 14
-  feature: Magic Item Savant
+  feature: Blindsense
+- level: 15
+  feature: Slippery Mind
 - level: 18
-  feature: Magic Item Master
+  feature: Elusive
 - level: 20
-  feature: Soul of Artifice
+  feature: Stroke of Luck
 progression:
   '1':
     proficiency_bonus: 2

@@ -3,7 +3,7 @@
 > [!info] Familienkern
 > Die Familie **Obermüller** ist eine alte, angesehene Familie.  
 > Das letzte Oberhaupt war **[[Albrik Obermüller]]**, der noch lebt, sich aber aus dem aktiven Familienleben weitgehend zurückgezogen hat.  
-> Sein **ältester Sohn ist [[Georgius Obermüller]]**.
+> Sein **ältester Sohn ist [[Public/Tjubi im Dildoland/Characters/NPCs/Georgius Obermüller]]**.
 
 ---
 
