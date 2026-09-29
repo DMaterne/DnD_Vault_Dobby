@@ -1,3 +1,6 @@
+---
+selected_character: Public/3 Backend/Characters/EIMER Test.md
+---
 ```dataviewjs
 const CHARACTERS_FOLDER = "Public/3 Backend/Characters/";
 const BUILDER_PATH = "Public/3 Backend/Character Builder.md";
@@ -14,14 +17,17 @@ function directCharacterFiles() {
 }
 
 const characterFiles = directCharacterFiles();
-const savedCharacterPath = String(window.__dndSheetCharacterPath ?? "").trim();
+
+// Store the selected character in the SHEET note itself.
+// This is persistent and Dataview automatically re-evaluates when frontmatter changes.
+const sheetPage = dv.current();
+const savedCharacterPath = String(sheetPage?.selected_character ?? "").trim();
+
 let CHARACTER_PATH = characterFiles.some(file => file.path === savedCharacterPath)
   ? savedCharacterPath
   : (characterFiles.some(file => file.path === DEFAULT_CHARACTER_PATH)
       ? DEFAULT_CHARACTER_PATH
       : (characterFiles[0]?.path ?? DEFAULT_CHARACTER_PATH));
-
-window.__dndSheetCharacterPath = CHARACTER_PATH;
 
 const ITEMS_FOLDER = "Public/3 Backend/Items/";
 const ACTIONS_FOLDER = "Public/3 Backend/Actions/";
@@ -1446,20 +1452,27 @@ if (!c) {
     const selectedPath = String(characterSelect.value ?? "").trim();
     if (!selectedPath || selectedPath === CHARACTER_PATH) return;
 
-    CHARACTER_PATH = selectedPath;
-    window.__dndSheetCharacterPath = selectedPath;
+    const sheetFile = app.workspace.getActiveFile();
+    if (!sheetFile) {
+      new Notice("Sheet-Datei konnte nicht ermittelt werden.");
+      return;
+    }
 
-    // Dataview keeps `c` from the current evaluation. Merely triggering a
-    // Dataview refresh is not reliable enough here, so force the active
-    // Markdown view to reload its file. The script then starts again at the
-    // top and reads window.__dndSheetCharacterPath before creating `c`.
-    const activeFile = app.workspace.getActiveFile();
-    const activeLeaf = app.workspace.activeLeaf;
+    characterSelect.disabled = true;
+    try {
+      // Persist the selection in this sheet's frontmatter. Dataview watches
+      // metadata changes and will re-evaluate this block with the new path.
+      await app.fileManager.processFrontMatter(sheetFile, fm => {
+        fm.selected_character = selectedPath;
+      });
 
-    if (activeFile && activeLeaf) {
-      await activeLeaf.openFile(activeFile, { active: true });
-    } else {
+      CHARACTER_PATH = selectedPath;
+
+      // Explicit refresh as an immediate fallback in addition to Dataview's
+      // metadata watcher.
       app.workspace.trigger("dataview:refresh-views");
+    } finally {
+      characterSelect.disabled = false;
     }
   });
 
