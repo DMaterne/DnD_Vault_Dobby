@@ -14,6 +14,8 @@ const ITEMS_FOLDER = "Public/3 Backend/Items/";
 
 const FEATS_FOLDER = "Public/3 Backend/Feats/";
 
+const SPECIES_FOLDER = "Public/3 Backend/Species/";
+
   
 
 const ABILITIES = [
@@ -127,6 +129,8 @@ const classFiles = directMarkdownFiles(CLASSES_FOLDER);
 const itemFiles = directMarkdownFiles(ITEMS_FOLDER);
 
 const featFiles = directMarkdownFiles(FEATS_FOLDER);
+
+const speciesFiles = directMarkdownFiles(SPECIES_FOLDER);
 
   
 
@@ -1124,6 +1128,283 @@ function renderClass() {
 }
 
   
+  
+
+function renderSpecies() {
+
+  content.innerHTML="";
+
+  sectionTitle("Species", "Choose a species/race and configure the choices defined by its backend file.");
+
+  
+
+  const speciesField=field(content,"Species");
+
+  const speciesSelect=speciesField.createEl("select"); styleInput(speciesSelect);
+
+  speciesSelect.createEl("option",{text:"— Select Species —"}).value="";
+
+  
+
+  for(const file of speciesFiles){
+
+    const pg=pageFor(file);
+
+    const opt=speciesSelect.createEl("option",{text:String(pg?.name ?? file.basename)});
+
+    opt.value=file.path;
+
+  }
+
+  
+
+  speciesSelect.value=String(draft.species ?? "");
+
+  speciesSelect.onchange=()=>{
+
+    draft.species=speciesSelect.value;
+
+    draft.species_choices={};
+
+    markDirty();
+
+    renderSpecies();
+
+  };
+
+  
+
+  if(!speciesFiles.length){
+
+    content.createEl("div",{text:`No species files found in ${SPECIES_FOLDER}`})
+
+      .style.cssText="margin-top:10px;font-size:.85em;opacity:.65";
+
+    return;
+
+  }
+
+  
+
+  const speciesPage=draft.species ? dv.page(draft.species) : null;
+
+  if(!speciesPage) return;
+
+  
+
+  const info=content.createEl("div");
+
+  info.style.cssText="margin-top:14px;padding:12px;border:1px solid var(--background-modifier-border);border-radius:10px";
+
+  const facts=[];
+
+  if(speciesPage.source) facts.push(`Source: ${speciesPage.source}`);
+
+  if(speciesPage.size) facts.push(`Size: ${speciesPage.size}`);
+
+  if(speciesPage.speed!=null) facts.push(`Speed: ${speciesPage.speed} ft`);
+
+  if(Array.isArray(speciesPage.languages)) facts.push(`Languages: ${speciesPage.languages.join(", ")}`);
+
+  info.createEl("div",{text:facts.join(" • ")}).style.cssText="font-size:.9em;opacity:.75";
+
+  if(speciesPage.notes) info.createEl("div",{text:String(speciesPage.notes)}).style.cssText="margin-top:8px";
+
+  
+
+  const defs=speciesPage.choices;
+
+  if(!defs || typeof defs!=="object") return;
+
+  if(!draft.species_choices || typeof draft.species_choices!=="object") draft.species_choices={};
+
+  const state=draft.species_choices;
+
+  
+
+  const box=content.createEl("div");
+
+  box.style.cssText="margin-top:14px;padding:14px;border:1px solid var(--background-modifier-border);border-radius:10px";
+
+  box.createEl("div",{text:"Species Choices"}).style.cssText="font-weight:700;margin-bottom:12px";
+
+  
+
+  function optionsFor(def){
+
+    return Array.isArray(def?.options) ? def.options.map(String) : [];
+
+  }
+
+  function singleSelect(label,key,options,placeholder="— Select —"){
+
+    const w=field(box,label), sel=w.createEl("select"); styleInput(sel);
+
+    sel.createEl("option",{text:placeholder}).value="";
+
+    for(const value of options){
+
+      const o=sel.createEl("option",{text:String(value).replaceAll("_"," ")}); o.value=String(value);
+
+    }
+
+    sel.value=String(state[key]??"");
+
+    sel.onchange=()=>{state[key]=sel.value;markDirty();};
+
+  }
+
+  function textChoices(label,key,count,placeholder){
+
+    if(!Array.isArray(state[key])) state[key]=[];
+
+    for(let i=0;i<count;i++){
+
+      const w=field(box,`${label} ${i+1}`);
+
+      const inp=w.createEl("input"); inp.type="text"; inp.placeholder=placeholder; styleInput(inp);
+
+      inp.value=String(state[key][i]??"");
+
+      inp.onchange=()=>{state[key][i]=inp.value.trim().toLowerCase();markDirty();};
+
+    }
+
+  }
+
+  
+
+  for(const [key,def] of Object.entries(defs)){
+
+    if(!def || typeof def!=="object") continue;
+
+    const count=Math.max(1,Number(def.count??1));
+
+    const amount=Number(def.amount??1);
+
+    const opts=optionsFor(def);
+
+  
+
+    if(key==="ability_increase"){
+
+      singleSelect(`Ability Increase (+${amount})`,key,opts);
+
+    } else if(key==="ability_increases"){
+
+      if(!Array.isArray(state[key])) state[key]=[];
+
+      for(let i=0;i<count;i++){
+
+        const w=field(box,`Ability Increase ${i+1} (+${amount})`);
+
+        const sel=w.createEl("select"); styleInput(sel);
+
+        sel.createEl("option",{text:"— Select Ability —"}).value="";
+
+        for(const value of opts){
+
+          const o=sel.createEl("option",{text:String(value).toUpperCase()}); o.value=value;
+
+        }
+
+        sel.value=String(state[key][i]??"");
+
+        sel.onchange=()=>{
+
+          state[key][i]=sel.value;
+
+          if(def.distinct===true){
+
+            state[key]=state[key].filter((v,idx)=>!v || state[key].indexOf(v)===idx);
+
+          }
+
+          markDirty(); renderSpecies();
+
+        };
+
+      }
+
+    } else if(key==="feat"){
+
+      const w=field(box,"Feat"), sel=w.createEl("select"); styleInput(sel);
+
+      sel.createEl("option",{text:"— Select Feat —"}).value="";
+
+      for(const file of featFiles){
+
+        const o=sel.createEl("option",{text:featDisplayName(file)}); o.value=file.path;
+
+      }
+
+      sel.value=String(state[key]??"");
+
+      sel.onchange=()=>{state[key]=sel.value;markDirty();};
+
+    } else if(opts.length){
+
+      singleSelect(key.replaceAll("_"," "),key,opts);
+
+    } else if(key.includes("skill") && count>1){
+
+      textChoices("Skill",key,count,"e.g. perception");
+
+    } else if(key.includes("skill")){
+
+      const w=field(box,"Skill Proficiency");
+
+      const inp=w.createEl("input"); inp.type="text"; inp.placeholder="e.g. perception"; styleInput(inp);
+
+      inp.value=String(state[key]??"");
+
+      inp.onchange=()=>{state[key]=inp.value.trim().toLowerCase();markDirty();};
+
+    } else if(key.includes("tool") && count>1){
+
+      textChoices("Tool",key,count,"e.g. thieves_tools");
+
+    } else if(key.includes("tool")){
+
+      const w=field(box,"Tool Proficiency");
+
+      const inp=w.createEl("input"); inp.type="text"; inp.placeholder="e.g. thieves_tools"; styleInput(inp);
+
+      inp.value=String(state[key]??"");
+
+      inp.onchange=()=>{state[key]=inp.value.trim().toLowerCase();markDirty();};
+
+    } else if(key.includes("language") && count>1){
+
+      textChoices("Language",key,count,"e.g. Draconic");
+
+    } else if(key.includes("language")){
+
+      const w=field(box,"Language");
+
+      const inp=w.createEl("input"); inp.type="text"; inp.placeholder="e.g. Draconic"; styleInput(inp);
+
+      inp.value=String(state[key]??"");
+
+      inp.onchange=()=>{state[key]=inp.value.trim();markDirty();};
+
+    } else {
+
+      const w=field(box,key.replaceAll("_"," "));
+
+      const inp=w.createEl("input"); inp.type="text"; styleInput(inp);
+
+      inp.value=String(state[key]??"");
+
+      inp.onchange=()=>{state[key]=inp.value.trim();markDirty();};
+
+    }
+
+  }
+
+}
+
+  
 
 function renderAbilities() {
 
@@ -1333,7 +1614,7 @@ function renderTab() {
 
   else if (activeTab==="background") renderPlaceholder("Background");
 
-  else if (activeTab==="species") renderPlaceholder("Species");
+  else if (activeTab==="species") renderSpecies();
 
   else if (activeTab==="abilities") renderAbilities();
 
@@ -1385,7 +1666,11 @@ function loadCharacter(path) {
 
     inventory:Array.isArray(pg.inventory) ? pg.inventory.map(e=>({...e})) : [],
 
-    asi_choices:pg.asi_choices&&typeof pg.asi_choices==="object"?JSON.parse(JSON.stringify(pg.asi_choices)):{}
+    asi_choices:pg.asi_choices&&typeof pg.asi_choices==="object"?JSON.parse(JSON.stringify(pg.asi_choices)):{},
+
+    species:String(pg.species ?? ""),
+
+    species_choices:pg.species_choices&&typeof pg.species_choices==="object"?JSON.parse(JSON.stringify(pg.species_choices)):{}
 
   };
 
@@ -1472,6 +1757,10 @@ async function saveCharacter() {
       fm.inventory=JSON.parse(JSON.stringify(draft.inventory ?? []));
 
       fm.asi_choices=JSON.parse(JSON.stringify(draft.asi_choices ?? {}));
+
+      fm.species=String(draft.species ?? "").trim() || null;
+
+      fm.species_choices=JSON.parse(JSON.stringify(draft.species_choices ?? {}));
 
     });
 

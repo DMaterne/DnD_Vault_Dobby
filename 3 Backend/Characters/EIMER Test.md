@@ -9,8 +9,8 @@ alignment: Lawful Neutral
 player: Dobby
 str: 8
 dex: 14
-con: 16
-int: 16
+con: 14
+int: 15
 wis: 10
 cha: 10
 hp_current: 19
@@ -151,6 +151,12 @@ asi_choices:
     ability_1: int
     ability_2: int
     feat: ""
+species: Public/3 Backend/Species/Warforged.md
+species_choices:
+  ability_increase: int
+  extra_language: Celestial
+  tool_proficiency: cartographer's tools
+  skill_proficiency: acrobatics
 ---
 # Bilder
 

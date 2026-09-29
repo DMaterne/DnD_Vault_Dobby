@@ -6,6 +6,7 @@ const ACTIONS_FOLDER = "Public/3 Backend/Actions/";
 const SPELLS_FOLDER = "Public/3 Backend/Spells/";
 const FEATURES_FOLDER = "Public/3 Backend/Features/";
 const FEATS_FOLDER = "Public/3 Backend/Feats/";
+const SPECIES_FOLDER = "Public/3 Backend/Species/";
 const CLASSES_FOLDER = "Public/3 Backend/Classes/";
 const SUBCLASSES_FOLDER = "Public/3 Backend/Subclasses/";
 
@@ -307,6 +308,57 @@ function getSubclassFeatureRefs() {
     .filter(ref => ref);
 }
 
+
+function getCharacterSpeciesPage() {
+  const ref = String(c.species ?? "").trim();
+  if (!ref) return null;
+  return resolvePageRef(ref, SPECIES_FOLDER);
+}
+
+function getSpeciesChoiceBonusEffects() {
+  const speciesPage = getCharacterSpeciesPage();
+  if (!speciesPage) return [];
+
+  const defs = speciesPage.choices && typeof speciesPage.choices === "object"
+    ? speciesPage.choices
+    : {};
+  const state = c.species_choices && typeof c.species_choices === "object"
+    ? c.species_choices
+    : {};
+  const result = [];
+
+  const addAbility = (ability, amount, sourceName) => {
+    const key = String(ability ?? "").trim().toLowerCase();
+    const n = Number(amount ?? 0);
+    if (!["str","dex","con","int","wis","cha"].includes(key) || !Number.isFinite(n)) return;
+    result.push({
+      type: key, value: n, set_value: null, formula: null,
+      active_when: "selected", source_kind: "species_choice",
+      source_name: sourceName, source_path: speciesPage.file?.path ?? null
+    });
+  };
+
+  if (defs.ability_increase) {
+    addAbility(state.ability_increase, defs.ability_increase.amount ?? 1,
+      speciesPage.name ?? "Species");
+  }
+
+  if (defs.ability_increases) {
+    const selected = Array.isArray(state.ability_increases) ? state.ability_increases : [];
+    const amount = Number(defs.ability_increases.amount ?? 1);
+    const count = Math.max(1, Number(defs.ability_increases.count ?? selected.length ?? 1));
+    selected.slice(0, count).forEach(a => addAbility(a, amount, speciesPage.name ?? "Species"));
+  }
+
+  return result;
+}
+
+function getSpeciesSpeed() {
+  const speciesPage = getCharacterSpeciesPage();
+  const speed = Number(speciesPage?.speed);
+  return Number.isFinite(speed) ? speed : null;
+}
+
 function getAllCharacterFeatures() {
   const manualFeatureRefs = Array.isArray(c.features) ? c.features : [];
   const classFeatureRefs = getClassFeatureRefs();
@@ -491,6 +543,42 @@ function getActiveBonusEffects() {
         });
       }
     }
+  }
+
+  const speciesPage = getCharacterSpeciesPage();
+
+  if (speciesPage) {
+    const speciesBonuses = [
+      ...(Array.isArray(speciesPage.bonuses) ? speciesPage.bonuses : []),
+      ...(Array.isArray(speciesPage.scaling_bonuses) ? speciesPage.scaling_bonuses : [])
+    ];
+
+    for (const bonus of speciesBonuses) {
+      if (!bonus || typeof bonus !== "object") continue;
+
+      const type = String(bonus.type ?? "").trim().toLowerCase();
+      const value = Number(bonus.value ?? 0);
+      const formula = String(bonus.formula ?? "").trim();
+      const rawSetValue = bonus.set_value;
+      const hasSetValue = rawSetValue !== undefined && rawSetValue !== null && rawSetValue !== "";
+      const setValue = hasSetValue ? Number(rawSetValue) : null;
+
+      if (!type) continue;
+      if (!Number.isFinite(value) && !formula && !(hasSetValue && Number.isFinite(setValue))) continue;
+
+      activeEffects.push({
+        type,
+        value: Number.isFinite(value) ? value : 0,
+        set_value: hasSetValue && Number.isFinite(setValue) ? setValue : null,
+        formula: formula || null,
+        active_when: "selected",
+        source_kind: "species",
+        source_name: speciesPage.name ?? speciesPage.file?.name ?? "Species",
+        source_path: speciesPage.file?.path ?? null
+      });
+    }
+
+    activeEffects.push(...getSpeciesChoiceBonusEffects());
   }
 
   const features = getAllCharacterFeatures();
@@ -829,6 +917,18 @@ async function setFeatureResourceUsed(resourceId, used, maxUses = null) {
 function getResourceIdsForRest(restType) {
   const ids = new Set();
 
+  const speciesPage = getCharacterSpeciesPage();
+  if (speciesPage) {
+    const def = getFeatureResourceDefinition(speciesPage);
+    if (def) {
+      const recharge = String(def.recharge ?? "").toLowerCase();
+      if (
+        (restType === "short" && recharge === "short_rest") ||
+        (restType === "long" && (recharge === "short_rest" || recharge === "long_rest"))
+      ) ids.add(def.id);
+    }
+  }
+
   for (const featurePage of getAllCharacterFeatures()) {
     const def = getFeatureResourceDefinition(featurePage);
     if (!def) continue;
@@ -1010,6 +1110,29 @@ function getAllCharacterActions() {
         file: {
           name: action.name ?? itemPage.name ?? itemPage.file?.name ?? "Unnamed Action",
           path: itemPage.file?.path ?? itemPath
+        }
+      });
+    }
+  }
+
+  // Inline actions from Species.
+  const speciesPage = getCharacterSpeciesPage();
+  if (speciesPage) {
+    const speciesActions = Array.isArray(speciesPage.actions) ? speciesPage.actions : [];
+    for (const action of speciesActions) {
+      if (!action || typeof action !== "object") continue;
+      const activation = String(action.activation ?? action.action_type ?? "other")
+        .trim().toLowerCase().replace(/\s+/g, "_");
+      const actionType = ["action","bonus_action","reaction"].includes(activation) ? activation : "other";
+
+      collectedActions.push({
+        ...action,
+        action_type: actionType,
+        source_type: "species",
+        source_label: speciesPage.name ?? speciesPage.file?.name ?? "Species",
+        file: {
+          name: action.name ?? speciesPage.name ?? "Species Action",
+          path: speciesPage.file?.path ?? CHARACTER_PATH
         }
       });
     }
@@ -2425,7 +2548,7 @@ if (!c) {
           const sourceText =
             action.source_type === "item" && action.source_item_name
               ? `From ${action.source_item_name}`
-              : (action.source_type === "feat" || action.source_type === "feature")
+              : (action.source_type === "feat" || action.source_type === "feature" || action.source_type === "species")
                 ? `From ${action.source_label ?? action.source_feature_name ?? "Feature"}`
                 : "";
 
