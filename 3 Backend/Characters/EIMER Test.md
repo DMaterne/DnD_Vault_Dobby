@@ -122,14 +122,6 @@ actions:
   - Public/3 Backend/Actions/Sickle.md
   - Public/3 Backend/Actions/Unarmed Strike.md
   - Public/3 Backend/Actions/Light Crossbow.md
-spells:
-  - Public/3 Backend/Spells/Absorb Elements.md
-  - Public/3 Backend/Spells/Thunderclap.md
-  - Public/3 Backend/Spells/Mending.md
-  - Public/3 Backend/Spells/Cure Wounds.md
-  - Public/3 Backend/Spells/Feather Fall.md
-  - Alarm
-  - Shatter
 spellcasting_ability: int
 attuned_items:
   - Public/3 Backend/Items/Armor of magical Strenght.md::17::0
@@ -263,6 +255,7 @@ known_spells:
   - Public/3 Backend/Spells/Skill Empowerment.md
   - Public/3 Backend/Spells/Transmute Rock.md
   - Public/3 Backend/Spells/Wall of Stone.md
+  - Public/3 Backend/Spells/Shatter.md
 prepared_spells:
   - Public/3 Backend/Spells/Thunderclap.md
   - Public/3 Backend/Spells/Mending.md

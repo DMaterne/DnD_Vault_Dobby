@@ -44,6 +44,26 @@ function modFromScore(v) { return Math.floor((Number(v) - 10) / 2); }
 
 function modString(v) { return Number(v) >= 0 ? `+${v}` : `${v}`; }
 
+function toPlainArray(value) {
+
+  if (Array.isArray(value)) return [...value];
+
+  if (value == null) return [];
+
+  try {
+
+    if (typeof value?.array === "function") return [...value.array()];
+
+    if (typeof value?.values === "function") return [...value.values()];
+
+    if (typeof value?.[Symbol.iterator] === "function" && typeof value !== "string") return [...value];
+
+  } catch {}
+
+  return [];
+
+}
+
 function directMarkdownFiles(folder) {
 
   const prefix = folder.endsWith("/") ? folder : folder + "/";
@@ -2158,9 +2178,9 @@ function renderSpells() {
 
   
 
-  draft.known_spells=Array.isArray(draft.known_spells)?draft.known_spells:[];
+  draft.known_spells=toPlainArray(draft.known_spells);
 
-  draft.prepared_spells=Array.isArray(draft.prepared_spells)?draft.prepared_spells:[];
+  draft.prepared_spells=toPlainArray(draft.prepared_spells);
 
   
 
@@ -2430,9 +2450,9 @@ function loadCharacter(path) {
 
     inventory:Array.isArray(pg.inventory) ? pg.inventory.map(e=>({...e})) : [],
 
-    known_spells:Array.isArray(pg.known_spells) ? [...pg.known_spells] : [],
+    known_spells:toPlainArray(pg.known_spells),
 
-    prepared_spells:Array.isArray(pg.prepared_spells) ? [...pg.prepared_spells] : [],
+    prepared_spells:toPlainArray(pg.prepared_spells),
 
     asi_choices:pg.asi_choices&&typeof pg.asi_choices==="object"?JSON.parse(JSON.stringify(pg.asi_choices)):{},
 

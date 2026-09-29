@@ -45,6 +45,16 @@ function modFromScore(score) {
 function modString(n) {
   return n >= 0 ? `+${n}` : `${n}`;
 }
+function toPlainArray(value) {
+  if (Array.isArray(value)) return [...value];
+  if (value == null) return [];
+  try {
+    if (typeof value?.array === "function") return [...value.array()];
+    if (typeof value?.values === "function") return [...value.values()];
+    if (typeof value?.[Symbol.iterator] === "function" && typeof value !== "string") return [...value];
+  } catch {}
+  return [];
+}
 
 function profValue(isProf, base, profBonus) {
   return base + (isProf ? profBonus : 0);
@@ -1480,8 +1490,8 @@ function getAllCharacterSpells() {
   // New builder model:
   // - prepared_spells: leveled spells currently prepared
   // - known_spells: spell access/selection; cantrips are always usable once selected
-  const preparedRefs = Array.isArray(c.prepared_spells) ? c.prepared_spells : [];
-  const knownRefs = Array.isArray(c.known_spells) ? c.known_spells : [];
+  const preparedRefs = toPlainArray(c.prepared_spells);
+  const knownRefs = toPlainArray(c.known_spells);
 
   for (const spellRef of preparedRefs) {
     addSpellRef(spellRef, "character", "Prepared");
@@ -1494,7 +1504,7 @@ function getAllCharacterSpells() {
   }
 
   // Legacy compatibility: old characters may still use `spells`.
-  const explicitSpellRefs = Array.isArray(c.spells) ? c.spells : [];
+  const explicitSpellRefs = toPlainArray(c.spells);
   for (const spellRef of explicitSpellRefs) {
     addSpellRef(spellRef, "character", "Character Sheet");
   }
@@ -3199,12 +3209,11 @@ if (!c) {
 
     const summaryGrid = tabContent.createEl("div");
     summaryGrid.style.display = "grid";
-    summaryGrid.style.gridTemplateColumns = "repeat(4, 1fr)";
+    summaryGrid.style.gridTemplateColumns = "repeat(3, 1fr)";
     summaryGrid.style.gap = "8px";
     summaryGrid.style.marginBottom = "12px";
 
     addSummaryBox(summaryGrid, "Modifier", modString(spellMod));
-    addSummaryBox(summaryGrid, "Proficiency", modString(prof));
     addSummaryBox(summaryGrid, "Spell Attack", modString(spellAttackBonus));
     addSummaryBox(summaryGrid, "Spell Save DC", spellSaveDC);
 
