@@ -6,7 +6,13 @@ choices:
   ability_increase:
     amount: 1
     options:
-      - cha
+    - cha
+effects:
+- id: actor_mimicry
+  type: advantage
+  targets:
+  - deception
+  - performance
+  condition: when impersonating another person
+notes: 2014 feat backend entry for Actor. Structured fields describe its character-sheet-relevant mechanics.
 ---
-
-> Backend entry for the 2014 feat. Structured fields contain only mechanics currently useful to the character-sheet engine; other feat behavior can be implemented as Actions/Features later.

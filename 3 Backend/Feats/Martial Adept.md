@@ -2,6 +2,15 @@
 name: Martial Adept
 type: feat
 source: PHB 2014
+choices:
+  maneuvers:
+    count: 2
+    source: battle_master_maneuvers
+resources:
+  id: superiority_dice
+  max: 1
+  recharge: short_rest
+  display: checkboxes
+  die: d6
+notes: 2014 feat backend entry for Martial Adept. Structured fields describe its character-sheet-relevant mechanics.
 ---
-
-> Backend entry for the 2014 feat. Structured fields contain only mechanics currently useful to the character-sheet engine; other feat behavior can be implemented as Actions/Features later.

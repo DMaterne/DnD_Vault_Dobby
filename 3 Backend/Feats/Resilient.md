@@ -7,12 +7,11 @@ choices:
     amount: 1
     grants_matching_save_proficiency: true
     options:
-      - str
-      - dex
-      - con
-      - int
-      - wis
-      - cha
+    - str
+    - dex
+    - con
+    - int
+    - wis
+    - cha
+notes: Improves one chosen ability and grants proficiency in saving throws using that ability.
 ---
-
-> Backend entry for the 2014 feat. Structured fields contain only mechanics currently useful to the character-sheet engine; other feat behavior can be implemented as Actions/Features later.

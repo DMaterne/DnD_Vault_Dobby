@@ -6,12 +6,10 @@ choices:
   ability_increase:
     amount: 1
     options:
-      - str
-      - dex
-choices:
+    - str
+    - dex
   weapon_proficiencies:
     count: 4
     source: simple_or_martial_weapons
+notes: 2014 feat backend entry for Weapon Master. Structured fields describe its character-sheet-relevant mechanics.
 ---
-
-> Backend entry for the 2014 feat. Structured fields contain only mechanics currently useful to the character-sheet engine; other feat behavior can be implemented as Actions/Features later.

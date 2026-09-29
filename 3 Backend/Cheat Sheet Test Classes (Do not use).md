@@ -1,32 +1,3 @@
----
-class: Artificer
-subclass: Armorer
-level: 10
-str: 10
-dex: 10
-con: 10
-int: 10
-wis: 10
-cha: 10
-inventory: []
-asi_choices:
-  "4":
-    type: feat
-    ability_1: ""
-    ability_2: ""
-    feat: Public/3 Backend/Feats/Shield Master.md
-    feat_choices: {}
-  "8":
-    type: asi
-    ability_1: int
-    ability_2: int
-    feat: ""
-  "12":
-    type: asi
-    ability_1: ""
-    ability_2: ""
-    feat: ""
----
 ```dataviewjs
 const CHARACTER_PATH = "Public/3 Backend/Characters/EIMER Test.md";
 
@@ -178,7 +149,8 @@ function getFormulaContext() {
     wis_mod: modFromScore(getAbilityScoreBase("wis")),
     cha_mod: modFromScore(getAbilityScoreBase("cha")),
 
-    prof: Number(getClassProgressionValue("proficiency_bonus", c.proficiency_bonus ?? 2))
+    prof: Number(getClassProgressionValue("proficiency_bonus", c.proficiency_bonus ?? 2)),
+    character_level: Number(c.level ?? 1)
   };
 }
 
@@ -190,6 +162,7 @@ function evaluateBonusFormula(formula) {
   let safeExpr = expr;
 
   const replacements = [
+    ["character_level", ctx.character_level],
     ["str_mod", ctx.str_mod],
     ["dex_mod", ctx.dex_mod],
     ["con_mod", ctx.con_mod],
@@ -339,12 +312,37 @@ function getAllCharacterFeatures() {
   const classFeatureRefs = getClassFeatureRefs();
   const subclassFeatureRefs = getSubclassFeatureRefs();
 
-  const allFeatureRefs = [...manualFeatureRefs, ...classFeatureRefs, ...subclassFeatureRefs];
   const seenPaths = new Set();
   const features = [];
 
+  // Normal character/class/subclass Features
+  const allFeatureRefs = [...manualFeatureRefs, ...classFeatureRefs, ...subclassFeatureRefs];
+
   for (const ref of allFeatureRefs) {
     const resolvedPath = resolvePathRef(ref, FEATURES_FOLDER);
+    if (!resolvedPath || seenPaths.has(resolvedPath)) continue;
+
+    const page = dv.page(resolvedPath);
+    if (!page) continue;
+
+    seenPaths.add(resolvedPath);
+    features.push(page);
+  }
+
+  // Feats selected through ASI choices are also Features for display,
+  // bonuses and resources. They stay in the Feats folder; no duplication
+  // in c.features is required.
+  const asiChoices = c.asi_choices && typeof c.asi_choices === "object"
+    ? c.asi_choices
+    : {};
+
+  for (const choice of Object.values(asiChoices)) {
+    if (!choice || String(choice.type ?? "").trim().toLowerCase() !== "feat") continue;
+
+    const featRef = String(choice.feat ?? "").trim();
+    if (!featRef) continue;
+
+    const resolvedPath = resolvePathRef(featRef, FEATS_FOLDER);
     if (!resolvedPath || seenPaths.has(resolvedPath)) continue;
 
     const page = dv.page(resolvedPath);
@@ -498,36 +496,25 @@ function getActiveBonusEffects() {
   const features = getAllCharacterFeatures();
 
   for (const featurePage of features) {
-    const bonuses = Array.isArray(featurePage.bonuses) ? featurePage.bonuses : [];
-    if (bonuses.length === 0) continue;
-
     const enabled = featurePage.enabled !== false;
+    const bonuses = Array.isArray(featurePage.bonuses) ? featurePage.bonuses : [];
+    const scalingBonuses = Array.isArray(featurePage.scaling_bonuses) ? featurePage.scaling_bonuses : [];
 
     for (const bonus of bonuses) {
       if (!bonus || typeof bonus !== "object") continue;
-
       const activeWhen = String(bonus.active_when ?? "enabled").trim().toLowerCase();
       const type = String(bonus.type ?? "").trim().toLowerCase();
       const value = Number(bonus.value ?? 0);
-
       const rawSetValue = bonus.set_value;
       const hasSetValue = rawSetValue !== undefined && rawSetValue !== null && rawSetValue !== "";
       const setValue = hasSetValue ? Number(rawSetValue) : null;
-
       const formula = String(bonus.formula ?? "").trim();
-
       if (!type) continue;
-      if (
-        !Number.isFinite(value) &&
-        !(hasSetValue && Number.isFinite(setValue)) &&
-        !formula
-      ) continue;
+      if (!Number.isFinite(value) && !(hasSetValue && Number.isFinite(setValue)) && !formula) continue;
 
-      let isActive = false;
-
-      if (activeWhen === "always") isActive = true;
-      if (activeWhen === "enabled" && enabled) isActive = true;
-
+      const isActive =
+        activeWhen === "always" ||
+        ((activeWhen === "enabled" || activeWhen === "selected") && enabled);
       if (!isActive) continue;
 
       activeEffects.push({
@@ -536,40 +523,28 @@ function getActiveBonusEffects() {
         set_value: hasSetValue && Number.isFinite(setValue) ? setValue : null,
         formula: formula || null,
         active_when: activeWhen,
-        source_kind: "feature",
+        source_kind: String(featurePage.type ?? "").toLowerCase() === "feat" ? "feat" : "feature",
         source_name: featurePage.name ?? featurePage.file?.name ?? "Unnamed Feature",
         source_path: featurePage.file?.path ?? null
       });
     }
-  }
 
-
-  const feats = getSelectedFeatPages();
-
-  for (const featPage of feats) {
-    const bonuses = Array.isArray(featPage.bonuses) ? featPage.bonuses : [];
-    for (const bonus of bonuses) {
+    for (const bonus of scalingBonuses) {
       if (!bonus || typeof bonus !== "object") continue;
-
       const type = String(bonus.type ?? "").trim().toLowerCase();
-      const value = Number(bonus.value ?? 0);
-      const rawSetValue = bonus.set_value;
-      const hasSetValue = rawSetValue !== undefined && rawSetValue !== null && rawSetValue !== "";
-      const setValue = hasSetValue ? Number(rawSetValue) : null;
       const formula = String(bonus.formula ?? "").trim();
-
-      if (!type) continue;
-      if (!Number.isFinite(value) && !(hasSetValue && Number.isFinite(setValue)) && !formula) continue;
+      const value = Number(bonus.value ?? 0);
+      if (!type || (!formula && !Number.isFinite(value))) continue;
 
       activeEffects.push({
         type,
         value: Number.isFinite(value) ? value : 0,
-        set_value: hasSetValue && Number.isFinite(setValue) ? setValue : null,
+        set_value: null,
         formula: formula || null,
-        active_when: "selected",
-        source_kind: "feat",
-        source_name: featPage.name ?? featPage.file?.name ?? "Unnamed Feat",
-        source_path: featPage.file?.path ?? null
+        active_when: "enabled",
+        source_kind: "feature_scaling",
+        source_name: featurePage.name ?? featurePage.file?.name ?? "Unnamed Feature",
+        source_path: featurePage.file?.path ?? null
       });
     }
   }
@@ -720,7 +695,12 @@ function getSkillTotal(label, abilityName, isProficient) {
 }
 
 function getFeatureResourceDefinition(featurePage) {
-  const resource = featurePage?.resource;
+  let resource = featurePage?.resource;
+  if ((!resource || typeof resource !== "object") && featurePage?.resources) {
+    resource = Array.isArray(featurePage.resources)
+      ? (featurePage.resources[0] ?? null)
+      : featurePage.resources;
+  }
   if (!resource || typeof resource !== "object") return null;
 
   const id = String(resource.id ?? "").trim();
@@ -1030,6 +1010,35 @@ function getAllCharacterActions() {
         file: {
           name: action.name ?? itemPage.name ?? itemPage.file?.name ?? "Unnamed Action",
           path: itemPage.file?.path ?? itemPath
+        }
+      });
+    }
+  }
+
+  // Inline actions from Features and Feats.
+  for (const featurePage of getAllCharacterFeatures()) {
+    const inlineActions = Array.isArray(featurePage.actions) ? featurePage.actions : [];
+    for (const action of inlineActions) {
+      if (!action || typeof action !== "object") continue;
+
+      const activation = String(action.activation ?? action.action_type ?? "other")
+        .trim().toLowerCase().replace(/\s+/g, "_");
+      const actionType = ["action", "bonus_action", "reaction"].includes(activation)
+        ? activation
+        : "other";
+      const sourceType = String(featurePage.type ?? "").trim().toLowerCase() === "feat"
+        ? "feat" : "feature";
+
+      collectedActions.push({
+        ...action,
+        action_type: actionType,
+        source_type: sourceType,
+        source_label: featurePage.name ?? featurePage.file?.name ?? "Feature",
+        source_feature_name: featurePage.name ?? featurePage.file?.name ?? "Feature",
+        source_feature_path: featurePage.file?.path ?? null,
+        file: {
+          name: action.name ?? featurePage.name ?? featurePage.file?.name ?? "Unnamed Action",
+          path: featurePage.file?.path ?? CHARACTER_PATH
         }
       });
     }
@@ -1860,6 +1869,43 @@ if (!c) {
           }
         }
 
+        const structuredEffects = Array.isArray(featurePage.effects) ? featurePage.effects : [];
+        if (structuredEffects.length > 0) {
+          const effectsTitle = content.createEl("div", { text: "Effects" });
+          effectsTitle.style.fontWeight = "600";
+          effectsTitle.style.marginTop = "12px";
+          effectsTitle.style.marginBottom = "6px";
+
+          for (const effect of structuredEffects) {
+            if (!effect || typeof effect !== "object") continue;
+            const effectCard = content.createEl("div");
+            effectCard.style.padding = "8px";
+            effectCard.style.marginBottom = "6px";
+            effectCard.style.border = "1px solid var(--background-modifier-border)";
+            effectCard.style.borderRadius = "8px";
+
+            const headingText = String(effect.name ?? effect.id ?? effect.type ?? "Effect").replace(/_/g, " ");
+            const heading = effectCard.createEl("div", { text: headingText });
+            heading.style.fontWeight = "600";
+
+            const parts = [];
+            if (effect.type) parts.push(`Type: ${String(effect.type).replace(/_/g, " ")}`);
+            if (effect.target) parts.push(`Target: ${effect.target}`);
+            if (Array.isArray(effect.targets)) parts.push(`Targets: ${effect.targets.join(", ")}`);
+            if (effect.value != null) parts.push(`Value: ${effect.value}`);
+            if (effect.condition) parts.push(`Condition: ${effect.condition}`);
+            if (effect.scope) parts.push(`Scope: ${effect.scope}`);
+            if (effect.damage) parts.push(`Damage: ${Array.isArray(effect.damage) ? effect.damage.join(", ") : effect.damage}`);
+
+            if (parts.length) {
+              const info = effectCard.createEl("div", { text: parts.join(" • ") });
+              info.style.fontSize = "0.9em";
+              info.style.opacity = "0.8";
+              info.style.marginTop = "3px";
+            }
+          }
+        }
+
         const notesTitle = content.createEl("div", { text: "Notes" });
         notesTitle.style.fontWeight = "600";
         notesTitle.style.marginTop = "8px";
@@ -2379,7 +2425,9 @@ if (!c) {
           const sourceText =
             action.source_type === "item" && action.source_item_name
               ? `From ${action.source_item_name}`
-              : "";
+              : (action.source_type === "feat" || action.source_type === "feature")
+                ? `From ${action.source_label ?? action.source_feature_name ?? "Feature"}`
+                : "";
 
           if (sourceText) {
             const sourceEl = leftWrap.createEl("div", { text: sourceText });
@@ -2465,6 +2513,9 @@ if (!c) {
           if (action.resource_cost != null) addInfoRow(infoBlock, "Resource Cost", action.resource_cost);
           if (action.requires_los != null) addInfoRow(infoBlock, "Requires LoS", action.requires_los ? "Ja" : "Nein");
           if (action.friendly_fire != null) addInfoRow(infoBlock, "Friendly Fire", action.friendly_fire ? "Ja" : "Nein");
+          if (action.condition != null) addInfoRow(infoBlock, "Condition", action.condition);
+          if (action.requires != null) addInfoRow(infoBlock, "Requires", action.requires);
+          if (action.resource != null) addInfoRow(infoBlock, "Resource", action.resource);
 
           const effectBlock = card.createEl("div");
           effectBlock.style.marginTop = "8px";

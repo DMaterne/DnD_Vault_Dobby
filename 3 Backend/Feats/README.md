@@ -1,13 +1,18 @@
-# Feats – PHB 2014
+# Enhanced PHB 2014 Feats
 
-These files are intended for:
+Target folder in the Obsidian vault:
+
 Public/3 Backend/Feats/
 
-The current Character Builder automatically lists every Markdown file in that folder.
+Fields:
+- bonuses: immediately calculable numeric modifiers
+- scaling_bonuses: numeric modifiers depending on character level
+- proficiencies: granted proficiencies
+- choices: selections the Character Builder should request
+- resources: tracked uses/charges
+- actions: active feat options shown/automated by the sheet
+- effects: conditional/passive rules that should be displayed and may later be automated
+- prerequisites: requirements the Builder can later validate
 
-Implemented structured examples include numeric bonuses and proficiency/choice metadata.
-Many feats have rule behavior that cannot yet be represented by the current automatic
-bonus engine; those files are still valid selectable feat records and can later receive
-Actions, Features, resources, prerequisites, or specialized effects.
-
-This pack intentionally does not reproduce the Player's Handbook feat descriptions.
+The notes and effect descriptions are concise paraphrases, not reproduced Player's Handbook text.
+This pack targets the 2014/Legacy versions and incorporates relevant official 2014 errata.

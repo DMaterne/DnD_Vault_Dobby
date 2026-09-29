@@ -6,7 +6,13 @@ choices:
   ability_increase:
     amount: 1
     options:
-      - int
+    - int
+  languages:
+    count: 3
+    source: languages
+effects:
+- id: linguist_cipher
+  type: utility_rule
+  value: create_written_ciphers
+notes: 2014 feat backend entry for Linguist. Structured fields describe its character-sheet-relevant mechanics.
 ---
-
-> Backend entry for the 2014 feat. Structured fields contain only mechanics currently useful to the character-sheet engine; other feat behavior can be implemented as Actions/Features later.

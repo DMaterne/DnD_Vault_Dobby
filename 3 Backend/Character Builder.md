@@ -66,19 +66,15 @@ function styleCard(el) {
 
 function styleInput(el) {
 
-  el.style.width = "100%";
+  el.style.cssText += `
 
-  el.style.boxSizing = "border-box";
+    width: 100%;
 
-  el.style.padding = "8px 10px";
+    min-width: 0;
 
-  el.style.border = "1px solid var(--background-modifier-border)";
+    box-sizing: border-box;
 
-  el.style.borderRadius = "8px";
-
-  el.style.background = "var(--background-primary)";
-
-  el.style.color = "var(--text-normal)";
+  `;
 
 }
 
@@ -195,6 +191,16 @@ selectorWrap.createEl("div", {text:"Character"}).style.cssText =
   "font-weight:600;font-size:.85em;margin-bottom:6px";
 
 const characterSelect = selectorWrap.createEl("select");
+
+characterSelect.style.cssText += `
+
+  width: 100%;
+
+  min-width: 350px;
+
+  max-width: 100%;
+
+`;
 
 styleInput(characterSelect);
 

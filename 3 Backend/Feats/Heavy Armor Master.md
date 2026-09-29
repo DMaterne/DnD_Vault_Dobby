@@ -2,11 +2,21 @@
 name: Heavy Armor Master
 type: feat
 source: PHB 2014
+prerequisites:
+  armor_proficiency: heavy
 choices:
   ability_increase:
     amount: 1
     options:
-      - str
+    - str
+effects:
+- id: ham_reduction
+  type: damage_reduction
+  value: 3
+  damage:
+  - bludgeoning
+  - piercing
+  - slashing
+  condition: wearing heavy armor; nonmagical attack
+notes: 2014 feat backend entry for Heavy Armor Master. Structured fields describe its character-sheet-relevant mechanics.
 ---
-
-> Backend entry for the 2014 feat. Structured fields contain only mechanics currently useful to the character-sheet engine; other feat behavior can be implemented as Actions/Features later.
