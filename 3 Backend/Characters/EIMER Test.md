@@ -176,8 +176,6 @@ background_choices:
     - dice_set
 portrait: Public/1 Assets/Bilder/EIMER.png
 known_spells:
-  - Public/3 Backend/Spells/Thunderclap.md
-  - Public/3 Backend/Spells/Mending.md
   - Public/3 Backend/Spells/Alarm.md
   - Public/3 Backend/Spells/Absorb Elements.md
   - Public/3 Backend/Spells/Cure Wounds.md
@@ -256,13 +254,23 @@ known_spells:
   - Public/3 Backend/Spells/Transmute Rock.md
   - Public/3 Backend/Spells/Wall of Stone.md
   - Public/3 Backend/Spells/Shatter.md
-prepared_spells:
-  - Public/3 Backend/Spells/Thunderclap.md
   - Public/3 Backend/Spells/Mending.md
+  - Public/3 Backend/Spells/Thunderclap.md
+prepared_spells:
   - Public/3 Backend/Spells/Alarm.md
   - Public/3 Backend/Spells/Absorb Elements.md
   - Public/3 Backend/Spells/Cure Wounds.md
   - Public/3 Backend/Spells/Feather Fall.md
+  - Public/3 Backend/Spells/Creation.md
+  - Public/3 Backend/Spells/Fabricate.md
+  - Public/3 Backend/Spells/Shatter.md
+  - Public/3 Backend/Spells/Dispel Magic.md
+  - Public/3 Backend/Spells/Invisibility.md
+  - Public/3 Backend/Spells/Web.md
+  - Public/3 Backend/Spells/Create Food and Water.md
+  - Public/3 Backend/Spells/Haste.md
+  - Public/3 Backend/Spells/Tiny Servant.md
+  - Public/3 Backend/Spells/Tasha's Caustic Brew.md
 ---
 # Bilder
 

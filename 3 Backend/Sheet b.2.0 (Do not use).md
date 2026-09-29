@@ -1742,7 +1742,14 @@ if (!c) {
     row.createEl("span", { text: String(value ?? "-") });
   }
 
-  addMetaInfoRow(meta, "Background", c.background ?? "-");
+  const backgroundPageForHeader = getBackgroundPage();
+  const backgroundDisplayName = String(
+    backgroundPageForHeader?.name ??
+    backgroundPageForHeader?.file?.name ??
+    String(c.background ?? "").split("/").pop()?.replace(/\.md$/i, "") ??
+    "-"
+  );
+  addMetaInfoRow(meta, "Background", backgroundDisplayName);
   addMetaInfoRow(meta, "Alignment", c.alignment ?? "-");
   addMetaInfoRow(meta, "Player", c.player ?? "-");
 

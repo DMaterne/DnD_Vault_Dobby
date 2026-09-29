@@ -2037,45 +2037,161 @@ function renderEquipment() {
 
   content.innerHTML="";
 
-  sectionTitle("Equipment","Manage the character inventory. Equipped state is controlled only from the character sheet.");
+  sectionTitle("Equipment","Search for an item, set the quantity, then add it to the character inventory. Equipped state is controlled only from the character sheet.");
 
   
 
-  const add=content.createEl("div");
+  const addCard=content.createEl("div");
 
-  add.style.cssText="display:grid;grid-template-columns:1fr auto;gap:8px;margin-bottom:16px";
+  addCard.style.cssText="display:flex;flex-direction:column;gap:8px;margin-bottom:16px;padding:12px;border:1px solid var(--background-modifier-border);border-radius:10px";
 
-  const itemSelect=add.createEl("select"); styleInput(itemSelect);
+  
 
-  itemSelect.createEl("option",{text:"— Add Item —"}).value="";
+  const search=addCard.createEl("input");
 
-  for (const f of itemFiles) {
+  search.type="search";
 
-    const p=pageFor(f), name=String(p?.name ?? f.basename);
+  search.placeholder="Search item…";
 
-    const o=itemSelect.createEl("option",{text:name}); o.value=f.path;
+  styleInput(search);
+
+  
+
+  const controls=addCard.createEl("div");
+
+  controls.style.cssText="display:grid;grid-template-columns:minmax(220px,1fr) 100px auto;gap:8px;align-items:center";
+
+  
+
+  const itemSelect=controls.createEl("select");
+
+  styleInput(itemSelect);
+
+  
+
+  const addQty=controls.createEl("input");
+
+  addQty.type="number";
+
+  addQty.min="1";
+
+  addQty.max="999";
+
+  addQty.value="1";
+
+  addQty.title="Quantity";
+
+  styleInput(addQty);
+
+  
+
+  const addBtn=makeButton(controls,"Add");
+
+  
+
+  function refillItemSelect() {
+
+    const previous=itemSelect.value;
+
+    itemSelect.innerHTML="";
+
+    itemSelect.createEl("option",{text:"— Select Item —"}).value="";
+
+  
+
+    const q=String(search.value ?? "").trim().toLowerCase();
+
+    const matches=itemFiles
+
+      .map(f=>({file:f,page:pageFor(f)}))
+
+      .filter(x=>{
+
+        if(!q) return true;
+
+        const haystack=[
+
+          x.page?.name ?? x.file.basename,
+
+          x.page?.type ?? "",
+
+          x.page?.category ?? "",
+
+          x.page?.notes ?? ""
+
+        ].join(" ").toLowerCase();
+
+        return haystack.includes(q);
+
+      });
+
+  
+
+    for (const {file,page} of matches) {
+
+      const name=String(page?.name ?? file.basename);
+
+      const type=String(page?.type ?? "").trim();
+
+      const label=type ? `${name} — ${type}` : name;
+
+      const o=itemSelect.createEl("option",{text:label});
+
+      o.value=file.path;
+
+    }
+
+  
+
+    if([...itemSelect.options].some(o=>o.value===previous)) itemSelect.value=previous;
 
   }
 
-  const addBtn=makeButton(add,"Add");
+  
+
+  refillItemSelect();
+
+  search.addEventListener("input",refillItemSelect);
+
+  
 
   addBtn.onclick=()=>{
 
-    if (!itemSelect.value) return;
+    if (!itemSelect.value) {
 
-    draft.inventory = Array.isArray(draft.inventory) ? draft.inventory : [];
+      new Notice("Select an item first.");
+
+      return;
+
+    }
+
+  
+
+    const amount=clampInt(addQty.value,1,999,1);
+
+    draft.inventory=Array.isArray(draft.inventory)?draft.inventory:[];
+
+  
 
     const existing=draft.inventory.find(e=>{
 
-      const r=resolveItem(e?.item); return r?.path===itemSelect.value;
+      const r=resolveItem(e?.item);
+
+      return r?.path===itemSelect.value;
 
     });
 
-    if (existing) existing.quantity=Math.max(1,Number(existing.quantity ?? 1))+1;
+  
 
-    else draft.inventory.push({item:itemSelect.value,quantity:1});
+    if(existing) existing.quantity=Math.max(1,Number(existing.quantity ?? 1))+amount;
 
-    markDirty(); renderEquipment();
+    else draft.inventory.push({item:itemSelect.value,quantity:amount});
+
+  
+
+    markDirty();
+
+    renderEquipment();
 
   };
 
@@ -2101,6 +2217,8 @@ function renderEquipment() {
 
     row.style.cssText="display:grid;grid-template-columns:minmax(220px,2fr) 90px 90px;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--background-modifier-border-hover)";
 
+  
+
     const nameWrap=row.createEl("div");
 
     nameWrap.createEl("div",{text:String(item?.name ?? resolved?.file?.basename ?? entry?.item ?? "Unknown Item")}).style.fontWeight="600";
@@ -2109,21 +2227,44 @@ function renderEquipment() {
 
   
 
-    const qty=row.createEl("input"); qty.type="number"; qty.min="1"; qty.value=String(Math.max(1,Number(entry.quantity ?? 1))); styleInput(qty);
+    const qty=row.createEl("input");
 
-    qty.onchange=()=>{entry.quantity=Math.max(1,clampInt(qty.value,1,999,1));markDirty();};
+    qty.type="number";
+
+    qty.min="1";
+
+    qty.max="999";
+
+    qty.value=String(Math.max(1,Number(entry.quantity ?? 1)));
+
+    styleInput(qty);
+
+    qty.onchange=()=>{
+
+      entry.quantity=Math.max(1,clampInt(qty.value,1,999,1));
+
+      markDirty();
+
+    };
 
   
 
     const remove=makeButton(row,"Remove");
 
-    remove.onclick=()=>{draft.inventory.splice(i,1);markDirty();renderEquipment();};
+    remove.onclick=()=>{
+
+      draft.inventory.splice(i,1);
+
+      markDirty();
+
+      renderEquipment();
+
+    };
 
   }
 
 }
 
-  
   
 
 function spellRefPath(ref) {
@@ -2174,7 +2315,7 @@ function renderSpells() {
 
   content.innerHTML="";
 
-  sectionTitle("Spells","Manage class spell access and the character's currently prepared spells.");
+  sectionTitle("Spells","Search all spell files and manage which spells the character knows and has prepared.");
 
   
 
@@ -2184,13 +2325,21 @@ function renderSpells() {
 
   
 
-  const className=String(draft.class ?? "").trim();
+  // IMPORTANT:
+
+  // Spell `classes:` tags are intentionally NOT required here.
+
+  // The builder reads every Markdown spell in SPELLS_FOLDER. This keeps the
+
+  // spell backend simple and allows manual/custom spell lists without having
+
+  // to maintain duplicate class metadata in every spell file.
 
   const available=spellFiles
 
     .map(file=>({file,page:pageFor(file)}))
 
-    .filter(x=>x.page && spellSupportsClass(x.page,className))
+    .filter(x=>x.page && String(x.page.category ?? "spell").toLowerCase()==="spell")
 
     .sort((a,b)=>{
 
@@ -2204,147 +2353,259 @@ function renderSpells() {
 
   
 
-  const preparedLimit=getPreparedSpellLimit();
+  // Prepared-spell maximum intentionally disabled.
 
-  const preparedCount=draft.prepared_spells.length;
+  // const preparedLimit=getPreparedSpellLimit();
+
+  const preparedLimit=null;
 
   
 
   const info=content.createEl("div");
 
-  info.style.cssText="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px;padding:10px;border:1px solid var(--background-modifier-border);border-radius:10px";
-
-  info.createEl("span",{text:`Class: ${className || "-"}`});
+  info.style.cssText="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:10px;padding:10px;border:1px solid var(--background-modifier-border);border-radius:10px";
 
   info.createEl("span",{text:`Available: ${available.length}`});
 
   info.createEl("span",{text:`Known: ${draft.known_spells.length}`});
 
-  info.createEl("span",{text:preparedLimit==null ? `Prepared: ${preparedCount}` : `Prepared: ${preparedCount}/${preparedLimit}`});
+  info.createEl("span",{text:preparedLimit==null ? `Prepared: ${draft.prepared_spells.length}` : `Prepared: ${draft.prepared_spells.length}/${preparedLimit}`});
 
   
 
-  if(!available.length){
+  const filters=content.createEl("div");
 
-    content.createEl("div",{text:`No spell files with classes: [${className || "…"}] found in ${SPELLS_FOLDER}`}).style.opacity=".7";
-
-    return;
-
-  }
+  filters.style.cssText="display:grid;grid-template-columns:minmax(220px,1fr) 130px;gap:8px;margin-bottom:12px";
 
   
 
-  let currentLevel=null;
+  const search=filters.createEl("input");
 
-  for(const {file,page} of available){
+  search.type="search";
 
-    const level=Number(page.level ?? 0);
+  search.placeholder="Search spells…";
 
-    if(level!==currentLevel){
+  styleInput(search);
 
-      currentLevel=level;
+  
 
-      const h=content.createEl("div",{text:level===0?"Cantrips":`Level ${level}`});
+  const levelFilter=filters.createEl("select");
 
-      h.style.cssText="font-weight:700;font-size:1.05em;margin-top:14px;padding-bottom:5px;border-bottom:1px solid var(--background-modifier-border)";
+  styleInput(levelFilter);
+
+  levelFilter.createEl("option",{text:"All levels"}).value="all";
+
+  levelFilter.createEl("option",{text:"Cantrips"}).value="0";
+
+  for(let lvl=1;lvl<=9;lvl++) levelFilter.createEl("option",{text:`Level ${lvl}`}).value=String(lvl);
+
+  
+
+  const list=content.createEl("div");
+
+  
+
+  function renderSpellList() {
+
+    list.innerHTML="";
+
+    const q=String(search.value ?? "").trim().toLowerCase();
+
+    const wantedLevel=levelFilter.value;
+
+  
+
+    const filtered=available.filter(({file,page})=>{
+
+      const level=Number(page.level ?? 0);
+
+      if(wantedLevel!=="all" && level!==Number(wantedLevel)) return false;
+
+      if(!q) return true;
+
+      const haystack=[
+
+        page.name ?? file.basename,
+
+        page.school ?? "",
+
+        page.effect ?? "",
+
+        page.notes ?? "",
+
+        page.damage_type ?? ""
+
+      ].join(" ").toLowerCase();
+
+      return haystack.includes(q);
+
+    });
+
+  
+
+    if(!filtered.length){
+
+      list.createEl("div",{text:"No matching spells found."}).style.opacity=".65";
+
+      return;
 
     }
 
   
 
-    const ref=file.path;
+    let currentLevel=null;
 
-    const known=draft.known_spells.map(spellRefPath).includes(ref);
+    for(const {file,page} of filtered){
 
-    const prepared=draft.prepared_spells.map(spellRefPath).includes(ref);
+      const level=Number(page.level ?? 0);
 
-  
+      if(level!==currentLevel){
 
-    const row=content.createEl("div");
+        currentLevel=level;
 
-    row.style.cssText="display:grid;grid-template-columns:minmax(220px,1fr) 100px 110px;gap:12px;align-items:center;padding:8px 4px;border-bottom:1px solid var(--background-modifier-border-hover)";
+        const h=list.createEl("div",{text:level===0?"Cantrips":`Level ${level}`});
 
-    const name=row.createEl("div");
+        h.style.cssText="font-weight:700;font-size:1.05em;margin-top:14px;padding-bottom:5px;border-bottom:1px solid var(--background-modifier-border)";
 
-    name.createEl("div",{text:String(page.name ?? file.basename)}).style.fontWeight="600";
-
-    name.createEl("div",{text:String(page.school ?? "")}).style.cssText="font-size:.8em;opacity:.6";
+      }
 
   
 
-    const knownLabel=row.createEl("label");
+      const ref=file.path;
 
-    knownLabel.style.cssText="display:flex;gap:6px;align-items:center";
+      const known=draft.known_spells.map(spellRefPath).includes(ref);
 
-    const knownBox=knownLabel.createEl("input"); knownBox.type="checkbox"; knownBox.checked=known;
-
-    knownLabel.createEl("span",{text:"Known"});
+      const prepared=draft.prepared_spells.map(spellRefPath).includes(ref);
 
   
 
-    const prepLabel=row.createEl("label");
+      const row=list.createEl("div");
 
-    prepLabel.style.cssText="display:flex;gap:6px;align-items:center";
-
-    const prepBox=prepLabel.createEl("input"); prepBox.type="checkbox"; prepBox.checked=prepared;
-
-    prepLabel.createEl("span",{text:"Prepared"});
+      row.style.cssText="display:grid;grid-template-columns:minmax(220px,1fr) 100px 110px;gap:12px;align-items:center;padding:8px 4px;border-bottom:1px solid var(--background-modifier-border-hover)";
 
   
 
-    // A spell cannot be prepared before it is part of the character's known/access list.
+      const name=row.createEl("div");
 
-    prepBox.disabled=!known;
+      name.createEl("div",{text:String(page.name ?? file.basename)}).style.fontWeight="600";
 
-  
+      const meta=[level===0?"Cantrip":`Level ${level}`,String(page.school ?? "")].filter(Boolean).join(" · ");
 
-    knownBox.onchange=()=>{
-
-      const knownSet=new Set(draft.known_spells.map(spellRefPath));
-
-      const prepSet=new Set(draft.prepared_spells.map(spellRefPath));
-
-      if(knownBox.checked) knownSet.add(ref);
-
-      else { knownSet.delete(ref); prepSet.delete(ref); }
-
-      draft.known_spells=[...knownSet];
-
-      draft.prepared_spells=[...prepSet];
-
-      markDirty(); renderSpells();
-
-    };
+      name.createEl("div",{text:meta}).style.cssText="font-size:.8em;opacity:.6";
 
   
 
-    prepBox.onchange=()=>{
+      const knownLabel=row.createEl("label");
 
-      const prepSet=new Set(draft.prepared_spells.map(spellRefPath));
+      knownLabel.style.cssText="display:flex;gap:6px;align-items:center";
 
-      if(prepBox.checked){
+      const knownBox=knownLabel.createEl("input");
 
-        if(preparedLimit!=null && prepSet.size>=preparedLimit){
+      knownBox.type="checkbox";
 
-          new Notice(`Prepared spell limit reached (${preparedLimit}).`);
+      knownBox.checked=known;
 
-          prepBox.checked=false;
+      knownLabel.createEl("span",{text:"Known"});
 
-          return;
+  
+
+      const prepLabel=row.createEl("label");
+
+      prepLabel.style.cssText="display:flex;gap:6px;align-items:center";
+
+      const prepBox=prepLabel.createEl("input");
+
+      prepBox.type="checkbox";
+
+      prepBox.checked=prepared;
+
+      prepLabel.createEl("span",{text:"Prepared"});
+
+      prepBox.disabled=!known || level===0;
+
+  
+
+      knownBox.onchange=()=>{
+
+        const knownSet=new Set(draft.known_spells.map(spellRefPath));
+
+        const prepSet=new Set(draft.prepared_spells.map(spellRefPath));
+
+  
+
+        if(knownBox.checked) knownSet.add(ref);
+
+        else {
+
+          knownSet.delete(ref);
+
+          prepSet.delete(ref);
 
         }
 
-        prepSet.add(ref);
+  
 
-      } else prepSet.delete(ref);
+        draft.known_spells=[...knownSet];
 
-      draft.prepared_spells=[...prepSet];
+        draft.prepared_spells=[...prepSet];
 
-      markDirty(); renderSpells();
+        markDirty();
 
-    };
+        renderSpellList();
+
+      };
+
+  
+
+      prepBox.onchange=()=>{
+
+        const prepSet=new Set(draft.prepared_spells.map(spellRefPath));
+
+  
+
+        if(prepBox.checked){
+
+          // Prepared-spell limit intentionally disabled:
+
+          // if(preparedLimit!=null && prepSet.size>=preparedLimit){
+
+          //   new Notice(`Prepared spell limit reached (${preparedLimit}).`);
+
+          //   prepBox.checked=false;
+
+          //   return;
+
+          // }
+
+          prepSet.add(ref);
+
+        } else {
+
+          prepSet.delete(ref);
+
+        }
+
+  
+
+        draft.prepared_spells=[...prepSet];
+
+        markDirty();
+
+        renderSpellList();
+
+      };
+
+    }
 
   }
+
+  
+
+  search.addEventListener("input",renderSpellList);
+
+  levelFilter.addEventListener("change",renderSpellList);
+
+  renderSpellList();
 
 }
 
