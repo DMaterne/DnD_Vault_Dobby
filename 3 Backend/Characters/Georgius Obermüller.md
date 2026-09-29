@@ -2,7 +2,6 @@
 name: Georgius Obermüller
 class: Commoner
 subclass:
-  - 
 level: 1
 race: Mensch
 background: Farmer
@@ -52,16 +51,18 @@ spell_slots:
   "3": 0
   "4": 0
   "5": 0
-inventory:
-  
+inventory: []
 features:
-  
 hp_temp: 0
-
 actions:
   - Public/3 Backend/Actions/Unarmed Strike.md
-  
 spellcasting_ability: int
+portrait: Public/1 Assets/Bilder/NPC und Monster/NPC_Placeholder.png
+asi_choices: {}
+class_choices: {}
+background_choices: {}
+species:
+species_choices: {}
 ---
 
 ## Notes 

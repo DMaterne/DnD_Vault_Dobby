@@ -1,6 +1,3 @@
----
-selected_character: Public/3 Backend/Characters/EIMER Test.md
----
 ```dataviewjs
 const CHARACTERS_FOLDER = "Public/3 Backend/Characters/";
 const BUILDER_PATH = "Public/3 Backend/Character Builder.md";
@@ -821,6 +818,87 @@ function getInitiativeBonus() {
 }
 
 
+function proficiencyDisplayName(value) {
+  const raw = String(value ?? "").trim();
+  if (!raw) return "";
+  const special = {
+    str:"STR", dex:"DEX", con:"CON", int:"INT", wis:"WIS", cha:"CHA",
+    light:"Light Armor", medium:"Medium Armor", heavy:"Heavy Armor",
+    shields:"Shields", simple:"Simple Weapons", martial:"Martial Weapons"
+  };
+  const key = raw.toLowerCase().replace(/\s+/g, "_");
+  if (special[key]) return special[key];
+  return raw
+    .replace(/_/g, " ")
+    .replace(/\b\w/g, ch => ch.toUpperCase());
+}
+
+function getAllProficienciesByCategory() {
+  const result = {
+    armor:new Set(), weapons:new Set(), tools:new Set(),
+    skills:new Set(), saving_throws:new Set(), languages:new Set()
+  };
+
+  const add = (category, raw) => {
+    if (!result[category] || raw == null) return;
+    const values = Array.isArray(raw) ? raw : [raw];
+    for (const value of values) {
+      const v = String(value ?? "").trim();
+      if (v) result[category].add(v);
+    }
+  };
+
+  const addPageProficiencies = page => {
+    const p = page?.proficiencies;
+    if (!p || typeof p !== "object") return;
+    add("armor", p.armor);
+    add("weapons", p.weapons);
+    add("tools", p.tools);
+    add("skills", p.skills);
+    add("saving_throws", p.saving_throws ?? p.saves);
+    add("languages", p.languages);
+  };
+
+  // Fixed grants from backend sources.
+  addPageProficiencies(getClassPage());
+  addPageProficiencies(getCharacterSpeciesPage());
+  addPageProficiencies(getBackgroundPage());
+  for (const feature of getAllCharacterFeatures()) addPageProficiencies(feature);
+  for (const feat of getSelectedFeatPages()) addPageProficiencies(feat);
+
+  // Class choices.
+  const cc = c.class_choices && typeof c.class_choices === "object" ? c.class_choices : {};
+  add("skills", cc.skills); add("tools", cc.tools);
+  add("weapons", cc.weapons); add("armor", cc.armor); add("languages", cc.languages);
+
+  // Background choices.
+  const bc = c.background_choices && typeof c.background_choices === "object" ? c.background_choices : {};
+  add("skills", bc.skills); add("tools", bc.tools);
+  add("weapons", bc.weapons); add("armor", bc.armor); add("languages", bc.languages);
+
+  // Species choices can use descriptive keys such as skill_proficiency,
+  // tool_proficiency and extra_language.
+  const sc = c.species_choices && typeof c.species_choices === "object" ? c.species_choices : {};
+  for (const [key, value] of Object.entries(sc)) {
+    const k = String(key).toLowerCase();
+    if (k.includes("skill")) add("skills", value);
+    else if (k.includes("tool")) add("tools", value);
+    else if (k.includes("weapon")) add("weapons", value);
+    else if (k.includes("armor")) add("armor", value);
+    else if (k.includes("language")) add("languages", value);
+  }
+
+  // Existing effective helpers preserve legacy character fields and feat choices.
+  for (const v of getEffectiveSkillProficiencies()) add("skills", v);
+  for (const v of getEffectiveSaveProficiencies()) add("saving_throws", v);
+  for (const category of ["armor","weapons","tools","skills","languages"]) {
+    for (const v of getFeatProficiencies(category)) add(category, v);
+  }
+  for (const v of getFeatProficiencies("saves")) add("saving_throws", v);
+
+  return result;
+}
+
 function normalizedProfKey(value) {
   return String(value ?? "").trim().toLowerCase().replace(/\s+/g, "_");
 }
@@ -1587,9 +1665,9 @@ if (!c) {
   portraitWrap.style.alignItems = "center";
   portraitWrap.style.gap = "8px";
 
-  const portraitPath = c.portrait ?? "Public/1 Assets/Bilder/EIMER.png";
+  const portraitPath = String(c.portrait ?? "").trim();
   const portraitFile = app.vault.getAbstractFileByPath(portraitPath);
-  const portraitUrl = app.vault.adapter.getResourcePath(portraitPath);
+  const portraitUrl = portraitPath ? app.vault.adapter.getResourcePath(portraitPath) : "";
 
   const portraitAnchor = portraitWrap.createEl("a");
   portraitAnchor.href = "#";
@@ -3717,6 +3795,45 @@ if (!c) {
 
     const valueEl = row.createEl("div", { text: String(value) });
     valueEl.style.fontWeight = "600";
+  }
+
+  const profCard = leftCol.createEl("div");
+  profCard.style.padding = "16px";
+  profCard.style.border = "1px solid var(--background-modifier-border)";
+  profCard.style.borderRadius = "14px";
+
+  const profTitle = profCard.createEl("div", { text: "Proficiencies" });
+  profTitle.style.fontWeight = "700";
+  profTitle.style.marginBottom = "12px";
+  profTitle.style.fontSize = "1.1em";
+
+  const allProfs = getAllProficienciesByCategory();
+  const profSections = [
+    ["Armor", "armor"],
+    ["Weapons", "weapons"],
+    ["Tools", "tools"],
+    ["Languages", "languages"]
+  ];
+
+  for (const [label, key] of profSections) {
+    const values = [...allProfs[key]]
+      .map(proficiencyDisplayName)
+      .filter(Boolean)
+      .sort((a,b)=>a.localeCompare(b,"de"));
+
+    if (values.length === 0) continue;
+
+    const section = profCard.createEl("div");
+    section.style.marginBottom = "10px";
+
+    const labelEl = section.createEl("div", { text: label });
+    labelEl.style.fontWeight = "600";
+    labelEl.style.fontSize = ".85em";
+    labelEl.style.opacity = ".7";
+    labelEl.style.marginBottom = "3px";
+
+    const valueEl = section.createEl("div", { text: values.join(", ") });
+    valueEl.style.lineHeight = "1.45";
   }
 }
 ```

@@ -166,6 +166,7 @@ class_choices:
 background_choices:
   tools:
     - dice_set
+portrait: Public/1 Assets/Bilder/EIMER.png
 ---
 # Bilder
 

@@ -2149,13 +2149,59 @@ function updateTabs() {
 
 }
 
+function renderCharacter() {
+
+  content.innerHTML="";
+
+  sectionTitle("Character", "Character-specific presentation data stored in the selected character backend.");
+
+  
+
+  const portraitWrap=field(content,"Portrait Path");
+
+  const portraitInput=portraitWrap.createEl("input");
+
+  portraitInput.type="text";
+
+  portraitInput.placeholder="Public/1 Assets/Bilder/Character.png";
+
+  portraitInput.value=String(draft?.portrait ?? "");
+
+  styleInput(portraitInput);
+
+  
+
+  portraitInput.oninput=()=>{
+
+    draft.portrait=portraitInput.value;
+
+    markDirty();
+
+  };
+
+  
+
+  const hint=content.createEl("div",{
+
+    text:"Vault-relative path to the portrait image. This value is saved as `portrait` in the character file."
+
+  });
+
+  hint.style.cssText="font-size:.85em;opacity:.65;margin-top:8px";
+
+}
+
+  
+
 function renderTab() {
 
   window.__dndBuilderTab=activeTab;
 
   updateTabs();
 
-  if (activeTab==="class") renderClass();
+  if (activeTab==="character") renderCharacter();
+
+  else if (activeTab==="class") renderClass();
 
   else if (activeTab==="background") renderBackground();
 
@@ -2169,7 +2215,7 @@ function renderTab() {
 
 for (const [key,label] of [
 
-  ["class","Class"],["background","Background"],["species","Species"],
+  ["character","Character"],["class","Class"],["background","Background"],["species","Species"],
 
   ["abilities","Abilities"],["equipment","Equipment"]
 
@@ -2196,6 +2242,8 @@ function loadCharacter(path) {
   currentFile=file; currentPage=pg; window.__dndBuilderCharacterPath=path;
 
   draft={
+
+    portrait:String(pg.portrait ?? ""),
 
     class:String(pg.class ?? ""),
 
@@ -2278,6 +2326,8 @@ async function saveCharacter() {
   
 
     await app.fileManager.processFrontMatter(targetFile, fm => {
+
+      fm.portrait=String(draft.portrait ?? "").trim() || null;
 
       fm.class=expectedClass;
 
