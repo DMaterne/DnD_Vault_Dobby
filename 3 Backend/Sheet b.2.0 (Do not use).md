@@ -247,9 +247,53 @@ function getClassProgressionValue(key, fallback = null) {
 }
 
 function getMaxSpellSlots() {
-  const classSlots = getClassProgressionValue("spell_slots", null);
+  // 1) Prefer explicit character slots when present. This keeps legacy
+  // characters and manually configured casters fully compatible.
+  const characterSlots = c.spell_slots;
+  if (characterSlots && typeof characterSlots === "object") {
+    const normalized = {};
+    let hasPositiveSlot = false;
+    for (let level = 1; level <= 9; level++) {
+      const value = Number(characterSlots?.[String(level)] ?? characterSlots?.[level] ?? 0);
+      normalized[String(level)] = Number.isFinite(value) ? Math.max(0, value) : 0;
+      if (normalized[String(level)] > 0) hasPositiveSlot = true;
+    }
+    if (hasPositiveSlot) return normalized;
+  }
+
+  // 2) Read either backend layout used by our class files:
+  //    levels[level] or progression[level].
+  const classPage = getClassPage();
+  const levelKey = String(Math.max(1, Number(c.level ?? 1)));
+  const levelData =
+    classPage?.levels?.[levelKey] ??
+    classPage?.progression?.[levelKey] ??
+    null;
+
+  const classSlots = levelData?.spell_slots;
   if (classSlots && typeof classSlots === "object") return classSlots;
-  return c.spell_slots ?? {};
+
+  // 3) Artificer 2014/Eberron half-caster progression. The current rebuilt
+  // Artificer backend contains progression data but no spell_slots entries,
+  // so without this fallback the UI calculates zero slots and renders no boxes.
+  if (String(classPage?.name ?? c.class ?? "").trim().toLowerCase() === "artificer") {
+    const ARTIFICER_SLOTS = {
+      1:[2,0,0,0,0],  2:[2,0,0,0,0],
+      3:[3,0,0,0,0],  4:[3,0,0,0,0],
+      5:[4,2,0,0,0],  6:[4,2,0,0,0],
+      7:[4,3,0,0,0],  8:[4,3,0,0,0],
+      9:[4,3,2,0,0], 10:[4,3,2,0,0],
+      11:[4,3,3,0,0],12:[4,3,3,0,0],
+      13:[4,3,3,1,0],14:[4,3,3,1,0],
+      15:[4,3,3,2,0],16:[4,3,3,2,0],
+      17:[4,3,3,3,1],18:[4,3,3,3,1],
+      19:[4,3,3,3,2],20:[4,3,3,3,2]
+    };
+    const row = ARTIFICER_SLOTS[Math.max(1, Math.min(20, Number(c.level ?? 1)))] ?? [];
+    return Object.fromEntries(row.map((value, index) => [String(index + 1), value]));
+  }
+
+  return {};
 }
 
 function getAttunementSlots() {
@@ -1500,7 +1544,7 @@ if (!c) {
 
   const restBar = wrapper.createEl("div");
   restBar.style.display = "flex";
-  restBar.style.justifyContent = "flex-end";
+  restBar.style.justifyContent = "space-between";
   restBar.style.flexWrap = "wrap";
   restBar.style.alignItems = "center";
   restBar.style.gap = "8px";
@@ -1508,10 +1552,23 @@ if (!c) {
   restBar.style.border = "1px solid var(--background-modifier-border)";
   restBar.style.borderRadius = "12px";
 
-  const characterLabel = restBar.createEl("span", { text: "Character" });
+  const characterGroup = restBar.createEl("div");
+  characterGroup.style.display = "flex";
+  characterGroup.style.alignItems = "center";
+  characterGroup.style.gap = "8px";
+  characterGroup.style.flexWrap = "wrap";
+
+  const restGroup = restBar.createEl("div");
+  restGroup.style.display = "flex";
+  restGroup.style.alignItems = "center";
+  restGroup.style.gap = "8px";
+  restGroup.style.flexWrap = "wrap";
+  restGroup.style.marginLeft = "auto";
+
+  const characterLabel = characterGroup.createEl("span", { text: "Character" });
   characterLabel.style.fontWeight = "700";
 
-  const characterSelect = restBar.createEl("select");
+  const characterSelect = characterGroup.createEl("select");
   characterSelect.style.minWidth = "220px";
   characterSelect.style.maxWidth = "360px";
   characterSelect.style.padding = "6px 8px";
@@ -1554,7 +1611,7 @@ if (!c) {
     }
   });
 
-  const editCharacterButton = restBar.createEl("button", { text: "Edit Character" });
+  const editCharacterButton = characterGroup.createEl("button", { text: "Edit Character" });
   editCharacterButton.addEventListener("click", async () => {
     const selectedPath = String(characterSelect.value ?? CHARACTER_PATH).trim();
     if (!selectedPath) return;
@@ -1571,11 +1628,11 @@ if (!c) {
     await app.workspace.getLeaf(false).openFile(builderFile);
   });
 
-  const restLabel = restBar.createEl("span", { text: "Rest" });
+  const restLabel = restGroup.createEl("span", { text: "Rest" });
   restLabel.style.fontWeight = "700";
   restLabel.style.marginRight = "4px";
 
-  const shortRestButton = restBar.createEl("button", { text: "Short Rest" });
+  const shortRestButton = restGroup.createEl("button", { text: "Short Rest" });
   shortRestButton.addEventListener("click", async () => {
     shortRestButton.disabled = true;
     try {
@@ -1585,7 +1642,7 @@ if (!c) {
     }
   });
 
-  const longRestButton = restBar.createEl("button", { text: "Long Rest" });
+  const longRestButton = restGroup.createEl("button", { text: "Long Rest" });
   longRestButton.addEventListener("click", async () => {
     longRestButton.disabled = true;
     try {
@@ -3074,11 +3131,10 @@ if (!c) {
       slotWrapper.style.alignItems = "center";
       slotWrapper.style.gap = "8px";
       slotWrapper.style.flexWrap = "wrap";
-      slotWrapper.style.marginTop = "6px";
-      slotWrapper.style.marginBottom = "8px";
+      slotWrapper.style.marginLeft = "auto";
 
       const label = slotWrapper.createEl("div", {
-        text: `Slots (${usedSlots}/${slotCount} used):`
+        text: `Slots ${usedSlots}/${slotCount}:`
       });
       label.style.fontSize = "0.9em";
       label.style.opacity = "0.75";
@@ -3086,7 +3142,7 @@ if (!c) {
       const boxes = [];
 
       function refreshSlotVisuals() {
-        label.setText(`Slots (${usedSlots}/${slotCount} used):`);
+        label.setText(`Slots ${usedSlots}/${slotCount}:`);
         for (let i = 0; i < boxes.length; i++) {
           boxes[i].checked = i < usedSlots;
         }
@@ -3199,16 +3255,23 @@ if (!c) {
         const section = spellContainer.createEl("div");
         section.style.marginTop = "12px";
 
-        const sectionTitle = section.createEl("div", { text: levelLabel(level) });
+        const sectionHeader = section.createEl("div");
+        sectionHeader.style.display = "flex";
+        sectionHeader.style.alignItems = "center";
+        sectionHeader.style.justifyContent = "space-between";
+        sectionHeader.style.gap = "12px";
+        sectionHeader.style.flexWrap = "wrap";
+        sectionHeader.style.marginBottom = "8px";
+        sectionHeader.style.paddingBottom = "4px";
+        sectionHeader.style.borderBottom = "1px solid var(--background-modifier-border)";
+
+        const sectionTitle = sectionHeader.createEl("div", { text: levelLabel(level) });
         sectionTitle.style.fontWeight = "700";
         sectionTitle.style.fontSize = "1.05em";
-        sectionTitle.style.marginBottom = "8px";
-        sectionTitle.style.paddingBottom = "4px";
-        sectionTitle.style.borderBottom = "1px solid var(--background-modifier-border)";
 
         const maxSpellSlots = getMaxSpellSlots();
         const slotCount = Number(maxSpellSlots?.[String(level)] ?? maxSpellSlots?.[level] ?? 0);
-        await addSpellSlotCheckboxes(section, level, slotCount);
+        await addSpellSlotCheckboxes(sectionHeader, level, slotCount);
 
         for (const spell of levelSpells) {
           const details = section.createEl("details");

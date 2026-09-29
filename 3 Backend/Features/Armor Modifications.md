@@ -1,17 +1,17 @@
 ---
 name: Armor Modifications
 type: feature
-class: Artificer
-subclass: Armorer
-level: 9
+source: Armorer
+enabled: true
+bonuses:
+  - type: max_infused_items
+    value: 2
+    active_when: always
+rules:
+  arcane_armor_separate_infusion_parts:
+    - armor_chest
+    - boots
+    - helmet
+    - special_weapon
+notes: At 9th level, the Arcane Armor counts as separate pieces for infusions. Two additional infused items are allowed, but those extra infusions must be applied to the Arcane Armor.
 ---
-
-# Armor Modifications
-
-Your Arcane Armor can hold more of your artificer infusions.
-
-For infusion purposes, different parts of the armor can be treated separately, allowing you to apply multiple compatible infusions to the suit.
-
-You also gain additional active infusion capacity that is specifically reserved for parts of your Arcane Armor.
-
-This feature should eventually integrate with the planned infusion-selection system.

@@ -1,21 +1,13 @@
 ---
 name: Armor Model
 type: feature
-class: Artificer
-subclass: Armorer
-level: 3
+source: Armorer
+enabled: true
+choices:
+  armor_model:
+    count: 1
+    options:
+      - guardian
+      - infiltrator
+notes: At 3rd level, Arcane Armor can use the Guardian or Infiltrator model. The model determines its special weapon and secondary benefits and can be changed after a short or long rest.
 ---
-
-# Armor Model
-
-You customize your Arcane Armor as either **Guardian** or **Infiltrator**.
-
-## Guardian
-
-Designed for frontline defense. Its special weapon is the Thunder Gauntlets, and it provides a defensive field for temporary hit points.
-
-## Infiltrator
-
-Designed for mobility and ranged combat. It provides a Lightning Launcher and improvements suited to stealth and movement.
-
-A future armor-model selector can store the active model in the character backend and expose the appropriate actions automatically.

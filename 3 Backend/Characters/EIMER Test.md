@@ -2,7 +2,7 @@
 name: Eimer
 class: Artificer
 subclass: Armorer
-level: 6
+level: 20
 race: Warforged
 background: Public/3 Backend/Backgrounds/Soldier.md
 alignment: Lawful Neutral
@@ -129,6 +129,7 @@ spells:
   - Public/3 Backend/Spells/Cure Wounds.md
   - Public/3 Backend/Spells/Feather Fall.md
   - Alarm
+  - Shatter
 spellcasting_ability: int
 attuned_items:
   - Public/3 Backend/Items/Armor of magical Strenght.md::17::0
@@ -150,6 +151,21 @@ asi_choices:
     type: asi
     ability_1: int
     ability_2: int
+    feat: ""
+  "12":
+    type: asi
+    ability_1: int
+    ability_2: int
+    feat: ""
+  "16":
+    type: asi
+    ability_1: con
+    ability_2: con
+    feat: ""
+  "19":
+    type: asi
+    ability_1: con
+    ability_2: con
     feat: ""
 species: Public/3 Backend/Species/Warforged.md
 species_choices:

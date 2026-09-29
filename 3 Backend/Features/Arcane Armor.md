@@ -1,15 +1,12 @@
 ---
 name: Arcane Armor
 type: feature
-class: Artificer
-subclass: Armorer
-level: 3
+source: Armorer
+enabled: true
+armor_rules:
+  - ignore_strength_requirement
+  - spellcasting_focus
+  - cannot_be_removed_against_will
+  - replaces_missing_limbs
+notes: At 3rd level, the Armorer can turn worn armor into Arcane Armor. It ignores its Strength requirement for you, can serve as your artificer spellcasting focus, cannot be removed against your will, and can replace missing limbs.
 ---
-
-# Arcane Armor
-
-You can turn armor you are wearing into Arcane Armor while using smith's tools.
-
-While wearing it, the armor functions as a conduit for your artificer magic. Among its benefits, its normal Strength requirement does not apply to you, it can serve as an artificer spellcasting focus, and it integrates closely with your body.
-
-The armor remains your Arcane Armor until the feature's ending conditions are met.
