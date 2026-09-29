@@ -3,35 +3,16 @@ name: Thunderclap
 category: spell
 classes:
 - Artificer
-action_type: action
-mode: save
-shape: self_circle
-radius: 5
 level: 0
 school: Evocation
 casting_time: 1 Action
 range: Self (5-foot radius)
 duration: Instantaneous
 concentration: false
-spellcasting_modifier: int
-dice_count: 1
-dice_size: 6
-damage: 1d6
-damage_bonus_stat: none
-damage_bonus: 0
-damage_type: thunder
-uses_attack_roll: false
 uses_save: true
 save_ability: con
-save_fail_chance: 0
-save_success_multiplier: 0
-friendly_fire: false
-requires_los: false
-utility_type: none
-utility_value: 0
-resource_cost: 0
-resource_formula: '0'
-ritual: false
+damage: 1d6
+damage_type: thunder
 effect: Create a burst of thunder around you; nearby creatures make Constitution saves or take thunder damage.
 notes: S
 ---
