@@ -1,6 +1,8 @@
 ---
 name: Sanctuary
 category: spell
+classes:
+- Artificer
 action_type: bonus_action
 mode: utility
 shape: single

@@ -1,6 +1,8 @@
 ---
 name: Ray of Frost
 category: spell
+classes:
+- Artificer
 action_type: action
 mode: attack
 shape: single

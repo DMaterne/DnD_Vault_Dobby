@@ -837,7 +837,12 @@ function getAbilityModByName(name) {
 }
 
 function getProficiencyBonus() {
-  const baseProf = Number(getClassProgressionValue("proficiency_bonus", c.proficiency_bonus ?? 2));
+  // D&D 5e proficiency bonus is determined by total character level:
+  // 1-4 +2, 5-8 +3, 9-12 +4, 13-16 +5, 17-20 +6.
+  // Do not depend on a class backend field here; older/newer backends use
+  // different progression layouts and that previously caused stale +2 values.
+  const level = Math.max(1, Math.min(20, Number(c.level ?? 1)));
+  const baseProf = 2 + Math.floor((level - 1) / 4);
   return applyItemEffects(baseProf, "proficiency_bonus");
 }
 
@@ -1457,25 +1462,45 @@ function getAllCharacterActions() {
 function getAllCharacterSpells() {
   const collectedSpells = [];
 
-  const explicitSpellRefs = Array.isArray(c.spells) ? c.spells : [];
-
-  for (const spellRef of explicitSpellRefs) {
+  function addSpellRef(spellRef, sourceType="character", sourceLabel="Prepared Spell") {
     const spellPage = resolvePageRef(spellRef, SPELLS_FOLDER);
-    if (!spellPage) continue;
+    if (!spellPage) return;
 
     const category = String(spellPage.category ?? "").trim().toLowerCase();
-    if (category && category !== "spell") continue;
+    if (category && category !== "spell") return;
 
     collectedSpells.push({
       ...spellPage,
-      source_type: "character",
-      source_label: "Character Sheet",
+      source_type: sourceType,
+      source_label: sourceLabel,
       file: spellPage.file
     });
   }
 
-  const inventoryEntries = Array.isArray(c.inventory) ? c.inventory : [];
+  // New builder model:
+  // - prepared_spells: leveled spells currently prepared
+  // - known_spells: spell access/selection; cantrips are always usable once selected
+  const preparedRefs = Array.isArray(c.prepared_spells) ? c.prepared_spells : [];
+  const knownRefs = Array.isArray(c.known_spells) ? c.known_spells : [];
 
+  for (const spellRef of preparedRefs) {
+    addSpellRef(spellRef, "character", "Prepared");
+  }
+
+  for (const spellRef of knownRefs) {
+    const spellPage = resolvePageRef(spellRef, SPELLS_FOLDER);
+    if (!spellPage || Number(spellPage.level ?? 0) !== 0) continue;
+    addSpellRef(spellRef, "character", "Known Cantrip");
+  }
+
+  // Legacy compatibility: old characters may still use `spells`.
+  const explicitSpellRefs = Array.isArray(c.spells) ? c.spells : [];
+  for (const spellRef of explicitSpellRefs) {
+    addSpellRef(spellRef, "character", "Character Sheet");
+  }
+
+  // Item-granted spells remain available independently of preparation.
+  const inventoryEntries = Array.isArray(c.inventory) ? c.inventory : [];
   for (const entry of inventoryEntries) {
     const itemPath = resolvePathRef(entry?.item, ITEMS_FOLDER);
     if (!itemPath) continue;
@@ -1484,13 +1509,9 @@ function getAllCharacterSpells() {
     if (!itemPage) continue;
 
     const itemActions = Array.isArray(itemPage.actions) ? itemPage.actions : [];
-    if (itemActions.length === 0) continue;
-
     for (const action of itemActions) {
       if (!action || typeof action !== "object") continue;
-
-      const category = String(action.category ?? "").trim().toLowerCase();
-      if (category !== "spell") continue;
+      if (String(action.category ?? "").trim().toLowerCase() !== "spell") continue;
 
       collectedSpells.push({
         ...action,
@@ -3178,11 +3199,12 @@ if (!c) {
 
     const summaryGrid = tabContent.createEl("div");
     summaryGrid.style.display = "grid";
-    summaryGrid.style.gridTemplateColumns = "repeat(3, 1fr)";
+    summaryGrid.style.gridTemplateColumns = "repeat(4, 1fr)";
     summaryGrid.style.gap = "8px";
     summaryGrid.style.marginBottom = "12px";
 
     addSummaryBox(summaryGrid, "Modifier", modString(spellMod));
+    addSummaryBox(summaryGrid, "Proficiency", modString(prof));
     addSummaryBox(summaryGrid, "Spell Attack", modString(spellAttackBonus));
     addSummaryBox(summaryGrid, "Spell Save DC", spellSaveDC);
 

@@ -1,6 +1,8 @@
 ---
 name: Catapult
 category: spell
+classes:
+- Artificer
 action_type: action
 mode: save
 shape: single

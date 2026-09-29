@@ -1,6 +1,8 @@
 ---
 name: Expeditious Retreat
 category: spell
+classes:
+- Artificer
 action_type: bonus_action
 mode: utility
 shape: single

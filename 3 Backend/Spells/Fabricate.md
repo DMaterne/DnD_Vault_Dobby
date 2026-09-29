@@ -1,6 +1,8 @@
 ---
 name: Fabricate
 category: spell
+classes:
+- Artificer
 action_type: 10_minutes
 mode: utility
 shape: single

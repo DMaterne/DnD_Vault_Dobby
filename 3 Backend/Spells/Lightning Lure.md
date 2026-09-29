@@ -1,6 +1,8 @@
 ---
 name: Lightning Lure
 category: spell
+classes:
+- Artificer
 action_type: action
 mode: save
 shape: self_circle

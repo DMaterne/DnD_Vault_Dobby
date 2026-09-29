@@ -18,6 +18,8 @@ const SPECIES_FOLDER = "Public/3 Backend/Species/";
 
 const BACKGROUNDS_FOLDER = "Public/3 Backend/Backgrounds/";
 
+const SPELLS_FOLDER = "Public/3 Backend/Spells/";
+
   
 
 const ABILITIES = [
@@ -137,6 +139,8 @@ const featFiles = directMarkdownFiles(FEATS_FOLDER);
 const speciesFiles = directMarkdownFiles(SPECIES_FOLDER);
 
 const backgroundFiles = directMarkdownFiles(BACKGROUNDS_FOLDER);
+
+const spellFiles = directMarkdownFiles(SPELLS_FOLDER);
 
   
 
@@ -2013,7 +2017,7 @@ function renderEquipment() {
 
   content.innerHTML="";
 
-  sectionTitle("Equipment","Manage the existing character inventory. Equipped state remains compatible with the character sheet.");
+  sectionTitle("Equipment","Manage the character inventory. Equipped state is controlled only from the character sheet.");
 
   
 
@@ -2049,7 +2053,7 @@ function renderEquipment() {
 
     if (existing) existing.quantity=Math.max(1,Number(existing.quantity ?? 1))+1;
 
-    else draft.inventory.push({item:itemSelect.value,quantity:1,equipped:false});
+    else draft.inventory.push({item:itemSelect.value,quantity:1});
 
     markDirty(); renderEquipment();
 
@@ -2075,7 +2079,7 @@ function renderEquipment() {
 
     const row=content.createEl("div");
 
-    row.style.cssText="display:grid;grid-template-columns:minmax(220px,2fr) 90px 110px 90px;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--background-modifier-border-hover)";
+    row.style.cssText="display:grid;grid-template-columns:minmax(220px,2fr) 90px 90px;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--background-modifier-border-hover)";
 
     const nameWrap=row.createEl("div");
 
@@ -2091,21 +2095,234 @@ function renderEquipment() {
 
   
 
-    const equipLabel=row.createEl("label");
-
-    equipLabel.style.cssText="display:flex;align-items:center;gap:6px";
-
-    const equip=equipLabel.createEl("input"); equip.type="checkbox"; equip.checked=entry.equipped===true;
-
-    equipLabel.createEl("span",{text:"Equipped"});
-
-    equip.onchange=()=>{entry.equipped=equip.checked;markDirty();};
-
-  
-
     const remove=makeButton(row,"Remove");
 
     remove.onclick=()=>{draft.inventory.splice(i,1);markDirty();renderEquipment();};
+
+  }
+
+}
+
+  
+  
+
+function spellRefPath(ref) {
+
+  const raw=String(ref ?? "").trim();
+
+  if(!raw) return "";
+
+  if(raw.includes("/")) return raw.endsWith(".md") ? raw : raw+".md";
+
+  return `${SPELLS_FOLDER}${raw.endsWith(".md") ? raw : raw+".md"}`;
+
+}
+
+  
+
+function spellSupportsClass(spell, className) {
+
+  const wanted=String(className ?? "").trim().toLowerCase();
+
+  if(!wanted) return false;
+
+  const classes=Array.isArray(spell?.classes) ? spell.classes : (spell?.classes ? [spell.classes] : []);
+
+  return classes.some(x=>String(x ?? "").trim().toLowerCase()===wanted);
+
+}
+
+  
+
+function getPreparedSpellLimit() {
+
+  const className=String(draft?.class ?? "").trim().toLowerCase();
+
+  if(className!=="artificer") return null;
+
+  const intScore=clampInt(draft?.int,1,30,10);
+
+  const intMod=modFromScore(intScore);
+
+  return Math.max(1, intMod + Math.floor(Math.max(1,Number(draft?.level ?? 1))/2));
+
+}
+
+  
+
+function renderSpells() {
+
+  content.innerHTML="";
+
+  sectionTitle("Spells","Manage class spell access and the character's currently prepared spells.");
+
+  
+
+  draft.known_spells=Array.isArray(draft.known_spells)?draft.known_spells:[];
+
+  draft.prepared_spells=Array.isArray(draft.prepared_spells)?draft.prepared_spells:[];
+
+  
+
+  const className=String(draft.class ?? "").trim();
+
+  const available=spellFiles
+
+    .map(file=>({file,page:pageFor(file)}))
+
+    .filter(x=>x.page && spellSupportsClass(x.page,className))
+
+    .sort((a,b)=>{
+
+      const la=Number(a.page.level ?? 0), lb=Number(b.page.level ?? 0);
+
+      if(la!==lb) return la-lb;
+
+      return String(a.page.name ?? a.file.basename).localeCompare(String(b.page.name ?? b.file.basename),"de");
+
+    });
+
+  
+
+  const preparedLimit=getPreparedSpellLimit();
+
+  const preparedCount=draft.prepared_spells.length;
+
+  
+
+  const info=content.createEl("div");
+
+  info.style.cssText="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px;padding:10px;border:1px solid var(--background-modifier-border);border-radius:10px";
+
+  info.createEl("span",{text:`Class: ${className || "-"}`});
+
+  info.createEl("span",{text:`Available: ${available.length}`});
+
+  info.createEl("span",{text:`Known: ${draft.known_spells.length}`});
+
+  info.createEl("span",{text:preparedLimit==null ? `Prepared: ${preparedCount}` : `Prepared: ${preparedCount}/${preparedLimit}`});
+
+  
+
+  if(!available.length){
+
+    content.createEl("div",{text:`No spell files with classes: [${className || "…"}] found in ${SPELLS_FOLDER}`}).style.opacity=".7";
+
+    return;
+
+  }
+
+  
+
+  let currentLevel=null;
+
+  for(const {file,page} of available){
+
+    const level=Number(page.level ?? 0);
+
+    if(level!==currentLevel){
+
+      currentLevel=level;
+
+      const h=content.createEl("div",{text:level===0?"Cantrips":`Level ${level}`});
+
+      h.style.cssText="font-weight:700;font-size:1.05em;margin-top:14px;padding-bottom:5px;border-bottom:1px solid var(--background-modifier-border)";
+
+    }
+
+  
+
+    const ref=file.path;
+
+    const known=draft.known_spells.map(spellRefPath).includes(ref);
+
+    const prepared=draft.prepared_spells.map(spellRefPath).includes(ref);
+
+  
+
+    const row=content.createEl("div");
+
+    row.style.cssText="display:grid;grid-template-columns:minmax(220px,1fr) 100px 110px;gap:12px;align-items:center;padding:8px 4px;border-bottom:1px solid var(--background-modifier-border-hover)";
+
+    const name=row.createEl("div");
+
+    name.createEl("div",{text:String(page.name ?? file.basename)}).style.fontWeight="600";
+
+    name.createEl("div",{text:String(page.school ?? "")}).style.cssText="font-size:.8em;opacity:.6";
+
+  
+
+    const knownLabel=row.createEl("label");
+
+    knownLabel.style.cssText="display:flex;gap:6px;align-items:center";
+
+    const knownBox=knownLabel.createEl("input"); knownBox.type="checkbox"; knownBox.checked=known;
+
+    knownLabel.createEl("span",{text:"Known"});
+
+  
+
+    const prepLabel=row.createEl("label");
+
+    prepLabel.style.cssText="display:flex;gap:6px;align-items:center";
+
+    const prepBox=prepLabel.createEl("input"); prepBox.type="checkbox"; prepBox.checked=prepared;
+
+    prepLabel.createEl("span",{text:"Prepared"});
+
+  
+
+    // A spell cannot be prepared before it is part of the character's known/access list.
+
+    prepBox.disabled=!known;
+
+  
+
+    knownBox.onchange=()=>{
+
+      const knownSet=new Set(draft.known_spells.map(spellRefPath));
+
+      const prepSet=new Set(draft.prepared_spells.map(spellRefPath));
+
+      if(knownBox.checked) knownSet.add(ref);
+
+      else { knownSet.delete(ref); prepSet.delete(ref); }
+
+      draft.known_spells=[...knownSet];
+
+      draft.prepared_spells=[...prepSet];
+
+      markDirty(); renderSpells();
+
+    };
+
+  
+
+    prepBox.onchange=()=>{
+
+      const prepSet=new Set(draft.prepared_spells.map(spellRefPath));
+
+      if(prepBox.checked){
+
+        if(preparedLimit!=null && prepSet.size>=preparedLimit){
+
+          new Notice(`Prepared spell limit reached (${preparedLimit}).`);
+
+          prepBox.checked=false;
+
+          return;
+
+        }
+
+        prepSet.add(ref);
+
+      } else prepSet.delete(ref);
+
+      draft.prepared_spells=[...prepSet];
+
+      markDirty(); renderSpells();
+
+    };
 
   }
 
@@ -2149,59 +2366,13 @@ function updateTabs() {
 
 }
 
-function renderCharacter() {
-
-  content.innerHTML="";
-
-  sectionTitle("Character", "Character-specific presentation data stored in the selected character backend.");
-
-  
-
-  const portraitWrap=field(content,"Portrait Path");
-
-  const portraitInput=portraitWrap.createEl("input");
-
-  portraitInput.type="text";
-
-  portraitInput.placeholder="Public/1 Assets/Bilder/Character.png";
-
-  portraitInput.value=String(draft?.portrait ?? "");
-
-  styleInput(portraitInput);
-
-  
-
-  portraitInput.oninput=()=>{
-
-    draft.portrait=portraitInput.value;
-
-    markDirty();
-
-  };
-
-  
-
-  const hint=content.createEl("div",{
-
-    text:"Vault-relative path to the portrait image. This value is saved as `portrait` in the character file."
-
-  });
-
-  hint.style.cssText="font-size:.85em;opacity:.65;margin-top:8px";
-
-}
-
-  
-
 function renderTab() {
 
   window.__dndBuilderTab=activeTab;
 
   updateTabs();
 
-  if (activeTab==="character") renderCharacter();
-
-  else if (activeTab==="class") renderClass();
+  if (activeTab==="class") renderClass();
 
   else if (activeTab==="background") renderBackground();
 
@@ -2211,13 +2382,15 @@ function renderTab() {
 
   else if (activeTab==="equipment") renderEquipment();
 
+  else if (activeTab==="spells") renderSpells();
+
 }
 
 for (const [key,label] of [
 
-  ["character","Character"],["class","Class"],["background","Background"],["species","Species"],
+  ["class","Class"],["background","Background"],["species","Species"],
 
-  ["abilities","Abilities"],["equipment","Equipment"]
+  ["abilities","Abilities"],["equipment","Equipment"],["spells","Spells"]
 
 ]) {
 
@@ -2243,8 +2416,6 @@ function loadCharacter(path) {
 
   draft={
 
-    portrait:String(pg.portrait ?? ""),
-
     class:String(pg.class ?? ""),
 
     subclass:Array.isArray(pg.subclass)?[...pg.subclass]:String(pg.subclass ?? ""),
@@ -2258,6 +2429,10 @@ function loadCharacter(path) {
     wis:clampInt(pg.wis,1,30,10), cha:clampInt(pg.cha,1,30,10),
 
     inventory:Array.isArray(pg.inventory) ? pg.inventory.map(e=>({...e})) : [],
+
+    known_spells:Array.isArray(pg.known_spells) ? [...pg.known_spells] : [],
+
+    prepared_spells:Array.isArray(pg.prepared_spells) ? [...pg.prepared_spells] : [],
 
     asi_choices:pg.asi_choices&&typeof pg.asi_choices==="object"?JSON.parse(JSON.stringify(pg.asi_choices)):{},
 
@@ -2327,8 +2502,6 @@ async function saveCharacter() {
 
     await app.fileManager.processFrontMatter(targetFile, fm => {
 
-      fm.portrait=String(draft.portrait ?? "").trim() || null;
-
       fm.class=expectedClass;
 
   
@@ -2356,6 +2529,10 @@ async function saveCharacter() {
   
 
       fm.inventory=JSON.parse(JSON.stringify(draft.inventory ?? []));
+
+      fm.known_spells=JSON.parse(JSON.stringify(draft.known_spells ?? []));
+
+      fm.prepared_spells=JSON.parse(JSON.stringify(draft.prepared_spells ?? []));
 
       fm.asi_choices=JSON.parse(JSON.stringify(draft.asi_choices ?? {}));
 

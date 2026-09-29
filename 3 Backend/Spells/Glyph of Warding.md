@@ -1,6 +1,8 @@
 ---
 name: Glyph of Warding
 category: spell
+classes:
+- Artificer
 action_type: hour
 mode: utility
 shape: single

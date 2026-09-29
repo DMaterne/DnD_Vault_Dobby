@@ -1,9 +1,11 @@
 ---
 name: Cure Wounds
 category: spell
+classes:
+- Artificer
 action_type: action
-mode: heal
-shape: touch
+mode: utility
+shape: single
 radius: 0
 level: 1
 school: Evocation
@@ -12,12 +14,12 @@ range: Touch
 duration: Instantaneous
 concentration: false
 spellcasting_modifier: int
-dice_count: 1
-dice_size: 8
-damage: 1d8
+dice_count: 0
+dice_size: 0
+damage: ''
 damage_bonus_stat: none
-damage_bonus: 3
-damage_type: variable
+damage_bonus: 0
+damage_type: none
 uses_attack_roll: false
 uses_save: false
 save_ability: none
@@ -25,12 +27,12 @@ save_fail_chance: 0
 save_success_multiplier: 0
 friendly_fire: false
 requires_los: false
-utility_type: resistance
-utility_value: 1
+utility_type: none
+utility_value: 0
 resource_cost: 1
-resource_formula: "1"
-effect: A creature you touch regains a number of hit points equal to 1d8 + your spellcasting ability modifier. This spell has no effect on undead or constructs.
+resource_formula: 1 spell slot
+ritual: false
+effect: Touch a creature to restore hit points based on the spell level and your spellcasting modifier.
 notes: V, S
 ---
 # Cure Wounds
----

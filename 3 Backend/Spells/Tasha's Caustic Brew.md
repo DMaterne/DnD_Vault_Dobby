@@ -1,6 +1,8 @@
 ---
 name: Tasha's Caustic Brew
 category: spell
+classes:
+- Artificer
 action_type: action
 mode: save
 shape: self_line

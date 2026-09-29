@@ -1,6 +1,8 @@
 ---
 name: Faerie Fire
 category: spell
+classes:
+- Artificer
 action_type: action
 mode: save
 shape: single

@@ -1,6 +1,8 @@
 ---
 name: Skill Empowerment
 category: spell
+classes:
+- Artificer
 action_type: action
 mode: utility
 shape: single

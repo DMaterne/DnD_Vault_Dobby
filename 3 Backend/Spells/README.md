@@ -14,3 +14,14 @@ Notes:
   Air Bubble, Kinetic Jaunt, Vortex Warp, Ashardalon's Stride, Intellect Fortress,
   Summon Construct, Create Spelljamming Helm.
 - Explicit UA entries were excluded: Arcane Weapon (UA), Flame Stride (UA), House of Cards (UA).
+
+## Class tags
+
+Every spell file now contains:
+
+```yaml
+classes:
+- Artificer
+```
+
+`known_spells` and `prepared_spells` are character-specific and therefore belong in the character backend, not in the spell file.

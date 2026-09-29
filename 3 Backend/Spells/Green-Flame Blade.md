@@ -1,6 +1,8 @@
 ---
 name: Green-Flame Blade
 category: spell
+classes:
+- Artificer
 action_type: action
 mode: utility
 shape: self_circle

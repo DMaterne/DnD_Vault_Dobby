@@ -1,23 +1,25 @@
 ---
 name: Feather Fall
 category: spell
+classes:
+- Artificer
 action_type: reaction
-mode: self_buff
-shape: self
+mode: utility
+shape: single
 radius: 0
 level: 1
 school: Transmutation
 casting_time: 1 Reaction
-range: 60 ft
-duration: 10 rounds
+range: 60 feet
+duration: 1 minute
 concentration: false
 spellcasting_modifier: int
-dice_count: 
-dice_size: 
-damage:
+dice_count: 0
+dice_size: 0
+damage: ''
 damage_bonus_stat: none
 damage_bonus: 0
-damage_type: variable
+damage_type: none
 uses_attack_roll: false
 uses_save: false
 save_ability: none
@@ -25,12 +27,12 @@ save_fail_chance: 0
 save_success_multiplier: 0
 friendly_fire: false
 requires_los: false
-utility_type: immunity
-utility_value: 1
+utility_type: none
+utility_value: 0
 resource_cost: 1
-resource_formula: "1"
-effect: Choose up to five falling creatures within range. A falling creature's rate of descent slows to 60 feet per round until the spell ends. If the creature lands before the spell ends, it takes no falling damage and can land on its feet, and the spell ends for that creature.
-notes: V, S
+resource_formula: 1 spell slot
+ritual: false
+effect: React when creatures fall to greatly slow their descent and prevent normal falling damage if they land before the spell ends.
+notes: V, M
 ---
-# Absorb Elements
----
+# Feather Fall

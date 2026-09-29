@@ -1,9 +1,11 @@
 ---
 name: Absorb Elements
 category: spell
+classes:
+- Artificer
 action_type: reaction
-mode: self_buff
-shape: self
+mode: utility
+shape: single
 radius: 0
 level: 1
 school: Abjuration
@@ -12,9 +14,9 @@ range: Self
 duration: 1 round
 concentration: false
 spellcasting_modifier: int
-dice_count: 
-dice_size: 
-damage:
+dice_count: 0
+dice_size: 0
+damage: ''
 damage_bonus_stat: none
 damage_bonus: 0
 damage_type: variable
@@ -25,12 +27,12 @@ save_fail_chance: 0
 save_success_multiplier: 0
 friendly_fire: false
 requires_los: false
-utility_type: resistance
-utility_value: 1
+utility_type: none
+utility_value: 0
 resource_cost: 1
-resource_formula: "1"
-effect: You gain resistance to the triggering damage type until the start of your next turn and the first time you hit with a melee attack on your next turn, the target takes an extra 1d6 damage of that same type.
+resource_formula: 1 spell slot
+ritual: false
+effect: React to incoming acid, cold, fire, lightning, or thunder damage to gain resistance to that instance; your next melee hit can deal extra damage of that type.
 notes: S
 ---
 # Absorb Elements
----

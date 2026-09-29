@@ -1,6 +1,8 @@
 ---
 name: Thorn Whip
 category: spell
+classes:
+- Artificer
 action_type: action
 mode: attack
 shape: single

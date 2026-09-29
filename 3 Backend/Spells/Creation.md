@@ -1,6 +1,8 @@
 ---
 name: Creation
 category: spell
+classes:
+- Artificer
 action_type: minute
 mode: utility
 shape: single

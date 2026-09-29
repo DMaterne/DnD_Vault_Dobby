@@ -183,6 +183,93 @@ background_choices:
   tools:
     - dice_set
 portrait: Public/1 Assets/Bilder/EIMER.png
+known_spells:
+  - Public/3 Backend/Spells/Thunderclap.md
+  - Public/3 Backend/Spells/Mending.md
+  - Public/3 Backend/Spells/Alarm.md
+  - Public/3 Backend/Spells/Absorb Elements.md
+  - Public/3 Backend/Spells/Cure Wounds.md
+  - Public/3 Backend/Spells/Feather Fall.md
+  - Public/3 Backend/Spells/Catapult.md
+  - Public/3 Backend/Spells/Detect Magic.md
+  - Public/3 Backend/Spells/Disguise Self.md
+  - Public/3 Backend/Spells/Expeditious Retreat.md
+  - Public/3 Backend/Spells/Faerie Fire.md
+  - Public/3 Backend/Spells/False Life.md
+  - Public/3 Backend/Spells/Grease.md
+  - Public/3 Backend/Spells/Identify.md
+  - Public/3 Backend/Spells/Jump.md
+  - Public/3 Backend/Spells/Longstrider.md
+  - Public/3 Backend/Spells/Purify Food and Drink.md
+  - Public/3 Backend/Spells/Sanctuary.md
+  - Public/3 Backend/Spells/Snare.md
+  - Public/3 Backend/Spells/Tasha's Caustic Brew.md
+  - Public/3 Backend/Spells/Aid.md
+  - Public/3 Backend/Spells/Air Bubble.md
+  - Public/3 Backend/Spells/Alter Self.md
+  - Public/3 Backend/Spells/Arcane Lock.md
+  - Public/3 Backend/Spells/Blur.md
+  - Public/3 Backend/Spells/Continual Flame.md
+  - Public/3 Backend/Spells/Darkvision.md
+  - Public/3 Backend/Spells/Enhance Ability.md
+  - Public/3 Backend/Spells/Enlarge-Reduce.md
+  - Public/3 Backend/Spells/Heat Metal.md
+  - Public/3 Backend/Spells/Invisibility.md
+  - Public/3 Backend/Spells/Kinetic Jaunt.md
+  - Public/3 Backend/Spells/Lesser Restoration.md
+  - Public/3 Backend/Spells/Levitate.md
+  - Public/3 Backend/Spells/Magic Mouth.md
+  - Public/3 Backend/Spells/Magic Weapon.md
+  - Public/3 Backend/Spells/Protection from Poison.md
+  - Public/3 Backend/Spells/Pyrotechnics.md
+  - Public/3 Backend/Spells/Rope Trick.md
+  - Public/3 Backend/Spells/See Invisibility.md
+  - Public/3 Backend/Spells/Skywrite.md
+  - Public/3 Backend/Spells/Spider Climb.md
+  - Public/3 Backend/Spells/Vortex Warp.md
+  - Public/3 Backend/Spells/Web.md
+  - Public/3 Backend/Spells/Ashardalon's Stride.md
+  - Public/3 Backend/Spells/Blink.md
+  - Public/3 Backend/Spells/Create Food and Water.md
+  - Public/3 Backend/Spells/Catnap.md
+  - Public/3 Backend/Spells/Dispel Magic.md
+  - Public/3 Backend/Spells/Elemental Weapon.md
+  - Public/3 Backend/Spells/Flame Arrows.md
+  - Public/3 Backend/Spells/Fly.md
+  - Public/3 Backend/Spells/Glyph of Warding.md
+  - Public/3 Backend/Spells/Haste.md
+  - Public/3 Backend/Spells/Intellect Fortress.md
+  - Public/3 Backend/Spells/Protection from Energy.md
+  - Public/3 Backend/Spells/Revivify.md
+  - Public/3 Backend/Spells/Tiny Servant.md
+  - Public/3 Backend/Spells/Water Breathing.md
+  - Public/3 Backend/Spells/Water Walk.md
+  - Public/3 Backend/Spells/Arcane Eye.md
+  - Public/3 Backend/Spells/Elemental Bane.md
+  - Public/3 Backend/Spells/Freedom of Movement.md
+  - Public/3 Backend/Spells/Fabricate.md
+  - Public/3 Backend/Spells/Leomund's Secret Chest.md
+  - Public/3 Backend/Spells/Mordenkainen's Faithful Hound.md
+  - Public/3 Backend/Spells/Mordenkainen's Private Sanctum.md
+  - Public/3 Backend/Spells/Stone Shape.md
+  - Public/3 Backend/Spells/Otiluke's Resilient Sphere.md
+  - Public/3 Backend/Spells/Stoneskin.md
+  - Public/3 Backend/Spells/Summon Construct.md
+  - Public/3 Backend/Spells/Animate Objects.md
+  - Public/3 Backend/Spells/Bigby's Hand.md
+  - Public/3 Backend/Spells/Create Spelljamming Helm.md
+  - Public/3 Backend/Spells/Creation.md
+  - Public/3 Backend/Spells/Greater Restoration.md
+  - Public/3 Backend/Spells/Skill Empowerment.md
+  - Public/3 Backend/Spells/Transmute Rock.md
+  - Public/3 Backend/Spells/Wall of Stone.md
+prepared_spells:
+  - Public/3 Backend/Spells/Thunderclap.md
+  - Public/3 Backend/Spells/Mending.md
+  - Public/3 Backend/Spells/Alarm.md
+  - Public/3 Backend/Spells/Absorb Elements.md
+  - Public/3 Backend/Spells/Cure Wounds.md
+  - Public/3 Backend/Spells/Feather Fall.md
 ---
 # Bilder
 
