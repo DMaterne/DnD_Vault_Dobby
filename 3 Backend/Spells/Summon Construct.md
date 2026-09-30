@@ -9,7 +9,8 @@ casting_time: 1 Action
 range: 90 feet
 duration: up to 1 hour
 concentration: true
-effect: Summon a magical construct spirit whose statistics scale with the spell slot and chosen construct form.
+effect: |-
+  https://www.dndbeyond.com/spells/721195-summon-construct
 notes: V, S, M
 ---
 # Summon Construct
