@@ -14,13 +14,10 @@ con: 16
 int: 16
 wis: 10
 cha: 10
-proficiency_bonus: 2
 hp_current: 19
 hp_max: 19
 ac: 12
 speed: 30
-initiative_bonus: 2
-passive_perception: 10
 hit_dice: 1d8
 str_save_prof: false
 dex_save_prof: false

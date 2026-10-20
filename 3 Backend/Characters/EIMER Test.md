@@ -1,8 +1,8 @@
 ---
-name: Eimer
+name: Eimer Test
 class: Artificer
 subclass: Armorer
-level: 20
+level: 2
 race: Warforged
 background: Public/3 Backend/Backgrounds/Soldier.md
 alignment: Lawful Neutral
@@ -17,8 +17,6 @@ hp_current: 19
 hp_max: 19
 ac: 12
 speed: 30
-initiative_bonus: 2
-passive_perception: 10
 hit_dice: 1d8
 str_save_prof: false
 dex_save_prof: false
