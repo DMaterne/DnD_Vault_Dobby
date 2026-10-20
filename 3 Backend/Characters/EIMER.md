@@ -2,16 +2,15 @@
 name: Eimer
 class: Artificer
 subclass:
-  - 
 level: 2
 race: Warforged
-background: Soldier
+background: Public/3 Backend/Backgrounds/Soldier.md
 alignment: Lawful Neutral
 player: Dobby
 str: 8
 dex: 14
-con: 16
-int: 16
+con: 14
+int: 15
 wis: 10
 cha: 10
 hp_current: 19
@@ -43,14 +42,8 @@ religion_prof: false
 sleight_of_hand_prof: false
 stealth_prof: false
 survival_prof: false
-spell_slots:
-  "1": 2
-  "2": 0
-  "3": 0
-  "4": 0
-  "5": 0
 spell_slots_used:
-  "1": 2
+  "1": 0
   "2": 0
   "3": 0
   "4": 0
@@ -124,9 +117,7 @@ features:
 hp_temp: 0
 actions:
   - Public/3 Backend/Actions/Opportunity Attack.md
-  - Public/3 Backend/Actions/Sickle.md
   - Public/3 Backend/Actions/Unarmed Strike.md
-  - Public/3 Backend/Actions/Light Crossbow.md
 spells:
   - Public/3 Backend/Spells/Absorb Elements.md
   - Public/3 Backend/Spells/Thunderclap.md
@@ -138,6 +129,35 @@ spellcasting_ability: int
 attunement_slots: 3
 attuned_items:
   - Public/3 Backend/Items/Armor of magical Strenght.md::17::0
+portrait: Public/1 Assets/Bilder/EIMER.png
+known_spells:
+  - Public/3 Backend/Spells/Thunderclap.md
+  - Public/3 Backend/Spells/Mending.md
+  - Public/3 Backend/Spells/Absorb Elements.md
+  - Public/3 Backend/Spells/Alarm.md
+  - Public/3 Backend/Spells/Cure Wounds.md
+  - Public/3 Backend/Spells/Feather Fall.md
+prepared_spells:
+  - Public/3 Backend/Spells/Absorb Elements.md
+  - Public/3 Backend/Spells/Alarm.md
+  - Public/3 Backend/Spells/Cure Wounds.md
+  - Public/3 Backend/Spells/Feather Fall.md
+asi_choices: {}
+class_choices:
+  skills:
+    - arcana
+    - investigation
+  tools:
+    - alchemists_supplies
+background_choices:
+  tools:
+    - dragonchess_set
+species: Public/3 Backend/Species/Warforged.md
+species_choices:
+  ability_increase: int
+  skill_proficiency: acrobatics
+  tool_proficiency: cartographers_tools
+  extra_language: Celestial
 ---
 # Bilder
 
