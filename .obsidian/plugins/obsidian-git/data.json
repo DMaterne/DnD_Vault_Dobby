@@ -23,7 +23,7 @@
   "mergeStrategy": "none",
   "customMessageOnAutoBackup": false,
   "autoBackupAfterFileChange": false,
-  "treeStructure": true,
+  "treeStructure": false,
   "gitServerPasswordSecret": "obsidian-git-password",
   "refreshSourceControl": false,
   "basePath": "",
