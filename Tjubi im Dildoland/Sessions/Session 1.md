@@ -91,7 +91,7 @@ Unser erster Halt ist bei [[Public/Tjubi im Dildoland/Characters/NPCs/Meister An
 
 Der nächste Halt ist [[Linn]], die Partnerin von [[Makkus]]. Er holt bei ihr seinen Schmiedehammer.
 
-Bei [[Siglinde]] holen wir anschließend noch ein Paar kleinigkeiten und Rationen. [[Siglinde]] ist eine kleine etwas fester gebaute Frau mit kurzen roten Haar die immer beschäftigt wirkt.
+Bei [[Siglinde]] holen wir anschließend noch ein Paar kleinigkeiten und Rationen. [[Siglinde]] ist eine kleine etwas fester gebaute Frau mit kurzen roten Haar, die immer beschäftigt wirkt.
 
 Anschließend gehen wir zu [[Helga]]. Ihr Laden heißt Hedlinde & Helga, nach Helga und ihrer Mutter. Diese ist aber in Rente und hat den Laden an ihre Tochter [[Helga]] abgegeben. Nach etwa 30 Minuten Wartezeit übergibt sie uns Gegengifte, die pflanzliche Gift neutralisieren.
 
@@ -99,9 +99,9 @@ Abschließend gehen wir zur Akademie. Dort werden wir in Empfang genommen und zu
 
 Da unsere Besorgungen erledigt sind, gehen wir mit [[Kaz]] in ein Restaurant eines Freundes. Der Goliath [[Fels]] stellt sich vor. Er serviert uns zur Feier des Tages einen Eintopf, der ausnahmsweise rattenlos ist. Die Zutaten sind roh und unverarbeitet. [[Eimer]] isst auf der Toilette, da sein Körper undicht ist und alles ausläuft. [[Fels]] fühlt sich zuerst beleidigt, da er denkt dass Eimer sein Essen in die Toilette wirft. Nachdem Eimer ihn die Situation erklärt, verlangt Fels dass er vor ihm trinkt. Das Bier läuft aus diversen Löchern aus Eimers Körper heraus, was Fels amüsiert. Die Gruppe trinkt noch Bier mit Eimer.
 
-Danach geht die Gruppe zu [[Nicolas]], einen weiteren Freund von [[Kas]]. Dort verfassen wir Reden für unseren späteren Auftritt. Zum Abschied lernt [[Eimer]] noch die Verabschiedung "Ciao Cacao", welche eine gute Verabschiedung laut [[Kaz]] ist. 
+Danach geht die Gruppe zu [[Nicolas]], einen weiteren Freund von [[Kaz]]. Dort verfassen wir Reden für unseren späteren Auftritt. Zum Abschied lernt [[Eimer]] noch die Verabschiedung "Ciao Cacao", welche eine gute Verabschiedung laut [[Kaz]] ist. 
 
-Beim Fest angekommen gibt es viele verschiedene Jahrmarktsspiele. Eine "Heavy Wood"-Band (ein frech-fetziges Musikgenre) sorgt für musikalische Unterhaltung. [[Makkus]] Freund bringen ihm Bier. Er stellt sie [[Eimer]] und [[Kaz]] vor. Makkus plant Brauer und die noch abwesende [[Aethusa]] zu verkuppeln. Kurz darauf gibt es erneut bei [[Fels]] etwas zu essen. Eimer schenkt diesen anschließend einen Stein, den er bei den Jahrmarktspielen gewonnen hat. 
+Beim Fest angekommen gibt es viele verschiedene Jahrmarktsspiele. Eine "Heavy Wood"-Band (ein frech-fetziges Musikgenre) sorgt für musikalische Unterhaltung. [[Makkus]] Freunde bringen ihm Bier. Er stellt sie [[Eimer]] und [[Kaz]] vor. Makkus plant Brauer und die noch abwesende [[Aethusa]] zu verkuppeln. Kurz darauf gibt es erneut bei [[Fels]] etwas zu essen. Eimer schenkt diesen anschließend einen Stein, den er bei den Jahrmarktspielen gewonnen hat. 
 
 Nun ist es Zeit für den Auftritt der Gruppe. [[Bürgermeister Bernd]] und die Gruppe halten ihre Reden. Das Volk wirkt begeistert und euphorisch. Mit viel Alkohol, Tanz und Musik geht die Feier weiter bis tief in die Nacht. Die Gruppe fasst noch den Plan, das nördliche Gebiet außerhalb von [[Arborgas]] zuerst zu erschließen. 
 
@@ -125,10 +125,12 @@ Die Gruppe zieht weiter Richtung Fluss. In der ferne erspähen wir eine Rinderhe
 Der Tag verläuft reibungslos. Immer wieder erspähen wir ein paar Wildtiere. Gegen Nachteinbruch ist der Fluss deutlich zu hören, jedoch ist kaum mehr was zu sehen. Ein Geräusch ist besonders auffällig, eine Art nasse Bewegung, schwer zuzuordnen. Die Nacht vergeht ohne Probleme.
 
 **Tag 6:**
-Am Morgen erspähen wir eine Kreatur, die Kreis am Flussufer zieht. Es scheint ein *Wasserelementar* zu sein, ein sehr territoriales Wesen. Anhand seiner Bewegungen lässt sich abschätzen, dass man sich noch etwas weiter nähern kann, bevor es zur Konfrontation kommt. Vorsichtig schleicht die Gruppe Richtung Elementar. In der Mitte der Kreise, die der Elementar läuft, befinden sich 12 *Orbs/Essenzen*, davon auch ein große. Doch der Elementar wirkt wesentlich stärker als die Kreatur, die diese Essenz mal besaß. [[Kaz]] beschließt die Essenz zu klauen und schleicht in die Mitte. Aus Furcht vor dem Elementar setzt die Gruppe die Ankersteine ein, um zurück zu [[Arborgas]] zu kommen.
+Am Morgen erspähen wir eine Kreatur, die Kreis am Flussufer zieht. Es scheint ein *Wasserelementar* zu sein, ein sehr territoriales Wesen. Anhand seiner Bewegungen lässt sich abschätzen, dass man sich noch etwas weiter nähern kann, bevor es zur Konfrontation kommt. Vorsichtig schleicht die Gruppe Richtung Elementar. In der Mitte der Kreise, die der Elementar läuft, befinden sich 12 *Orbs/Essenzen*, davon auch ein große. Doch der Elementar wirkt wesentlich stärker als die Kreatur, die diese Essenz mal besaß. [[Kaz]] beschließt die Essenz zu klauen und schleicht in die Mitte. Aus Furcht vor dem Elementar setzt die Gruppe die Ankersteine ein, um zurück zu [[Arborgas]] zu kommen. Eimer kommt eine Art Erinnerung zurück: seine letzte Begegnung mit einem Elementar verlief nicht sehr gut...
 
 
 ### **Zusammenfassung:**
 
 In [[Arborgas]], einer seit 1000 Jahren durch eine magische Kuppel geschützten Stadt, wird eine Expedition zur Erkundung der Außenwelt zusammengestellt. [[Eimer]], [[Aethusa]], [[Makkus]] und [[Kaz]] werden von [[Bürgermeister Bernd]] mit der Aufgabe betraut, neue Lebensräume zu erschließen, Gefahren zu untersuchen und mögliche Zivilisationen zu kontaktieren. Nach den Vorbereitungen, bei denen die Gruppe unter anderem magische Ankersteine erhält, wird ihr Aufbruch mit einem großen Stadtfest gefeiert. Die Expedition verlässt Arborgas durch das Nordtor und entdeckt eine weitläufige Graslandschaft, in der zunehmend seltsame Kreaturen auftauchen. Die Gruppe kämpft gegen pflanzliche Monster, sogenannte Blights, und entdeckt, dass diese magische Essenzen hinterlassen, die [[Eimer]] sogar konsumieren kann. Während einer Nachtwache werden die Abenteurer außerdem von einer mysteriösen Schattenkreatur angegriffen. Auf ihrem weiteren Weg beobachten sie das merkwürdige Verhalten der Blights und ihrer Essenzen. Schließlich erreichen sie einen Fluss, an dessen Ufer ein mächtiges Wasserelementar mehrere Essenzen bewacht. Nachdem [[Kaz]] eine besonders große Essenz gestohlen hat, teleportiert sich die Gruppe mithilfe ihrer Ankersteine zurück nach Arborgas.
+
+(Level 2 erreicht)
 
