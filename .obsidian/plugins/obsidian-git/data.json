@@ -24,7 +24,7 @@
   "customMessageOnAutoBackup": false,
   "autoBackupAfterFileChange": false,
   "treeStructure": false,
-  "gitServerPasswordSecret": "obsidian-git-password",
+  "gitServerPasswordSecret": "token",
   "refreshSourceControl": false,
   "basePath": "",
   "differentIntervalCommitAndPush": false,
