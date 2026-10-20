@@ -11,14 +11,15 @@
             "id": "b9e4bcd06607fdeb",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "diff-view",
               "state": {
-                "file": "Bönkis Kampagne/Dashboard.md",
-                "mode": "source",
-                "source": false
+                "aFile": ".obsidian/plugins/obsidian-git/data.json",
+                "bFile": ".obsidian/plugins/obsidian-git/data.json",
+                "aRef": "HEAD",
+                "bRef": ""
               },
-              "icon": "lucide-file",
-              "title": "Dashboard"
+              "icon": "git-pull-request",
+              "title": "Diff: data.json"
             }
           }
         ]
