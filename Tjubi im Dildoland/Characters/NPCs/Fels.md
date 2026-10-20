@@ -26,11 +26,11 @@ Mehr zu ihm ist Eimer noch nicht bekannt.
 
 ```timeline
 [line-3, body-2]
-+ Expeditionsvorbereitungen
++ Expeditionsvorbereitungen ([[Public/Tjubi im Dildoland/Sessions/Session 1|Session 1]])
 + In seinem Restaurant
 + Die Gruppe besucht Fels Restaurant für eine Stärkung vor dem Fest. Er serviert ihnen ein "Festmahl", einen besonderen Eintopf, der ausnahmsweise keine Ratten beinhaltet. Die Zutaten sind unbearbeitet, wie z.B. rohe Zwiebeln.
 
-+ Abschiedsfeier
++ Abschiedsfeier ([[Public/Tjubi im Dildoland/Sessions/Session 1|Session 1]])
 + An seinem Essensstand
 + Er verkauft Essen und versorgt die Gruppe kostenlos. Eimer schenkt ihn einen Stein, den er bei einem Jahrmarktsspiel gewonnen hat
 ```

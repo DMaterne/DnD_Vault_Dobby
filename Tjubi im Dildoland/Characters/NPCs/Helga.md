@@ -26,7 +26,7 @@ Mehr zu ihr ist Eimer noch nicht bekannt.
 
 ```timeline
 [line-3, body-2]
-+ Expeditionsvorbereitungen
++ Expeditionsvorbereitungen ([[Public/Tjubi im Dildoland/Sessions/Session 1|Session 1]])
 + In ihrem Laden
 + Sie übergibt der Gruppe Gegengift, dass pflanzliche Gifte neutralisiert
 
