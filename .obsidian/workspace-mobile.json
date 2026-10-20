@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Bönkis Kampagne/Geographie/Dörfer/Ahrol Mir.md",
+                "file": "Bönkis Kampagne/Dashboard.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Ahrol Mir"
+              "title": "Dashboard"
             }
           }
         ]
@@ -186,6 +186,7 @@
   },
   "active": "b9e4bcd06607fdeb",
   "lastOpenFiles": [
+    "Bönkis Kampagne/Geographie/Dörfer/Ahrol Mir.md",
     "Bönkis Kampagne/Dashboard.md",
     "3 Backend/Items/Rations (1 day).md",
     "3 Backend/Character Sheet.md"
