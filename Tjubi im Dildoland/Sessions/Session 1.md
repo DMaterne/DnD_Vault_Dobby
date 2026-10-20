@@ -5,7 +5,7 @@ Spieler: alle
 
 ###  **Session Notizen (raw):**
 
-arborgas, groß, alles. was wir wissen. etwa 1000 jahre unter mag kuppel. von magier o. ganzer kontinent invasion, alle zivilisationen weg. monster tauchen auf aber geschützt. baum von dem kuppel aus geht. groß. marktplatz darum, rathaus, tavenren, gilden und co. innen nice, außen simpler. keine große armut. diplom. hautstadt damals. viele rassen, diversität. rassismus wenig. wachen, rechtssystem. platz wird eng, monster weniger, lass expedition in die außenwelt starten. ausschreibung.
+arborgas, groß, alles. was wir wissen. etwa 1000 jahre unter mag kuppel. von magier o. ganzer kontinent invasion, alle zivilisationen weg. monster tauchen auf aber geschützt. baum von dem kuppel aus geht. groß. marktplatz darum, rathaus, tavenren, gilden und co. innen nice, außen simpler. keine große armut. diplom. hauptstadt damals. viele rassen, diversität. rassismus wenig. wachen, rechtssystem. platz wird eng, monster weniger, lass expedition in die außenwelt starten. ausschreibung.
 bürgermeister bernd: dünn, mittelalt, schnauzer groß.
 staten bei ihm. eimer 
 bönki: 1,58m faun, stoffkleidung beige/braun. fell. rote haare/bronze. spellbook an hüfte. kleidung krabbelt was am hals rum. grüne augen. name Aethusa (Silie). 
@@ -72,9 +72,26 @@ level 2!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 ###  **Protokoll:**
 
+Alles was wir kennen ist die Stadt [[Arborgas]], eine große Stadt, die unter einer magischen Kuppel liegt. Vor etwa 1000 Jahren gab es eine gigantische Invasion auf dem Kontinent. Um [[Arborgas]] vor dieser zu schützen, erschuf der große [[Magier O]] die Kuppel, um Monster von der Stadt fern zu halten. Diese geht von einem großen Baum im Zentrum der Stadt aus. Kaum etwas aus der Zeit vor der Invasion ist bekannt, wir wissen nur, dass alle anderen Zivilisationen untergegangen sind. Um en Baum herum liegt ein Marktplatz. Im inneren der Stadt sind außerdem Gilden, das Rathaus und Tavernen. Im inneren der Stadt ist diese schön, sie wird aber simpler je weiter man nach außen geht. Es gibt keine große Armut. Früher war [[Arborgas]] eine diplomatische Hauptstadt, weswegen viele unterschiedliche Rassen vertreten sind, welche auch alle gleichermaßen anerkannt sind. Die Stadt hat ihr eigenes Rechtssystem und auch eine eigene Stadtwache. Nach 1000 Jahren Isolation wird der Lebensraum innerhalb der Kuppel langsam knapp. Der Stadtrat hat beschlossen, Bürger zu rekrutieren, welche die Außenwelt erkunden sollen um möglichen neuen Lebensraum zu erschließen.
+
+Die Ausschreibung ist Abgeschlossen und die Kandidaten gewählt. [[Bürgermeister Bernd]], ein dünner, mittelalter Mann mit einem großen Schnauzer empfängt die Auserwählten. Als erstes betritt [[Public/3 Backend/Characters/Eimer|Eimer]] (ich) den Raum. 
+Nach einem kurzen Austausch kommt [[Aethusa]] (gespielt von Bönki) dazu. Sie ist eine 158m große Faun Frau, bekleidet in braun-beiger Stoffkleidung. Ihre Haare sind rot-bronze. An ihrer Hüfte trägt sie ein Spell-Book. In ihrer Kleidung schien etwas zu krabbeln. Ihre Augen sind tief grün.
+Als nächstes betritt [[Makkus]] (gespielt von Schoas) den Raum.Makkus ist ein 1,51m großer Zwerg mit verflochtenem Bart, der bis zu seinem Hals geht. Er trägt einen kleinen Hammer und seine simple Schmidekleidung.
+Zu Schluss tritt [[Kaz]] (gespielt von Iggy) ein. Kaz ist ein Drow Mann mit dunklem Haar. Er trägt eine Augenklappe. Er scheint eine Vorgeschichte mit der Stadtache und dem Bürgermeister zu haben.
+Da alle angekommen sind, erklärt [[Bürgermeister Bernd]] uns unsere Mission: Wir sollen das Umland erkunden um eine Expansion zu ermöglichen. Dabei ist es wichtig festzustellen, welchen gefahren dort lauern. Auch sollen wir diplomatische Beziehungen zu anderen Zivilisationen aufbauen, falls wir welche treffen. Damit wir auch gut vorbereitet sind, haben wir bestimmte Privilegien:
+- Unsere Startausrüstung wir uns gestellt
+- 20% Rabatt bei [[Meister Andi]]
+- 50% Rabatt auf alles außer Tiernahrung in [[Siglide]]s Supermarkt
+- Kostenlose Behandlung bei Helga und 10% auf Heilgegenstände
+- 4 Ankersteine gesponsort von der Akademie, die uns ein mal zum Baum im Stadtzentrum teleportieren können, weitere Steine kosten uns nur 10gp statt 50gp
+- Ein Monatliches Gehalt das noch ausgehandelt wird
+[[Aethusa]]'s Familiar Taya klettert aus ihrer Kleidung. Taya ist eine kleine Schlange. Die Vorbereitung für das Abschiedsfest sind im vollen Gange. Dort sollen wir auf der Bühne vorgestellt werden. [[Kaz]] wird vom Bürgermeister bestochen, dass er sich benimmt. [[Aethusa]] wird ein Schein übergeben, der uns als den Erkundungstrupp identifiziert. [[Arborgas]] hat in jeder Himmelrichtung ein Tor, uns ist es überlassen, welche wir zuerst erkunden. Um 10 Uhr beginnt das Abschiedsfest, bis dahin sollen wir bereit sein.
+
+Unser erster Halt ist bei [[Public/Tjubi im Dildoland/Characters/NPCs/Meister Andi|Meister Andi]].
+
 
 
 ### **Zusammenfassung:**
 
-
+dadadada
 

@@ -5,7 +5,7 @@ Spieler: alle
 
 ###  **Zusammenfassung letzte Session: [[Public/Tjubi im Dildoland/Sessions/Session 1|Session 1]]**
 
-![[Public/Tjubi im Dildoland/Sessions/Session 1/Session 1#**Zusammenfassung **]]
+![[Session 1#**Zusammenfassung:**]]
 
 ###  **Session Notizen (raw):**
 
