@@ -81,13 +81,18 @@ Zu Schluss tritt [[Kaz]] (gespielt von Iggy) ein. Kaz ist ein Drow Mann mit dunk
 Da alle angekommen sind, erklärt [[Bürgermeister Bernd]] uns unsere Mission: Wir sollen das Umland erkunden um eine Expansion zu ermöglichen. Dabei ist es wichtig festzustellen, welchen gefahren dort lauern. Auch sollen wir diplomatische Beziehungen zu anderen Zivilisationen aufbauen, falls wir welche treffen. Damit wir auch gut vorbereitet sind, haben wir bestimmte Privilegien:
 - Unsere Startausrüstung wir uns gestellt
 - 20% Rabatt bei [[Meister Andi]]
-- 50% Rabatt auf alles außer Tiernahrung in [[Siglide]]s Supermarkt
+- 50% Rabatt auf alles außer Tiernahrung in [[Siglinde]]s Supermarkt
 - Kostenlose Behandlung bei Helga und 10% auf Heilgegenstände
 - 4 Ankersteine gesponsort von der Akademie, die uns ein mal zum Baum im Stadtzentrum teleportieren können, weitere Steine kosten uns nur 10gp statt 50gp
 - Ein Monatliches Gehalt das noch ausgehandelt wird
 [[Aethusa]]'s Familiar Taya klettert aus ihrer Kleidung. Taya ist eine kleine Schlange. Die Vorbereitung für das Abschiedsfest sind im vollen Gange. Dort sollen wir auf der Bühne vorgestellt werden. [[Kaz]] wird vom Bürgermeister bestochen, dass er sich benimmt. [[Aethusa]] wird ein Schein übergeben, der uns als den Erkundungstrupp identifiziert. [[Arborgas]] hat in jeder Himmelrichtung ein Tor, uns ist es überlassen, welche wir zuerst erkunden. Um 10 Uhr beginnt das Abschiedsfest, bis dahin sollen wir bereit sein.
 
-Unser erster Halt ist bei [[Public/Tjubi im Dildoland/Characters/NPCs/Meister Andi|Meister Andi]]. Eine laute Explosion ist aus seiner Schmiede zu hören. Mit einem Urbayrischen Akzent begrüßt er uns. Wir holen uns Rüstung und Waffen für die Mission
+Unser erster Halt ist bei [[Public/Tjubi im Dildoland/Characters/NPCs/Meister Andi|Meister Andi]]. Eine laute Explosion ist aus seiner Schmiede zu hören. Mit einem Urbayrischen Akzent begrüßt er uns. Wir holen uns Rüstung und Waffen für die Mission.
+
+Der nächste Halt ist [[Linn]], die Partnerin von [[Makkus]]. Er holt bei ihr seinen Schmiedehammer.
+
+Bei [[Siglinde]] holen wir anschließend noch ein Paar kleinigkeiten und Rationen. [[Siglinde]] ist eine kleine etwas fester gebaute Frau, die immer beschäftigt wirkt.
+
 
 
 
