@@ -97,7 +97,35 @@ Anschließend gehen wir zu [[Helga]]. Ihr Laden heißt Hedlinde & Helga, nach He
 
 Abschließend gehen wir zur Akademie. Dort werden wir in Empfang genommen und zu [[Meniat]] gebracht. Wir eine lange Wendeltreppe führt zu seinem Büro in einen Turm. Meniat ist ein alter Mann in einen Rollstuhl. Optisch erinnert er mehr an eine Rosine als an einen Menschen. Niemand weiß wie alt er wirklich ist. Er murmelt zusammenhanglos vor sich hin. Nachdem er mehrfach angesprochen wurde, erscheint er wieder fit und fährt  magisch zu einem Regal und holt 4 Steine. Die Steine sehen aus, als wären sie irgendwo abgebaut worden. Es sind Ankersteine, wenn man an [[Arborgas]] denkt und sie schüttelt, teleportieren sie einen direkt in die Stadt. Jeder nimmt einen Stein.
 
-Da unsere Besorgungen erledigt sind, gehen wir mit [[Kaz]] in ein Restaurant eines Freundes.
+Da unsere Besorgungen erledigt sind, gehen wir mit [[Kaz]] in ein Restaurant eines Freundes. Der Goliath [[Fels]] stellt sich vor. Er serviert uns zur Feier des Tages einen Eintopf, der ausnahmsweise rattenlos ist. Die Zutaten sind roh und unverarbeitet. [[Eimer]] isst auf der Toilette, da sein Körper undicht ist und alles ausläuft. [[Fels]] fühlt sich zuerst beleidigt, da er denkt dass Eimer sein Essen in die Toilette wirft. Nachdem Eimer ihn die Situation erklärt, verlangt Fels dass er vor ihm trinkt. Das Bier läuft aus diversen Löchern aus Eimers Körper heraus, was Fels amüsiert. Die Gruppe trinkt noch Bier mit Eimer.
+
+Danach geht die Gruppe zu [[Nicolas]], einen weiteren Freund von [[Kas]]. Dort verfassen wir Reden für unseren späteren Auftritt. Zum Abschied lernt [[Eimer]] noch die Verabschiedung "Ciao Cacao", welche eine gute Verabschiedung laut [[Kaz]] ist. 
+
+Beim Fest angekommen gibt es viele verschiedene Jahrmarktsspiele. Eine "Heavy Wood"-Band (ein frech-fetziges Musikgenre) sorgt für musikalische Unterhaltung. [[Makkus]] Freund bringen ihm Bier. Er stellt sie [[Eimer]] und [[Kaz]] vor. Makkus plant Brauer und die noch abwesende [[Aethusa]] zu verkuppeln. Kurz darauf gibt es erneut bei [[Fels]] etwas zu essen. Eimer schenkt diesen anschließend einen Stein, den er bei den Jahrmarktspielen gewonnen hat. 
+
+Nun ist es Zeit für den Auftritt der Gruppe. [[Bürgermeister Bernd]] und die Gruppe halten ihre Reden. Das Volk wirkt begeistert und euphorisch. Mit viel Alkohol, Tanz und Musik geht die Feier weiter bis tief in die Nacht. Die Gruppe fasst noch den Plan, das nördliche Gebiet außerhalb von [[Arborgas]] zuerst zu erschließen. 
+
+Am nächsten Morgen treffen sich alle zum Abschied. [[Bürgermeister Bernd]] verabschiedet die Gruppe. Zunächst gehen wir auf die Wachtürme, um einen ersten Eindruck der Umgebung zu gewinnen. In weiter ferne ist ein Fluss zu erkennen. Ein weites Grasland erstreckt sich um die Stadt. Kein Wald, kaum Bäume und ein paar Büsche. Die Gruppe bricht auf.
+
+**Tag 1:**
+Uns verfolgt das Gefühl, als hätten wir etwas vergessen. Gleichzeitig fühlen wir uns belebter als in der Stadt. Die Landschaft ist eintönig.
+
+**Tag 2:**
+Ab und an rascheln die Büsche um uns herum. Wir finden Schleifspuren und Hufabdrücke, jedoch nicht was sie verursacht hat. Abends am Lagerfeuer unterhalten sich [[Aethusa]] und [[Makkus]]. Aethusa erzählt, dass sie die Welt sehen und Abenteuer erleben möchte. Makkus ist interessiert an Rohstoffen, vor allem Metalle zum Schmieden. Er rebelliert gegen die schlechte Metallqualität in [[Arborgas]], indem er Phallussymbole überall in der Stadt verteilt.
+
+**Tag 3:**
+Erneut rascheln die Büsche. [[Kaz]] überzeugt [[Eimer]] nachzusehen, was es damit auf sich hat. Ein kleines Tier spring aus dem Busch und flieht. Die Gruppe setzt ihren Weg fort. Langsam nimmt die Vegetation immer mehr zu. Das Gebiet scheint fruchtbarer zu werden. Erneut ist ein Rascheln in den Büschen wahrzunehmen. [[Aethusa]] wirkt *Detect Magic* und bemerkt dadurch, dass uns die Büsche verfolgen. Ein Kampf bricht aus. Die Gruppe schlägt sich gut und kann die Angreifer bezwingen. Zurück bleiben nur schwebende elastische Kugel. [[Aethusa]] erklärt, dass sie diese Objekt mit *Detect Magic* gespürt hat. [[Eimer]] verstaut eine der Kugeln in seinem Rucksack/Eimer. Danach überzeugt ihn [[Kaz]], eine der Kugeln zu konsumieren (Shoutout an Tjubi der nicht daran gedacht hat dass wir sowas machen). Er fühlt sich erholt, ein warmes Gefühl durchströmt ihn. Im Gegenatz zu anderen Nahrungsmitteln verschwindet der Orb tatsächlich, statt Eimers Körper zu entweichen. Die Gruppe möchte, dass er noch eine isst und das macht er auch. Der Effekt bleibt gleich. Anschließen heilt [[Eimer]] [[Aethusa]] und sie sammelt proben der Pflanzen. Sie erklärt dass es sich um *Blights* handelt und es mehrere Unterarten dieser pflanzlichen Kreatur gibt.
+Die Gruppe setzt ihren Weg fort. Abend schlagen wir ein Lager auf. [[Aethusa]] möchte [[Eimer]] in Ethik unterrichten, sobald sie wieder in der Stadt sind. Sie erzählt dass vorwiegend an Zauberer geglaubt wird und es keine richtige Religion in [[Arborgas]] gibt. 
+[[Aethusa]] übernimmt die erste Nachtwache. Ein Paranoia-Gefühl sucht sie heim. Sie erspäht eine körperlose Entität und beschließt [[Eimer]] zu wecken. Eine Hand erhebt sich aus dem Schatten und greift nach [[Aethusa]]. Sie entfernt sich von der Kreatur. Durch den Lärm wachen auch [[Makkus]] und [[Kaz]] auf. Beim Kampf wird eimer durch einen magischen Angriff bewusstlos. Der Schatten spricht durch die Dunkelheit und greift die anderen Gruppenmitglieder an. Während das Monster im Schatten von [[Aethusa]] ist, wird es besiegt. Dadurch verschwindet ihr Schatten vorübergehend. Danach rastet die Gruppe.
+
+**Tag 4:**
+Die Gruppe zieht weiter Richtung Fluss. In der ferne erspähen wir eine Rinderherde und zwei *Blights*, die sich ihr nähern. Ihnen gelingt es, ein Rind zu reißen. Wir greifen die *Blights* an, bevor sie uns gefährlich werden. Für die Nacht plant Eimer das Verhalten der Orbs zu untersuchen, während [[Kaz]] und [[Aethusa]] wache halten. Die *Blights* scheine von den Orbs angezogen zu werden, ziehen sich jedoch zurück wenn sie in Sichtweite kommen. Nach einiger Zeit kommt eine Liane und nimmt sich langsam einen der Orbs und konsumiert diesen. Die restliche Nacht verläuft ruhig.
+
+**Tag 5:**
+Der Tag verläuft reibungslos. Immer wieder erspähen wir ein paar Wildtiere. Gegen Nachteinbruch ist der Fluss deutlich zu hören, jedoch ist kaum mehr was zu sehen. Ein Geräusch ist besonders auffällig, eine Art nasse Bewegung, schwer zuzuordnen. Die Nacht vergeht ohne Probleme.
+
+**Tag 6:**
+Am Morgen erspähen wir eine Kreatur, die Kreis am Flussufer zieht. Es scheint ein *Wasserelementar* zu sein, ein sehr territoriales Wesen. Anhand seiner Bewegungen lässt sich abschätzen, dass man sich noch etwas weiter nähern kann, bevor es zur Konfrontation kommt. Vorsichtig schleicht die Gruppe Richtung Elementar. In der Mitte der Kreise, die der Elementar läuft, befinden sich 12 *Orbs/Essenzen*, davon auch ein große. Doch der Elementar wirkt wesentlich stärker als die Kreatur, die diese Essenz mal besaß. [[Kaz]] beschließt die Essenz zu klauen und schleicht in die Mitte. Aus Furcht vor dem Elementar setzt die Gruppe die Ankersteine ein, um zurück zu [[Arborgas]] zu kommen.
 
 
 ### **Zusammenfassung:**
