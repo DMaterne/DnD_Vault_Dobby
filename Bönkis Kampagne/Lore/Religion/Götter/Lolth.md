@@ -1,1 +1,0 @@
-Böse Spinnengöttin. Öffentliches Anbeten von Lloth ist teilweise verboten und hat schlechten Ruf.

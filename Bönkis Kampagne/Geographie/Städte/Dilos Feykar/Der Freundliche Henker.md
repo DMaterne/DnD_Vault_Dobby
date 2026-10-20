@@ -1,3 +1,0 @@
-Eine Preiswerte Taverne in [[Dilos Feykar]]. Schlicht gehalten mit einem großen Schlafsaal. Morgens gibt es Brot und Abends Fischsuppe. Die Nachte kostet 5 Silber.
-
-Dort sind die Helden nach der Zeitreise wieder aufgewacht
