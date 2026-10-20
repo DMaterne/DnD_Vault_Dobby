@@ -1,0 +1,2 @@
+Diese Taverne in [[Dilos Feykar]] gehört insgeheim zum [[Zirkel der Spiegel]]. Eine Halborkische Barkeeperin informiert bei Signal den Koch, welcher weitere Schritte einleitet.
+

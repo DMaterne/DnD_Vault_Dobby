@@ -1,0 +1,1 @@
+Ein Baron hat kaum politische Macht.
