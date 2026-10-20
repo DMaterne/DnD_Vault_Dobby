@@ -87,7 +87,7 @@ Da alle angekommen sind, erklärt [[Bürgermeister Bernd]] uns unsere Mission: W
 - Ein Monatliches Gehalt das noch ausgehandelt wird
 [[Aethusa]]'s Familiar Taya klettert aus ihrer Kleidung. Taya ist eine kleine Schlange. Die Vorbereitung für das Abschiedsfest sind im vollen Gange. Dort sollen wir auf der Bühne vorgestellt werden. [[Kaz]] wird vom Bürgermeister bestochen, dass er sich benimmt. [[Aethusa]] wird ein Schein übergeben, der uns als den Erkundungstrupp identifiziert. [[Arborgas]] hat in jeder Himmelrichtung ein Tor, uns ist es überlassen, welche wir zuerst erkunden. Um 10 Uhr beginnt das Abschiedsfest, bis dahin sollen wir bereit sein.
 
-Unser erster Halt ist bei [[Public/Tjubi im Dildoland/Characters/NPCs/Meister Andi|Meister Andi]].
+Unser erster Halt ist bei [[Public/Tjubi im Dildoland/Characters/NPCs/Meister Andi|Meister Andi]]. Eine laute Explosion ist aus seiner Schmiede zu hören. Mit einem Urbayrischen Akzent begrüßt er uns. Wir holen uns Rüstung und Waffen für die Mission
 
 
 
