@@ -91,9 +91,13 @@ Unser erster Halt ist bei [[Public/Tjubi im Dildoland/Characters/NPCs/Meister An
 
 Der nächste Halt ist [[Linn]], die Partnerin von [[Makkus]]. Er holt bei ihr seinen Schmiedehammer.
 
-Bei [[Siglinde]] holen wir anschließend noch ein Paar kleinigkeiten und Rationen. [[Siglinde]] ist eine kleine etwas fester gebaute Frau, die immer beschäftigt wirkt.
+Bei [[Siglinde]] holen wir anschließend noch ein Paar kleinigkeiten und Rationen. [[Siglinde]] ist eine kleine etwas fester gebaute Frau mit kurzen roten Haar die immer beschäftigt wirkt.
 
+Anschließend gehen wir zu [[Helga]]. Ihr Laden heißt Hedlinde & Helga, nach Helga und ihrer Mutter. Diese ist aber in Rente und hat den Laden an ihre Tochter [[Helga]] abgegeben. Nach etwa 30 Minuten Wartezeit übergibt sie uns Gegengifte, die pflanzliche Gift neutralisieren.
 
+Abschließend gehen wir zur Akademie. Dort werden wir in Empfang genommen und zu [[Meniat]] gebracht. Wir eine lange Wendeltreppe führt zu seinem Büro in einen Turm. Meniat ist ein alter Mann in einen Rollstuhl. Optisch erinnert er mehr an eine Rosine als an einen Menschen. Niemand weiß wie alt er wirklich ist. Er murmelt zusammenhanglos vor sich hin. Nachdem er mehrfach angesprochen wurde, erscheint er wieder fit und fährt  magisch zu einem Regal und holt 4 Steine. Die Steine sehen aus, als wären sie irgendwo abgebaut worden. Es sind Ankersteine, wenn man an [[Arborgas]] denkt und sie schüttelt, teleportieren sie einen direkt in die Stadt. Jeder nimmt einen Stein.
+
+Da unsere Besorgungen erledigt sind, gehen wir mit [[Kaz]] in ein Restaurant eines Freundes.
 
 
 ### **Zusammenfassung:**

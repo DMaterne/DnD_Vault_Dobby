@@ -1,7 +1,7 @@
 ```dataviewjs
 const CHARACTERS_FOLDER = "Public/3 Backend/Characters/";
 const BUILDER_PATH = "Public/3 Backend/Character Builder.md";
-const DEFAULT_CHARACTER_PATH = "Public/3 Backend/Characters/EIMER Test.md";
+const DEFAULT_CHARACTER_PATH = "Public/3 Backend/Characters/EIMER.md";
 
 function directCharacterFiles() {
   const prefix = CHARACTERS_FOLDER.endsWith("/") ? CHARACTERS_FOLDER : CHARACTERS_FOLDER + "/";

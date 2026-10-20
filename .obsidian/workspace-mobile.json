@@ -13,15 +13,30 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Tjubi im Dildoland/Sessions/Session 1.md",
+                "file": "Public/3 Backend/Character Sheet.md",
+                "mode": "preview",
+                "source": true
+              },
+              "icon": "lucide-file",
+              "title": "Character Sheet"
+            }
+          },
+          {
+            "id": "5239ec2f3f142e8b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Public/Tjubi im Dildoland/Sessions/Session 1.md",
                 "mode": "source",
-                "source": false
+                "source": true
               },
               "icon": "lucide-file",
               "title": "Session 1"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -184,14 +199,57 @@
       "bases:Neue Base erstellen": false
     }
   },
-  "active": "b9e4bcd06607fdeb",
+  "active": "5239ec2f3f142e8b",
   "lastOpenFiles": [
-    "Bönkis Kampagne/Dashboard.md",
-    "Tjubi im Dildoland/Sessions/Session 1.md",
-    "Tjubi im Dildoland/Sessions",
-    "Tjubi im Dildoland",
-    "Bönkis Kampagne/Geographie/Dörfer/Ahrol Mir.md",
-    "3 Backend/Items/Rations (1 day).md",
-    "3 Backend/Character Sheet.md"
+    "Public/3 Backend/Character Sheet.md",
+    "Public/3 Backend/Characters/EIMER.md",
+    "Test.md",
+    "Public/3 Backend/Character Builder.md",
+    "Public/3 Backend/Characters/EIMER Test.md",
+    "3 Backend/Character Sheet.md",
+    "Public/3 Backend/Actions/Unarmed Strike.md",
+    "Public/3 Backend/Actions/Thunder Gauntlets.md",
+    "Public/3 Backend/Actions/Grasping Arrow.md",
+    "Public/3 Backend/Actions/Shadow Arrow.md",
+    "Public/3 Backend/Actions/Opportunity Attack.md",
+    "Public/3 Backend/Characters/Georgius Obermüller.md",
+    "Public/3 Backend/Characters/Meister Andi.md",
+    "Public/3 Backend/Characters/Johann Schmidt.md",
+    "Public/3 Backend/Items/Rope (50ft, Hempen).md",
+    "Public/3 Backend/Items/Hammer Weapon.md",
+    "Public/3 Backend/Items/Scimitar.md",
+    "Public/3 Backend/Items/Backpack.md",
+    "Public/3 Backend/Items/Scale Mail.md",
+    "Public/3 Backend/Items/Crowbar.md",
+    "Public/3 Backend/Items/Rations (1 day).md",
+    "Public/3 Backend/Items/Tinderbox.md",
+    "Public/3 Backend/Items/Sickle.md",
+    "Public/3 Backend/Items/Arrow.md",
+    "Public/3 Backend/Items/Eimer's Control Unit.md",
+    "Public/3 Backend/Items/Ring of Protection.md",
+    "Public/3 Backend/obsidian_character_sheet_class_system.txt",
+    "Public/3 Backend/Actions",
+    "Public/3 Backend/Characters",
+    "Public/3 Backend/Items",
+    "Public/3 Backend/Subclasses",
+    "Public/3 Backend/Species",
+    "Public/3 Backend/Classes",
+    "Public/3 Backend/Spells",
+    "Public/3 Backend/Backgrounds",
+    "Public/3 Backend/Features",
+    "Public/Bönkis Kampagne/Quests/Mindmap Expedition.canvas",
+    "Public/Bönkis Kampagne/Quests/Expedition.canvas",
+    "Public/1 Assets/Bilder/NPC und Monster/GustavEF.png",
+    "Public/1 Assets/Bilder/NPC und Monster/VicariPortrait.png",
+    "Public/1 Assets/Bilder/NPC und Monster/NPC_Placeholder.png",
+    "Public/1 Assets/Bilder/NPC und Monster/DaisyEF.png",
+    "Public/1 Assets/Bilder/NPC und Monster/PeterEF.png",
+    "Public/1 Assets/Bilder/NPC und Monster/CastorArmor.png",
+    "Public/1 Assets/Bilder/NPC und Monster/Zoak.png",
+    "Public/1 Assets/Bilder/NPC und Monster/PetraEF.png",
+    "Public/1 Assets/Bilder/NPC und Monster/Berliath.jpg",
+    "Public/1 Assets/Bilder/NPC und Monster/Chasme.jpeg",
+    "Bönkis Kampagne/Quests/Mindmap Expedition.canvas",
+    "Bönkis Kampagne/Quests/Expedition.canvas"
   ]
 }
