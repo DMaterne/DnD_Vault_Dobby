@@ -59,7 +59,7 @@ Nach unserem Besuch in der Akademie trennen sich unsere Wege vorübergehend.
 
 [[Aethusa]] begibt sich in die Bibliothek, um mehr über Elementare und die verschiedenen Unterarten der _Blights_ herauszufinden. Dabei erfährt sie, dass die unterschiedlichen Arten jeweils eigene Fähigkeiten besitzen. _Twig Blights_ sind kleine pflanzliche Kreaturen, die besonders gut brennen. _Needle Blights_ können ihre Nadeln als Geschosse verschießen, während _Vine Blights_ ihre Ranken einsetzen können, um andere Wesen festzuhalten. Grundsätzlich scheinen die verschiedenen _Blights_ eher passive Kreaturen zu sein, sofern sie nicht provoziert werden.
 
-[[Eimer]] und [[Makkus]] besuchen währenddessen [[Meister Andi]]. Eimer nutzt die Gelegenheit, um seine magischen Infusionen vorzubereiten. Meister Andi zeigt außerdem Interesse an den gefundenen Essenzen und bietet uns an, gemeinsam mit ihnen zu experimentieren, sofern wir ihm welche mitbringen.
+[[Eimer]] und [[Makkus]] besuchen währenddessen [[Public/Tjubi im Dildoland/Characters/NPCs/Meister Andi|Meister Andi]]. Eimer nutzt die Gelegenheit, um seine magischen Infusionen vorzubereiten. Meister Andi zeigt außerdem Interesse an den gefundenen Essenzen und bietet uns an, gemeinsam mit ihnen zu experimentieren, sofern wir ihm welche mitbringen.
 
 **Tag 1:**
 Am nächsten Morgen bereiten wir uns auf unsere zweite Expedition vor. Zunächst kaufen wir weitere Rationen, um für die bevorstehende Reise ausreichend versorgt zu sein.

@@ -60,11 +60,3 @@ actions:
 spellcasting_ability: int
 ---
 
-## Notes 
-
-### Charakter
-Johann ist ein Mitglied der Stadtwache von [[Arborgas]]. Schon jung trat er dieser bei und stieg relativ schnell im Rang auf. Doch in den letzten Jahren entschleunigte sich seine Karriere, da es vermehrt zu Beschwerden über ihm kam. Durch narzisstische Charakterzüge und einem Weltbild, bei dem Menschen allen anderen Spezies überlegen sind, kommt es häufig zu Auseinandersetzungen zwischen ihm und nicht menschlichen Mitbürgern. Auch ist er fest davon überzeugt dass die Außenwelt extrem gefährlich ist. 
-
-### Johann und Eimer
-Eines Tages vor mehreren Jahren machte ein Gerücht in [[Arborgas]] die Runde. Die Familie Obermüller scheint eine Art humanoides Konstrukt während Feldarbeiten außerhalb der Barriere ausgegraben haben. Als Johann das hörte, machte er sich mit zwei Untergeordneten sofort auf dem Weg, um dieses zu zerstören. Er befürchtete, dass dieses eine Gefahr für [[Arborgas]] darstellen könnte. Jedoch kam er zu spät. Als er am Hof der Familie Obermüller ankam, hatte der [[Public/Tjubi im Dildoland/Characters/NPCs/Meister Andi|Artificer Meister Andi]] das Konstrukt bereits repariert und es scheint ein Bewusstsein zu haben, weswegen die Familie nicht möchte, dass Johann es zerstört. Rechtlich sind ihm die Hände gebunden. Sollte das Konstrukt ein Lebewesen sein, kann Johann nicht gegen es vorgehen, ohne dass es ein verbrechen begeht. Sollte es ein Objekt sein, ist es Eigentum der Familie Obermüller. Da es schwer beschädigt ist, stellt es auch keine akute Gefahr für [[Arborgas]] dar, was eine Konfiszierung unmöglich macht. 
-Das Konstrukt trägt den Namen [[Public/Tjubi im Dildoland/Characters/PCs/Eimer|Eimer]]. Jedes mal wenn Johann und [[Public/Tjubi im Dildoland/Characters/PCs/Eimer|Eimer]] aufeinandertreffen, behandelt Johann ihn wie ein Objekt. Er ist herablassend und möchte jedem beweisen, dass [[Public/3 Backend/Characters/Eimer]] eine Gefahr ist.
