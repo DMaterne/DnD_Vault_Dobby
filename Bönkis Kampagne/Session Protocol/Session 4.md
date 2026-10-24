@@ -3,9 +3,9 @@
 Datum: 18.10.2025
 Spieler: alle
 
-###  **Zusammenfassung letzte Session: [[Session 3]]**
+###  **Zusammenfassung letzte Session: [[Public/Bönkis Kampagne/Session Protocol/Session 3]]**
 
-![[Session 3#**Zusammenfassung **]]
+![[Public/Bönkis Kampagne/Session Protocol/Session 3#**Zusammenfassung **]]
 
 ###  **Session Notizen (raw):**
 recap
