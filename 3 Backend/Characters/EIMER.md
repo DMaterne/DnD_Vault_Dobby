@@ -159,6 +159,10 @@ species_choices:
   tool_proficiency: cartographers_tools
   extra_language: Celestial
 resources: {}
+item_resources:
+  Public/3 Backend/Items/Armor of magical Strenght.md::17::0:
+    armor_of_magical_strength:
+      used: 1
 ---
 # Bilder
 
