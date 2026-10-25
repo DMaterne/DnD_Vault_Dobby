@@ -15,6 +15,9 @@ neue regeln:
 
 - Item Haltbarkeit: können repariert werden, Crit: armor -1 Haltbarkeit, -1 AC; Waffe: krit fail -1 Haltbarkeit, -1 Würfelstufe; -1 Spellcasting Bonus bei krit fail; Repairing tool check; Mending gibt von kaputt zu eine Haltbarkeit
 
+resten, wandern richtung stadt, kaz spielt dudelsack, kaz muss nochmal üben. 
+sind am tor. gigantische mauern, doppelt so hoch wie arborgas, mindestens, 40-50m. tor komplett zerstört. dickes holztor, tortzdem voll zerstört. straße mit häusern, viel schutt, sind hinter einer schutt-barrikade.
+hier ist das gefühlt von unbehagen viel krasser als sonst wo. angst vor was hinter der barrikade ist.
 
 ###  **Protokoll:**
 

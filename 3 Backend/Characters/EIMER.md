@@ -13,7 +13,7 @@ con: 14
 int: 15
 wis: 10
 cha: 10
-hp_current: 17
+hp_current: 19
 hp_max: 19
 ac: 12
 speed: 30
@@ -43,7 +43,7 @@ sleight_of_hand_prof: false
 stealth_prof: false
 survival_prof: false
 spell_slots_used:
-  "1": 1
+  "1": 0
   "2": 0
   "3": 0
   "4": 0
@@ -158,6 +158,7 @@ species_choices:
   skill_proficiency: acrobatics
   tool_proficiency: cartographers_tools
   extra_language: Celestial
+resources: {}
 ---
 # Bilder
 
