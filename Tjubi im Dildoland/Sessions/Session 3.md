@@ -29,6 +29,10 @@ weiter zum nächsten haus. eimer findet was cooles: etwas nicht lesbares. übers
 
 taya findet ungeschliffenen quarz
 
+5gp werte goldene wage
+
+looten
+
 
 ###  **Protokoll:**
 
