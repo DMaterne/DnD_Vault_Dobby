@@ -162,7 +162,7 @@ resources: {}
 item_resources:
   Public/3 Backend/Items/Armor of magical Strenght.md::17::0:
     armor_of_magical_strength:
-      used: 1
+      used: 0
 ---
 # Bilder
 

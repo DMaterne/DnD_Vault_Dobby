@@ -39,6 +39,9 @@ paar fights, schlagen uns super
 
 +1 essenz von hesligen stinkenden untoten
 
+nochmal combat, +1 essenz in eimer +1 magen (felshy, necrotic) für jeweils eimer und kaz
+
+häuser durchsuchen, zeitung: die agressive irene interview bauer archibald
 
 ###  **Protokoll:**
 
