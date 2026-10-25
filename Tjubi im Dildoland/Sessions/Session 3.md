@@ -33,6 +33,12 @@ taya findet ungeschliffenen quarz
 
 looten
 
+erkunden
+
+paar fights, schlagen uns super
+
++1 essenz von hesligen stinkenden untoten
+
 
 ###  **Protokoll:**
 
