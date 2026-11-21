@@ -37,6 +37,9 @@ glibbering mouther /toffis mum 5xgewebe (flesh, necrotic)
 hunde heißen rotrottweiler
 kampf
 ein zombie explodiert, fühlen etwas weniger angst und ungutes gefühl 
+zweite explosion lock mehr an aber noch weniger angst
+heilung für makkus du iwas verringert aber noch weniger angst 
+geist hittet eimer. -7 max hp
 
 ###  **Protokoll:**
 
