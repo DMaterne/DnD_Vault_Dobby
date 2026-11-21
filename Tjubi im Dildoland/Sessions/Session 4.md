@@ -9,7 +9,7 @@ Spieler: alle
 
 ###  **Session Notizen (raw):**
 
-
+ewiger abgrund rechts weil map nicht lädt
 
 ###  **Protokoll:**
 
