@@ -21,7 +21,15 @@ zeitung: Evakuierungsbefehl die untere Stadt wird geopfert
 scouten von bäumen aus. sehen shopping district
 kampf ghoul und goat demon
 eimer down, nat 1 -2ac jetzt schon
-
+goat demon macht bösen con effekt, man spürt seine emotionen telepatisch, findet es gut dass er uns sehr vermöbelt
++2 kleine essenzen
+aethusa ghoulleder (common, necrotic, skin)
+& ziegenhorn (rare, bone, necrotic)
+long rest
+bönki lernt sprache, nennt sie ficka
+bönki gibt für nach der rast n slot auf damit eimer wieder aufsteht
+eimer repariert sich
+makkus nicht mehr krank äthusa immernoch
 
 ###  **Protokoll:**
 

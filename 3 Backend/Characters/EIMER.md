@@ -13,7 +13,7 @@ con: 14
 int: 15
 wis: 10
 cha: 10
-hp_current: 0
+hp_current: 1
 hp_max: 19
 ac: 12
 speed: 30
