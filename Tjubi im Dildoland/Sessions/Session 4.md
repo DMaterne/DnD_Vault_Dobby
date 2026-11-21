@@ -10,6 +10,15 @@ Spieler: alle
 ###  **Session Notizen (raw):**
 
 ewiger abgrund rechts weil map nicht lädt
+kampf
+eimer nat 1 -1 ac
+bönki friendly fire auf eimer
+loot:
+- +2 kleine essenzen von hund und blob
+- kaz bekommt pfote von hund
+short rest. kaz findet zeitung. fail beim reparieren.
+zeitung: Evakuierungsbefehl die untere Stadt wird geopfert
+scouten von bäumen aus. sehen shopping district
 
 ###  **Protokoll:**
 
