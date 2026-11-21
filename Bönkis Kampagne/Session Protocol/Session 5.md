@@ -3,9 +3,9 @@
 Datum: DD.MM.YYYY
 Spieler: alle
 
-###  **Zusammenfassung letzte Session: [[Session 4]]**
+###  **Zusammenfassung letzte Session: [[Public/Bönkis Kampagne/Session Protocol/Session 4]]**
 
-![[Session 4#**Zusammenfassung **]]
+![[Public/Bönkis Kampagne/Session Protocol/Session 4#**Zusammenfassung **]]
 
 ###  **Session Notizen (raw):**
 
