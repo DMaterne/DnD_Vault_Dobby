@@ -32,6 +32,9 @@ eimer repariert sich
 makkus nicht mehr krank äthusa immernoch
 kampf
 nat 1 mit crossbow, kein damage bonus mehr. 5 nat 1s, ich hasse dieses game
++2 essenzen (iggy bönki)
+glibbering mouther /toffis mum 5xgewebe (flesh, necrotic)
+hunde heißen rotrottweiler
 
 
 ###  **Protokoll:**

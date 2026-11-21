@@ -13,7 +13,7 @@ con: 14
 int: 15
 wis: 10
 cha: 10
-hp_current: 1
+hp_current: 19
 hp_max: 19
 ac: 12
 speed: 30
@@ -43,7 +43,7 @@ sleight_of_hand_prof: false
 stealth_prof: false
 survival_prof: false
 spell_slots_used:
-  "1": 2
+  "1": 1
   "2": 0
   "3": 0
   "4": 0
@@ -55,7 +55,7 @@ spell_slots_used:
   "5": 0
 inventory:
   - item: Public/3 Backend/Items/Crossbow Bolts.md
-    quantity: 16
+    quantity: 15
     equipped: true
   - item: Public/3 Backend/Items/Light Crossbow.md
     quantity: 1
