@@ -19,6 +19,9 @@ loot:
 short rest. kaz findet zeitung. fail beim reparieren.
 zeitung: Evakuierungsbefehl die untere Stadt wird geopfert
 scouten von bäumen aus. sehen shopping district
+kampf ghoul und goat demon
+eimer down, nat 1 -2ac jetzt schon
+
 
 ###  **Protokoll:**
 
