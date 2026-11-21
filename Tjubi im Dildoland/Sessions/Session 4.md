@@ -30,6 +30,9 @@ bönki lernt sprache, nennt sie ficka
 bönki gibt für nach der rast n slot auf damit eimer wieder aufsteht
 eimer repariert sich
 makkus nicht mehr krank äthusa immernoch
+kampf
+nat 1 mit crossbow, kein damage bonus mehr. 5 nat 1s, ich hasse dieses game
+
 
 ###  **Protokoll:**
 
