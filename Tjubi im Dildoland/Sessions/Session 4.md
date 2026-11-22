@@ -40,6 +40,15 @@ ein zombie explodiert, fühlen etwas weniger angst und ungutes gefühl
 zweite explosion lock mehr an aber noch weniger angst
 heilung für makkus du iwas verringert aber noch weniger angst 
 geist hittet eimer. -7 max hp
+nochmal -7
+looten:
+- kleine essenz für schoas
+- kein gefäß für geist überreste -> kein loot
+zu ungutem gefühl belustigung, ähnlich wie bei der ziege, art telepatisch
+crossbow repariert
+chillen bis long rest
+long rest 
+session ende
 
 ###  **Protokoll:**
 

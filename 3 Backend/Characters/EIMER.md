@@ -13,7 +13,7 @@ con: 14
 int: 15
 wis: 10
 cha: 10
-hp_current: 12
+hp_current: 5
 hp_max: 19
 ac: 12
 speed: 30
@@ -55,7 +55,7 @@ spell_slots_used:
   "5": 0
 inventory:
   - item: Public/3 Backend/Items/Crossbow Bolts.md
-    quantity: 15
+    quantity: 11
     equipped: true
   - item: Public/3 Backend/Items/Light Crossbow.md
     quantity: 1
